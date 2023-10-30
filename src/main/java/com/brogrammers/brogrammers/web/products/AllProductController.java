@@ -58,6 +58,7 @@ public class AllProductController {
         }
         List<Brand> brands = brandService.findAll();
         List<Category> categories = categoryService.findAll();
+        model.addAttribute("add","add");
         model.addAttribute("brands",brands);
         model.addAttribute("categories",categories);
         return "products/add";
@@ -103,7 +104,7 @@ public class AllProductController {
         if(!list.isEmpty()){model.addAttribute("imgs",list);}
         model.addAttribute("mgs","상품 등록이 완료되었습니다.");
         model.addAttribute("product",products);
-        return "products/detail"; // 상품 상세보기 페이지로 넘어갈 예정
+        return "alert/alert"; // alert창 띄우고 리스트로
     }
     /////////////////////////////////////상품 등록 ///////////////////////////////////
 

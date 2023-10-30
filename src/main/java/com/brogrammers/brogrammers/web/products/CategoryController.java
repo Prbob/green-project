@@ -31,19 +31,23 @@ public class CategoryController {
     @GetMapping("/category/form")
     public String addCategoryForm(Model model,HttpServletRequest request){
         if(fun.getMember(request)==null){
-            return "redirect:/";
+            return "redirect:alert/alert";
         }
+        model.addAttribute("cateAdd","cateAdd");
+        model.addAttribute("msg","카테고리 등록");
         model.addAttribute("form",new CategoryForm());
         return "category/categoryForm";
     }
     @PostMapping("/category/form")
     public String addCategory(@Valid @ModelAttribute("form") CategoryForm form, BindingResult bindingResult, HttpServletRequest httpServletRequest, Model model){
         if(bindingResult.hasErrors()){
-            return "products/categoryForm";
+            return "category/categoryForm";
         }
         Long categoryId = categoryService.duplChk(form.getName());
         if(categoryId!=null){
+            model.addAttribute("msg","카테고리 등록");
             bindingResult.rejectValue("name","error.name","이미 존재하는 카테고리 입니다.");
+            return "category/categoryForm";
         }
         Category category = Category.builder().name(form.getName()).build();
         categoryService.save(category);
@@ -55,6 +59,7 @@ public class CategoryController {
     public String categoryList(Model model){
         List<Category> categoryList = categoryService.findAll();
         model.addAttribute("categoryList",categoryList);
+        model.addAttribute("cateUp","cateUp");
         return "category/categoryList";
     }
 
@@ -110,9 +115,11 @@ public class CategoryController {
     @GetMapping("/category/updatCategory/{id}")
     public String updatCategoryForm(@PathVariable("id")Long id, HttpServletRequest request,
                               Model model){
-        if(fun.getMember(request)==null){return "redirect:/";}
+        if(fun.getMember(request)==null || fun.getMember(request).getAccessrigths().equals("NORMAL")){return "/alert/noLogin";}
 
         CategoryForm form = categoryService.getCategoryFromById(id);
+        model.addAttribute("cateUp","cateUp");
+        model.addAttribute("msg","카테고리 수정");
         model.addAttribute("form",form);
         return "category/categoryForm";
     }
@@ -124,11 +131,13 @@ public class CategoryController {
         }
         Optional<Category> cateChk = categoryService.findOneByName(form.getName());
         if(cateChk.isPresent() && !id.equals(cateChk.get().getId())){
+            model.addAttribute("msg","카테고리 업데이트");
             result.rejectValue("name","error.name","이미 존재하는 카테고리입니다. ");
             return "category/categoryForm";
         }
 
         categoryService.updatCatoegryByForm(form);
+        model.addAttribute("msg","카테고리 업데이트");
         model.addAttribute("form",form);
         return "redirect:/category/list";
     }

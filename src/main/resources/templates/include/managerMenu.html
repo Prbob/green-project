@@ -14,7 +14,8 @@
                 <div data-v-7bcac446="" class="snb_list"><strong data-v-7bcac446="" class="snb_title">관리자 메뉴</strong>
                     <ul data-v-7a824f04="" data-v-7bcac446="" class="snb_menu">
                         <li data-v-7a824f04="" class="menu_item">
-                            <a data-v-7a824f04="" th:class="menu_link" th:unless="|${session.member.accessrigths == 'NORMAL'}|" th:href="@{/products/add}">상품등록</a>
+                            <strong data-v-7a824f04="" th:if="add == ${add}" th:class="menu_link">상품등록</strong>
+                            <a data-v-7a824f04="" th:unless="add == ${add}" th:class="menu_link"  th:href="@{/products/add}">상품등록</a>
                         </li>
                         <li data-v-7a824f04="" class="menu_item">
                             <a data-v-7a824f04="" th:class="menu_link" th:href="@{/products/myList}">내가 등록한 신발</a> <br>
@@ -23,10 +24,12 @@
                             <a data-v-7a824f04="" th:class="menu_link" th:href="@{/products/myList}">공지사항 등록</a> <br>
                         </li>
                         <li data-v-7a824f04="" class="menu_item">
-                            <a data-v-7a824f04="" th:class="menu_link" th:href="@{/category/form}">category+</a> <br>
+                            <strong data-v-7a824f04="" th:if="cateAdd == ${cateAdd}" th:class="menu_link">category+</strong>
+                            <a data-v-7a824f04="" th:unless="cateAdd==${cateAdd}" th:class="menu_link" th:href="@{/category/form}">category+</a> <br>
                         </li>
                         <li data-v-7a824f04="" class="menu_item">
-                            <a data-v-7a824f04="" th:class="menu_link" th:href="@{/category/list}">categoryList</a> <br>
+                            <strong data-v-7a824f04="" th:if="cateUp == ${cateUp}" th:class="menu_link">categoryList+</strong>
+                            <a data-v-7a824f04="" th:unless="cateUp==${cateUp}" th:class="menu_link" th:href="@{/category/list}">categoryList</a> <br>
                         </li>
                         <li data-v-7a824f04="" class="menu_item">
                             <a data-v-7a824f04="" th:class="menu_link" th:href="@{/category/brand}">Brand+</a> <br>
