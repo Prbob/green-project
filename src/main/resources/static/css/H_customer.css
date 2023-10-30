@@ -1,0 +1,71 @@
+/* customer.html 파일이 다른거랑 엉키기에 이곳에 새로 작성 */
+/* 김한결 이곳에 css 작성함. */
+ul{
+    margin: 0;
+    padding: 0;
+}
+ul li{
+    text-decoration: none; /* 밑줄 제거 */
+    color: black; /* 글씨 색 검정 */
+    list-style: none; /* 리스트 점 제거 */
+    margin: 0;
+    padding: 0;
+}
+/*ul.dropdown_list{*/
+/*    margin: 0;*/
+/*    padding: 0;*/
+/*}*/
+ul.dropdown_list li{
+    border-bottom: 1px solid #f6f6f6;
+}
+
+.more_info_list li{
+    colors: #222222 opacity 50%;
+}
+
+
+
+div.container{/* 가장 큰 프레임 정렬 설정 */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 30px;
+    /*
+        display 요소를 flex요소로 바꾸고
+        가로 세로 가운데 정렬을 요청을 한다.
+    */
+}
+div.sidebar{
+    margin-right: 10px;
+    width: 20%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+div.sidebar ul{
+    margin: 0;
+    padding: 0;
+}
+div.sidebar a{
+    list-style: none;
+    text-decoration-line: none;
+    color: black;
+}
+div.content_area{
+    width: 60%;
+    align-items: center;
+    /*
+        가로길이는 화면의 60%를 차지하도록 설정
+        그리고 정렬은 가운데로
+     */
+}
+div.content_title{
+    border-bottom: 2px solid black;
+    /* title을 감싸고 있는 div영역의 아랫부분에 2픽셀 실선을 생성 */
+}
+span.blind{
+    
+}
+/* 김한결 css 작성 일단락 끝 향후 작성에 의거하여 추가 될 수 있음.*/

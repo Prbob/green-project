@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>사이드바_고객센터</title>
+
+    <style>
+
+    </style>
+</head>
+<body>
+<th:block th:replace="include/header :: header"></th:block>
+<div id="container">
+    <div class="column">
+        <h4>게시판</h4>
+        <a href="#">공지사항</a>
+        <a href="#">문의</a>
+        <a href="#">QNA</a>
+    </div>
+    <div class="column">
+        <a href="#">공지사항</a>
+        <a href="#">문의</a>
+        <a href="#">QNA</a>
+    </div>
+</div>
+<th:block th:replace="include/footer :: footer"></th:block>
+</body>
+</html>

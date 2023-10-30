@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>회원가입시 이메일 인증 페이지</title>
+</head>
+<body>
+    <div style="width: 100%; dispaly: flex">
+        <div class="forTextLabel">
+            이메일
+        </div>
+        <div class="forText">
+            <input type="text" id="emailText" name="u_mail">
+        </div>
+        <div class="check_font" id="mail_check"></div>
+        <div>
+            <button id="emailCheck" th:onclick="emailSend()">인증번호 받기</button>
+        </div>
+        <div style="width: 100%; dispaly: flex">
+            <div class="forTextLabel">
+                인증번호
+            </div>
+            <div class="forText">
+                <input type="text" id="certificationNumber">
+            </div>
+            <div>
+                <button id="certificationBtn" th:onclick="emailCertification()">인증하기</button>
+                <input type="hidden" id="certificationYN" value="false">
+            </div>
+        </div>
+    </div>
+
+<!-- 이메일 인증 스크립트 -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script th:src="@{/js/emailCertification.js}"></script>
+
+</body>
+</html>

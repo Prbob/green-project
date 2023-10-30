@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>메뉴</title>
+    <style>
+        *{margin:0; padding:0;}
+        #totalmenu{
+            text-align: center;
+        }
+    </style>
+
+    <th:block th:replace="include/header :: header"></th:block>
+</head>
+
+<body>
+<!--header-->
+<th:block th:replace="include/bodyHead :: bodyHeader"></th:block>
+    <h2 id="totalmenu">전체 메뉴란</h2>
+    <div class="itemBox">
+        <a th:href="@{/}" ><img src="'/image/productMain/' + ${product_number}"</a>
+    </div>
+
+<!--footer-->
+<th:block th:replace="include/footer :: footer"></th:block>
+</body>
+</html>
