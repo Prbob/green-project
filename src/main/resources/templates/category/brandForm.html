@@ -8,6 +8,8 @@
 <body>
 <th:block th:replace="include/bodyHead :: bodyHeader"></th:block>
 <h2>브랜드 등록 페이지</h2>
+<div class="container my lg" data-v-e2abb636="" data-v-cdf8523a="">
+    <th:block th:replace="include/managerMenu :: managerMenu"></th:block>
 <form th:action method="post" th:object="${form}">
     <div>
         <label th:for="name">브랜드:</label>
@@ -17,6 +19,7 @@
 
     <button type="submit">등록</button>
 </form>
+</div>
 <a href="#">링크</a>
 </body>
 </html>

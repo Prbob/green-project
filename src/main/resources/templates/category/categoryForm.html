@@ -7,6 +7,9 @@
 </head>
 <body>
 <th:block th:replace="include/bodyHead :: bodyHeader"></th:block>
+<div class="container my lg" data-v-e2abb636="" data-v-cdf8523a="">
+    <th:block th:replace="include/managerMenu :: managerMenu"></th:block>
+
 <h2>등록된 카테고리 목록</h2>
 <form th:action method="post" th:object="${form}">
     <div>
@@ -17,6 +20,7 @@
 
     <button type="submit">등록</button>
 </form>
+</div>
 <a href="#">링크</a>
 </body>
 </html>
