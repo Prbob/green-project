@@ -133,12 +133,10 @@ public class MemberController {
     }
 
     @GetMapping("/member/myPage") // 마이페이지
-    public String myPage(HttpServletRequest request){
+    public String myPage(HttpServletRequest request,Model model){
         Member member = fun.getMemberDb(request);
-        // 1. 프로필 사진 보여주기
-        // 2. 이름
-        //
-        return "";
+        model.addAttribute("member",member);
+        return "member/myPage";
     }
 }
 
