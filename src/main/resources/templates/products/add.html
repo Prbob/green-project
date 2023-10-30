@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>상품등록</title>
+    <th:block th:replace="include/header :: header"></th:block>
+</head>
+<body>
+<th:block th:replace="include/bodyHead :: bodyHeader"></th:block>
+<h2>상품등록 페이지</h2>
+<form th:action="@{/products/add}" method="post" th:object="${form}" enctype="multipart/form-data">
+    <div th:if="${#fields.hasGlobalErrors()}">
+        <p class="field-error" th:each="err : ${#fields.globalErrors()}" th:text="${err}">글로벌 오류 메시지</p>
+    </div>
+    <div>
+        <label>브랜드 </label>
+        <select th:field="*{productBrand}">
+            <option th:each="brand : ${brands}" th:value="${brand.name}" th:text="${brand.name}"></option>
+        </select>
+    </div>
+    <div>
+        <label>카테고리</label>
+        <select th:field="*{productCategory}">
+            <option th:each="category : ${categories}" th:value="${category.name}" th:text="${category.name}"></option>
+        </select>
+    </div>
+    <div>
+        <label>성별</label>
+        <select th:field="*{gender}">
+            <option value="male">male</option>
+            <option value="female" >female</option>
+            <option value="every" >every</option>
+        </select>
+    </div>
+    <div>
+        <label th:for="productName">상품 이름:</label>
+        <input type="text" th:field="*{productName}" >
+        <div class="field-error" th:errors="*{productName}" />
+    </div>
+    <div>
+        <label th:for="productColor">색상:</label>
+        <input type="text" th:field="*{productColor}" >
+        <div class="field-error" th:errors="*{productColor}" />
+    </div>
+    <div>
+        <label th:for="size">사이즈:</label>
+        <input type="text" th:field="*{size}">
+        <div class="field-error" th:errors="*{size}" />
+    </div>
+    <div>
+        <label th:for="stockQuantity">수량:</label>
+        <input type="text" th:field="*{stockQuantity}">
+        <div class="field-error" th:errors="*{stockQuantity}" />
+    </div>
+    <div>
+        <label th:for="price">가격:</label>
+        <input type="text" th:field="*{price}">
+        <div class="field-error" th:errors="*{price}" />
+    </div>
+    <div>
+        <p>썸네일 이미지<input type="file" name="img"></p>
+        <input type="file" name="imgs" multiple>
+    </div>
+    <button type="submit">등록</button>
+</form>
+<a href="#">링크</a>
+</body>
+</html>

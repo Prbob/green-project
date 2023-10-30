@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>자주 묻는 질문</title>
+    <th:block th:replace="include/header :: header"></th:block>
+
+    <!--공지사항 css-->
+    <link rel="stylesheet" th:href="@{/css/customer.css}" type="text/css">
+
+
+</head>
+<body>
+<!--Header-->
+<th:block th:replace="include/bodyHead :: bodyHeader"></th:block>
+
+<div class="container">
+    <div class="sidebar">
+        <a href="/notice" aria-current="page">
+            <h2 class="snb_main_title">자주 묻는 질문</h2>
+        </a>
+        <nav>
+            <ul class="snb_menu">
+                <li class="menu_item"><a href="/customer/notice" aria-current="page" class="menu_link"> 공지사항 </a></li>
+                <li class="menu_item"><a href="/customer/questions" class="menu_link"> <span style="font-weight:bolder">자주 묻는 질문</span> </a></li>
+                <li class="menu_item"><a href="/customer/inspectionStandards" class="menu_link"> 검수 기준 </a></li>
+            </ul>
+        </nav>
+    </div>
+    <div class="content_area">
+        <div class="content_title">자주 묻는 질문</div>
+        <ul class="dropdown_list">
+            <li>
+                <a href="#"> <!-- 첫 번째 링크 주소를 추가하세요 -->
+                    <div class="dropdown">
+                        <div class="title_box">
+                            <p class="title">페널티 정책</p>
+                        </div>
+                    </div>
+                </a>
+            </li>
+            <li>
+                <a href="#"> <!-- 두 번째 링크 주소를 추가하세요 -->
+                    <div class="dropdown">
+                        <div class="title_box">
+                            <p class="title">가품 ・ 손상/오염/사용감 있는 상품 판매에 대한 제재</p>
+                        </div>
+                    </div>
+                </a>
+            </li>
+            <li>
+                <a href="#"> <!-- 세 번째 링크 주소를 추가하세요 -->
+                    <div class="dropdown">
+                        <div class="title_box">
+                            <p class="title">검수 기준 악용에 대한 제재</p>
+                        </div>
+                    </div>
+                </a>
+            </li>
+            <!-- 다른 공지사항 항목을 추가하려면 위와 같은 방식으로 추가하세요 -->
+        </ul>
+    </div>
+</div>
+
+
+
+<!--footer-->
+<th:block th:replace="include/footer :: footer"></th:block>
+</body>
+</html>
