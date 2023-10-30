@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>브랜드 등록</title>
+    <th:block th:replace="include/header :: header"></th:block>
+</head>
+<body>
+<th:block th:replace="include/bodyHead :: bodyHeader"></th:block>
+<h2>브랜드 등록 페이지</h2>
+<form th:action method="post" th:object="${form}">
+    <div>
+        <label th:for="name">브랜드:</label>
+        <input type="text" th:field="*{name}" >
+        <div class="field-error" th:errors="*{name}" />
+    </div>
+
+    <button type="submit">등록</button>
+</form>
+<a href="#">링크</a>
+</body>
+</html>

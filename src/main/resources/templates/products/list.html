@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>로그인</title>
+    <th:block th:replace="include/header :: header"></th:block>
+    <link rel="stylesheet" th:href="@{/css/product.css}" type="text/css">
+    <script src="https://kit.fontawesome.com/3697bc8c45.js" crossorigin="anonymous"></script>
+
+    <style>
+        *{
+            color: #1d1d1b;
+        }
+        aside{
+            padding : 20px;
+            box-sizing: border-box;
+            height: 900px;
+        }
+
+        input{
+            border: 1px solid grey;
+            line-height: 2em;
+        }
+        #searchForm{
+            margin-top: 20px;
+        }
+        #searchForm p{
+            font-size:14px;
+            line-height: 22px;
+        }
+        #searchForm input{
+            margin-bottom:5px;
+            border: 1px solid #909090;
+            width: 188px;
+            padding-left: 5px;
+            border-radius: 2px;
+        }
+        button{
+            /*디자인 몰라 가져오자...*/
+        }
+
+        <!--contentsArea -->
+        #productWrap{
+            border: 1px solid red;
+            width: 100%;
+        }
+        .itembox{
+            display: inline-block;
+            width: 220px;
+            height: 300px;
+            margin: 3px;
+        }
+        .itembox a{
+            display: inline-block;
+        }
+        .itembox img{
+            background-color: #cccccc;
+            display: inherit;
+            width: 220px;
+            height: 220px;
+            border-radius: 3px;
+        }
+        .itembox p{
+            float: right;
+        }
+
+
+    </style>
+</head>
+<body>
+<th:block th:replace="include/bodyHead :: bodyHeader"></th:block>
+
+<div class="container">
+    <aside>
+        <h5>필터</h5>
+        <div id="filter">
+            <form action="" method="get" id="searchForm">
+                <p>상품<br><input type="text" id="nameSearch" name="nameSearch"></p>
+                <p>브랜드<br><input type="text" id="brandSearch" name="brandSearch"></p>
+                <p>사이즈(KR)<br><input type="text" id="sizeSearch" name="sizeSearch"></p>
+                <br>
+                <button type="submit">
+                    검 색
+                </button>
+            </form>
+        </div>
+
+    </aside> <!--END sidebar-->
+
+
+
+
+    <div class="content_area">
+        <div class="content_title" th:text="${bodytitle}"></div>
+
+        <div id="productWrap" th:each="product : ${products}">
+<!--            <th:block th:each="" class="itembox">-->
+            <div class="itembox">
+                <a th:href="@{/products/detail/{productId} (productId=${product.id})}" >
+                    <img th:src="@{|/upload/${product.imgName}|}"/>
+                    <p th:text="|상품명 : ${product.name}|"></p><br>
+                    <p th:text="|가격 :  ${product.price}|"></p><br>
+                </a>
+            </div>
+        </div>
+        <th:block th:each="page : ${#numbers.sequence(startPage,endPage)}">
+            <a th:if="${page != nowPage}" th:href="@{/products/__${pname}__(page = ${page-1},searchKeyword = ${param.searchKeyword})}" th:text="${page}"></a>
+            <strong th:if="${page == nowPage}"  th:text="${page}" style="color:red"></strong>
+        </th:block>
+    </div>
+    <form th:action method="get">
+        <input type="text" name="searchKeyword">
+        <button type="submit">검색</button>
+    </form>
+
+
+</div> <!-- /container -->
+
+<th:block th:replace="include/footer :: footer"></th:block>
+</body>
+</html>
+

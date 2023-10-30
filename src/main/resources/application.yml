@@ -1,0 +1,58 @@
+# H2
+spring:
+  datasource:
+    url: jdbc:h2:tcp://localhost/~/test
+    username: sa
+    password:
+    driver-class-name: org.h2.Driver
+
+  jpa:
+    hibernate:
+      ddl-auto:
+    properties:
+      hibernate:
+        show_sql: true
+        format_sql: true
+
+
+## 서버 db (mySQL)
+#spring:
+#  datasource:-99
+#    # jdbc:mysql://<rds에서 생성한 db 엔드포인트>:<포트>/<데이터베이스_이름>
+#    url: jdbc:mysql://database-1.coawkjlckqsh.ap-northeast-2.rds.amazonaws.com:3306/test
+#    # rds 에서 db 생성시 입력하는 마스터 사용자 이름
+#    username: admin
+#    # rds 에서 db 생성시 입력하는 암호
+#    password: Aoaaoa12!!
+#    driver-class-name: com.mysql.cj.jdbc.Driver
+#  thymeleaf:
+#    cache: false
+#
+#  jpa:
+#    hibernate:
+#      # 서버 껏다 켰을때 데이터 유지를 하고 싶다면 create만 지우기
+#      ddl-auto:
+#      dialect: org.hibernate.dialect.MySQL5InnoDBDialect
+
+
+  mail:
+    host: smtp.gmail.com
+    port: 465
+    username: qkrgksrl0033@gmail.com #보내는 사람 이메일
+    password: tmdvpjdnnpxcneiv # 구글 앱 비밀번호(구글 비밀번호x)
+    properties:
+      mail:
+        smtp:
+          ssl:
+            enable: true
+            required: true
+          auth: true
+
+logging:
+  level:
+    org.hibernate.SQL: debug
+    org.hibernate.type: trace
+server:
+  servlet:
+    session:
+      tracking-modes: cookie

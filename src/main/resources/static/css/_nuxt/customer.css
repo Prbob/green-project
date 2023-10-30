@@ -1,0 +1,57 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+.container {
+    display: flex;
+    max-width: 1200px;
+    margin: 0 auto;
+    background-color: #f5f5f5;
+}
+.sidebar {
+    background-color: #fff;
+    color: #fff;
+    width: 250px;
+    padding: 20px;
+}
+.snb_main_title {
+    font-size: 24px;
+}
+.snb_menu {
+    list-style: none;
+    padding: 0;
+}
+.menu_item {
+    margin-bottom: 10px;
+}
+.menu_link {
+    text-decoration: none;
+    color: #333;
+    font-size: 18px;
+}
+.content_area {
+    padding: 20px;
+    flex-grow: 1;
+    background-color: #fff;
+}
+.content_title {
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+.dropdown_list {
+    list-style: none;
+    padding: 0;
+}
+.dropdown {
+    border: 1px solid #ccc;
+    margin-bottom: 20px;
+    border-radius: 5px;
+    padding: 10px;
+}
+.title_box {
+    padding: 10px;
+}
+.title {
+    font-size: 18px;
+}
