@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>로그인</title>
+    <th:block th:replace="include/header :: header"></th:block>
+</head>
+<body>
+<th:block th:replace="include/bodyHead :: bodyHeader"></th:block>
+<h2>상품 등록 리스트(관리자)</h2> <!-- 로그인된 정보로 상품 리스트 불러오기 -->
+<div class="container">
+    <div>
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th>#</th>
+                <th>상품명 + 색상</th>
+                <th>가격</th>
+                <th>재고수량</th>
+                <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="product : ${products}">
+                <td th:text="${product.id}"></td>
+                <td th:text="|${product.name} ${product.color}|"></td>
+                <td th:text="|${product.price}|"></td>
+                <td th:text="${product.stockQuantity}"></td>
+                <td th:text="${product.member.name}"></td>
+                <td>
+                    <a href="#" th:href="@{/products/{id}/detail (id=${product.id})}" class="btn btn-primary" role="button">
+                        상세보기
+                    </a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+
+</div> <!-- /container -->
+
+<th:block th:replace="include/footer :: footer"></th:block>
+</body>
+</html>

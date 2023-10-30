@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<th:block th:replace="include/header :: header"></th:block>
+<script src="https://kit.fontawesome.com/3697bc8c45.js" crossorigin="anonymous"></script>
+<style>
+
+    #iconLink{
+        display: flex;
+    }
+
+    #iconLink i{
+        display: inline;
+        width: 24px;
+        height: 24px;
+        border: 1px solid red;
+    }
+</style>
+<body>
+<th:block th:fragment="bodyHeader">
+
+    <div id="__nuxt">
+        <div id="__layout">
+            <div id="wrap" tabindex="0" class="layout_base lg has_bottom_nav wrap has_tab win_os lg" data-v-e2abb636=""
+                 data-v-c8624148="">
+                <div class="header-desktop" data-v-c8624148="" data-v-e2abb636="">
+                    <div data-v-533cad97="" data-v-3e40d81c="" class="header fixed social">
+                        <div data-v-533cad97="" class="header_top">
+                            <div data-v-533cad97="" class="top_inner">
+                                <ul data-v-533cad97="" class="top_list">
+
+                                    <li data-v-533cad97="" th:if="${session.member!=null} and ${session.accessrigths != 'NORMAL'}" class="top_item"><a data-v-533cad97="" href="/manager" class="top_link"> 관리자페이지 </a></li>
+                                    <li data-v-533cad97="" class="top_item"><a data-v-533cad97="" href="/customer/notice" class="top_link"> 고객센터 </a></li>
+                                    <li data-v-533cad97="" th:unless="${session.member==null}" class="top_item"><a data-v-533cad97="" th:href="@{/member/myPage}" class="top_link"> 내정보 </a></li>
+                                    <li data-v-533cad97="" th:unless="${session.member==null}" class="top_item"><a data-v-533cad97="" th:href="@{/products/myBasket}" class="top_link"> 관심상품 </a></li>
+                                    <li data-v-533cad97="" th:unless="${session.member==null}" class="top_item"><a data-v-533cad97=""  th:href="@{/logout}" class="top_link"> 로그아웃 </a></li>
+                                    <li data-v-533cad97="" th:if="${session.member==null}" class="top_item"><a data-v-533cad97="" href="/member/joinMember" class="top_link"> 회원가입 </a></li>
+                                    <li data-v-533cad97="" th:if="${session.member==null}" class="top_item"><a data-v-533cad97="" href="/member/login" class="top_link"> 로그인 </a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div data-v-533cad97="" class="header_main">
+                            <div data-v-533cad97="" class="main_inner">
+                                <h1 data-v-7546c27e="" data-v-533cad97="">
+                                    <a data-v-7546c27e="" href="/" aria-label="홈" class="logo">UNCOMMON</a>
+                                </h1>
+                                    <a href="#" id="iconLink"><i class="fa-sharp fa-solid fa-magnifying-glass"></i></a>
+
+
+                                <div data-v-533cad97="" class="center"></div>
+                                <div data-v-533cad97="" class="right">
+                                    <div data-v-3e40d81c="" class="gnb_area" data-v-533cad97="">
+                                        <nav data-v-3e40d81c="" class="gnb" >
+                                            <ul class="gnb_list">
+                                                <li data-v-83e3cb96="" data-v-3e40d81c="" class="gnb_item" style="float: left"><a
+                                                        data-v-83e3cb96="" href="/" aria-current="page"
+                                                        class="active nuxt-link-active gnb_link active"> HOME </a></li>
+                                                <li data-v-83e3cb96="" data-v-3e40d81c="" class="gnb_item" style="float: left" ><a
+                                                        data-v-83e3cb96="" href="/menu/social" class="gnb_link"> STYLE </a>
+                                                </li>
+                                                <li data-v-83e3cb96="" data-v-3e40d81c="" class="gnb_item" style="float: left"><a
+                                                        data-v-83e3cb96="" th:href="@{/products/list}" class="gnb_link"> SHOP </a>
+                                                </li>
+                                            </ul>
+                                        </nav>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div data-v-533cad97="" class="portal_target vue-portal-target">
+                            <nav data-v-000bbc8a="" class="tabs">
+                                <ul data-v-7fae9a20="" data-v-2830b567="" data-v-000bbc8a=""
+                                    class="ul_tab home_tabs inline">
+                                    <li data-v-bdefeeaa="" data-v-2830b567="" class="li_tab" data-v-7fae9a20=""><a
+                                            data-v-a1a3ce98="" data-v-2830b567=""
+                                            href="/exhibitions/2259?tab=home_special_tmvxcake" class="tab"
+                                            data-v-bdefeeaa="" style="border-bottom-color: rgb(221, 47, 0);"><span
+                                            data-v-a1a3ce98="" class="tab_name" style="color: rgb(221, 47, 0);">
+                                                TMVxCAKE </span></a></li>
+                                    <li data-v-bdefeeaa="" data-v-2830b567="" class="li_tab" data-v-7fae9a20=""><a
+                                            data-v-a1a3ce98="" data-v-2830b567="" href="/?tab=home_recommendation"
+                                            class="tab active" data-v-bdefeeaa=""><span data-v-a1a3ce98=""
+                                                                                        class="tab_name"> 추천 </span></a></li>
+                                    <li data-v-bdefeeaa="" data-v-2830b567="" class="li_tab" data-v-7fae9a20=""><a
+                                            data-v-a1a3ce98="" data-v-2830b567="" href="/?tab=home_ranking"
+                                            class="tab updated" data-v-bdefeeaa=""><span data-v-a1a3ce98=""
+                                                                                         class="tab_name"> 차트 </span></a></li>
+                                    <li data-v-bdefeeaa="" data-v-2830b567="" class="li_tab" data-v-7fae9a20=""><a
+                                            data-v-a1a3ce98="" data-v-2830b567="" href="/?tab=home_luxury" class="tab"
+                                            data-v-bdefeeaa=""><span data-v-a1a3ce98="" class="tab_name"> 컬렉션
+                                            </span></a></li>
+                                    <li data-v-bdefeeaa="" data-v-2830b567="" class="li_tab" data-v-7fae9a20=""><a
+                                            data-v-a1a3ce98="" data-v-2830b567="" href="/?tab=home_men" class="tab"
+                                            data-v-bdefeeaa=""><span data-v-a1a3ce98="" class="tab_name"> 남성 </span></a>
+                                    </li>
+                                    <li data-v-bdefeeaa="" data-v-2830b567="" class="li_tab" data-v-7fae9a20=""><a
+                                            data-v-a1a3ce98="" data-v-2830b567="" href="/?tab=home_women" class="tab"
+                                            data-v-bdefeeaa=""><span data-v-a1a3ce98="" class="tab_name"> 여성 </span></a>
+                                    </li>
+                                    <li data-v-bdefeeaa="" data-v-2830b567="" class="li_tab" data-v-7fae9a20=""><a
+                                            data-v-a1a3ce98="" data-v-2830b567="" href="/?tab=home_discovery"
+                                            class="tab" data-v-bdefeeaa=""><span data-v-a1a3ce98="" class="tab_name"> 발견
+                                            </span></a></li>
+                                </ul>
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</th:block>
+</body>
+
+</html>

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>CategoryList</title>
+    <th:block th:replace="include/header :: header"></th:block>
+</head>
+<body>
+<th:block th:replace="include/bodyHead :: bodyHeader"></th:block>
+<h2>카테고리 리스트</h2>
+<div>
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>카테고리 아이디</th>
+            <th>카테고리 이름</th>
+            <th>버튼</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="category : ${categoryList}">
+            <td th:text="|${category.id}|"></td>
+            <td th:text="${category.name}"></td>
+            <td>
+                <a th:href="@{/category/updatCategory/{id} (id=${category.id})}" >
+                    수정
+                </a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+<a href="#">링크</a>
+</body>
+</html>
