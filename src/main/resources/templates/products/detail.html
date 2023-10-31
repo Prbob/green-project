@@ -3,42 +3,162 @@
 <head>
     <meta charset="UTF-8">
     <title>로그인</title>
+    <script src="https://kit.fontawesome.com/3697bc8c45.js" crossorigin="anonymous"></script>
     <th:block th:replace="include/header :: header"></th:block>
+
+    <style>
+        *{
+            margin:0; padding:0; box-sizing: border-box;
+        }
+        html{scroll-behavior:smooth;}
+        p{
+            line-height: 2em;
+        }
+        .form-group {
+            margin:0px auto;
+            max-width:1100px;
+            min-width: 600px;
+        }
+        #fixed {
+            box-shadow: 0 -1px 0px #cccccc;
+            padding : 30px 20px 40px 30px;
+            /*border: 1px solid blue;*/
+            width: 550px;
+            height: 550px;
+            font-size: 18px;
+        }
+        #fixed .data{
+            text-align: right;
+        }
+        #fixed #info {
+            height: 270px;
+        }
+
+        #fixed #selectBox{
+            box-shadow: 0 -1px 0px #cccccc;
+        }
+
+        #fixed{
+            position: fixed;
+            left:50%;
+        }
+        #selectBox {
+            padding-top : 30px;
+            position:relative;
+            height: 180px;
+        }
+        #selectBox input{
+            border:1px solid #1d1d1b;
+            text-align: right;
+            position:absolute;
+            right:0px;
+            padding: 5px;
+        }
+        #button {
+            min-width: 300px;
+            height: 60px;
+            text-align: center;
+            font-size: 24px;
+            right: 90px;
+            bottom: 30px;
+            position: absolute;
+        }
+
+        .first{
+            border:1px solid #EF6253;
+            width: 250px;
+            height: 100%;
+            margin-right:10px;
+            font-size: 20px;
+        }
+        .first:hover{
+            background-color: #ef6253;
+            color:white;
+            font-weight: bolder;
+        }
+        .second{
+            border: 1px solid black;
+            width: 60px;
+            height: 100%;
+            font-size: 20px;
+        }
+        .second:hover{
+            background-color: #eeeeee;
+            color:white;
+            font-weight: bolder;
+        }
+        #adminBox{
+            box-shadow: 0 -1px 0px #cccccc;
+            text-align: right;
+            padding: 10px;
+        }
+
+        #leftSide{
+            display: inline-block;
+            width: 50%;
+            height: 50%;
+            /*border: 1px solid red;*/
+            background-color: #eeeeee;
+            float: left;
+            margin-right: 20px;
+        }
+        #leftSide img {
+            width: 100%;
+            height: 100%;
+        }
+    </style>
 </head>
 <body>
 <th:block th:replace="include/bodyHead :: bodyHeader"></th:block>
 <h2 th:text="${msg}">상품등록(디테일) 페이지 </h2>
 <form th:action="@{/order/basket/{productId} (productId=${product.id})}" th:object="${product}" method="post">
     <div class="form-group">
-        <input type="hidden" name="productId" th:value="*{id}"/>
-        <div>상품이름</div>
-        <div th:text="*{name}"></div>
-        <div>브랜드</div>
-        <div th:text="*{brand.name}"></div>
-        <div>상품이미지</div>
-        <div th:each="img : ${imgs}">
-            <img th:src="@{|/upload/${img.saveName}|}"/>
-        </div>
-        <div>
-            <label >수량 : </label>
-            <input name="quantity" type="number" value="1">
-        </div>
-        <button type="submit" th:name="action" th:value="basket" class="btn btn-primary" role="button" name="basket">
-            장바구니
-        </button>
-        <button type="submit" th:name="action" th:value="buy" class="btn btn-primary" role="button" name="basket">
-            즉시 구매
-        </button>
-        <a th:unless="${session.accessrigths == 'NORMAL'}" th:href="@{/products/edit/{id} (id=${product.id})}" class="btn btn-primary" role="button">
-            수정 <!-- 관리자 권한일 때에만 표시 -->
-        </a>
-        <div>띄우기</div>
-        <div>ㅇㅇ</div>
-        <a th:unless="${session.accessrigths == 'NORMAL'}" th:href="@{/products/delete/{id} (id=${product.id})}" class="btn btn-primary" role="button">
-            삭제 <!-- 관리자 권한일 때에만 표시 -->
-        </a>
-    </div>
-</form>
+        <div id="fixed">
 
+            <input type="hidden" name="productId" th:value="*{id}"/>
+            <div id="info">
+                <h3>Product Info</h3>
+                <div>&nbsp;</div>
+                <p> 상품명 </p>
+                <p th:text="*{name}" class="data" id="productName"></p>
+                <span> 가격 </span>
+                <p th:text="*{price}" class="data" id="productPrice"></p>
+                <span> 브랜드 </span>
+                <p th:text="*{brand.name}" class="data" id="productBrand"></p>
+            </div>
+
+            <div id="selectBox">
+                <label > 선택 수량 : </label>
+                <input name="quantity" type="number" value="1">
+                <div id="button">
+                    <button type="submit" th:name="action" th:value="buy" class="btn btn-primary first" role="button" name="basket">즉시 구매</button>
+                    <button type="submit" th:name="action" th:value="basket" class="btn btn-primary second" role="button" name="basket"><i class="fa-solid fa-cart-plus"></i></button>
+                </div>
+            </div>
+
+            <div id="adminBox">
+                <a th:unless="${session.accessrigths == 'NORMAL'}" th:href="@{/products/edit/{id} (id=${product.id})}" class="btn btn-primary" role="button">
+                    수정 <!-- 관리자 권한일 때에만 표시 -->
+                </a>
+                <a th:unless="${session.accessrigths == 'NORMAL'}" th:href="@{/products/delete/{id} (id=${product.id})}" class="btn btn-primary" role="button">
+                    삭제 <!-- 관리자 권한일 때에만 표시 -->
+                </a>
+            </div>
+        </div>
+
+
+        <div id="leftSide">
+            <ul th:each="img : ${imgs}" id="imageUl">
+                <li><img th:src="@{|/upload/${img.saveName}|}"/></li>
+            </ul>
+        </div>
+
+
+
+    </div>
+
+</form>
 </body>
+
 </html>
+
