@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="kr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UNCOMMON | 한정판 거래의 FLEX</title>
+    <!-- <style type="stylesheet" href="styleSheet/imsi_style.css"></style> -->
+    <style>
+        ul{
+            margin: 0;
+            padding: 0;
+        }
+        li{
+            list-style: none;
+            color: black;
+        }
+        a{
+            color: black;
+            text-decoration-line: none;
+        }
+        div.MyPage_Space{
+            align-items: center;
+            justify-content: center;
+        }
+        div.MyPage_SpaceSeparation{
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        div.MyPage_left_side_MenuBar{
+            margin-right: 50px;
+        }
+        div.MyPage_MainContent{
+            width: 50%;
+        }
+        div.myPage_tabContent1_datas{
+            width: 100%;
+            background-color: #fafafa;
+            display: flex;
+            justify-content: center;
+            padding: 10px;
+            align-items: center;
+        }
+        div.myPage_tabContent1_datas_cal{
+            display: flex;
+        }
+        div.myPage_tabContent1_datas button{
+            background-color: #222222;
+            border: 1px solid #96959a;
+            color: aliceblue;
+            padding: 5px;
+        }
+        div.myPage_tabContent1_datas_cal_div{   
+            margin: auto 10px;
+            border-radius: 5px;
+        }
+        div.myPage_tabContent1_datas_cal_div input{   
+            background-color: #ffffff;
+            border: 1px solid #96959a;
+        }
+       
+        div.myPage_tabContent1_datas_but button{
+            background-color: #fffeff;
+            border: 1px solid #96959a;
+            padding: 5px;
+            margin-right: 10px;
+            color: #b2b1af;
+        }
+        li.MyPage_left_side_MenuBar_lisTitle{
+            margin-top: 20px;
+        }
+        li.MyPage_left_side_MenuBar_li a{
+            color: #96959a;
+        }
+        div.myPage_tabContent1_termsSearch ul li{
+            color: #96959a;
+            font-size: 11px;
+        }
+        h3{
+            margin-bottom: 0;
+        }
+        strong{
+            color: black;
+        }
+        /* 탭메뉴 관련 txt */
+        /*div.tapMenu2_frame{*/
+        /*    display: flex;*/
+        /*    justify-content: center;*/
+        /*}*/
+        /*div.tapMenu2{*/
+        /*    width: 45%;*/
+        /*    height: 15%;*/
+        /*    background-color: #ffffff;*/
+        /*    border: 1px solid #b2b1af;*/
+        /*}*/
+    </style>
+    
+    <!--
+        아이콘 저작권 
+        <a href="https://www.flaticon.com/kr/free-icons/" title=" 아이콘"> 아이콘  제작자: Freepik - Flaticon</a>
+    -->
+</head>
+
+<body>
+    <div class="MyPage_Space">
+        <div class="MyPage_SpaceSeparation">
+            <div class="MyPage_left_side_MenuBar">
+                <div class="MyPage_left_side_MenuBar_detail">
+                    <h2>마이 페이지</h2>
+                    <div>
+                        <ul class="MyPage_left_side_MenuBar_ul">
+                            <li class="MyPage_left_side_MenuBar_lisTitle">
+                                <h3>쇼핑 정보</h3>
+                            </li>
+                            <li class="MyPage_left_side_MenuBar_li">
+                                <a href="#"><strong>구매 내역</strong></a>
+                            </li>
+                            <li class="MyPage_left_side_MenuBar_li">
+                                <a href="#">판매 내역</a>
+                            </li>
+                            <li class="MyPage_left_side_MenuBar_li">
+                                <a href="#">보관 판매</a>
+                            </li>
+                            <li class="MyPage_left_side_MenuBar_li">
+                                <a href="#">관심 상품</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div>
+                        <ul class="MyPage_left_side_MenuBar_ul">
+                            <li class="MyPage_left_side_MenuBar_lisTitle">
+                                <h3>내 정보</h3>
+                            </li>
+                            <li class="MyPage_left_side_MenuBar_li">
+                                <a href="#">로그인 정보</a>
+                            </li>
+                            <li class="MyPage_left_side_MenuBar_li">
+                                <a href="#">프로필 관리</a>
+                            </li>
+                            <li class="MyPage_left_side_MenuBar_li">
+                                <a href="#">주소록</a>
+                            </li>
+                            <li class="MyPage_left_side_MenuBar_li">
+                                <a href="#">결제 정보</a>
+                            </li>
+                            <li class="MyPage_left_side_MenuBar_li">
+                                <a href="#">판매 정산 계좌</a>
+                            </li>
+                            <li class="MyPage_left_side_MenuBar_li">
+                                <a href="#">현금영수증 정보</a>
+                            </li>
+                            <li class="MyPage_left_side_MenuBar_li">
+                                <a href="#">포인트</a>
+                            </li>
+                            <li class="MyPage_left_side_MenuBar_li">
+                                <a href="#">쿠폰</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="MyPage_MainContent">
+                <h1>구매 내역</h1>
+                <div class="tapMenu2_frame">
+                    <div class="tapMenu2" for="mypage_buylist_id1">
+                        <input type="radio" id="mypage_buylist_id1" name="tabMenu" checked>
+                        <label for="mypage_buylist_id1"> 구매 입찰 </label>
+                    </div>
+                    <div class="tapMenu2" for="mypage_buylist_id2">
+                        <input type="radio" id="mypage_buylist_id2" name="tabMenu">
+                        <label for="mypage_buylist_id2"> 종료 됨 </label>
+                    </div>
+                </div>
+                
+                
+                
+    
+                <div class="myPage_tabContent1">
+                    <strong>구매수행</strong>
+                    <div class="myPage_tabContent1_datas">
+                        <div class="myPage_tabContent1_datas_but">
+                            <button type="button" value="60">최근 2개월</button>
+                            <button type="button" value="240"> 4개월</button>
+                            <button type="button" value="360"> 6개월</button>
+                        </div>
+                        <div class="myPage_tabContent1_datas_cal">
+                            <div class="myPage_tabContent1_datas_cal_div">
+                                <input type="date">
+                            </div>
+                            ~
+                            <div class="myPage_tabContent1_datas_cal_div">
+                                <input type="date">
+                            </div>
+                        </div>
+                        <button type="button" onclick="">조회</button>
+                    </div>
+                    <div class="myPage_tabContent1_termsSearch">
+                        <ul>
+                            <li>※ 한번에 조회 가능한 기간은 최대 6개월 입니다.</li>
+                            <li>※ 기간별 조회 결과는 입찰일 기준으로 노출됩니다.</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <div>
+                            <dd>정렬</dd>
+                            <dt><button>오름 차순</button></dt>
+                        </div>
+                    </div>
+                </div>
+                <div class="myPage_tabContent2">
+                    <strong>구매내역</strong>
+                    <div class="myPage_tabContent1_datas">
+                        <div class="myPage_tabContent1_datas_but">
+                            <button type="button" value="60">최근 2개월</button>
+                            <button type="button" value="240"> 4개월</button>
+                            <button type="button" value="360"> 6개월</button>
+                        </div>
+                        <div class="myPage_tabContent1_datas_cal">
+                            <div class="myPage_tabContent1_datas_cal_div">
+                                <input type="date">
+                            </div>
+                            ~
+                            <div class="myPage_tabContent1_datas_cal_div">
+                                <input type="date">
+                            </div>
+                        </div>
+                        <button type="button" onclick="">조회</button>
+                    </div>
+                    <div class="myPage_tabContent1_termsSearch">
+                        <ul>
+                            <li>※ 한번에 조회 가능한 기간은 최대 6개월 입니다.</li>
+                            <li>※ 기간별 조회 결과는 입찰일 기준으로 노출됩니다.</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <div>
+                            <dd>정렬</dd>
+                            <dt><button>오름 차순</button></dt>
+                        </div>
+                        <div>
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+</body>
+<script>
+
+    // 탭메뉴
+    // 탭 요소 가져오기
+    const tab1 = document.getElementById("mypage_buylist_id1");
+    const tab2 = document.getElementById("mypage_buylist_id2");
+
+    // 탭 콘텐츠 가져오기
+    const tabContent1 = document.querySelector(".myPage_tabContent1");
+    const tabContent2 = document.querySelector(".myPage_tabContent2");
+
+    // 탭 클릭 이벤트 처리
+    tab1.addEventListener("click", () => {
+        tabContent1.style.display = "block";
+        tabContent2.style.display = "none";
+    });
+
+    tab2.addEventListener("click", () => {
+        tabContent1.style.display = "none";
+        tabContent2.style.display = "block";
+    });
+    tabContent2.style.display = "none";
+
+</script>
+</html>
