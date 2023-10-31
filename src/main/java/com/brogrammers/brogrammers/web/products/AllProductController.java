@@ -43,21 +43,10 @@ public class AllProductController {
     @GetMapping("/products/add")
     public String addForm(@ModelAttribute("form") ProductForm form ,Model model, @PathVariable(value = "productId",required = false)Long productId,
                           HttpServletRequest request){
-        HttpSession session = request.getSession(false);
-        if(session==null){
-            return "redirect:/";
-        }
-        Member member = (Member)session.getAttribute(SessionConst.LOGIN_MEMBER);
-        if(member==null ){
-            // 없는 회원이거나
-            return "redirect:/";
-        }
-        if(member.getAccessrigths().equals("NORMAL")){
-            //회원 권한이 NOMAL일 경우 index페이지로 이동
-            return "redirect:/";
-        }
+        if(fun.getMember(request)==null || fun.getMember(request).getAccessrigths().equals("NORMAL")){return "/alert/noLogin";}
         List<Brand> brands = brandService.findAll();
         List<Category> categories = categoryService.findAll();
+        model.addAttribute("add","add");
         model.addAttribute("brands",brands);
         model.addAttribute("categories",categories);
         return "products/add";
@@ -103,7 +92,7 @@ public class AllProductController {
         if(!list.isEmpty()){model.addAttribute("imgs",list);}
         model.addAttribute("mgs","상품 등록이 완료되었습니다.");
         model.addAttribute("product",products);
-        return "products/detail"; // 상품 상세보기 페이지로 넘어갈 예정
+        return "alert/alert"; // alert창 띄우고 리스트로
     }
     /////////////////////////////////////상품 등록 ///////////////////////////////////
 

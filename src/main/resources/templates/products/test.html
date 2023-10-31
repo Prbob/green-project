@@ -1,22 +1,27 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-
 <head>
     <meta charset="UTF-8">
-    <title>스타일</title>
+    <title>상품등록</title>
     <th:block th:replace="include/header :: header"></th:block>
     <style>
+      .contain{
+        display: flex;
 
+      }
+      div{
+        outline: 1px solid red;
+      }
 
     </style>
 </head>
-
 <body>
 <th:block th:replace="include/bodyHead :: bodyHeader"></th:block>
-<div class="container my lg" data-v-e2abb636="" data-v-cdf8523a="">
+<div class="main">
     <th:block th:replace="include/managerMenu :: managerMenu"></th:block>
+<div class="contain">
+  <div class="child">123123</div>
+  <div class="child2">asdfadfdsa</div>
 </div>
-<th:block th:replace="include/footer :: footer"></th:block>
 </body>
-
 </html>

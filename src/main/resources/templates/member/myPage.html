@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${member.name}"></title>
+    <th:block th:replace="include/header :: header"></th:block>
+</head>
+<body>
+<th:block th:replace="include/bodyHead :: bodyHeader"></th:block>
+<h2>마이페이지</h2>
+<img th:src="@{|/upload/${member.imgName}|}"/> <!-- 사진 -->
+<div th:text="${member.name}"></div> <!-- 멤버 이름 -->
+</script>
+</body>
+</html>
