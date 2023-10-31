@@ -16,6 +16,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -33,8 +34,9 @@ public class MemberController {
     private final FunctionClass fun;
     /////////////////////// 회원가입 //////////////////////
     @GetMapping("/member/joinMember")
-    public String joinMemberForm(Model model){
-        model.addAttribute("form", new MemberForm());
+    public String joinMemberForm(Model model, @RequestParam(value = "email",required = false) String email){
+        MemberForm memberForm = MemberForm.builder().email(email).build();
+        model.addAttribute("form",memberForm);
         return "member/joinMemberForm";
     }
 
