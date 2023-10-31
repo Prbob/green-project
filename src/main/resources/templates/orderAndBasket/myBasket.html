@@ -188,7 +188,9 @@
                                 </div>
                                 <!--상품명 + 색상-->
                                 <a data-v-3bb254ce="" class="name" th:href="@{/products/detail/{productId} (productId=${basketInProducts.products.id})}" th:text="|${basketInProducts.products.name} ${basketInProducts.products.color}|"></a>
-
+                                <a href="#" th:href="@{/order/buyAll}" class="btn btn-primary" role="button">
+                                    전체구매
+                                </a>
                                 <div>
                                     <form th:action="@{/order/basket/{productId} (productId=${basketInProducts.products.id})}" method="post"
                                           style="width: 210px;">
