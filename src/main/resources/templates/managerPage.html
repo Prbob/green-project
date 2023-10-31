@@ -5,75 +5,18 @@
     <meta charset="UTF-8">
     <title>스타일</title>
     <th:block th:replace="include/header :: header"></th:block>
+    <style>
+
+
+    </style>
 </head>
 
 <body>
-    <th:block th:replace="include/bodyHead :: bodyHeader"></th:block>
-
-    <div class="header">
-        <p th:text="|로그인: ${member.name}|">로그인 성공 페이지</p> <br>
-        <a th:unless="|${member.accessrigths == 'NORMAL'}|" th:href="@{/products/add}">상품등록</a> <br>
-        <a th:unless="|${member.accessrigths == 'NORMAL'}|" th:href="@{/products/myList}">등록 상품 리스트</a> <br>
-        <a th:unless="|${member.accessrigths == 'NORMAL'}|" th:href="@{/products/myList}">공지사항 등록</a> <br>
-        <a th:unless="|${member.accessrigths == 'NORMAL'}|" th:href="@{/category/form}">카테고리 등록</a> <br>
-        <a th:unless="|${member.accessrigths == 'NORMAL'}|" th:href="@{/category/list}">카테고리 리스트</a> <br>
-        <a th:unless="|${member.accessrigths == 'NORMAL'}|" th:href="@{/category/brand}">브랜드 등록</a> <br>
-        <a th:unless="|${member.accessrigths == 'NORMAL'}|" th:href="@{/category/brandList}">브랜드 리스트</a> <br>
-
-
-        <form th:action="@{/logout}" method="post"><button type="submit">로그아웃</button></form>
-        <div data-v-cdf8523a="" class="snb_area">
-            <h2 data-v-cdf8523a="" class="snb_main_title" th:text="|관리자 페이지 / 권한 : ${session.accessrigths}|"></h2>
-            <nav data-v-7bcac446="" data-v-cdf8523a="" class="snb">
-                <div data-v-7bcac446="" class="snb_list"><strong data-v-7bcac446="" class="snb_title">관리자 메뉴</strong>
-                    <ul data-v-7a824f04="" data-v-7bcac446="" class="snb_menu">
-                        <li data-v-7a824f04="" class="menu_item">
-                            <a data-v-7a824f04="" th:class="menu_link" th:unless="|${member.accessrigths == 'NORMAL'}|" th:href="@{/products/add}">상품등록</a>
-                        </li>
-                        <li data-v-7a824f04="" class="menu_item">
-                            <a data-v-7a824f04="" class="menu_item" th:href="@{/products/myList}">내가 등록한 신발</a> <br>
-                        </li>
-                        <li data-v-7a824f04="" class="menu_item">
-                            <a data-v-7a824f04="" class="menu_item" th:href="@{/products/myList}">공지사항 등록</a> <br>
-                        </li>
-                        <li data-v-7a824f04="" class="menu_item">
-                            <a data-v-7a824f04="" class="menu_item" th:href="@{/category/form}">category+</a> <br>
-                        </li>
-                        <li data-v-7a824f04="" class="menu_item">
-                            <a data-v-7a824f04="" class="menu_item" th:href="@{/category/list}">categoryList</a> <br>
-                        </li>
-                        <li data-v-7a824f04="" class="menu_item">
-                            <a data-v-7a824f04="" class="menu_item" th:href="@{/category/brand}">Brand+</a> <br>
-                        </li>
-                        <li data-v-7a824f04="" class="menu_item">
-                            <a data-v-7a824f04="" class="menu_item" th:href="@{/category/brandList}">BrandList</a> <br>
-                        </li>
-                    </ul>
-                </div>
-                <div data-v-7bcac446="" class="snb_list"><strong data-v-7bcac446="" class="snb_title">내 정보</strong>
-                    <ul data-v-7a824f04="" data-v-7bcac446="" class="snb_menu">
-                        <li data-v-7a824f04="" class="menu_item"><a data-v-7a824f04="" href="/my/profile"
-                                class="menu_link"> 로그인 정보 </a></li>
-                        <li data-v-7a824f04="" class="menu_item"><a data-v-7a824f04="" href="/my/profile-edit"
-                                class="menu_link"> 프로필 관리 </a></li>
-                        <li data-v-7a824f04="" class="menu_item"><a data-v-7a824f04="" href="/my/address"
-                                class="menu_link"> 주소록 </a></li>
-                        <li data-v-7a824f04="" class="menu_item"><a data-v-7a824f04="" href="/my/payment"
-                                class="menu_link"> 결제 정보 </a></li>
-                        <li data-v-7a824f04="" class="menu_item"><a data-v-7a824f04="" href="/my/account"
-                                class="menu_link"> 판매 정산 계좌 </a></li>
-                        <li data-v-7a824f04="" class="menu_item"><a data-v-7a824f04="" href="/my/receipt"
-                                class="menu_link"> 현금영수증 정보 </a></li>
-                        <li data-v-7a824f04="" class="menu_item"><a data-v-7a824f04="" href="/my/point"
-                                class="menu_link"> 포인트 </a></li>
-                        <li data-v-7a824f04="" class="menu_item"><a data-v-7a824f04="" href="/my/coupon"
-                                class="menu_link"> 쿠폰 </a></li>
-                    </ul>
-                </div>
-            </nav>
-        </div>
-    </div>
-    <th:block th:replace="include/footer :: footer"></th:block>
+<th:block th:replace="include/bodyHead :: bodyHeader"></th:block>
+<div class="container my lg" data-v-e2abb636="" data-v-cdf8523a="">
+    <th:block th:replace="include/managerMenu :: managerMenu"></th:block>
+</div>
+<th:block th:replace="include/footer :: footer"></th:block>
 </body>
 
 </html>

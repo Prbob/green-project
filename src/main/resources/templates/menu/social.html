@@ -3,7 +3,6 @@
 <head>
     <meta charset="UTF-8">
     <title>스타일</title>
-    <th:block th:replace="include/header :: header"></th:block>
     <script src="/js/instafeed.min.js"></script>
     <style>
         * {margin:0; padding: 0; text-align: center;}
@@ -33,7 +32,7 @@
 </head>
 <body>
 
-
+<th:block th:replace="include/header :: header"></th:block>
 <th:block th:replace="include/bodyHead :: bodyHeader"></th:block>
 <div id="wrap">
     <h2 id="stylemenu">STYLE</h2>
