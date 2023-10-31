@@ -1,11 +1,51 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
+
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
+    <!-- Add your head content here -->
+    <style>
+        /* Apply styles to the left navigation */
+.left-nav {
+    width: 200px; /* Adjust the width as needed */
+    height: 100%; /* Take full height of the page */
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: #333; /* Change background color as needed */
+    color: #fff; /* Change text color as needed */
+    overflow-y: auto; /* Add scrollbar if content exceeds the height */
+}
+
+.left-nav a {
+    color: #fff; /* Change link color as needed */
+    text-decoration: none;
+    padding: 10px;
+    display: block;
+}
+
+/* Adjust the styles for your content area accordingly */
+.content {
+    margin-left: 200px; /* Match the width of the left navigation */
+    padding: 20px; /* Add padding to separate content from navigation */
+}
+
+
+    </style>
 </head>
+
 <body>
-  hello1111
+<div class="left-nav">
+    <a href="/notice" aria-current="page">
+        <h2 data-v-cdf8523a="" class="snb_main_title">고객센터</h2>
+    </a>
+    <nav>
+        <!-- Add your navigation links here -->
+    </nav>
+</div>
+
+<div class="content">
+    <!-- Add your content here -->
+</div>
 </body>
+
 </html>
