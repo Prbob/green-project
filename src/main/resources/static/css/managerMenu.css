@@ -1,0 +1,109 @@
+.form{
+    display: flex;
+    border: solid 1px gray;
+    border-radius: 5px;
+    width: 700px;
+}
+.imgSection{
+    width: 50%;
+}
+.img{
+    display: flex;
+    flex-direction: column;
+}
+.img> div:first-child{
+    height: 300px;
+    width: 100%;
+}
+.labelSelec{
+    display: flex;
+    margin:5px;
+}
+.label{
+    margin: 10px;
+    width: 100px;
+}
+.labelSelec input{
+    border: 1px solid gray;
+    border-radius: 10px;
+}
+.labelSelec input{
+    padding:10px
+}
+.inputSection{
+    padding: 15px;
+    width: 50%;
+}
+#addProduct{
+    padding-left: 500px;
+}
+.select>select{
+    margin-top: 10px;
+}
+.img input{
+    display: inline-block;
+    margin-left:50px;
+}
+.img div{
+    margin:10px
+}
+#addbuttondiv{
+    text-align: center;
+}
+#addButton {
+    background-color: rgb(186, 186, 186); /* 배경 색상 */
+    color: rgb(51, 51, 51); /* 텍스트 색상 */
+    padding: 7px 20px; /* 내부 여백 (위, 우, 아래, 좌 순서) */
+    border: none; /* 테두리 제거 */
+    border-radius: 5px; /* 둥근 테두리 */
+    cursor: pointer; /* 커서 스타일 */
+    font-size: 16px; /* 폰트 크기 */
+    font-weight: bold; /* 폰트 굵기 */
+    margin: auto;
+}
+
+#addButton:hover {
+    background-color: rgb(74, 74, 74); /* 마우스 호버 시 배경 색상 변경 */
+    color: white;
+}
+.form-control.fieldError{
+    border: 2px solid red;
+    text-align: center;
+
+}
+.field-error{
+    text-align: center;
+    color: red;
+    padding: 5px;
+}
+.categorydiv{
+    display: flex;
+    flex-direction: column;
+}
+.categoryinput{
+    border: 1px solid gray;
+    border-radius: 7px;
+    padding: 10px;
+    margin: 10px;
+}
+.categorydiv > label{
+    text-align: left;
+    margin: 10px;
+}
+.categorydiv > h2{
+    margin-left: 10px;
+    margin-bottom: 20px;
+}
+.addbutton{
+    padding-left: 10px;
+}
+.categoryform{
+    border: 1px solid gray;
+    border-radius: 10px;
+    padding: 10px;
+    margin: 10px;
+}
+.table-striped{
+    text-align: center;
+}
+
