@@ -24,18 +24,20 @@
                             <a data-v-7a824f04="" th:class="menu_link" th:href="@{/products/myList}">공지사항 등록</a> <br>
                         </li>
                         <li data-v-7a824f04="" class="menu_item">
-                            <strong data-v-7a824f04="" th:if="cateAdd == ${cateAdd}" th:class="menu_link">category+</strong>
-                            <a data-v-7a824f04="" th:unless="cateAdd==${cateAdd}" th:class="menu_link" th:href="@{/category/form}">category+</a> <br>
+                            <strong data-v-7a824f04="" th:if="cateAdd == ${cateAdd}" th:class="menu_link">Add Category</strong>
+                            <a data-v-7a824f04="" th:unless="cateAdd==${cateAdd}" th:class="menu_link" th:href="@{/category/form}">Add Category</a> <br>
                         </li>
                         <li data-v-7a824f04="" class="menu_item">
-                            <strong data-v-7a824f04="" th:if="cateUp == ${cateUp}" th:class="menu_link">categoryList+</strong>
-                            <a data-v-7a824f04="" th:unless="cateUp==${cateUp}" th:class="menu_link" th:href="@{/category/list}">categoryList</a> <br>
+                            <strong data-v-7a824f04="" th:if="cateUp == ${cateUp}" th:class="menu_link">Category List</strong>
+                            <a data-v-7a824f04="" th:unless="cateUp==${cateUp}" th:class="menu_link" th:href="@{/category/list}">Category List</a> <br>
                         </li>
                         <li data-v-7a824f04="" class="menu_item">
-                            <a data-v-7a824f04="" th:class="menu_link" th:href="@{/category/brand}">Brand+</a> <br>
+                            <strong data-v-7a824f04="" th:if="brandAdd == ${brandAdd}" th:class="menu_link">Add Brand</strong>
+                            <a data-v-7a824f04="" th:unless="brandAdd==${brandAdd}" th:class="menu_link" th:href="@{/category/brand}">Add Brand</a> <br>
                         </li>
                         <li data-v-7a824f04="" class="menu_item">
-                            <a data-v-7a824f04="" th:class="menu_link" th:href="@{/category/brandList}">BrandList</a> <br>
+                            <strong data-v-7a824f04="" th:if="brandL == ${brandL}" th:class="menu_link">Brand List</strong>
+                            <a data-v-7a824f04="" th:unless="brandL==${brandL}" th:class="menu_link" th:href="@{/category/brandList}">Brand List</a> <br>
                         </li>
                     </ul>
                 </div>

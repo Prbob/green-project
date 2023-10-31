@@ -30,8 +30,8 @@ public class CategoryController {
     //////////////////////////////////// 카데고리 등록폼 ///////////////////////////
     @GetMapping("/category/form")
     public String addCategoryForm(Model model,HttpServletRequest request){
-        if(fun.getMember(request)==null){
-            return "redirect:alert/alert";
+        if(fun.getMember(request)==null || fun.getMember(request).getAccessrigths().equals("NORAML")){
+            return "alert/noLogin";
         }
         model.addAttribute("cateAdd","cateAdd");
         model.addAttribute("msg","카테고리 등록");
@@ -41,10 +41,13 @@ public class CategoryController {
     @PostMapping("/category/form")
     public String addCategory(@Valid @ModelAttribute("form") CategoryForm form, BindingResult bindingResult, HttpServletRequest httpServletRequest, Model model){
         if(bindingResult.hasErrors()){
+            model.addAttribute("cateAdd","cateAdd");
+            model.addAttribute("msg","카테고리 등록");
             return "category/categoryForm";
         }
         Long categoryId = categoryService.duplChk(form.getName());
         if(categoryId!=null){
+            model.addAttribute("cateAdd","cateAdd");
             model.addAttribute("msg","카테고리 등록");
             bindingResult.rejectValue("name","error.name","이미 존재하는 카테고리 입니다.");
             return "category/categoryForm";
@@ -56,7 +59,10 @@ public class CategoryController {
         return "category/categoryList";
     }
     @GetMapping("/category/list")
-    public String categoryList(Model model){
+    public String categoryList(Model model,HttpServletRequest request){
+        if(fun.getMember(request)==null || fun.getMember(request).getAccessrigths().equals("NORAML")){
+            return "alert/noLogin";
+        }
         List<Category> categoryList = categoryService.findAll();
         model.addAttribute("categoryList",categoryList);
         model.addAttribute("cateUp","cateUp");
@@ -64,8 +70,13 @@ public class CategoryController {
     }
 
     @GetMapping("/category/brand")
-    public String brandForm(Model model){
+    public String brandForm(Model model, HttpServletRequest request){
+        if(fun.getMember(request)==null || fun.getMember(request).getAccessrigths().equals("NORAML")){
+            return "alert/noLogin";
+        }
         model.addAttribute("form",new BrandForm());
+        model.addAttribute("brandAdd","brandAdd");
+        model.addAttribute("msg","브랜드 등록");
         return "category/brandForm";
     }
     @PostMapping("/category/brand")
@@ -84,9 +95,13 @@ public class CategoryController {
         return "category/brandList";
     }
     @GetMapping("/category/brandList")
-    public String brandList(Model model){
+    public String brandList(Model model, HttpServletRequest request){
+        if(fun.getMember(request)==null || fun.getMember(request).getAccessrigths().equals("NORAML")){
+            return "alert/noLogin";
+        }
         List<Brand> brandList = brandService.findAll();
         model.addAttribute("brandList",brandList);
+        model.addAttribute("brandL","brandL");
         return "category/brandList";
     }
 
@@ -94,23 +109,33 @@ public class CategoryController {
     public String updatBrandFrom(@PathVariable("id")Long id,Model model, HttpServletRequest request){
         BrandForm form = brandService.getBrandFormById(id);
         model.addAttribute("form",form);
+        model.addAttribute("brandList","brandList");
+        model.addAttribute("msg","브랜드 업데이트");
         return "category/brandForm";
     }
     @PostMapping("/category/updatBrand/{id}")
     public String updatBrand(@PathVariable("id")Long id,Model model,
                              @Valid @ModelAttribute("form") BrandForm form,BindingResult result ,HttpServletRequest request){
+        if(fun.getMember(request)==null || fun.getMember(request).getAccessrigths().equals("NORAML")){
+            return "alert/noLogin";
+        }
+
         if(result.hasErrors()){
+            model.addAttribute("brandList","brandList");
+            model.addAttribute("msg","브랜드 업데이트");
             return "category/brandForm";
         }
         Optional<Brand> brand = brandService.findOneByName(form.getName());
         if(brand.isPresent() && !brand.get().getId().equals(id)){
+            model.addAttribute("brandList","brandList");
+            model.addAttribute("msg","브랜드 업데이트");
             result.rejectValue("name","error.name","이미 존재하는 브랜드 입니다. ");
             return "category/brandForm";
 
         }
         brandService.updatBrandByForm(form);
         model.addAttribute("form",form);
-        return "redirect:/category/brandList";
+        return "alert/brandAlert";
     }
     @GetMapping("/category/updatCategory/{id}")
     public String updatCategoryForm(@PathVariable("id")Long id, HttpServletRequest request,

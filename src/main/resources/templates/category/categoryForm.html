@@ -8,7 +8,7 @@
 <body>
 <th:block th:replace="include/bodyHead :: bodyHeader"></th:block>
 <div class="container my lg" data-v-e2abb636="" data-v-cdf8523a="">
-<th:block th:replace="include/managerMenu :: managerMenu"></th:block>
+<th:block th:replace="include/managerMenu :: managerMenu"></th:block>  <!-- 관리자 페이지 왼쪽 메뉴 -->
     <div class="categorydiv">
         <h2 th:text="${msg}"></h2>
         <form th:action method="post" th:object="${form}" class="categoryform">
@@ -20,10 +20,9 @@
             </div>
             <div class="addbutton"><button id="addButton" class="categorybutton" type="submit">등록</button></div>
         </form>
-
     </div>
-
 </div>
+
 
 </body>
 </html>
