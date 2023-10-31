@@ -21,12 +21,13 @@ public class ProductForm {
     @NotEmpty(message = "색상 기입은 필수 입니다.")
     private String productColor;
     @NotNull(message = "사이즈 기입은 필수 입니다.")
-    private int size;
+    private Integer size;
     @NotNull(message = "수량 기입은 필수 입니다.")
     @Min(value = 0,message = "입력가능한 최소 수량은 0개부터 입니다.")
-    private int stockQuantity;
+    private Integer stockQuantity;
     @NotNull(message = "가격 기입은 필수 입니다.")
-    private int price;
+    @Min(value = 0,message = "가격을 다시 확인해주세요!")
+    private Integer price;
     private Member member; // 등록 회원이 누구인지 식별하기 위한 회원
     private String gender; // 성별구분
 

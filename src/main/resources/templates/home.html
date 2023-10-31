@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <title>스타일</title>
     <th:block th:replace="include/header :: header"></th:block>
-    <script src="https://kit.fontawesome.com/3697bc8c45.js" crossorigin="anonymous"></script>
     <style>
         *{
             color: #1d1d1b;
@@ -22,34 +21,26 @@
         }
 
         #cardList{
-            width: 700px;
+            width: 600px;
             margin : 20px auto;
             /*border: 1px solid red;*/
             box-sizing: inherit;
         }
         .card{
             display: inline-block;
-            width: 140px;
-            height: 100px;
-            margin: 5px;
+            width: 110px;
+            height: 60px;
+            margin: 0 5px;
         }
 
         .cardImage{
             background-color: #eeeeee;
             border-radius: 5px;
-            height: 70px;
+            height: 60px;
             margin-bottom:5px;
             width: 100%;
         }
-        .cardImage p{
-            line-height: 1.7em;
-            font-size: 40px;
-        }
-        .cardImage i {
-            font-size: 32px;
-            color: rgba(238, 153, 18, 0.99);
-        }
-        .cardTitle > h5{
+        .cardImage > h5{
             font-size:12px;
             display: inline-block;
             width: 90px;
@@ -80,42 +71,33 @@
         <div class="card">
             <a href="#">
             <div class="cardImage">
-                <p><i class="fa-solid fa-ranking-star"></i></p>
+                <h5>UNCOMMON<br>EXCLUSIVE</h5>
             </div>
             <!--png 상품 이미지 또는 박스 제목 디자인 삽입-->
                 <div class="cardTitle"><h5>실시간 차트</h5></div>
             </a>
         </div>
+
         <div class="card">
-            <a th:href="@{/products/category/{categoryName} (categoryName=1)}">
-                <div class="cardImage"style="padding:16px 4px 4px 4px;">
-                    <p style="font-size:14px; line-height: 1.5em;">UNCOMMON<br>EXCLUSIVE</p>
-                </div>
-                <div class="cardTitle"><h5>한정 제품</h5></div>
+            <a href="#">
+            <div class="cardImage">
+                <h5>스테디셀러</h5>
+            </div>
+                <div class="cardTitle"><h5>스테디셀러</h5></div>
             </a>
         </div>
         <div class="card">
             <a href="/products/soldOut">
-                <div class="cardImage">
-                    <p><i class="fa-solid fa-bolt"></i></p>
-                </div>
-                <div class="cardTitle"><h5>LAST PIECE</h5></div><!--stock 기준 하위 30개-->
+            <div class="cardImage">
+                <h5>매진 임박 </h5>
+            </div>
+                <div class="cardTitle"><h5>매진 임박</h5></div><!--stock 기준 하위 30개-->
             </a>
         </div>
-
-        <div class="card">
-            <a href="#">
-                <div class="cardImage"style="padding:16px 4px 4px 4px;">
-                    <p style="font-size:14px; line-height: 1.5em;">STEADY<br>ITEMS</p>
-                </div>
-                <div class="cardTitle"><h5>스테디셀러</h5></div>
-            </a>
-        </div>
-
         <div class="card">
             <a th:href="@{/products/male}">
             <div class="cardImage">
-                <h5><i class="fa-solid fa-m" style="color:rgba(2,2,138,0.78);line-height: 2.5em; font-size: 24px;padding-top: 7px;"></i></h5>
+                <h5></h5>
             </div>
                 <div class="cardTitle"><h5>남성제품</h5></div>
             </a>
@@ -123,7 +105,7 @@
         <div class="card">
             <a th:href="@{/products/female}">
             <div class="cardImage">
-                <h5><i class="fa-solid fa-w" style="color:rgba(168,18,114,0.78); line-height: 2.5em; font-size: 24px;padding-top: 7px;"></i></h5>
+                <h5></h5>
             </div>
                 <div class="cardTitle"><h5>여성제품</h5></div>
             </a>
@@ -131,13 +113,19 @@
         <div class="card">
             <a href="#">
             <div class="cardImage">
-                <img style="display: inline-block; width:100%; height: 100%; border-radius: 5px;" src="/image/card_07.jpg">
+                <h5></h5>
             </div>
                 <div class="cardTitle"><h5>신상품</h5></div>
-                <!--뉴발 렉토 검색링크결과 링크걸면 됨-->
             </a>
         </div>
-
+        <div class="card">
+            <a th:href="@{/products/category/{categoryName} (categoryName=1)}">
+            <div class="cardImage">
+                <h5>카테사진</h5>
+            </div>
+                <div class="cardTitle"><h5>카테고리1 제품 보기</h5></div>
+            </a>
+        </div>
         <div class="card">
             <a href="#">
             <div class="cardImage">
