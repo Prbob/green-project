@@ -98,8 +98,9 @@
             <div class="itembox">
                 <a th:href="@{/products/detail/{productId} (productId=${product.id})}" >
                     <img th:src="@{|/upload/${product.imgName}|}"/>
-                    <p th:text="|상품명 : ${product.name}|" class="info"></p>
-                    <p th:text="|가격 :  ${product.price}|" class="info"></p>
+                    <p th:text="|${product.price}|" class="info itemPrice"></p>
+                    <p th:text="|${product.name}|" class="info itemName" ></p>
+
                 </a>
             </div>
         </div>
@@ -115,8 +116,9 @@
 
 
 </div> <!-- /container -->
-
+<div>
 <th:block th:replace="include/footer :: footer"></th:block>
+</div>
 </body>
 </html>
 

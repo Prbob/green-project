@@ -10,10 +10,19 @@
 
     #iconLink i{
         display: inline;
-        width: 24px;
-        height: 24px;
         border: 1px solid red;
     }
+
+    #mainLogoSet{
+        display: flex;
+        width: 180px;
+        height: 30px;
+    }
+    #mainLogoSet a{
+        display: inline-block;
+        width: 165px;
+    }
+
 </style>
 <body>
 <th:block th:fragment="bodyHeader">
@@ -40,12 +49,15 @@
                         </div>
                         <div data-v-533cad97="" class="header_main">
                             <div data-v-533cad97="" class="main_inner">
-                                <h1 data-v-7546c27e="" data-v-533cad97="">
-                                    <a data-v-7546c27e="" href="/" aria-label="홈" class="logo">UNCOMMON</a>
-                                </h1>
-                                    <a href="#" id="iconLink"><i class="fa-sharp fa-solid fa-magnifying-glass"></i></a>
+                                <div id="mainLogoSet">
+                                    <h1 data-v-7546c27e="" data-v-533cad97="">
+                                        <a data-v-7546c27e="" href="/" aria-label="홈" class="logo">UNCOMMON</a>
+<!--                                        <a href="#" id="iconLink" data-v-7546c27e=""><i class="fa-sharp fa-solid fa-magnifying-glass" style="font-size:20px;"></i></a>-->
+                                    </h1>
 
+                                </div>
 
+<!--///////////////////////////////////////////////////////////////////////////////////////////////////////-->
                                 <div data-v-533cad97="" class="center"></div>
                                 <div data-v-533cad97="" class="right">
                                     <div data-v-3e40d81c="" class="gnb_area" data-v-533cad97="">
