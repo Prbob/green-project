@@ -83,16 +83,28 @@
             color: black;
         }
         /* 탭메뉴 관련 txt */
-        /*div.tapMenu2_frame{*/
-        /*    display: flex;*/
-        /*    justify-content: center;*/
-        /*}*/
-        /*div.tapMenu2{*/
-        /*    width: 45%;*/
-        /*    height: 15%;*/
-        /*    background-color: #ffffff;*/
-        /*    border: 1px solid #b2b1af;*/
-        /*}*/
+        label.tapMenu2{
+            width: 50%;
+            height: 20%;
+            border: 1px solid #b2b1af;
+            display: flex; /* 수평 가운데 정렬을 위해 flex 컨테이너로 설정합니다. */
+            justify-content: center; /* 가로 가운데 정렬 */
+            align-items: center; /* 세로 가운데 정렬 */
+        }
+        div.tapMenu2_frame {
+            display: flex; /* tapMenu2_frame를 가로로 배치합니다. */
+            justify-content: space-between; /* 각 label 요소를 가능한 최대로 간격을 두며 배치합니다. */
+        }
+        div.tapMenu2_div{
+            width: 49%;
+            height: 25%;
+        }
+        div.tapMenu2_div input{
+            visibility: hidden;
+            justify-content: center;
+            display: inline;
+        }
+
     </style>
     
     <!--
@@ -162,21 +174,24 @@
             <div class="MyPage_MainContent">
                 <h1>구매 내역</h1>
                 <div class="tapMenu2_frame">
-                    <div class="tapMenu2" for="mypage_buylist_id1">
-                        <input type="radio" id="mypage_buylist_id1" name="tabMenu" checked>
-                        <label for="mypage_buylist_id1"> 구매 입찰 </label>
-                    </div>
-                    <div class="tapMenu2" for="mypage_buylist_id2">
-                        <input type="radio" id="mypage_buylist_id2" name="tabMenu">
-                        <label for="mypage_buylist_id2"> 종료 됨 </label>
-                    </div>
+                    
+                        <label class="tapMenu2" for="mypage_buylist_id1"> 
+                            <div class="tapMenu2_div">
+                                <input type="radio" id="mypage_buylist_id1" name="tabMenu" checked>
+                                구매 입찰 
+                            </div>
+                        </label>
+                        
+                        <label class="tapMenu2" for="mypage_buylist_id2"> 
+                            <div class="tapMenu2_div">
+                                <input type="radio" id="mypage_buylist_id2" name="tabMenu">
+                                구매 내역 
+                            </div>
+                        </label>                    
                 </div>
                 
-                
-                
-    
                 <div class="myPage_tabContent1">
-                    <strong>구매수행</strong>
+                    <strong>구매 수행</strong>
                     <div class="myPage_tabContent1_datas">
                         <div class="myPage_tabContent1_datas_but">
                             <button type="button" value="60">최근 2개월</button>
@@ -204,11 +219,16 @@
                         <div>
                             <dd>정렬</dd>
                             <dt><button>오름 차순</button></dt>
+                        </div>
+                        <div>
+                            <div class="MyPage_MainContent_MiddleContent_EmptySpace">
+                                <p class="gray_mini_font">현재 거래 내역이 없습니다.</p>
+                            </div>
                         </div>
                     </div>
                 </div>
                 <div class="myPage_tabContent2">
-                    <strong>구매내역</strong>
+                    <strong>구매 내역</strong>
                     <div class="myPage_tabContent1_datas">
                         <div class="myPage_tabContent1_datas_but">
                             <button type="button" value="60">최근 2개월</button>
@@ -238,12 +258,13 @@
                             <dt><button>오름 차순</button></dt>
                         </div>
                         <div>
-                            
+                            <div class="MyPage_MainContent_MiddleContent_EmptySpace">
+                                <p class="gray_mini_font">현재 거래 내역이 없습니다.</p>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-            
         </div>
     </div>
 </body>
