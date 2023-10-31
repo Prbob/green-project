@@ -82,6 +82,17 @@
         strong{
             color: black;
         }
+        /* 탭메뉴 관련 txt */
+        /*div.tapMenu2_frame{*/
+        /*    display: flex;*/
+        /*    justify-content: center;*/
+        /*}*/
+        /*div.tapMenu2{*/
+        /*    width: 45%;*/
+        /*    height: 15%;*/
+        /*    background-color: #ffffff;*/
+        /*    border: 1px solid #b2b1af;*/
+        /*}*/
     </style>
     
     <!--
@@ -150,10 +161,18 @@
             </div>
             <div class="MyPage_MainContent">
                 <h1>구매 내역</h1>
-                <input type="radio" id="mypage_buylist_id1" name="tabMenu" checked>
-                <label for="mypage_buylist_id1"> 구매 입찰 </label>
-                <input type="radio" id="mypage_buylist_id2" name="tabMenu">
-                <label for="mypage_buylist_id2"> 종료 됨 </label>
+                <div class="tapMenu2_frame">
+                    <div class="tapMenu2" for="mypage_buylist_id1">
+                        <input type="radio" id="mypage_buylist_id1" name="tabMenu" checked>
+                        <label for="mypage_buylist_id1"> 구매 입찰 </label>
+                    </div>
+                    <div class="tapMenu2" for="mypage_buylist_id2">
+                        <input type="radio" id="mypage_buylist_id2" name="tabMenu">
+                        <label for="mypage_buylist_id2"> 종료 됨 </label>
+                    </div>
+                </div>
+                
+                
                 
     
                 <div class="myPage_tabContent1">
@@ -185,9 +204,6 @@
                         <div>
                             <dd>정렬</dd>
                             <dt><button>오름 차순</button></dt>
-                        </div>
-                        <div>
-                            
                         </div>
                     </div>
                 </div>
