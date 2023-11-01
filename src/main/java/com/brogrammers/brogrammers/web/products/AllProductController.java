@@ -116,11 +116,15 @@ public class AllProductController {
         int startPage = Math.max(1,nowPage%3==0?nowPage/3*3-2:nowPage/3*3+1);
         int endPage = Math.min(products.getTotalPages(),startPage+2);
         String pname = "list";
+        List<Category> categories = categoryService.findAll();
+        List<Brand> brands = brandService.findAll();
         model.addAttribute("bodytitle",bodytitle);
         model.addAttribute("pname",pname);
         model.addAttribute("products",products);
         model.addAttribute("nowPage",nowPage);
         model.addAttribute("startPage",startPage);
+        model.addAttribute("categories", categories);
+        model.addAttribute("brands", brands);
         model.addAttribute("endPage",endPage);
         return "products/list";
     }

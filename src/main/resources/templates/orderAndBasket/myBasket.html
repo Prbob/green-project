@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>공지사항</title>
+    <title>장바구니</title>
     <th:block th:replace="include/header :: header"></th:block>
 
     <!--공지사항 css-->
@@ -31,6 +31,7 @@
             flex-shrink: 0;
             margin-left: auto;
             text-align: right;
+            margin-top: 10px;
         }
 
         .wish_list li {
@@ -133,7 +134,7 @@
 
 
 <div tabindex="0" class="layout_base" data-v-e2abb636="" data-v-cdf8523a="">
-    <div class="container my lg" data-v-e2abb636="" data-v-cdf8523a="">
+    <div class="container my lg" data-v-e2abb636="" data-v-cdf8523a="" style="padding-top: 0px;">
         <div class="sidebar">
             <a href="/notice" aria-current="page">
                 <h2 data-v-cdf8523a="" class="snb_main_title" style="margin-bottom: 20px;">마이페이지</h2>
@@ -144,7 +145,7 @@
                     <li class="menu_item"><a href="#"> 구매 내역 </a></li>
                     <li class="menu_item"><a href="#"> 판매 내역 </a></li>
                     <li class="menu_item"><a href="#"> 보관 판매 </a></li>
-                    <li class="menu_item" style="font-weight:bolder; color:#333"><a href="#"> 관심 상품 </a></li>
+                    <li class="menu_item" style="font-weight:bolder; color:#333; margin-left: 10px;"><a href="#"> 관심 상품 </a></li>
                 </ul>
 
                 <ul class="snb_menu" style="margin-top: 50px;">
@@ -176,16 +177,17 @@
                                 <div data-v-aff2362e="" data-v-3bb254ce="" class="product"
                                      style="background-color: rgb(244, 244, 244); width: 100px; height: 100px;">
                                     <img th:src="@{|/upload/${basketInProducts.products.imgName}|}" alt="Product Image" style="width: 100%; height: 100%;">
-                                    <!--                                    <div th:src="${basketInProducts.products.imgName}"></div>-->
                                 </div>
                             </div>
                             <div data-v-3bb254ce="" class="product_detail">
                                 <div data-v-3bb254ce="" class="brand_link" style="height: 20px;">
-                                    <a data-v-3bb254ce="" href="#" class="brand-text"> Typing Mistake </a>
+                                    <a data-v-3bb254ce="" href="#" class="brand-text" th:text="${basketInProducts.products.brand.name}"> </a>
                                     <svg data-v-3bb254ce="" xmlns="http://www.w3.org/2000/svg"
                                          class="ico-brand-official icon sprite-icons">
                                     </svg>
                                 </div>
+
+
                                 <!--상품명 + 색상-->
                                 <a data-v-3bb254ce="" class="name" th:href="@{/products/detail/{productId} (productId=${basketInProducts.products.id})}" th:text="|${basketInProducts.products.name} ${basketInProducts.products.color}|"></a>
                                 <a href="#" th:href="@{/order/buy}" class="btn btn-primary" role="button">
@@ -194,17 +196,23 @@
                                 <div>
                                     <form th:action="@{/order/basket/{productId} (productId=${basketInProducts.products.id})}" method="post"
                                           style="width: 210px;">
-                                        <div class="quantity">
-                                            <input type='button' onclick='count("plus")' value='+'/>
-                                            <div id='result' name="quantity" th:text="${basketInProducts.quantity}">0</div>
-                                            <input type='button' onclick='count("minus")' value='-'/>
+                                        <div>
+                                            <form th:action="@{/order/basket/{productId} (productId=${basketInProducts.products.id})}" method="post">
+                                                <select id="quantity" name="quantity" style="color: #000;">
+                                                    <option th:each="i : ${#numbers.sequence(1, basketInProducts.products.stockQuantity)}"
+                                                            th:value="${i}" th:text="${i}" th:selected="${i == basketInProducts.quantity}"/>
+                                                </select>
+                                                <button type="submit" th:name="action" th:value="myBasket" style="background-color: #fff; color: #000; border: 1px solid #ccc; padding: 1.5px 6px; border-radius: 5px; cursor: pointer;">
+                                                    수정
+                                                </button>
+                                            </form>
                                         </div>
+
 
 
                                     </form>
                                 </div>
 
-                                <!--<span data-v-3bb254ce="" class="size">F</span>-->
                                 <div class="size" th:text="${basketInProducts.products.size}"></div>
                             </div>
 
@@ -217,8 +225,10 @@
                                             <div data-v-0b6ddb6a="" class="price" style="height: 22px;">
                                                 <span data-v-0b6ddb6a="" class="amount">
                                                     <!--가격-->
-                                                    <em data-v-0b6ddb6a="" class="num" th:text="|${basketInProducts.products.price}|"> </em>
-                                                    <span data-v-0b6ddb6a="" class="won">원</span>
+<!--                                                    <em data-v-0b6ddb6a="" class="num" th:text="${#strings.formatNumber(basketInProducts.products.price, 0, 'NUMBER', 'ko-KR')}"> </em>-->
+<!--                                                    <span data-v-0b6ddb6a="" class="won">원</span>-->
+                                                    <div data-th-text="${#numbers.formatInteger(basketInProducts.products.price, 3, 'COMMA') + '원'}"></div>
+
                                                 </span>
                                             </div>
                                         </button>
@@ -239,6 +249,13 @@
                     </div>
                 </div>-->
 
+
+                <div style="text-align: right; margin-top: 10px;">
+                    <a href="#" th:href="@{/order/buyAll}" class="btn btn-primary" role="button">
+                        전체구매
+                    </a>
+                </div>
+
             </div>
         </div>
     </div>
@@ -247,29 +264,6 @@
 <!--footer-->
 <th:block th:replace="include/footer :: footer"></th:block>
 
-<script>
-    // JavaScript로 Thymeleaf에서 가져온 데이터
-    var initialQuantity = parseInt(document.getElementById('result').textContent);
 
-    function count(type)  {
-        // 결과를 표시할 element
-        const resultElement = document.getElementById('result');
-
-        // 현재 화면에 표시된 값
-        let number = parseInt(resultElement.textContent);
-
-        // 더하기/빼기
-        if(type === 'plus') {
-            number = number + 1;
-        } else if(type === 'minus')  {
-            number = number - 1;
-        }
-
-        // 결과 출력
-        resultElement.textContent = number;
-
-
-    }
-</script>
 
 </body>
