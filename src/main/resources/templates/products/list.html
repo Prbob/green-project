@@ -115,16 +115,18 @@
 <!--                    </select>-->
 <!--                </div>-->
                 <p>카테고리<br>
-                    <select th:class="form-select" style="width:190px; font-size: 20px; ">
+                    <select style="width:190px; font-size: 16px;">
                         <option value=""> </option>
-                        <option value="category" >런닝화</option>
+                        <option th:each="category : ${categories}" th:value="${category.id}"
+                                th:text="${category.name}"></option>
                     </select>
                 </p>
 
                 <p>브랜드<br>
-                    <select th:class="form-select" style="width:190px; font-size: 20px;">
+                    <select style="width:190px; font-size: 16px;">
                         <option value=""> </option>
-                        <option value="brand" >nike</option>
+                        <option th:each="brand : ${brands}" th:value="${brand.id}"
+                                th:text="${brand.name}"></option>
                     </select>
                 </p>
                 <br>
@@ -137,14 +139,9 @@
 
     <div class="content_area">
         <div id="categories">
-            <ul id="categor_gnb">
+            <ul id="category_gnb">
                 <li style="font-weight: bolder">전체</li>
-               <li>스포츠</li>
-                <li>런닝화</li>
-               <li>스니커즈</li>
-               <li>캐주얼</li>
-               <li>샌들</li>
-               <li>부츠</li>
+               <li th:each="category : ${categories}" th:value="${category.id}" th:text="${category.name}"></li>
             </ul>
         </div>
 
@@ -160,6 +157,7 @@
                 </a>
             </div>
         </div>
+
         <th:block th:each="page : ${#numbers.sequence(startPage,endPage)}">
             <a th:if="${page != nowPage}" th:href="@{/products/__${pname}__(page = ${page-1},searchKeyword = ${param.searchKeyword})}" th:text="${page}"></a>
             <strong th:if="${page == nowPage}"  th:text="${page}" style="color:red"></strong>
