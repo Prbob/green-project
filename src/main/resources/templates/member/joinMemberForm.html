@@ -23,7 +23,7 @@
                                 <p class="field-error" th:each="err : ${#fields.globalErrors()}" th:text="${err}">글로벌 오류 메시지</p>
                             </div>
 
-                            <!--이메일(인증)-->
+                            <!--이메일(인증 포함)-->
 <!--                            <div data-v-4e1fd2e6="" data-v-286e873e="" class="input_join input_box" style="padding-bottom: 0px;">
                                 <div style="display: flex; align-items: center;">
                                     <h3 data-v-286e873e="" data-v-4e1fd2e6="" class="input_title ess" th:for="email">이메일 주소</h3>
@@ -39,14 +39,14 @@
                             </div>-->
 
 
-                            <!--이메일(미인증)-->
+                            <!--이메일(인증 미포함)-->
                             <div data-v-4e1fd2e6="" data-v-286e873e="" class="input_join input_box">
                                 <div style="display: flex; align-items: center;">
                                     <h3 data-v-286e873e="" data-v-4e1fd2e6="" class="input_title ess" th:for="email">이메일 주소</h3>
                                     <div class="field-error" th:errors="*{email}" />
                                 </div>
                                 <div data-v-4e1fd2e6="" class="input_item">
-                                    <input data-v-4e1fd2e6="" type="email" placeholder="예) kream@kream.co.kr" class="input_txt" th:field="*{email}" readonly>
+                                    <input data-v-4e1fd2e6="" type="email" placeholder="예) kream@kream.co.kr" class="input_txt" th:field="*{email}">
                                 </div>
                             </div>
 
