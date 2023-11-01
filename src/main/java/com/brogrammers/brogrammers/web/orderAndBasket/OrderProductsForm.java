@@ -14,21 +14,19 @@ public class OrderProductsForm {
 
     private String name; // member 객체에서 가지고 와야함.
     private String phone; // member 객체에서 가지고 와야함
-    private String phone2; // member 객체에서 가지고 와야함
-    private String phone3; // member 객체에서 가지고 와야함
+    private String please;
 
     @Builder
-    public OrderProductsForm(String name, String phone, String phone2, String phone3, String payment, String postal_code, String middle_address, String detailed_address, List<ProductsCount> productCounts, int totalPrice) {
+    public OrderProductsForm(String name, String phone, String payment, String postal_code, String middle_address, String detailed_address, List<ProductsCount> productCounts, int totalPrice, String please) {
         this.name = name;
         this.phone = phone;
-        this.phone2 = phone2;
-        this.phone3 = phone3;
         this.payment = payment;
         this.postal_code = postal_code;
         this.middle_address = middle_address;
         this.detailed_address = detailed_address;
         this.productCounts = productCounts;
         this.totalPrice = totalPrice;
+        this.please = please;
     }
 
     private String payment; // 결제수단
