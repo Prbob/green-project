@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>로그인</title>
+    <title>SHOP</title>
     <th:block th:replace="include/header :: header"></th:block>
     <link rel="stylesheet" th:href="@{/css/product.css}" type="text/css">
     <script src="https://kit.fontawesome.com/3697bc8c45.js" crossorigin="anonymous"></script>
@@ -38,11 +38,35 @@
         button{
             /*디자인 몰라 가져오자...*/
         }
-
-        <!--contentsArea -->
-        #productWrap{
-            border: 1px solid red;
+        .content_area{
+            padding:0;
+        }
+        .content_area .content_title {
+            padding-top:20px;
+        }
+        .content_area #categories {
+            font-family: inherit;
+            font-size: 14px;
             width: 100%;
+            padding: 15px 0;
+            font-weight: bold;
+            margin : auto;
+            display:flex;
+            justify-content: space-between;
+            align-items:center;
+            box-shadow: 0 1px 0px #dddddd;
+        }
+        #categories ul{
+            display: flex;
+        }
+        #categories li{
+            margin:0 20px;
+        }
+
+        #productWrap{
+            width: 100%;
+            display: flex;
+            padding: 20px;
         }
         .itembox{
             display: inline-block;
@@ -59,9 +83,15 @@
             width: 220px;
             height: 220px;
             border-radius: 3px;
+            margin-bottom: 5px;
         }
         .itembox p{
-            float: right;
+            padding-left: 5px;
+            text-align: left;
+            line-height: 1.8em;
+        }
+        .itembox #priceTag{
+            font-size: 20px;
         }
 
 
@@ -75,31 +105,58 @@
         <h5>필터</h5>
         <div id="filter">
             <form action="" method="get" id="searchForm">
-                <p>상품<br><input type="text" id="nameSearch" name="nameSearch"></p>
-                <p>브랜드<br><input type="text" id="brandSearch" name="brandSearch"></p>
-                <p>사이즈(KR)<br><input type="text" id="sizeSearch" name="sizeSearch"></p>
+                <p>상품명<br><input type="text" id="nameSearch" name="nameSearch" style="background-color: white"></p>
+<!--                <div>-->
+<!--                    <div>카테고리</div>-->
+<!--                    <select th:field="*{category}" class="form-select">-->
+<!--                        <option value="">==카테고리 선택==</option>-->
+<!--                        <option th:each="category : ${categories}" th:value="${category.id}"-->
+<!--                                th:text="${category.name}">와좌</option>-->
+<!--                    </select>-->
+<!--                </div>-->
+                <p>카테고리<br>
+                    <select th:class="form-select" style="width:190px; font-size: 20px; ">
+                        <option value=""> </option>
+                        <option value="category" >런닝화</option>
+                    </select>
+                </p>
+
+                <p>브랜드<br>
+                    <select th:class="form-select" style="width:190px; font-size: 20px;">
+                        <option value=""> </option>
+                        <option value="brand" >nike</option>
+                    </select>
+                </p>
                 <br>
                 <button type="submit">
                     검 색
                 </button>
             </form>
         </div>
-
     </aside> <!--END sidebar-->
 
-
-
-
     <div class="content_area">
-        <div class="content_title" th:text="${bodytitle}"></div>
+        <div id="categories">
+            <ul id="categor_gnb">
+                <li style="font-weight: bolder">전체</li>
+               <li>스포츠</li>
+                <li>런닝화</li>
+               <li>스니커즈</li>
+               <li>캐주얼</li>
+               <li>샌들</li>
+               <li>부츠</li>
+            </ul>
+        </div>
 
-        <div id="productWrap" th:each="product : ${products}">
-<!--            <th:block th:each="" class="itembox">-->
-            <div class="itembox">
+        <div id="productWrap">
+            <div class="itembox" th:each="product : ${products}">
                 <a th:href="@{/products/detail/{productId} (productId=${product.id})}" >
                     <img th:src="@{|/upload/${product.imgName}|}"/>
-                    <p th:text="|상품명 : ${product.name}|"></p><br>
-                    <p th:text="|가격 :  ${#numbers.formatDecimal(product.price,3, 'COMMA',0,'POINT')}|"></p><br>
+                    <div id="itembox_info">
+                    <b><p th:text="|${product.brand.name}|"></p></b>
+                    <p th:text="|${#strings.substring(product.name, 0, 20)} ...|"></p>
+                    <p th:text="|${#numbers.formatDecimal(product.price,3, 'COMMA',0,'POINT')}|" id="priceTag"></p><br>
+                    </div>
                 </a>
             </div>
         </div>
@@ -108,11 +165,6 @@
             <strong th:if="${page == nowPage}"  th:text="${page}" style="color:red"></strong>
         </th:block>
     </div>
-    <form th:action method="get">
-        <input type="text" name="searchKeyword">
-        <button type="submit">검색</button>
-    </form>
-
 
 </div> <!-- /container -->
 
