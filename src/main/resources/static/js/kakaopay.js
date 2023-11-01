@@ -51,7 +51,7 @@ IMP.request_pay({
   buyer_tel: phone,
   buyer_addr: middle_address + detailed_address,
   buyer_postcode: postal_code,
-  m_redirect_url: 'https://www.yourdomain.com/payments/complete'
+  m_redirect_url: '/'
   /*
       모바일 결제시,
       결제가 끝나고 랜딩되는 URL을 지정

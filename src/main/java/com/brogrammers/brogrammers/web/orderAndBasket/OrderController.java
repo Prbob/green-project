@@ -39,6 +39,7 @@ public class OrderController {
     public String orderForm(@RequestParam(name = "product",required = false)Long id,@RequestParam(name = "quantity",required = false)Integer quantity,
                             Model model, HttpServletRequest request,@RequestParam(name = "way",required = false)String way){
         if(fun.getMember(request)==null){return "/alert/orderNologin";}
+
         Member member = functionClass.getMemberDb(request); // 1. 회원 정보를 불러옴
         Address address = member.getAddress(); // 회원 주소
         if(way!=null && way.equals("one")){
