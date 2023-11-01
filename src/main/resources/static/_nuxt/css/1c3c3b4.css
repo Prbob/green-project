@@ -21,6 +21,75 @@
     background-color: #fef7f6
 }
 
+
+
+.pay_title{
+    height: 100%;
+    width: 100%;
+}
+
+.payment_section input[type=radio]{
+    display: none;
+}
+.payment_section input[type=radio]+label{
+    display: inline-block;
+    cursor: pointer;
+    height: 100%;
+    width: 100%;
+    /* border: 1px solid #333; */
+    /* line-height: 24px; */
+    text-align: center;
+    font-weight:700;
+    font-size:16px;
+}
+
+.payment_section input[type=radio]+label{
+    background-color: #fff;
+    color: #333;
+}
+.payment_section input[type=radio]:checked+label{
+    /* background-color: #414141; */
+    /* color: #fff; */
+    color:chocolate
+}
+.pay_item label{
+    line-height: 40px;
+
+}
+#btn_confirm22{
+    text-align: center;
+}
+#check_module{
+    font-size:17px;
+    font-weight: bold;
+    display: inline-block;
+    margin: auto;
+    padding: 10px;
+    width: 150px;
+    height: 50px;;
+    background: rgb(209, 209, 209);
+    border: 1px solid gary;
+    border-radius: 10px;
+    cursor: pointer;
+}
+#check_module:hover{
+    background: rgb(48, 48, 48);
+    cursor: pointer;
+    color: #e7efec;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
 .notice.buyer_notice .tag[data-v-e34ccfec] {
     background-color: #ef6253
 }
@@ -29,6 +98,12 @@
     color: #f15746
 }
 
+.sihwaselect{
+    margin-bottom: 10px;
+}
+.thick_separator{
+    border-top:2px solid gray;
+}
 .notice .tag[data-v-e34ccfec] {
     border-radius: 4px;
     color: #fafafa;

@@ -12,10 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
@@ -31,22 +28,39 @@ public class OrderController {
     @Autowired private BaskProdService baskProdService;
     @Autowired private OrderService orderService;
     @Autowired private OrderProductsService orderProductsService;
+    @Autowired private FunctionClass fun;
+    @Autowired private ProductService productService;
     // 배송지 정보를 담아주어야함.
     // 주문자 정보 => 회원 정보 => member정보
     // 상품 정보(orderProducts) => 장바구니에서 어떤 물품들 있는지 조회 => 오더상품으로 맵핑해주어야함
     // 결제수단?
     // 현금 영수증
-    @GetMapping("/order/buyAll")
-    public String orderForm(Model model, HttpServletRequest request){
+    @GetMapping("/order/buy") // 장바구니 구매 페이지
+    public String orderForm(@RequestParam(name = "product",required = false)Long id,@RequestParam(name = "quantity",required = false)Integer quantity,
+                            Model model, HttpServletRequest request,@RequestParam(name = "way",required = false)String way){
+        if(fun.getMember(request)==null){return "/alert/orderNologin";}
         Member member = functionClass.getMemberDb(request); // 1. 회원 정보를 불러옴
+        Address address = member.getAddress(); // 회원 주소
+        if(way!=null && way.equals("one")){
+            Products products = productService.getByid(id);
+            List<ProductsCount> productOne = new ArrayList<>();
+            productOne.add(ProductsCount.builder().product(products).quantity(quantity).build());
+            OrderProductsForm form2 = OrderProductsForm.builder() //
+                    .name(member.getName()).phone(member.getPhone()+"-"+member.getPhone2()+"-"+member.getPhone3())
+                    .postal_code(address.getPostal_code()).middle_address(address.getMiddle_address()).detailed_address(address.getDetailed_address()) // 주소 입력해주기
+                    .build();
+            form2.setTotalPrice(products.getPrice()*quantity);
+            form2.setProductCounts(productOne);
+            model.addAttribute("list",productOne); // 내 장바구니 상품들 담아줌.
+            model.addAttribute("form",form2);
+            return "orderAndBasket/orderForm";
+        }
         Basket basket = basketService.findByMemberid(member.getId()).get(); // 1. 장바구니를 불러옴
         List<Products> products = baskProdService.findProductsByBasketId(basket); // 3. 장바구니에 담긴 상품 가져오기
         BasketProducts basketProducts = null;
-        Address address = member.getAddress(); // 회원 주소
         List<ProductsCount> productsCounts = new ArrayList<>();
         OrderProductsForm form = OrderProductsForm.builder() //
                 .name(member.getName()).phone(member.getPhone()+"-"+member.getPhone2()+"-"+member.getPhone3())
-//                .phone2(member.getPhone2()).phone3(member.getPhone3()) // 회원 이름, 전화번호 담아주기
                 .postal_code(address.getPostal_code()).middle_address(address.getMiddle_address()).detailed_address(address.getDetailed_address()) // 주소 입력해주기
                 .build();
         int totalPrice = 0;
@@ -66,8 +80,9 @@ public class OrderController {
         System.out.println("오더페이지 컨트롤러 실행");
         return "orderAndBasket/orderForm";
     }
-    @PostMapping("/order/buyAll")
+    @PostMapping("/order/buy")
     public String order(@ModelAttribute("form") @Valid OrderProductsForm form, BindingResult result, Model model, HttpServletRequest request){
+        if(fun.getMember(request)==null){return "/alert/noLogin";}
         if(result.hasErrors()){
             return "redirect:/order/buyAll";
         }
@@ -97,5 +112,10 @@ public class OrderController {
         System.out.println("이름" + form.getName());
 
         return "orderAndBasket/orderFormTest";
+    }
+    @GetMapping("/buy")
+    public String buyOne(@RequestParam("product")Long id,HttpServletRequest request){
+        if(fun.getMember(request)==null){return "/alert/noLogin";}
+        return "redirect:/";
     }
 }
