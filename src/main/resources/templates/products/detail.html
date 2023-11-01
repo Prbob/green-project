@@ -20,29 +20,26 @@
             min-width: 600px;
         }
         #fixed {
-            box-shadow: 0 -1px 0px #cccccc;
-            padding : 30px 20px 40px 30px;
+            padding : 0px 20px 40px 30px;
             /*border: 1px solid blue;*/
             width: 550px;
-            height: 550px;
+            height: 100%;
             font-size: 18px;
+            position: fixed;
+            left:50%;
+        }
+        #fixed #infoBox {
+            height: 50%;
+            box-shadow: 0 -1px 0px #cccccc;
+            padding-top: 30px;
         }
         #fixed .data{
             text-align: right;
         }
-        #fixed #info {
-            height: 270px;
-        }
 
         #fixed #selectBox{
             box-shadow: 0 -1px 0px #cccccc;
-        }
-
-        #fixed{
-            position: fixed;
-            left:50%;
-        }
-        #selectBox {
+            height: 40%;
             padding-top : 30px;
             position:relative;
             height: 180px;
@@ -116,15 +113,15 @@
         <div id="fixed">
 
             <input type="hidden" name="productId" th:value="*{id}"/>
-            <div id="info">
+            <div id="infoBox">
                 <h3>Product Info</h3>
                 <div>&nbsp;</div>
                 <p> 상품명 </p>
-                <p th:text="*{name}" class="data" id="productName"></p>
+                <p th:text="*{name}" class="data" id="productName"></p><br>
                 <span> 가격 </span>
-                <p th:text="*{price}" class="data" id="productPrice"></p>
+                <p th:text="*{#numbers.formatDecimal(price,3, 'COMMA',0,'POINT')} + ' 원'" class="data" id="productPrice"></p><br>
                 <span> 브랜드 </span>
-                <p th:text="*{brand.name}" class="data" id="productBrand"></p>
+                <p th:text="*{brand.name}" class="data" id="productBrand"></p><br>
             </div>
 
             <div id="selectBox">
@@ -137,10 +134,10 @@
             </div>
 
             <div id="adminBox">
-                <a th:unless="${session.accessrigths == 'NORMAL'}" th:href="@{/products/edit/{id} (id=${product.id})}" class="btn btn-primary" role="button">
+                <a th:unless="${session.accessrigths == 'NORMAL' || session.accessrigths == null}" th:href="@{/products/edit/{id} (id=${product.id})}" class="btn btn-primary" role="button">
                     수정 <!-- 관리자 권한일 때에만 표시 -->
                 </a>
-                <a th:unless="${session.accessrigths == 'NORMAL'}" th:href="@{/products/delete/{id} (id=${product.id})}" class="btn btn-primary" role="button">
+                <a th:unless="${session.accessrigths == 'NORMAL' || session.accessrigths == null}" th:href="@{/products/delete/{id} (id=${product.id})}" class="btn btn-primary" role="button">
                     삭제 <!-- 관리자 권한일 때에만 표시 -->
                 </a>
             </div>

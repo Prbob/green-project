@@ -99,7 +99,7 @@
                 <a th:href="@{/products/detail/{productId} (productId=${product.id})}" >
                     <img th:src="@{|/upload/${product.imgName}|}"/>
                     <p th:text="|상품명 : ${product.name}|"></p><br>
-                    <p th:text="|가격 :  ${product.price}|"></p><br>
+                    <p th:text="|가격 :  ${#numbers.formatDecimal(product.price,3, 'COMMA',0,'POINT')}|"></p><br>
                 </a>
             </div>
         </div>
