@@ -145,7 +145,7 @@
                     <li class="menu_item"><a href="#"> 구매 내역 </a></li>
                     <li class="menu_item"><a href="#"> 판매 내역 </a></li>
                     <li class="menu_item"><a href="#"> 보관 판매 </a></li>
-                    <li class="menu_item" style="font-weight:bolder; color:#333; margin-left: 10px;"><a href="#"> 관심 상품 </a></li>
+                    <li class="menu_item" style="font-weight:bolder; color:#333;"><a href="#"> 관심 상품 </a></li>
                 </ul>
 
                 <ul class="snb_menu" style="margin-top: 50px;">
@@ -190,13 +190,11 @@
 
                                 <!--상품명 + 색상-->
                                 <a data-v-3bb254ce="" class="name" th:href="@{/products/detail/{productId} (productId=${basketInProducts.products.id})}" th:text="|${basketInProducts.products.name} ${basketInProducts.products.color}|"></a>
-                                <a href="#" th:href="@{/order/buy}" class="btn btn-primary" role="button">
-                                    전체구매
-                                </a>
+
                                 <div>
                                     <form th:action="@{/order/basket/{productId} (productId=${basketInProducts.products.id})}" method="post"
                                           style="width: 210px;">
-                                        <div>
+                                        <div style="padding-top: 5px;">
                                             <form th:action="@{/order/basket/{productId} (productId=${basketInProducts.products.id})}" method="post">
                                                 <select id="quantity" name="quantity" style="color: #000;">
                                                     <option th:each="i : ${#numbers.sequence(1, basketInProducts.products.stockQuantity)}"
@@ -225,10 +223,7 @@
                                             <div data-v-0b6ddb6a="" class="price" style="height: 22px;">
                                                 <span data-v-0b6ddb6a="" class="amount">
                                                     <!--가격-->
-<!--                                                    <em data-v-0b6ddb6a="" class="num" th:text="${#strings.formatNumber(basketInProducts.products.price, 0, 'NUMBER', 'ko-KR')}"> </em>-->
-<!--                                                    <span data-v-0b6ddb6a="" class="won">원</span>-->
                                                     <div data-th-text="${#numbers.formatInteger(basketInProducts.products.price, 3, 'COMMA') + '원'}"></div>
-
                                                 </span>
                                             </div>
                                         </button>
@@ -251,7 +246,7 @@
 
 
                 <div style="text-align: right; margin-top: 10px;">
-                    <a href="#" th:href="@{/order/buyAll}" class="btn btn-primary" role="button">
+                    <a href="#" th:href="@{/order/buy}" class="btn btn-primary" role="button">
                         전체구매
                     </a>
                 </div>
