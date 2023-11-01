@@ -22,6 +22,9 @@ public class OAuthController {
         String code2 = oAuthService.getKakaoAccessToken(code);
         System.out.println("====================");
         String email = oAuthService.createKakaoUser(code2);
+        System.out.println("====================");
+        System.out.println("====================");
+        System.out.println(email);
     }
 
 

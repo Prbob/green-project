@@ -10,6 +10,7 @@ import javax.validation.constraints.NotEmpty;
 @NoArgsConstructor
 public class CategoryForm {
     private Long id;
+
     @NotEmpty(message = "기입은 필수입니다.")
     private String name;
 

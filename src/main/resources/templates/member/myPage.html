@@ -4,13 +4,14 @@
     <meta charset="UTF-8">
     <title th:text="${member.name}"></title>
     <th:block th:replace="include/header :: header"></th:block>
+<<<<<<< HEAD
     <style>
         ul {
             list-style: none;
             padding-left: 0px;
         }
         a{
-            color: black; 
+            color: black;
             text-decoration: none;
         }
         div.MyPage_left_side_MenuBar{
@@ -135,8 +136,12 @@
         }
         /* f2f9f6 */
     </style>
+
 </head>
 <body>
+<h2>마이페이지</h2>
+<img th:src="@{|/upload/${member.imgName}|}"/> <!-- 사진 -->
+<div th:text="${member.name}"></div> <!-- 멤버 이름 -->
 <th:block th:replace="include/bodyHead :: bodyHeader"></th:block>
 <!--<h2>마이페이지</h2>-->
 <!--<img th:src="@{|/upload/${member.imgName}|}"/> &lt;!&ndash; 사진 &ndash;&gt;-->
@@ -186,7 +191,7 @@
                         <img th:src="@{|/upload/${member.imgName}|}" alt="개인 프로필 사진" width="100px" height="100px"/><!--개인 프로필 사진 연결-->
                     </div>
                     <div class="MyPage_MainContent_Top_userMembership_Introduction_info">
-<!--                        <div th:text="${member.name}"></div>&lt;!&ndash;개인 프로필 이름 연결&ndash;&gt;-->
+                        <!--                        <div th:text="${member.name}"></div>&lt;!&ndash;개인 프로필 이름 연결&ndash;&gt;-->
                         <p th:text="${member.name}" class="MyPage_MainContent_Top_userMembership_Introduction_Email">이름 들어올 부분.()</p>
                         <p class="MyPage_MainContent_Top_userMembership_Introduction_Email gray_mini_font">이메일</p>
                         <!--개인 프로필 이메일 연결-->
@@ -214,7 +219,7 @@
                 </div>
             </div><!--MyPage_MainContent_Top_userMembership_frame 영역 끝-->
         </div><!--MyPage_MainContent_Top_userMembership 종료-->
-        
+
         <img src="/src/main/resources/static/image/banner/sample_banner01.png" alt="배너 광고" width="100%" height="25%">
         <!--만들어놓기는 했는데 구현을 못할거같아서 안보이게 처리함.-->
         <!-- <a class="MyPage_MainContent_MiddleContent_miniBanner">
@@ -256,7 +261,7 @@
         <div class="MyPage_MainContent_MiddleContent_EmptySpace">
             <p class="gray_mini_font">현재 거래 내역이 없습니다.</p>
         </div>
-        
+
         <div class="MyPage_MainContent_MiddleTitle"><!-- 이거는 나중에 다시 써야 하는 거.-->
             <h3 class="MyPage_MainContent_MiddleTitle_title">
                 관심 상품
@@ -265,11 +270,8 @@
         <div class="MyPage_MainContent_MiddleContent_EmptySpace">
             <p class="gray_mini_font">현재 거래 내역이 없습니다.</p>
         </div>
-
     </div>
 </div>
 </body>
-<script>
-    
 </script>
 </html>

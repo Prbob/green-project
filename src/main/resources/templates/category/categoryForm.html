@@ -2,21 +2,27 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>카테고리 등록</title>
+    <title>카테고리</title>
     <th:block th:replace="include/header :: header"></th:block>
 </head>
 <body>
 <th:block th:replace="include/bodyHead :: bodyHeader"></th:block>
-<h2>등록된 카테고리 목록</h2>
-<form th:action method="post" th:object="${form}">
-    <div>
-        <label th:for="name">카테고리:</label>
-        <input type="text" th:field="*{name}" >
-        <div class="field-error" th:errors="*{name}" />
+<div class="container my lg" data-v-e2abb636="" data-v-cdf8523a="">
+<th:block th:replace="include/managerMenu :: managerMenu"></th:block>  <!-- 관리자 페이지 왼쪽 메뉴 -->
+    <div class="categorydiv">
+        <h2 th:text="${msg}"></h2>
+        <form th:action method="post" th:object="${form}" class="categoryform">
+            <div class="categorydiv">
+                <label th:for="name">카테고리</label>
+                <input type="text" th:field="*{name}" class="categoryinput"
+                       th:class="${#fields.hasErrors('name')}? 'categoryinput form-control fieldError' : 'categoryinput'">
+                <div class="field-error" th:errors="*{name}" />
+            </div>
+            <div class="addbutton"><button id="addButton" class="categorybutton" type="submit">등록</button></div>
+        </form>
     </div>
+</div>
 
-    <button type="submit">등록</button>
-</form>
-<a href="#">링크</a>
+
 </body>
 </html>
