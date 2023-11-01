@@ -22,16 +22,18 @@
         #fixed {
             padding : 0px 20px 40px 30px;
             /*border: 1px solid blue;*/
-            width: 550px;
+            width: 500px;
             height: 100%;
             font-size: 18px;
             position: fixed;
             left:50%;
         }
         #fixed #infoBox {
-            height: 50%;
             box-shadow: 0 -1px 0px #cccccc;
+            height: 40%;
             padding-top: 30px;
+            padding-bottom : 30px;
+            overflow: hidden;
         }
         #fixed .data{
             text-align: right;
@@ -39,32 +41,43 @@
 
         #fixed #selectBox{
             box-shadow: 0 -1px 0px #cccccc;
-            height: 40%;
             padding-top : 30px;
             position:relative;
-            height: 180px;
         }
         #selectBox input{
-            border:1px solid #1d1d1b;
+            border:1px solid #2d2d2d;
             text-align: right;
             position:absolute;
             right:0px;
             padding: 5px;
         }
+        #sizeSelect {
+            justify-content: space-between;
+            position:relative;
+            line-height: 2em;
+            vertical-align: center;
+        }
+        #sizeSelect select{
+            position: absolute;
+            right:0;
+            font-size: 18px;
+        }
+        #selectBox .space {
+            width: 100%;
+            height: 20px;
+        }
+
         #button {
-            min-width: 300px;
-            height: 60px;
+            width: 100%;
             text-align: center;
             font-size: 24px;
-            right: 90px;
-            bottom: 30px;
-            position: absolute;
+            margin-bottom:20px;
         }
 
         .first{
             border:1px solid #EF6253;
             width: 250px;
-            height: 100%;
+            height: 60px;
             margin-right:10px;
             font-size: 20px;
         }
@@ -76,7 +89,7 @@
         .second{
             border: 1px solid black;
             width: 60px;
-            height: 100%;
+            height: 60px;
             font-size: 20px;
         }
         .second:hover{
@@ -88,6 +101,7 @@
             box-shadow: 0 -1px 0px #cccccc;
             text-align: right;
             padding: 10px;
+            height: 10%;
         }
 
         #leftSide{
@@ -124,9 +138,25 @@
                 <p th:text="*{brand.name}" class="data" id="productBrand"></p><br>
             </div>
 
-            <div id="selectBox">
+            <div id="selectBox" style="line-height: 2em;">
+                <div id="sizeSelect">
+                    <span>사이즈 선택 :</span>
+
+                        <select class="form-select" style="width:190px;">
+                            <option value=""> </option>
+                            <option value="size" >220</option>
+                            <option value="size" >230</option>
+                            <option value="size" >240</option>
+                            <option value="size" >250</option>
+                            <option value="size" >260</option>
+                            <option value="size" >270</option>
+                            <option value="size" >280</option>
+                        </select>
+                </div><!--id sizeSelect END-->
+                <div class="space">&nbsp; </div>
                 <label > 선택 수량 : </label>
                 <input name="quantity" type="number" value="1">
+                <div class="space">&nbsp; </div>
                 <div id="button">
                     <button type="submit" th:name="action" th:value="buy" class="btn btn-primary first" role="button" name="basket">즉시 구매</button>
                     <button type="submit" th:name="action" th:value="basket" class="btn btn-primary second" role="button" name="basket"><i class="fa-solid fa-cart-plus"></i></button>
