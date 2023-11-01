@@ -18,4 +18,7 @@ public interface BaskProdRepository extends JpaRepository<BasketProducts,Long> {
     Optional<BasketProducts> findOneByBaskeyAndProducts(@Param("basket") Basket basket , @Param("products") Products products);
 
     void deleteBasketProductsById(Long id);
+
+    @Query("DELETE FROM BasketProducts bp WHERE bp.basket= :basket AND bp.products = :products")
+    void deleteBaskProdByBasketAndProducts(@Param("basket") Basket basket, @Param("products") Products products);
 }
