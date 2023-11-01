@@ -158,7 +158,11 @@
                 <input name="quantity" type="number" value="1">
                 <div class="space">&nbsp; </div>
                 <div id="button">
-                    <button type="submit" th:name="action" th:value="buy" class="btn btn-primary first" role="button" name="basket">즉시 구매</button>
+                    <button type="submit" th:name="action" th:value="buy" class="btn btn-primary first" role="button" name="basket">
+<!--                        <a th:href="@{/buy(product = ${product.id},quantity=${})}" th:text="'즉시구매'" >-->
+                            즉시구매
+<!--                        </a>-->
+                    </button>
                     <button type="submit" th:name="action" th:value="basket" class="btn btn-primary second" role="button" name="basket"><i class="fa-solid fa-cart-plus"></i></button>
                 </div>
             </div>
@@ -183,6 +187,7 @@
     </div>
 
 </form>
+
 </body>
 
 </html>

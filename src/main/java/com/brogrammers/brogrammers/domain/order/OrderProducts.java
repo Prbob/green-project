@@ -1,13 +1,22 @@
 package com.brogrammers.brogrammers.domain.order;
 
 import com.brogrammers.brogrammers.domain.product.Products;
+import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
 @Entity
 @Getter
+@NoArgsConstructor
 public class OrderProducts {
+    @Builder
+    public OrderProducts(int quantity, Products products, Orders orders) {
+        this.quantity = quantity;
+        this.products = products;
+        this.orders = orders;
+    }
 
     @Id @GeneratedValue
     @Column(name="order_Products_id")
