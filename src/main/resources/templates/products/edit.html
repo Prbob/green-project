@@ -62,7 +62,7 @@
                         </div>
                         <div>
                             <input type="text" th:field="*{productName}" placeholder="상품 이름을 입력해주세요"
-                                   th:class="${#fields.hasErrors('productName')}? 'form-control fieldError' : 'form-control'">>
+                                   th:class="${#fields.hasErrors('productName')}? 'form-control fieldError' : 'form-control'">
                             <div class="field-error" th:errors="*{productName}" />
                         </div>
                     </div>

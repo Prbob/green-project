@@ -8,10 +8,12 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
+import java.util.List;
 import java.util.Optional;
 
 public interface ProductsRepository extends JpaRepository<Products,Long> {
     Products findProductById(Long id);
+
 
     Page<Products> findByNameContaining(String search, Pageable pageable);
 
@@ -31,5 +33,9 @@ public interface ProductsRepository extends JpaRepository<Products,Long> {
     @Query("SELECT p FROM Products p WHERE p.gender = :gender AND p.name LIKE %:keyword%")
     Page<Products> findProductsByGender(@Param("gender") String gender,@Param("keyword") String keyword ,Pageable pageable); // 성별로 구분
 
-    void deleteBrandByBrandId(Brand brand);
+    @Query("SELECT p FROM Products p WHERE p.gender= :gender AND p.name= :name AND p.brand=:brand AND p.color =:color")
+    List<Products> findProductsToSize(@Param("gender") String gender,@Param("name")String name, @Param("brand")Brand brand,@Param("color")String color);
+
+    @Query("SELECT p FROM Products p WHERE p.name= :name AND p.color=:color AND p.size=:size AND p.brand =:brand")
+    Optional<Products> findProductsByNameAndColorAndSizeAndBrand(@Param("name") String name,@Param("color") String color, @Param("size") int size,@Param("brand") Brand brand);    void deleteBrandByBrandId(Brand brand);
 }

@@ -33,15 +33,18 @@ public class Orders {
     private String name; // 주문한 사람
     @Column(name="order_phone")
     private String phone;
-
+    @Column(name="imp_uid")
+    private String imp_uid;
 
     @Builder
-    public Orders(int totalPrice, String payment, Member member, String name, String phone) {
+    public Orders(int totalPrice, String payment, Member member, String name, String phone, String imp_uid,Delivery delivery) {
         this.totalPrice = totalPrice;
         this.payment = payment;
         this.member = member;
         this.name = name;
-
+        this.phone = phone;
+        this.imp_uid = imp_uid;
+        this.delivery = delivery;
     }
 
     @Column(name="order_registrationDate")
@@ -56,8 +59,8 @@ public class Orders {
     @OneToMany(mappedBy = "orders")
     private List<OrderProducts> orderProducts = new ArrayList<>();
 
-    @Column(name="order_status", columnDefinition = "varchar(255) default 'NO_PAYMENY'")
-    private OrderStatus orderStatus; // 주문 상태
+    @Column(name="order_status")
+    private OrderStatus orderStatus=OrderStatus.NO_PAYMENY; // 주문 상태
 
     @OneToOne
     @JoinColumn(name="dilivery_id")

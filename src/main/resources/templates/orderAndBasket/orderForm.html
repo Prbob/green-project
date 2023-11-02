@@ -23,6 +23,7 @@
                     <div data-v-240c5974="" data-v-01ec1c70="" class="buy_immediate">
                         <div data-v-955c094e="" data-v-240c5974="" class="product_info_area">
                             <div data-v-955c094e="" class="product_info" th:each="pc : ${form.productCounts}">
+
                                 <div data-v-aff2362e="" data-v-955c094e="" class="product"
                                      style="background-color: rgb(235, 240, 245);">
                                     <div data-v-416dde45="" data-v-aff2362e="" class="product_inner_tag display_tag_item"><!----><span data-v-416dde45="">  </span></div>
@@ -269,7 +270,7 @@
                                         </div>
                                         <div data-v-15287078="" data-v-4217af8e="" class="display_line line heavy_text">
                                             <div th:each="pc : ${form.productCounts}" data-v-6edbf060="" data-v-15287078="" id="sihwa" class="line_title display_paragraph" style="color: rgb(34, 34, 34);">
-                                                <div style="color:inherit;" class="orderInformation1" th:text="|${pc.product.name} (${pc.quantity} ea) |"></div>
+                                                <div style="color:inherit;" class="orderInformation1" th:text="|${pc.product.name} (size ${pc.product.size} / ${pc.quantity} ea) |"></div>
                                                 <div class="orderInformation2"><em style="color:inherit;"   th:text="${#numbers.formatInteger(pc.product.price,3,'COMMA') + '원'}"></em></div>
                                             </div>
                                         </div>
