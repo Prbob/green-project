@@ -104,6 +104,31 @@
             justify-content: center;
             display: inline;
         }
+        div.MyPage_MainContent_MiddleContent_alignment{
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+        }
+        div.MyPage_MainContent_MiddleContent_alignment dd{
+            margin-left: 0px;
+            display: inline-flex;
+        }
+        div.MyPage_MainContent_MiddleContent_alignment dt{
+            display: inline-flex;
+        }
+        div.MyPage_MainContent_MiddleContent_EmptySpace{
+            width: 100%;
+            height: 100px;
+            justify-content: center;
+            align-items: center;
+            background-color: #d3d3d3 ;
+            display: flex;
+        }
+        p.gray_mini_font{
+            text-align: center;
+            display: inline-block;
+            color: #909090;
+        }
 
     </style>
     
@@ -216,14 +241,12 @@
                         </ul>
                     </div>
                     <div>
-                        <div>
-                            <dd>정렬</dd>
+                        <div class="MyPage_MainContent_MiddleContent_alignment">
+                            <dd style="margin-left: 0">정렬</dd>
                             <dt><button>오름 차순</button></dt>
                         </div>
-                        <div>
-                            <div class="MyPage_MainContent_MiddleContent_EmptySpace">
-                                <p class="gray_mini_font">현재 거래 내역이 없습니다.</p>
-                            </div>
+                        <div class="MyPage_MainContent_MiddleContent_EmptySpace">
+                            <p class="gray_mini_font">현재 거래 내역이 없습니다.</p>
                         </div>
                     </div>
                 </div>
@@ -253,14 +276,12 @@
                         </ul>
                     </div>
                     <div>
-                        <div>
-                            <dd>정렬</dd>
+                        <div class="MyPage_MainContent_MiddleContent_alignment">
+                            <dd style="margin-left: 0">정렬</dd>
                             <dt><button>오름 차순</button></dt>
                         </div>
-                        <div>
-                            <div class="MyPage_MainContent_MiddleContent_EmptySpace">
-                                <p class="gray_mini_font">현재 거래 내역이 없습니다.</p>
-                            </div>
+                        <div class="MyPage_MainContent_MiddleContent_EmptySpace">
+                            <p class="gray_mini_font">현재 거래 내역이 없습니다.</p>
                         </div>
                     </div>
                 </div>

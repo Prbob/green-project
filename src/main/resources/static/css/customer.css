@@ -55,3 +55,49 @@ body {
 .title {
     font-size: 16px;
 }
+
+/* 한결 (HG가 붙으면 제가 한걸로..)*/
+li{
+    margin-top: 10px;
+}
+div.dropdown{
+    margin-bottom: 0;
+}
+div.div_start_end{
+    display: flex;
+    justify-content: space-between;
+}
+div.div_start_end p{
+    display: inline-block;
+}
+div.dropdown_hidden{
+    background-color: #f5f5f3;
+    font-weight: 300;
+    font-size: 14px;
+    padding: 30px;
+    border-radius: 5px;
+    color: #272902;
+}
+div.dropdown_hidden_frame{
+    width: 70%;
+}
+div.dropdown_hidden tr{
+    border-top: 1px solid #ebebeb;
+}
+div.dropdown_hidden tr td {
+    padding: 20px;
+    text-align: left;
+}
+td.tbody_red{
+    color: #fc6769;
+    font-weight: 500;
+}
+p{
+    margin-bottom: 9px;
+}
+i{
+    display: flex;
+}
+
+
+/* 한결끝 */
