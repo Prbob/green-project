@@ -121,9 +121,6 @@
             padding-top: 4px;
         }
 
-
-
-
     </style>
 
 </head>
@@ -167,6 +164,7 @@
             <div class="v-portal" style="display:none;" data-v-4128f410=""></div>
             <div class="content_title border" data-v-61e7a8a3="" data-v-4128f410="">
                 <div class="title" data-v-61e7a8a3=""><h3 data-v-61e7a8a3="">관심 상품</h3><!----></div><!----></div>
+                <div class="nolist" th:if="nolist == 'nolist'">관심 상품이 없습니다.</div>
             <div data-v-4128f410="" class="my_interest">
                 <ul data-v-3bb254ce="" data-v-4128f410="" class="wish_list">
 
@@ -246,7 +244,7 @@
 
 
                 <div style="text-align: right; margin-top: 10px;">
-                    <a href="#" th:href="@{/order/buy}" class="btn btn-primary" role="button">
+                    <a href="#" th:if="${nolist != 'nolist'}" th:href="@{/order/buy}" class="btn btn-primary" role="button">
                         전체구매
                     </a>
                 </div>

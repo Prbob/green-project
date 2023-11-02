@@ -101,4 +101,15 @@ public class ProductService {
     public Optional<Products> findProductByNameColorSizeBrand(String name, String color, int size,Brand brand){
         return productsRepository.findProductsByNameAndColorAndSizeAndBrand(name,color,size,brand);
     }
+
+
+    // 브랜드 O 검색 키워드 O
+    public Page<Products> findProductsByBrandAndKeyword(String keyword, Brand brand,Pageable pageable){
+        return productsRepository.findProductsByNameAndBrand(keyword,brand,pageable);
+    }
+
+    // 브랜드 O 검색 키워드X
+    public Page<Products> findProductsByBrand(Brand brand,Pageable pageable){
+        return productsRepository.findProductsByBrand(brand,pageable);
+    }
 }

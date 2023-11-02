@@ -28,11 +28,19 @@ table a{
 #headth{
     background-color: rgb(223, 223, 223);
 }
+#cateform{
+    text-align: center;
+}
+#catelist{
+    padding: 10px;
+    border: 1px solid gray;
+    border-radius: 6px;
+    margin-left: 85px;
+}
     </style>
 </head>
 <body>
 <th:block th:replace="include/bodyHead :: bodyHeader"></th:block>
-<h2 id="addProduct">카테고리 리스트</h2>
 <div class="container my lg" data-v-e2abb636="" data-v-cdf8523a="">
     <th:block th:replace="include/managerMenu :: managerMenu"></th:block>
     <div>
@@ -56,6 +64,22 @@ table a{
             </tr>
             </tbody>
         </table>
+        <form method="get" th:action id="cateform">
+            <input name="nameSearch" id="catelist">
+            <button type="submit">검색</button>
+        </form>
+        <div class="paging">
+            <a th:if="${5 < startPage}" th:href="@{/category/list(page = ${startPage-6},nameSearch = ${param.nameSearch},brandId=${param.brandId})}">
+                <i class="fas fa-chevron-left"></i>
+            </a>
+            <th:block th:each="page : ${#numbers.sequence(startPage,endPage)}">
+                <a th:if="${page != nowPage}" th:href="@{/category/list(page = ${page-1},nameSearch = ${param.nameSearch})}" th:text="${page}"></a>
+                <strong th:if="${page == nowPage}"  th:text="${page}" style="color:red"></strong>
+            </th:block>
+            <a th:if="${totalPage > endPage && endPage != 0}" th:href="@{/category/list(page = ${endPage}, nameSearch = ${param.nameSearch})}">
+                <i class="fas fa-chevron-right"></i> <!-- Font Awesome 아이콘 클래스를 추가합니다 -->
+            </a>
+        </div>
     </div>
 </div>
 
