@@ -4,7 +4,7 @@ body {
     padding: 0;
 }
 .container {
-    display: flex;
+    justify-content: center;
     max-width: 1200px;
     margin: 0 auto;
     /*장바구니 배경에 깔려서 뺏음*/
@@ -58,6 +58,7 @@ body {
 }
 
 /* 한결 ()*/
+/* questions.html */
 li{
     margin-top: 10px;
 }
