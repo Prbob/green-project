@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>구매 성공</title>
+    <th:block th:replace="include/header :: header"></th:block>
+    <style>
+        body{
+            margin:0; padding:0;box-sizing: border-box;
+        }
+        #container{
+            width: 80%;
+            margin:0 auto;
+            /*border: 1px solid black;*/
+        }
+        #noticeBox{
+            font-size:18px;
+            text-align: center;
+        }
+        #noticeBox h2 {
+            text-align: left;
+            margin: 10px auto 0;
+            line-height: 2.5em;
+            box-shadow: 0px 1px 0px #dddddd;
+            padding-left: 5px;
+        }
+        #noticeBox p {
+            margin: 30px auto 25px;
+            line-height: 3em;
+        }
+        #noticeBox .orderItems{
+            border:1px solid #dddddd;
+            border-left-color: #1d1d1b;
+            width: 70%;
+            margin: 20px auto;
+            padding: 10px;
+            text-align: left;
+        }
+        #noticeBox .orderItems img{
+            display: inline-block;
+            width: 70px;
+            height: 70px;
+            border:1px solid #eeeeee;
+        }
+        .orderItems span{
+            margin:20px;
+        }
+        #orderInfo{
+            display: flex;
+            box-shadow: 0px -1px 0px #dddddd;
+        }
+        #orderInfo h3{
+            margin-top: 20px;
+            margin-bottom: 10px;
+        }
+
+        .infoBox{
+            line-height: 2em;
+            width: 40%;
+            /*border: 1px solid red;*/
+        }
+        .space{
+            width:6.3%;
+        }
+        .infoBox th{
+            text-align: left;
+        }
+        .infoBox td{
+            text-align: right;
+        }
+
+        .buttons{
+            font-size:16px;
+            margin: 0 auto;
+            width: 220px;
+        }
+        .buttons a{
+            display: inline-block;
+            background-color: #eeeeee;
+            width: 100px;
+            line-height: 3em;
+            margin: 30px 0;
+            text-align: center;
+            font-size:14px;
+        }
+        .buttons a:hover {
+            background-color: #ef6253;
+            color:white;
+            font-weight: bolder;
+        }
+
+    </style>
+</head>
+<body>
+<th:block th:replace="include/bodyHead :: bodyHeader"></th:block>
+<div id="container">
+
+<div id ="noticeBox">
+    <h2> 주문 완료 </h2>
+    <p><b>주문이 완료</b>되었습니다. 감사합니다. </p>
+    <div class="orderItems">
+        <div class="orderItem">
+            <img src="/image/productMain/Nike_Zoom_Vomero_5_Oatmeal_(W).png" style="display: inline-block;">
+            <b><span style="line-height: 3.5em;">item name</span></b>
+        </div>
+    </div>
+</div> <!--END noticeBOX-->
+<div id="orderInfo">
+    <div class="space"></div>
+    <div id="receiverInfo" class = "infoBox">
+        <h3>받는 사람 정보</h3>
+        <table border="0">
+            <tr>
+                <th>받는사람</th> <td>Name</td>
+            </tr>
+            <tr>
+                <th>전화번호</th> <td>Number</td>
+            </tr>
+            <tr>
+                <th>받는주소</th> <td>receiver Address</td>
+            </tr>
+            <tr>
+                <th>요청사항</th> <td> comment </td>
+            </tr>
+            </tr>
+        </table>
+    </div>
+    <div class="space"></div>
+    <div id = "purchaseInfo" class="infoBox">
+        <h3>주문 정보</h3>
+        <table border="0">
+            <tr>
+                <th>주문번호</th> <td> 그냥 있길래 넣어봄 </td>
+            </tr>
+            <tr>
+                <th>주문금액</th> <td> XXXX 원</td>
+            </tr>
+            <tr>
+                <th>추가배송료</th> <td> 0 원</td>
+            </tr>
+            <tr>
+                <th>총 금액</th> <td> XXXX 원</td>
+            </tr>
+
+        </table>
+    </div>
+    <div class="space"></div>
+</div><!--END orderInfo-->
+
+<div class="buttons">
+    <a href="/member/orderDetail" style="margin-right:15px;">주문 상세 보기</a>
+    <a href="/">쇼핑 계속 하기</a>
+</div><!--END buttons-->
+
+</div><!--END container-->
+</body>
+</html>
