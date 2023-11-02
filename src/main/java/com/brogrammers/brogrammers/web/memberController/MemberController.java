@@ -32,6 +32,9 @@ public class MemberController {
     private final LoginService loginService;
     private final BasketService basketService;
     private final FunctionClass fun;
+
+//    시큐리티
+//    PasswordHashConversion passwordConverter = new PasswordHashConversion();
     /////////////////////// 회원가입 //////////////////////
     @GetMapping("/member/joinMember")
     public String joinMemberForm(Model model, @RequestParam(value = "email",required = false) String email){
@@ -56,8 +59,13 @@ public class MemberController {
             bindingResult.reject("duplicateMember","이미 존재하는 회원");
             return "member/joinMemberForm";
         }
+
+        // 비밀번호 해싱
+//        String hashedPassword = passwordConverter.hashPassword(form.getPwd());
+
         Member member = new Member();
         member = member.saveMember(form.getEmail(),form.getPwd(),form.getName());
+//        member = member.saveMember(form.getEmail(),hashedPassword,form.getName());
 
         if(form.getPostal_code()!=null &&form.getMiddle_address()!=null&&form.getDetailed_address()!=null){
             Address address = new Address(form.getPostal_code(),form.getMiddle_address(),form.getDetailed_address()); // 주소 입력 메서드
@@ -98,6 +106,11 @@ public class MemberController {
         if(bindingResult.hasErrors()){
             return "member/loginForm";
         }
+
+        // 비밀번호 해싱
+//        String hashedPassword = passwordConverter.hashPassword(form.getPassword());
+//        Member loginMember = loginService.login(form.getMemberEmail(),hashedPassword);
+
         Member loginMember = loginService.login(form.getMemberEmail(),form.getPassword());
         if(loginMember==null){
             bindingResult.reject("loginFail","아이디 또는 비밀번호 오류");
