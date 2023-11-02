@@ -152,6 +152,116 @@
             margin: 5px;
             color: #b2b1af;
         }
+
+        /*여기는 한규형거 css 추가*/
+        * {
+            font-family: Pretendard Variable,Pretendard,-apple-system,BlinkMacSystemFont,system-ui,Segoe UI,Roboto,Ubuntu,Cantarell,Noto Sans,sans-serif,Helvetica Neue,Apple SD Gothic Neo,Noto Sans KR,Malgun Gothic,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol;
+        }
+
+        .wish_product {
+            cursor: pointer;
+            display: flex;
+            width: 100%;
+            align-items: center;
+            padding-bottom: 20px;
+            padding-top: 20px;
+        }
+
+        .wish_buy[data-v-3bb254ce] {
+            display: inline-flex;
+            flex-direction: column;
+            flex-shrink: 0;
+            margin-left: auto;
+            text-align: right;
+            margin-top: 10px;
+        }
+
+        .wish_list li {
+            border-bottom: 1px solid #D3D3D3;
+        }
+
+        .product_box {
+            padding-left : 10px;
+            padding-right : 10px;
+        }
+
+        .division_btn_box .btn_action[data-v-0b6ddb6a] {
+            align-items: center;
+            border-radius: 10px;
+            color: #fff;
+            cursor: pointer;
+            display: inline-flex;
+            flex: 1;
+            position: relative;
+        }
+
+        .my_interest .division_btn_box[data-v-0b6ddb6a] {
+            margin-top: 0;
+            text-align: left;
+            width: 164px;
+        }
+
+        .division_btn_box {
+            display: flex;
+            justify-content: flex-end;
+        }
+
+        .product_detail {
+            position: relative;
+        }
+
+
+        .size {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            font-weight: bolder;
+            font-size: 13px;
+        }
+
+        .name {
+            font-size: 14px;
+        }
+
+        .btn_action {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            height: 60px;
+        }
+
+        .price {
+            text-align: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100%;
+        }
+
+        .layout_base {
+            padding-top: 20px;
+        }
+
+        .sidebar {
+            color: #333;
+        }
+
+
+        .quantity {
+            display: flex;
+            justify-content: space-between; /* 혹은 다른 정렬 방법 선택 */
+            width: 50px;
+        }
+
+        .quantity input {
+            font-size: 20px;
+        }
+
+        .quantity div {
+            padding-top: 4px;
+        }
         /* f2f9f6 */
     </style>
 </head>
@@ -164,38 +274,19 @@
 <!--김한결 마이페이지 작업 시작.-->
 
 <div class="MyPage_SpaceSeparation">
-    <div class="MyPage_left_side_MenuBar">
-        <div class="MyPage_left_side_MenuBar_detail">
-            <H2>마이 페이지</H2>
-            <div>
-                <ul class="MyPage_left_side_MenuBar_ul">
-                    <li class="MyPage_left_side_MenuBar_lisTitle">
-                        <strong style="font-size: 17px;">내 정보</strong>
-                    </li>
-                    <li class="MyPage_left_side_MenuBar_li">
-                        <a href="#">구매 내역</a>
-                    </li>
-                    <li class="MyPage_left_side_MenuBar_li">
-                        <a href="#">판매 내역</a>
-                    </li>
-                    <li class="MyPage_left_side_MenuBar_li">
-                        <a href="#">관심 상품</a>
-                    </li>
-                    <li class="MyPage_left_side_MenuBar_li">
-                        <a href="#">로그인 정보</a>
-                    </li>
-                    <li class="MyPage_left_side_MenuBar_li">
-                        <a href="#">프로필 관리</a>
-                    </li>
-                    <li class="MyPage_left_side_MenuBar_li">
-                        <a href="#">주소록</a>
-                    </li>
-                    <li class="MyPage_left_side_MenuBar_li">
-                        <a href="#">결제 정보</a>
-                    </li>
-                </ul>
-            </div>
-        </div>
+    <div class="sidebar">
+        <a href="/notice" aria-current="page">
+            <h2 data-v-cdf8523a="" class="snb_main_title">마이페이지</h2>
+        </a>
+        <nav>
+            <ul class="snb_menu">
+                <li class="menu_item"><a href="#"> 구매 내역 </a></li>
+                <li class="menu_item"><a href="#"> 판매 내역 </a></li>
+                <li class="menu_item"><a href="#"> 보관 판매 </a></li>
+                <li class="menu_item" style="font-weight:bolder; color:#333;"><a href="#"> 관심 상품 </a></li>
+                <li class="menu_item"><a href="#"> 로그인 정보 </a></li>
+            </ul>
+        </nav>
     </div>
     <div class="MyPage_MainContent">
         <div class="MyPage_MainContent_Top_userMembership">
@@ -283,12 +374,11 @@
                 <div>
                     <div>
                         <div class="">
-                            <SPAN>배송상품 주문 안내</SPAN>
-                            <span><a href="#">자세한 내용 더보기</a></span>
+                            <span>배송상품 주문상태 안내</span>
                         </div>
                         <div class="">
                             <div>
-
+                                <img src="/static/image/order-status.png">
                             </div>
                         </div>
                     </div>
