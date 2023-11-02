@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>회원정보</title>
+    <th:block th:replace="include/header :: header"></th:block>
+
+    <link rel="stylesheet" th:href="@{/css/customer.css}" type="text/css">
+    <link href="/_nuxt/css/2e6b79f.css" rel="stylesheet" type="text/css">
+    <link href="/_nuxt/css/c9eea23.css" rel="stylesheet" type="text/css">
+
+    <style>
+        * {
+            font-family: Pretendard Variable,Pretendard,-apple-system,BlinkMacSystemFont,system-ui,Segoe UI,Roboto,Ubuntu,Cantarell,Noto Sans,sans-serif,Helvetica Neue,Apple SD Gothic Neo,Noto Sans KR,Malgun Gothic,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol;
+        }
+
+        .wish_product {
+            cursor: pointer;
+            display: flex;
+            width: 100%
+            align-items: center;
+            padding-bottom: 20px;
+            padding-top: 20px;
+        }
+
+        .wish_buy[data-v-3bb254ce] {
+            display: inline-flex;
+            flex-direction: column;
+            flex-shrink: 0;
+            margin-left: auto;
+            text-align: right;
+            margin-top: 10px;
+        }
+
+        .wish_list li {
+            border-bottom: 1px solid #D3D3D3;
+        }
+
+        .product_box {
+            padding-left : 10px;
+            padding-right : 10px;
+        }
+
+        .division_btn_box .btn_action[data-v-0b6ddb6a] {
+            align-items: center;
+            border-radius: 10px;
+            color: #fff;
+            cursor: pointer;
+            display: inline-flex;
+            flex: 1;
+            position: relative;
+        }
+
+        .my_interest .division_btn_box[data-v-0b6ddb6a] {
+            margin-top: 0;
+            text-align: left;
+            width: 164px;
+        }
+
+        .division_btn_box {
+            display: flex;
+            justify-content: flex-end;
+        }
+
+        .product_detail {
+            position: relative;
+        }
+
+
+        .size {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            font-weight: bolder;
+            font-size: 13px;
+        }
+
+        .name {
+            font-size: 14px;
+        }
+
+        .btn_action {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            height: 60px;
+        }
+
+        .price {
+            text-align: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100%;
+        }
+
+        .layout_base {
+            padding-top: 20px;
+        }
+
+        .sidebar {
+            color: #333;
+        }
+
+
+        .quantity {
+            display: flex;
+            justify-content: space-between; /* 혹은 다른 정렬 방법 선택 */
+            width: 50px;
+        }
+
+        .quantity input {
+            font-size: 20px;
+        }
+
+        .quantity div {
+            padding-top: 4px;
+        }
+
+
+    </style>
+
+</head>
+
+<body>
+<!--Header-->
+<th:block th:replace="include/bodyHead :: bodyHeader"></th:block>
+
+
+<div tabindex="0" class="layout_base" data-v-e2abb636="" data-v-cdf8523a="">
+    <div class="container my lg" data-v-e2abb636="" data-v-cdf8523a="" style="padding-top: 0px;">
+        <div class="sidebar">
+            <a href="/notice" aria-current="page">
+                <h2 data-v-cdf8523a="" class="snb_main_title">마이페이지</h2>
+            </a>
+            <nav>
+                <ul class="snb_menu">
+                    <li class="menu_item"><a href="#"> 구매 내역 </a></li>
+                    <li class="menu_item"><a href="#"> 판매 내역 </a></li>
+                    <li class="menu_item"><a href="#"> 보관 판매 </a></li>
+                    <li class="menu_item"><a href="#"> 관심 상품 </a></li>
+                    <li class="menu_item" style="font-weight:bolder; color:#333;"><a href="#"> 로그인 정보 </a></li>
+                </ul>
+            </nav>
+        </div>
+
+
+        <div data-v-cf6a6ef4="" data-v-cdf8523a="" class="content_area my-page-content">
+            <div data-v-cf6a6ef4="" class="my_profile">
+                <div data-v-61e7a8a3="" data-v-cf6a6ef4="" class="content_title border">
+                    <div data-v-61e7a8a3="" class="title">
+                        <h3 data-v-61e7a8a3="">로그인 정보</h3>
+                    </div>
+                </div>
+                <div data-v-cf6a6ef4="" class="profile_info">
+
+                    <!--내 정보-->
+                    <div data-v-8b96a82e="" data-v-cf6a6ef4="" class="profile_group">
+                        <h4 data-v-8b96a82e="" class="group_title" style="margin-bottom: 10px;">내 정보</h4>
+
+
+                        <!--이름-->
+                        <div data-v-4e1fd2e6="" data-v-286e873e="" class="input_join input_box">
+                            <div style="display: flex; align-items: center;">
+                                <h3 data-v-286e873e="" data-v-4e1fd2e6="" class="input_title" th:for="name">이름</h3>
+                            </div>
+                            <div data-v-4e1fd2e6="" class="input_item">
+                                <input data-v-4e1fd2e6="" type="text" placeholder="값 받아오기" autocomplete="off" class="input_txt" readonly>
+                            </div>
+                        </div><!---->
+
+
+
+                        <!--이메일 주소-->
+                        <div data-v-4e1fd2e6="" data-v-286e873e="" class="input_join input_box">
+                            <div style="display: flex; align-items: center;">
+                                <h3 data-v-286e873e="" data-v-4e1fd2e6="" class="input_title">이메일 주소</h3>
+                            </div>
+                            <div data-v-4e1fd2e6="" class="input_item">
+                                <input data-v-4e1fd2e6="" type="text" placeholder="값 받아오기" autocomplete="off" class="input_txt" readonly>
+                            </div>
+
+                        </div><!---->
+
+
+
+                        <!--비밀번호-->
+                        <div data-v-4e1fd2e6="" data-v-286e873e="" class="input_box input_join has_button">
+                            <div style="display: flex; align-items: center;">
+                                <h3 data-v-286e873e="" data-v-4e1fd2e6="" class="input_title" th:for="pwd">비밀번호</h3>
+                            </div>
+
+                            <div data-v-4e1fd2e6="" class="input_item">
+                                <input data-v-4e1fd2e6="" type="password" placeholder="값 받아오기" autocomplete="off" class="input_txt">
+                            </div>
+                        </div><!---->
+
+
+                        <!--비밀번호-->
+                        <div data-v-4e1fd2e6="" data-v-286e873e="" class="input_box input_join has_button">
+                            <div style="display: flex; align-items: center;">
+                                <h3 data-v-286e873e="" data-v-4e1fd2e6="" class="input_title" th:for="pwd">비밀번호 확인</h3>
+                            </div>
+
+                            <div data-v-4e1fd2e6="" class="input_item">
+                                <input data-v-4e1fd2e6="" type="password" placeholder="값 받아오기" autocomplete="off" class="input_txt">
+                            </div>
+                        </div><!---->
+
+
+                        <!--휴대폰 번호-->
+                        <div data-v-4e1fd2e6="" data-v-286e873e="" class="input_join input_box">
+                            <div style="display: flex; align-items: center;">
+                                <h3 data-v-286e873e="" data-v-4e1fd2e6="" class="input_title">휴대폰 번호</h3>
+                            </div>
+                            <div data-v-4e1fd2e6="" class="input_item">
+                                <input data-v-4e1fd2e6="" type="text" placeholder="값 받아오기" autocomplete="off" class="input_txt" readonly>
+                            </div>
+
+                        </div><!---->
+                    </div>
+
+
+
+
+                    <form th:action="@{/member/joinMember}" method="post" th:object="${form}" style="margin-top: 50px;">
+                        <div data-v-8b96a82e="" data-v-cf6a6ef4="" class="profile_group">
+                            <h4 data-v-8b96a82e="" class="group_title" style="margin: 10px 0px;">주소</h4>
+                            <!--배송지-->
+                            <div data-v-4e1fd2e6="" data-v-286e873e="" class="input_box input_join has_button" style="padding-bottom: 0px;">
+                                <h3 data-v-286e873e="" data-v-4e1fd2e6="" class="ess" style="font-size: 13px;" th:for="postal_code">우편번호</h3>
+                                <div data-v-4e1fd2e6="" class="input_item">
+                                    <input data-v-4e1fd2e6="" type="text" placeholder="값 받아오기" autocomplete="off" class="input_txt" id="sample6_postcode"  style="height: 48px;" readonly>
+                                    <input type="button" onclick="sample6_execDaumPostcode()" value="우편번호 찾기" class="btn btn_modify outlinegrey small" data-v-472c9b08="" data-v-cf6a6ef4="" data-v-0c9f3f9e=""><br>
+                                </div>
+                            </div><!---->
+
+
+                            <!--주소-->
+                            <div data-v-4e1fd2e6="" data-v-286e873e="" class="input_box input_join has_button">
+                                <h3 data-v-286e873e="" data-v-4e1fd2e6="" class="ess" style="font-size: 13px;" th:for="middle_address">주소</h3>
+                                <div data-v-4e1fd2e6="" class="input_item">
+                                    <input data-v-4e1fd2e6="" type="text" placeholder="값 받아오기" autocomplete="off" class="input_txt" id="sample6_address" readonly>
+                                </div>
+                            </div><!---->
+
+
+                            <!--상세주소-->
+                            <div data-v-4e1fd2e6="" data-v-286e873e="" class="input_box input_join has_button">
+                                <h3 data-v-286e873e="" data-v-4e1fd2e6="" class="ess" style="font-size: 13px;" th:for="detailed_address">상세주소</h3>
+                                <div data-v-4e1fd2e6="" class="input_item">
+                                    <input data-v-4e1fd2e6="" type="text" placeholder="값 받아오기" autocomplete="off" class="input_txt" id="sample6_detailAddress" >
+                                </div>
+                            </div><!---->
+
+
+                            <!--참고항목-->
+                            <div data-v-4e1fd2e6="" data-v-286e873e="" class="input_box input_join has_button">
+                                <h3 data-v-286e873e="" data-v-4e1fd2e6="" class="ess" style="font-size: 13px;">참고항목</h3>
+                                <div data-v-4e1fd2e6="" class="input_item">
+                                    <input data-v-4e1fd2e6="" type="text" placeholder="값 받아오기" autocomplete="off" class="input_txt" id="sample6_extraAddress">
+                                </div>
+                            </div><!---->
+
+                            <button data-v-472c9b08="" data-v-cf6a6ef4="" type="button" class="btn btn_modify outlinegrey small" data-v-0c9f3f9e="" style="position: static;">
+                                변경
+                            </button>
+
+                            <!--회원탈퇴-->
+                                <a data-v-cf6a6ef4="" href="/my/withdrawal" class="btn_withdrawal" style="margin-top: 0px; text-decoration: none; color: red; margin-left: 370px; ">회원탈퇴</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!--주소 찾기 api-->
+<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+<script type="text/javascript" th:src="@{/js/kakaoAddress.js}"></script>
+
+<!--footer-->
+<th:block th:replace="include/footer :: footer"></th:block>
+
+
+</body>
