@@ -125,7 +125,6 @@
 <form th:action="@{/order/basket/{productId} (productId=${product.id})}" th:object="${product}" method="post">
     <div class="form-group">
         <div id="fixed">
-
             <input type="hidden" name="productId" th:value="*{id}"/>
             <div id="infoBox">
                 <h3>Product Info</h3>
@@ -142,16 +141,12 @@
                 <div id="sizeSelect">
                     <span>사이즈 선택 :</span>
 
-                        <select class="form-select" style="width:190px;">
-                            <option value=""> </option>
-                            <option value="size" >220</option>
-                            <option value="size" >230</option>
-                            <option value="size" >240</option>
-                            <option value="size" >250</option>
-                            <option value="size" >260</option>
-                            <option value="size" >270</option>
-                            <option value="size" >280</option>
+
+                        <select class="form-select" style="width:190px;" name="sizeParam">
+                            <option th:each="size : ${sizeList}" th:value="${size}" th:text="${size}"></option>
+
                         </select>
+
                 </div><!--id sizeSelect END-->
                 <div class="space">&nbsp; </div>
                 <label > 선택 수량 : </label>
@@ -159,9 +154,9 @@
                 <div class="space">&nbsp; </div>
                 <div id="button">
                     <button type="submit" th:name="action" th:value="buy" class="btn btn-primary first" role="button" name="basket">
-<!--                        <a th:href="@{/buy(product = ${product.id},quantity=${})}" th:text="'즉시구매'" >-->
-                            즉시구매
-<!--                        </a>-->
+                        <!--                        <a th:href="@{/buy(product = ${product.id},quantity=${})}" th:text="'즉시구매'" >-->
+                        즉시구매
+                        <!--                        </a>-->
                     </button>
                     <button type="submit" th:name="action" th:value="basket" class="btn btn-primary second" role="button" name="basket"><i class="fa-solid fa-cart-plus"></i></button>
                 </div>
@@ -179,8 +174,9 @@
 
 
         <div id="leftSide">
-            <ul th:each="img : ${imgs}" id="imageUl">
-                <li><img th:src="@{|/upload/${img.saveName}|}"/></li>
+            <ul id="imageUl">
+                <li><img th:src="@{|/upload/${product.imgName}|}"/></li>
+                <li th:each="img : ${imgs}"><img th:src="@{|/upload/${img.saveName}|}"/></li>
             </ul>
         </div>
 
@@ -191,4 +187,3 @@
 </body>
 
 </html>
-

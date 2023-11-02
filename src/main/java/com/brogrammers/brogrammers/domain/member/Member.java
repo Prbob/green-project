@@ -32,12 +32,9 @@ public class Member {  /////////////////// 완료 !
     @NotNull
     @Column(name="member_name")
     private String name; // 회원 이름
-    @Column(name="member_phone_1")
+    @Column(name="member_phone",columnDefinition = "varchar(255) default '010-1234-5678'")
     private String phone;
-    @Column(name="member_phone_2")
-    private String phone2;
-    @Column(name="member_phone_3")
-    private String phone3;
+
 
     @Column(name="member_img_path")
     private String imgPath; // 썸네일 이미지 저장 경로

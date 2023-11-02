@@ -26,6 +26,7 @@ public class OrderProducts {
     private int quantity;
 
 
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "products_id")
     private Products products;
@@ -33,7 +34,5 @@ public class OrderProducts {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="orders_id")
     private Orders orders;
-
-
 
 }

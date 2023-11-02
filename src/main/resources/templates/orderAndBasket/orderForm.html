@@ -10,22 +10,32 @@
 <th:block th:replace="include/bodyHead :: bodyHeader"></th:block>
 
 <h2>상품 주문 페이지</h2>
+<br>
+<a href="/orderAndBasket/orderSuccess" > 구매 성공시 페이지 </a>
 <form th:object="${form}" th:action method="post">
     <input type="hidden" th:value="${session.member.email}" id="email">
     <input type="hidden" th:value="${session.member.name}" id="name">
-    <div id="__nuxt">
-        <div id="__layout">
-            <div data-v-e2abb636="" data-v-29b4e7c0="" class="layout_base lg is_scroll wrap lg win_os" tabindex="0">
-                <div data-v-01ec1c70="" data-v-29b4e7c0="" class="container buy lg step-2">
-                    <div data-v-01ec1c70="" class="content">
-                        <div data-v-240c5974="" data-v-01ec1c70="" class="buy_immediate">
-                            <div data-v-955c094e="" data-v-240c5974="" class="product_info_area">
-                                <div data-v-955c094e="" class="product_info" th:each="pc : ${form.productCounts}">
-                                    <div data-v-aff2362e="" data-v-955c094e="" class="product"
-                                         style="background-color: rgb(235, 240, 245);">
-                                        <div data-v-416dde45="" data-v-aff2362e="" class="product_inner_tag display_tag_item"><!----><span data-v-416dde45="">  </span></div>
-                                        <picture data-v-44ba780a="" data-v-aff2362e="" class="picture product_img">
-                                            <img data-v-44ba780a="" alt="상품 이미지" th:src="@{|/upload/${pc.product.imgName}|}" loading="lazy" class="image full_width"></picture><!----><!----><!---->
+
+<div id="__nuxt">
+    <div id="__layout">
+        <div data-v-e2abb636="" data-v-29b4e7c0="" class="layout_base lg is_scroll wrap lg win_os" tabindex="0">
+            <div data-v-01ec1c70="" data-v-29b4e7c0="" class="container buy lg step-2">
+                <div data-v-01ec1c70="" class="content">
+                    <div data-v-240c5974="" data-v-01ec1c70="" class="buy_immediate">
+                        <div data-v-955c094e="" data-v-240c5974="" class="product_info_area">
+                            <div data-v-955c094e="" class="product_info" th:each="pc : ${form.productCounts}">
+
+                                <div data-v-aff2362e="" data-v-955c094e="" class="product"
+                                     style="background-color: rgb(235, 240, 245);">
+                                    <div data-v-416dde45="" data-v-aff2362e="" class="product_inner_tag display_tag_item"><!----><span data-v-416dde45="">  </span></div>
+                                    <picture data-v-44ba780a="" data-v-aff2362e="" class="picture product_img">
+                                        <img data-v-44ba780a="" alt="상품 이미지" th:src="@{|/upload/${pc.product.imgName}|}" loading="lazy" class="image full_width"></picture><!----><!----><!---->
+                                </div>
+                                <div data-v-955c094e="" class="product_detail"><strong data-v-955c094e="" th:text="${pc.product.name}"  class="model_number"></strong>
+                                    <p data-v-955c094e="" class="model_title"></p>
+                                    <p data-v-955c094e="" class="model_ko" th:text="|ID : ${pc.product.id} / color : ${pc.product.color}|">상품 아이디 및 색상</p>  <!-- 상품 설명? 성별,색상-->
+                                    <div data-v-955c094e="" class="model_desc"><p data-v-955c094e="" class="size_txt" th:text="|size : ${pc.product.size}|"></p>
+
                                     </div>
                                     <div data-v-955c094e="" class="product_detail"><strong data-v-955c094e="" th:text="${pc.product.name}"  class="model_number"></strong>
                                         <p data-v-955c094e="" class="model_title"></p>
@@ -253,22 +263,24 @@
                                             </div>
                                         </div>
                                     </div>
-                                </section>
-                                <section data-v-240c5974="" data-v-53a7a807="">
-                                    <div data-v-240c5974="" class="section_content" data-v-53a7a807="">
-                                        <div data-v-4217af8e="" class="display_item empty_header final_price"
-                                             style="background-color: rgb(250, 250, 250);">
-                                            <div data-v-4217af8e="" class="title_wrap" style="display: none;">
-                                                <div data-v-4217af8e="">
-                                                    <p data-v-4217af8e="" class="title" style="display: none;">
-                                                    </p><!---->
-                                                </div><!---->
-                                            </div>
-                                            <div data-v-15287078="" data-v-4217af8e="" class="display_line line heavy_text">
-                                                <div th:each="pc : ${form.productCounts}" data-v-6edbf060="" data-v-15287078="" id="sihwa" class="line_title display_paragraph" style="color: rgb(34, 34, 34);">
-                                                    <div style="color:inherit;" class="orderInformation1" th:text="|${pc.product.name} (${pc.quantity} ea) |"></div>
-                                                    <div class="orderInformation2"><em style="color:inherit;"   th:text="${#numbers.formatInteger(pc.product.price,3,'COMMA') + '원'}"></em></div>
-                                                </div>
+
+                                </div>
+                            </section>
+                            <section data-v-240c5974="" data-v-53a7a807="">
+                                <div data-v-240c5974="" class="section_content" data-v-53a7a807="">
+                                    <div data-v-4217af8e="" class="display_item empty_header final_price"
+                                         style="background-color: rgb(250, 250, 250);">
+                                        <div data-v-4217af8e="" class="title_wrap" style="display: none;">
+                                            <div data-v-4217af8e="">
+                                                <p data-v-4217af8e="" class="title" style="display: none;">
+                                                </p><!---->
+                                            </div><!---->
+                                        </div>
+                                        <div data-v-15287078="" data-v-4217af8e="" class="display_line line heavy_text">
+                                            <div th:each="pc : ${form.productCounts}" data-v-6edbf060="" data-v-15287078="" id="sihwa" class="line_title display_paragraph" style="color: rgb(34, 34, 34);">
+                                                <div style="color:inherit;" class="orderInformation1" th:text="|${pc.product.name} (size ${pc.product.size} / ${pc.quantity} ea) |"></div>
+                                                <div class="orderInformation2"><em style="color:inherit;"   th:text="${#numbers.formatInteger(pc.product.price,3,'COMMA') + '원'}"></em></div>
+
                                             </div>
                                         </div>
                                     </div>

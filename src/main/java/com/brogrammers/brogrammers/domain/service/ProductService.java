@@ -12,6 +12,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -95,4 +96,9 @@ public class ProductService {
         productsRepository.deleteById(id);
     }
 
+    public List<Products> findProductsToSize(String gender,String name,Brand brand, String color ){return productsRepository.findProductsToSize(gender,name,brand,color);}
+
+    public Optional<Products> findProductByNameColorSizeBrand(String name, String color, int size,Brand brand){
+        return productsRepository.findProductsByNameAndColorAndSizeAndBrand(name,color,size,brand);
+    }
 }

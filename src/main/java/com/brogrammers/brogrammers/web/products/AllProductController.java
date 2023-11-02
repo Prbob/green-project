@@ -143,14 +143,22 @@ public class AllProductController {
     ///////////////////////////////////// 디테일 ///////////////////////////////////
     @GetMapping("/products/detail/{productId}") // 디테일 페이지 컨트롤러
     public String detail(@PathVariable("productId")Long productId,Model model,HttpServletRequest request){
-        Products product = productService.getByid(productId);
+        Products product = productService.getByid(productId); //
+
         List<Imgs> imgs = product.getImgs();
         Member member = fun.getMember(request);
         String accessrigths = "NORMAL";
         if(member!=null){ // 로그인 하지 않았을 경우
             accessrigths = String.valueOf(member.getAccessrigths());
         }
+        List<Products> products = productService.findProductsToSize(product.getGender(),
+                product.getName(),product.getBrand(),product.getColor());
+        List<Integer> sizeList = new ArrayList<>();
+        for(Products products1 : products){
+            sizeList.add(products1.getSize());
+        }
 
+        model.addAttribute("sizeList",sizeList);
         model.addAttribute("accessrigths",accessrigths);
         model.addAttribute("imgs",imgs);
         model.addAttribute("product", product);

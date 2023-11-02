@@ -150,9 +150,9 @@
                 <a th:href="@{/products/detail/{productId} (productId=${product.id})}" >
                     <img th:src="@{|/upload/${product.imgName}|}"/>
                     <div id="itembox_info">
-                    <b><p th:text="|${product.brand.name}|"></p></b>
-                    <p th:text="|${#strings.substring(product.name, 0, 20)} ...|"></p>
-                    <p th:text="|${#numbers.formatDecimal(product.price,3, 'COMMA',0,'POINT')}|" id="priceTag"></p><br>
+                        <b><p th:text="|${product.brand.name}|"></p></b>
+                        <p th:text="${#strings.length(product.name) < 20 ? product.name : #strings.substring(product.name, 0, 20) + ' ...'}"></p>
+                        <p th:text="|${#numbers.formatDecimal(product.price,3, 'COMMA',0,'POINT')}|" id="priceTag"></p><br>
                     </div>
                 </a>
             </div>
