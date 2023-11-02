@@ -10,6 +10,8 @@
 <th:block th:replace="include/bodyHead :: bodyHeader"></th:block>
 
 <h2>상품 주문 페이지</h2>
+<br>
+<a href="/orderAndBasket/orderSuccess" > 구매 성공시 페이지 </a>
 <form th:object="${form}" th:action method="post">
     <input type="hidden" th:value="${session.member.email}" id="email">
     <input type="hidden" th:value="${session.member.name}" id="name">
