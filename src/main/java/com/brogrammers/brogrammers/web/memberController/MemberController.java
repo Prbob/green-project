@@ -153,5 +153,9 @@ public class MemberController {
         model.addAttribute("member",member);
         return "member/myPage";
     }
+    @GetMapping("/member/orderDetail")
+    public String orderDetail() {
+        return "member/orderDetail";
+    }
 }
 

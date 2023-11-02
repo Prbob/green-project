@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>회원정보</title>
+    <th:block th:replace="include/header :: header"></th:block>
+
+    <!--공지사항 css-->
+    <link rel="stylesheet" th:href="@{/css/customer.css}" type="text/css">
+    <!--  위의 경로가 원래의 경로인데 css적용이 안되어서 아래줄 추가함.[Han]  -->
+    <!-- <link rel="stylesheet" type="text/css" href="/static/css/H_customer.css">-->
+
+    <style>
+        * {
+            font-family: Pretendard Variable,Pretendard,-apple-system,BlinkMacSystemFont,system-ui,Segoe UI,Roboto,Ubuntu,Cantarell,Noto Sans,sans-serif,Helvetica Neue,Apple SD Gothic Neo,Noto Sans KR,Malgun Gothic,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol;
+        }
+        .wish_list li {
+            border-bottom: 1px solid #D3D3D3;
+        }
+        .content_area{
+            width:100%;
+        }
+        #buttonNOrderItems{
+            width:75%;
+        }
+        .orderItem{
+            padding:10px;
+        }
+        .orderItem img {
+            display: inline-block;
+            width: 80px;
+            height: 80px;
+            border: 1px solid #eeeeee;
+            border-left:2px solid #aaaaaa;
+        }
+        .orderItem span{
+            line-height: 4.8em;
+            margin: 10px;
+        }
+        #buttonBox{
+            text-align: center;
+        }
+        #buttons{
+            width: 100%;
+            border:1px solid red;
+        }
+        .orderEdit {
+            display: inline-block;
+            border: 1px solid blue;
+            width: 85px;
+            text-align: center;
+        }
+
+        .tableBox{
+            text-align: left;
+            width:75%;
+            margin-top:20px;
+            line-height: 2em;
+            border-bottom: 1px solid #bbbbbb;
+            border-top: 1px solid #999999;
+        }
+        .tableBox h3{
+            margin-bottom: 10px;
+        }
+        .tableBox th{
+            width: 100px;
+        }
+        .layout_base {
+            padding-top: 20px;
+        }
+        .sidebar {
+            color: #333;
+        }
+        ::placeholder {
+            color: black;
+        }
+
+    </style>
+
+</head>
+
+<body>
+<!--Header-->
+<th:block th:replace="include/bodyHead :: bodyHeader"></th:block>
+
+
+<div tabindex="0" class="layout_base" data-v-e2abb636="" data-v-cdf8523a="">
+    <div class="container my lg" data-v-e2abb636="" data-v-cdf8523a="" style="padding-top: 0px;">
+        <div class="sidebar">
+            <a href="/notice" aria-current="page">
+                <h2 data-v-cdf8523a="" class="snb_main_title">마이페이지</h2>
+            </a>
+            <nav>
+                <ul class="snb_menu">
+                    <li class="menu_item"  style="font-weight:bolder; color:#333;"><a href="#"> 구매 내역 </a></li>
+                    <li class="menu_item"><a href="#"> 판매 내역 </a></li>
+                    <li class="menu_item"><a href="#"> 보관 판매 </a></li>
+                    <li class="menu_item"><a href="#"> 관심 상품 </a></li>
+                    <li class="menu_item"><a href="#"> 로그인 정보 </a></li>
+                </ul>
+            </nav>
+        </div>
+
+        <div data-v-cf6a6ef4="" data-v-cdf8523a="" class="content_area my-page-content">
+            <div data-v-cf6a6ef4="" class="my_profile">
+                <div data-v-61e7a8a3="" data-v-cf6a6ef4="" class="content_title border">
+                    <div data-v-61e7a8a3="" class="title"><h3 data-v-61e7a8a3="">구매 내역</h3><!----></div><!----></div>
+                <div data-v-cf6a6ef4="" class="profile_info">
+
+                    <div data-v-8b96a82e="" data-v-cf6a6ef4="" class="profile_group">
+                        <h4 data-v-8b96a82e="" class="group_title"> 오더날짜 YYYY.MM.DD + 주문번호 : orderNumber </h4>
+                    </div>
+
+                    <div> &nbsp;</div>
+                    <div id="buttonNOrderItems">
+                        <table border="1">
+                            <tr>
+                                <td colspan="4">
+                                    <div class="orderItem">
+                                        <img src="/image/productMain/Nike_Zoom_Vomero_5_Oatmeal_(W).png">
+                                        <b><span>item name</span></b>
+                                    </div>
+                                </td>
+                                <td colspan="1" rowspan="0" id="buttonBox">
+                                    <div id="buttons">
+                                        <a href="cancelOrder" class="orderEdit">배송조회</a>
+                                        <a href="cancelOrder" class="orderEdit">주문취소</a>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="4">
+                                    <div class="orderItem">
+                                        <img src="/image/productMain/Nike_Zoom_Vomero_5_Oatmeal_(W).png">
+                                        <b><span>item name</span></b>
+                                    </div>
+                                </td>
+
+                            </tr>
+                        </table>
+                    </div>
+
+
+
+
+                    <div id="receiverInfo" class="tableBox">
+                        <h3>받는 사람 정보</h3>
+                        <table border="0">
+                            <tr>
+                                <th>받는사람</th> <td>Name</td>
+                            </tr>
+                            <tr>
+                                <th>전화번호</th> <td>Number</td>
+                            </tr>
+                            <tr>
+                                <th>받는주소</th> <td>receiver Address</td>
+                            </tr>
+                            <tr>
+                                <th>요청사항</th> <td> comment </td>
+                            </tr>
+                            </tr>
+                        </table>
+                    </div>
+                    <div id="payInfo" class="tableBox">
+                        <h3>결제 정보</h3>
+                        <table border="0">
+                            <tr>
+                                <th>주문금액</th> <td><b>XXXX원</b></td>
+                            </tr>
+                            <tr>
+                                <th>추가배송료</th> <td>0원</td>
+                            </tr>
+                            <tr>
+                                <th>결제 수단</th> <td>카카오페이 토스페이</td>
+                            </tr>
+                            <tr>
+                                <th>총결제금액</th> <td><b> XXXX + 0원</b></td>
+                            </tr>
+
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<link href="/_nuxt/css/2e6b79f.css" rel="stylesheet" type="text/css">
+<link href="/_nuxt/css/c9eea23.css" rel="stylesheet" type="text/css">
+<!--footer-->
+<th:block th:replace="include/footer :: footer"></th:block>
+
+
+</body>
