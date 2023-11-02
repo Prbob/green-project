@@ -6,42 +6,18 @@
     <title>회원정보</title>
     <th:block th:replace="include/header :: header"></th:block>
 
-    <!--공지사항 css-->
     <link rel="stylesheet" th:href="@{/css/customer.css}" type="text/css">
-    <!--  위의 경로가 원래의 경로인데 css적용이 안되어서 아래줄 추가함.[Han]  -->
-    <!-- <link rel="stylesheet" type="text/css" href="/static/css/H_customer.css">-->
+
 
     <style>
         * {
             font-family: Pretendard Variable,Pretendard,-apple-system,BlinkMacSystemFont,system-ui,Segoe UI,Roboto,Ubuntu,Cantarell,Noto Sans,sans-serif,Helvetica Neue,Apple SD Gothic Neo,Noto Sans KR,Malgun Gothic,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol;
         }
 
-        .wish_product {
-            cursor: pointer;
-            display: flex;
-            width: 100%;
-            align-items: center;
-            padding-bottom: 20px;
-            padding-top: 20px;
-        }
-
-        .wish_buy[data-v-3bb254ce] {
-            display: inline-flex;
-            flex-direction: column;
-            flex-shrink: 0;
-            margin-left: auto;
-            text-align: right;
-            margin-top: 10px;
-        }
-
         .wish_list li {
             border-bottom: 1px solid #D3D3D3;
         }
 
-        .product_box {
-            padding-left : 10px;
-            padding-right : 10px;
-        }
 
         .division_btn_box .btn_action[data-v-0b6ddb6a] {
             align-items: center;
@@ -59,58 +35,12 @@
             width: 164px;
         }
 
-        .division_btn_box {
-            display: flex;
-            justify-content: flex-end;
-        }
-
-        .product_detail {
-            position: relative;
-        }
-
-
-        .size {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            font-weight: bolder;
-            font-size: 13px;
-        }
-
-        .name {
-            font-size: 14px;
-        }
-
-        .btn_action {
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            height: 60px;
-        }
-
-        .price {
-            text-align: center;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100%;
-        }
-
         .layout_base {
             padding-top: 20px;
         }
 
         .sidebar {
             color: #333;
-        }
-
-
-        .quantity {
-            display: flex;
-            justify-content: space-between; /* 혹은 다른 정렬 방법 선택 */
-            width: 50px;
         }
 
         .quantity input {
@@ -126,6 +56,72 @@
             color: black;
         }
 
+        .container{
+            margin:0; padding:0; line-height: 2em;
+            width: 75%;
+        }
+        .title h3{
+            min-width: 90px;
+        }
+        .orderInfo{
+            /*box-shadow: 0 1px 0 #aaaaaa;*/
+        }
+        .orderTitle{
+            width: 100%;
+            min-width:600px;
+        }
+        .orderTitle a{
+            float:right;
+            line-height: 3em;
+            color:#297dcb;
+        }
+        .orderItems{
+            border-bottom: 2px solid #dddddd;
+        }
+        .orderItem{
+            box-shadow: 0 1px 0 #aaaaaa;
+            border:1px solid #eeeeee;
+            border-radius: 4px;
+            padding: 10px 0 10px 20px;
+            min-width: 600px;
+            display: flex;
+            vertical-align: center;
+            margin-bottom: 20px;
+        }
+        .orderItems h5{
+            font-size:16px;
+            line-height: 2.4em;
+            min-width: 50px;
+        }
+        .orderItem .leftImg {
+            /*border:1px solid red;*/
+        }
+        .orderItem img{
+            display: inline-block;
+            width: 100px;
+            height: 100px;
+        }
+        .orderItem .rightInfo {
+            /*border: 1px solid blue;*/
+            min-width: 350px;
+            padding: 20px;
+        }
+
+        .rightInfo p{
+            font-size: 18px;
+            /*border:1px solid darkolivegreen;*/
+        }
+
+
+
+
+
+
+
+
+
+
+
     </style>
 
 </head>
@@ -138,14 +134,12 @@
 <div tabindex="0" class="layout_base" data-v-e2abb636="" data-v-cdf8523a="">
     <div class="container my lg" data-v-e2abb636="" data-v-cdf8523a="" style="padding-top: 0px;">
         <div class="sidebar">
-            <a href="/notice" aria-current="page">
+            <a href="/member/myPage" aria-current="page">
                 <h2 data-v-cdf8523a="" class="snb_main_title">마이페이지</h2>
             </a>
             <nav>
                 <ul class="snb_menu">
-                    <li class="menu_item"  style="font-weight:bolder; color:#333;"><a href="#"> 구매 내역 </a></li>
-                    <li class="menu_item"><a href="#"> 판매 내역 </a></li>
-                    <li class="menu_item"><a href="#"> 보관 판매 </a></li>
+                    <li class="menu_item"  style="font-weight:bolder; color:#333;"><a href="/member/myPage"> 구매 내역 </a></li>
                     <li class="menu_item"><a href="#"> 관심 상품 </a></li>
                     <li class="menu_item"><a href="#"> 로그인 정보 </a></li>
                 </ul>
@@ -157,14 +151,28 @@
             <div data-v-cf6a6ef4="" class="my_profile">
                 <div data-v-61e7a8a3="" data-v-cf6a6ef4="" class="content_title border">
                     <div data-v-61e7a8a3="" class="title"><h3 data-v-61e7a8a3="">구매 내역</h3><!----></div><!----></div>
-                <div data-v-cf6a6ef4="" class="profile_info">
+                    <div id="ordersWrap">
 
-                    <!--내 정보-->
-                    <div data-v-8b96a82e="" data-v-cf6a6ef4="" class="profile_group">
-                        <h4 data-v-8b96a82e="" class="group_title">내 정보</h4>
+                        <div class="orderInfo">
+                            <div class="orderTitle">
+                                <h4 data-v-8b96a82e="" class="group_title" style="display: inline">YYYY.MM.DD 주문</h4><a href="/member/orderDetail"> &nbsp; > 주문 상세보기 </a>
+                            </div>
+                            <div class="orderItems">
+                                <h5>배송전</h5>
+                                <div class="orderItem">
+                                    <div class="leftImg">
+                                        <img src="/image/productMain/Nike_Zoom_Vomero_5_Oatmeal_(W).png">
+                                    </div>
+                                    <div class="rightInfo">
+                                        <p><a href="/products/detail/"><b>item name</b></a></p>
+                                        <p>price 원</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
                     </div>
 
-                </div>
             </div>
         </div>
     </div>

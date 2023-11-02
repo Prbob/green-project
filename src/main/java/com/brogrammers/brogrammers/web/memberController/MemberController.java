@@ -149,8 +149,8 @@ public class MemberController {
 
     @GetMapping("/member/myPage") // 마이페이지
     public String myPage(HttpServletRequest request,Model model){
-        Member member = fun.getMemberDb(request);
-        model.addAttribute("member",member);
+//        Member member = fun.getMemberDb(request);
+//        model.addAttribute("member",member);
         return "member/myPage";
     }
     @GetMapping("/member/orderDetail")
