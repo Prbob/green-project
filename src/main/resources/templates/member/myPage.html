@@ -6,10 +6,6 @@
     <th:block th:replace="include/header :: header"></th:block>
 
     <style>
-        ul {
-            list-style: none;
-            padding-left: 0px;
-        }
         a{
             color: black;
             text-decoration: none;
@@ -118,7 +114,6 @@
             vertical-align: middle;
             padding: 5px 15px; /* 내용 주변의 간격 추가 */
         }
-
         div.MyPage_MainContent_MiddleContent_EmptySpace p.gray_mini_font {
             display: flex;
             justify-content: center;
@@ -133,6 +128,29 @@
         p.gray_mini_font{
             color: #96959a;
             font-size: 11px;
+        }
+        /*div._notice 설정을 하는 곳.*/
+        div._notice{
+            font-size: 11px;
+            background-color: #f5f5f3;
+            padding: 10px;
+        }
+        p._notice_title{
+            font-weight: 600;
+            font-size: 15px;
+            text-align: center;
+        }
+        span.span-redpoint{
+            color: red;
+        }
+        div._notice-frame  strong{
+            color: #b2b1af;
+        }
+
+        li._notice-li{
+            list-style-type: lower-roman;
+            margin: 5px;
+            color: #b2b1af;
         }
         /* f2f9f6 */
     </style>
@@ -218,7 +236,7 @@
             </div><!--MyPage_MainContent_Top_userMembership_frame 영역 끝-->
         </div><!--MyPage_MainContent_Top_userMembership 종료-->
 
-        <img src="/src/main/resources/static/image/banner/sample_banner01.png" alt="배너 광고" width="100%" height="25%">
+        
         <!--만들어놓기는 했는데 구현을 못할거같아서 안보이게 처리함.-->
         <!-- <a class="MyPage_MainContent_MiddleContent_miniBanner">
             <div>
@@ -260,6 +278,65 @@
             <p class="gray_mini_font">현재 거래 내역이 없습니다.</p>
         </div>
 
+        <div>
+            <div>
+                <div>
+                    <div>
+                        <div class="">
+                            <SPAN>배송상품 주문 안내</SPAN>
+                            <span><a href="#">자세한 내용 더보기</a></span>
+                        </div>
+                        <div class="">
+                            <div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <div class="_notice">
+                    <div class="_notice-frame">
+                        <p class="_notice_title">잠깐! <span class="span-redpoint">주문취소/환불/반품</span> 이전에 꼭! 확인해주세요!</p>
+                        <strong>취소</strong>
+                        <ul class="_notice-ul">
+                            <li class="_notice-li">여행/레저/숙박 상품은 취소 시 수수료가 발생할 수 있으며,
+                                취소수수료를 확인하여 2일 이내(주말,공휴일 제외) 처리결과를 문자로 안내해드립니다.(당일 접수 기준, 마감시간 오후 4시)</li>
+                            <li class="_notice-li">문화 상품은 사용 전날 24시까지 취소 신청 시 취소수수료가 발생되지 않습니다.</li>
+                        </ul>
+
+                        <p>
+                            <br>
+                        </p>
+                        <strong>반품</strong>
+                        <ul class="_notice-ul">
+                            <li class="_notice-li">
+                                상품 수령 후 7일 이내 신청하여 주세요.
+                            </li>
+                            <li class="_notice-li">
+                                문화 상품은 사용 전날 24시까지 취소 신청 시 취소수수료가 발생되지 않습니다.
+                            </li>
+                            <li class="_notice-li">
+                                상품이 출고된 이후에는 배송 완료 후, 반품 상품을 회수합니다.
+                            </li>
+                            <li class="_notice-li">
+                                설치상품/주문제작/해외배송/신선냉동 상품 등은 고객센터에서만 반품 신청이 가능합니다.
+                            </li>
+                        </ul>
+
+                        <p>
+                            <br>
+                        </p>
+                        <strong>교환</strong>
+                        <ul class="_notice-ul">
+                            <li class="_notice-li">
+                                상품의 교환 신청은 고객센터로 문의하여 주세요.
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
         <div class="MyPage_MainContent_MiddleTitle"><!-- 이거는 나중에 다시 써야 하는 거.-->
             <h3 class="MyPage_MainContent_MiddleTitle_title">
                 관심 상품
