@@ -6,22 +6,21 @@
     <th:block th:replace="include/header :: header"></th:block>
 
     <style>
+        ul {
+            list-style: none;
+            padding-left: 0px;
+        }
         a{
             color: black;
             text-decoration: none;
         }
-        div.MyPage_left_side_MenuBar{
-            width: 15%;
-        }
+        
         div.MyPage_SpaceSeparation{
             max-width: 1200px;
             margin: 0 auto;
             display: flex;
         }
-        div.MyPage_left_side_MenuBar a{
-            text-decoration: none;
-            color: gray;
-        }
+        
         div.MyPage_MainContent{
             width: 60%;
         }
@@ -114,6 +113,7 @@
             vertical-align: middle;
             padding: 5px 15px; /* 내용 주변의 간격 추가 */
         }
+
         div.MyPage_MainContent_MiddleContent_EmptySpace p.gray_mini_font {
             display: flex;
             justify-content: center;
@@ -129,6 +129,7 @@
             color: #96959a;
             font-size: 11px;
         }
+        
         /*div._notice 설정을 하는 곳.*/
         div._notice{
             font-size: 11px;
@@ -152,6 +153,13 @@
             margin: 5px;
             color: #b2b1af;
         }
+        
+        /* div delivery_process */
+        div.delivery_process_frame{
+            display: flex;
+            font-size: 12px;
+        }
+
 
         /*여기는 한규형거 css 추가*/
         * {
@@ -370,62 +378,74 @@
         </div>
 
         <div>
-            <div>
+            <div class="delivery_process">
                 <div>
+                    <span>배송상품 주문상태 안내</span>
+                </div>
+                <div class="delivery_process_frame">
                     <div>
-                        <div class="">
-                            <span>배송상품 주문상태 안내</span>
-                        </div>
-                        <div class="">
-                            <div>
-                                <img src="/static/image/order-status.png">
-                            </div>
-                        </div>
+                        <img src="/src/main/resources/static/image/icon/order-status/order-status1.png" alt="주문상태 1아이콘">
+                        <span>주문,결제,확인이 완료되었습니다.</span>
+                    </div>
+                    <div>
+                        <img src="/src/main/resources/static/image/icon/order-status/order-status2.png" alt="주문상태 2아이콘">
+                        <span>판매자가 발송할 상품을 준비중입니다.</span>
+                    </div>
+                    <div>
+                        <img src="/src/main/resources/static/image/icon/order-status/order-status3.png" alt="주문상태 3아이콘">
+                        <span>상품준비가 완료되어 곧 배송될 예정입니다.</span>
+                    </div>
+                    <div>
+                        <img src="/src/main/resources/static/image/icon/order-status/order-status4.png" alt="주문상태 4아이콘">
+                        <span>상품이 고객님께 배송중입니다.</span>
+                    </div>
+                    <div>
+                        <img src="/src/main/resources/static/image/icon/order-status/order-status5.png" alt="주문상태 5아이콘">
+                        <span> 상품이 주문자에게 전달완료되었습니다.</span>
                     </div>
                 </div>
             </div>
-            <div>
+            
                 <div class="_notice">
                     <div class="_notice-frame">
                         <p class="_notice_title">잠깐! <span class="span-redpoint">주문취소/환불/반품</span> 이전에 꼭! 확인해주세요!</p>
-                        <strong>취소</strong>
-                        <ul class="_notice-ul">
+                    <strong>취소</strong>
+                    <ul class="_notice-ul">
                             <li class="_notice-li">여행/레저/숙박 상품은 취소 시 수수료가 발생할 수 있으며,
-                                취소수수료를 확인하여 2일 이내(주말,공휴일 제외) 처리결과를 문자로 안내해드립니다.(당일 접수 기준, 마감시간 오후 4시)</li>
-                            <li class="_notice-li">문화 상품은 사용 전날 24시까지 취소 신청 시 취소수수료가 발생되지 않습니다.</li>
+                        취소수수료를 확인하여 2일 이내(주말,공휴일 제외) 처리결과를 문자로 안내해드립니다.(당일 접수 기준, 마감시간 오후 4시)</li>
+                    <li class="_notice-li">문화 상품은 사용 전날 24시까지 취소 신청 시 취소수수료가 발생되지 않습니다.</li>
                         </ul>
 
                         <p>
                             <br>
                         </p>
-                        <strong>반품</strong>
-                        <ul class="_notice-ul">
+                    <strong>반품</strong>
+                    <ul class="_notice-ul">
                             <li class="_notice-li">
                                 상품 수령 후 7일 이내 신청하여 주세요.
                             </li>
-                            <li class="_notice-li">
+                    <li class="_notice-li">
                                 문화 상품은 사용 전날 24시까지 취소 신청 시 취소수수료가 발생되지 않습니다.
                             </li>
                             <li class="_notice-li">
                                 상품이 출고된 이후에는 배송 완료 후, 반품 상품을 회수합니다.
                             </li>
-                            <li class="_notice-li">
-                                설치상품/주문제작/해외배송/신선냉동 상품 등은 고객센터에서만 반품 신청이 가능합니다.
-                            </li>
+                    <li class="_notice-li">
+                                설치상품/주문제작/해외배송/신선냉동 상품 등은 고객센터에서만 반품 신청이 가능합니다. 
+                        </li>
                         </ul>
 
                         <p>
                             <br>
-                        </p>
-                        <strong>교환</strong>
-                        <ul class="_notice-ul">
+                    </p>
+                    <strong>교환</strong>
+                    <ul class="_notice-ul">
                             <li class="_notice-li">
                                 상품의 교환 신청은 고객센터로 문의하여 주세요.
                             </li>
                         </ul>
                     </div>
                 </div>
-            </div>
         </div>
         <div class="MyPage_MainContent_MiddleTitle"><!-- 이거는 나중에 다시 써야 하는 거.-->
             <h3 class="MyPage_MainContent_MiddleTitle_title">
