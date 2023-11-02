@@ -1,163 +1,158 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>loginForm</title>
+    <link rel="stylesheet" href="/_nuxt/css/12266fe.css">
     <th:block th:replace="include/header :: header"></th:block>
+    <style>
+        ul.look_box {
+            display: flex;
+            list-style: none;
+            padding: 0; /* 기본 패딩 제거 */
+            margin: 18px 0px; /* li 요소 사이의 간격을 조절할 수 있습니다. */
+        }
+
+        .look_box li {
+            width: 200px;
+            text-align: center;
+            font-size: 13px;
+        }
+
+        .social_login button {
+           margin-top: 5px;
+        }
+
+
+    </style>
 </head>
-
-<style>
-    *{margin:0;padding:0;box-sizing: border-box;}
-  .login a{text-decoration: none; color:inherit;}
-  .login > .wrap{
-    color:#666;
-    font-size:14px;
-    width:500px;
-    background-color: #fff;
-    margin:100px auto;
-    border-radius:10px;
-    overflow: hidden;
-  }
-  .login h1{
-    text-align:center;
-    margin-top:40px;/*margin으로 둘수 없음?*/ /*해서 수정*/
-  }
-  form{
-    width:100%;
-    padding:40px;
-  }
-  input[type=text],
-  input[type=password]{
-    display: block;
-    width:100%;
-    padding:16px;
-    border:1px solid #999;
-    margin-bottom:10px;
-  }
-  p{
-    line-height:40px;
-  }
-
-  input[type=checkbox]{
-    margin-right:5px;
-    position:relative;
-    bottom:-1px;
-  }
-  input[type=submit]{
-    padding:6px 16px;
-    background-color: #696;
-    border:none;
-    color:#fff;
-    font-weight: bold;
-    cursor:pointer;
-  }
-  .loginButton{
-    text-align: center;
-    outline: 1px solid red;
-      overflow: hidden;
-  }
-  .icon{
-      margin: 0 auto;
-      outline: 1px solid black;
-      display: inline-block;
-  }
-  .join{
-    width:100%;
-    border-top:1px solid #ccc;
-    text-align:center;
-    padding:20px 0;
-  }
-  .join > a{
-    padding:0 20px;
-
-  }
-  .join > a:first-child{
-    border-right:2px solid #ccc;
-  }
-
-  #loginButton1{
-    overflow: hidden;
-  }
-  .field-error {
-    border-color: #dc3545;
-    color: #dc3545;
-  }
-</style>
 <body>
+<!--Header-->
 <th:block th:replace="include/bodyHead :: bodyHeader"></th:block>
-
-<!--    <div data-include-path="../header.html"></div>-->
-    <!--
-        How to include HTML
-        https://www.w3schools.com/howto/howto_html_include.asp
-    -->
 <script type="text/javascript" th:src="@{/js/kakaoLogin.js}"></script>
-    <div class="login">
-        <div class="wrap">
-          <h1>LOGIN</h1>
-<!--            bindingResult  -->
-        <form th:action th:object="${form}" method="post">
-            <div th:if="${#fields.hasGlobalErrors()}">
-                <p class="field-error" th:each="err : ${#fields.globalErrors()}" th:text="${err}">글로벌 오류 메시지</p>
-            </div>
-            <input type="text" th:field="*{memberEmail}" placeholder="아이디" th:errorclass="field-error">
-            <div class="field-error" th:errors="*{memberEmail}" />  <!-- 에러가 있을 때만 보여주는 디브 태그 -->
 
-            <input type="password" th:field="*{password}" placeholder="비밀번호">
-            <div class="field-error" th:errors="*{password}" />
-            <p>
-              <input type="checkbox">로그인 유지
-            </p>
+<div id="__nuxt" style="height: 530px;">
+    <div id="__layout" style="width:400px; height:600px; margin:auto;">
+        <div id="wrap" tabindex="0" class="layout_base lg wrap win_os lg" data-v-e2abb636="" data-v-6d2e0ef8="">
+            <div class="container login" data-v-399f484e="" data-v-6d2e0ef8="" data-v-e2abb636="">
+                <div class="content lg" data-v-399f484e="">
+                    <form th:action th:object="${form}" method="post">
+                        <div th:if="${#fields.hasGlobalErrors()}">
+                            <p class="field-error" th:each="err : ${#fields.globalErrors()}" th:text="${err}">글로벌 오류
+                                메시지</p>
+                        </div>
+                        <div class="login_area" data-v-399f484e=""><h2 class="login_title" data-v-399f484e=""><span
+                                class="blind" data-v-399f484e="">KREAM</span></h2>
+                            <div class="has_button input_box" data-v-4e1fd2e6="" data-v-399f484e="">
+                                <div class="input_title_container" style="display: flex; align-items: center;">
+                                    <h3 class="input_title" data-v-4e1fd2e6="" data-v-399f484e="">이메일 주소</h3>
+                                    <div class="field-error" style="width: 210px;margin-left: 36px;"
+                                         th:errors="*{memberEmail}"/>  <!-- 에러가 있을 때만 보여주는 디브 태그 -->
+                                </div>
 
-            <p class="loginButton">
-                <input type="submit" value="로그인">
-            </p>
-            <div id="apiLogin">
-                <div class="icon">
-                    <a href="#" onclick="naverLogin()">
-                        <img src="/image/naver_login_btnW.png" width="200" height="50" alt="네이버 로그인 버튼">
-                    </a>
+                                <div class="input_item" data-v-4e1fd2e6=""><input type="email"
+                                                                                  placeholder="예) kream@kream.co.kr"
+                                                                                  autocomplete="off" class="input_txt"
+                                                                                  data-v-4e1fd2e6=""
+                                                                                  th:field="*{memberEmail}"
+                                                                                  >
+
+                                    <button type="button" class="btn input_delete" style="display:none;"
+                                            data-v-472c9b08=""
+                                            data-v-399f484e="" data-v-4e1fd2e6="">
+                                        <svg xmlns="http://www.w3.org/2000/svg"
+                                             class="ico-delete-circle icon sprite-icons"
+                                             data-v-399f484e="">
+                                            <use href="/_nuxt/b685a18dbba161b5c3cf613cb39a8946.svg#i-ico-delete-circle"
+                                                 xlink:href="/_nuxt/b685a18dbba161b5c3cf613cb39a8946.svg#i-ico-delete-circle"
+                                                 data-v-399f484e=""></use>
+                                        </svg>
+                                    </button>
+                                </div>
+                                <div class="input_box has_button" data-v-4e1fd2e6="" data-v-399f484e="">
+                                    <div class="input_title_container" style="display: flex; align-items: center;">
+                                        <h3 class="input_title" data-v-4e1fd2e6="" data-v-399f484e="">비밀번호</h3>
+                                        <div class="field-error" th:errors="*{password}" style="width: 210px;margin-left: 50px;"/>
+                                    </div>
+
+                                    <div class="input_item" data-v-4e1fd2e6="">
+                                        <input type="password" placeholder="" autocomplete="off" maxlength="16"
+                                               class="input_txt" data-v-4e1fd2e6="" th:field="*{password}">
+                                    </div>
+                                    <p class="input_error" data-v-4e1fd2e6="" data-v-399f484e=""> 영문, 숫자, 특수문자를 조합해서
+                                        입력해주세요.
+                                        (8-16자) </p></div>
+                                <div class="login_btn_box" data-v-399f484e="" style="margin-top: 20px;">
+                                    <a disabled="disabled" href="#" class="loginButton btn full solid disabled"
+                                       data-v-472c9b08="" data-v-399f484e="">
+                                        <input type="submit" value="로그인"
+                                               style="font-weight: bold; color: #333; width:100%; height:100%">
+                                    </a>
+                                </div>
+
+
+                                <!--<div class="social_login" id="apiLogin" data-v-399f484e="">
+                                    <div class="icon" data-v-472c9b08="" data-v-399f484e="">
+                                        <a href="#" onclick="kakaoLogin()">
+                                            <img src="https://k.kakaocdn.net/14/dn/btroDszwNrM/I6efHub1SN5KCJqLm1Ovx1/o.jpg" width="200" height="50" alt="카카오 로그인 버튼" />
+                                        </a>
+                                    </div>
+                                </div>-->
+
+                                <div id="apiLogin" style="margin-top: 20px;">
+                                    <div class="icon">
+                                        <a href="#" onclick="naverLogin()">
+                                            <img src="/image/naver_login_btnW.png" width="198" height="50"
+                                                 alt="네이버 로그인 버튼">
+                                        </a>
+
+                                        <a href="#" onclick="kakaoLogin()">
+                                            <img src="https://k.kakaocdn.net/14/dn/btroDszwNrM/I6efHub1SN5KCJqLm1Ovx1/o.jpg"
+                                                 width="198" height="50" alt="카카오 로그인 버튼"/>
+                                        </a>
+                                    </div>
+                                </div>
+
+                                <ul class="look_box join" data-v-399f484e="">
+                                    <li class="look_list" data-v-399f484e="" style="border-right: 1px solid #D3D3D3;">
+                                        <a th:href="@{/member/joinMember}" class="look_link" data-v-399f484e="">회원가입</a>
+                                    </li>
+                                    <li class="look_list" data-v-399f484e="">
+                                        <a th:href="@{/member/findPassword}" class="look_link" data-v-399f484e="">비밀번호
+                                            찾기</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </form>
                 </div>
-            <div class="icon">
-                <a href="#" onclick="kakaoLogin()">
-                    <img src="https://k.kakaocdn.net/14/dn/btroDszwNrM/I6efHub1SN5KCJqLm1Ovx1/o.jpg" width="200" height="50" alt="카카오 로그인 버튼" />
-            </a></div>
             </div>
-
-          </form>
-          <div class="join">
-            <a th:href="@{/member/findPassword}">아이디/비밀번호 찾기</a>
-            <a th:href="@{/member/joinMember}">회원가입</a    >
-          </div>
         </div>
     </div>
+</div>
 
-
-
-
+<!--footer-->
 <th:block th:replace="include/footer :: footer"></th:block>
+<link href="/_nuxt/css/f801c71.css" rel="stylesheet" type="text/css">
 
-   <script>
+<script>
 
-       window.addEventListener('load', function() {
-           var allElements = document.getElementsByTagName('*');
-           Array.prototype.forEach.call(allElements, function(el) {
-               var includePath = el.dataset.includePath;
-               if (includePath) {
-                   var xhttp = new XMLHttpRequest();
-                   xhttp.onreadystatechange = function () {
-                       if (this.readyState == 4 && this.status == 200) {
-                           el.outerHTML = this.responseText;
-                       }
-                   };
-                   xhttp.open('GET', includePath, true);
-                   xhttp.send();
-               }
-           });
-       });
+    window.addEventListener('load', function() {
+        var allElements = document.getElementsByTagName('*');
+        Array.prototype.forEach.call(allElements, function(el) {
+            var includePath = el.dataset.includePath;
+            if (includePath) {
+                var xhttp = new XMLHttpRequest();
+                xhttp.onreadystatechange = function () {
+                    if (this.readyState == 4 && this.status == 200) {
+                        el.outerHTML = this.responseText;
+                    }
+                };
+                xhttp.open('GET', includePath, true);
+                xhttp.send();
+            }
+        });
+    });
 
-   </script>
+</script>
+
 </body>
-
 </html>

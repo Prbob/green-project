@@ -7,7 +7,8 @@ body {
     display: flex;
     max-width: 1200px;
     margin: 0 auto;
-    background-color: #f5f5f5;
+    /*장바구니 배경에 깔려서 뺏음*/
+    /*background-color: #f5f5f5;*/
 }
 .sidebar {
     background-color: #fff;

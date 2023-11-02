@@ -12,4 +12,5 @@ public interface BasketRepository extends JpaRepository<Basket, Long> {
 
     @Query("SELECT b FROM Basket b WHERE b.member = :member")
     Optional<Basket> findBasketByMember(@Param("member") Member member);
+
 }

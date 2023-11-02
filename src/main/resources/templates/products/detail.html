@@ -20,54 +20,64 @@
             min-width: 600px;
         }
         #fixed {
-            box-shadow: 0 -1px 0px #cccccc;
-            padding : 30px 20px 40px 30px;
+            padding : 0px 20px 40px 30px;
             /*border: 1px solid blue;*/
-            width: 550px;
-            height: 550px;
+            width: 500px;
+            height: 100%;
             font-size: 18px;
+            position: fixed;
+            left:50%;
+        }
+        #fixed #infoBox {
+            box-shadow: 0 -1px 0px #cccccc;
+            height: 40%;
+            padding-top: 30px;
+            padding-bottom : 30px;
+            overflow: hidden;
         }
         #fixed .data{
             text-align: right;
         }
-        #fixed #info {
-            height: 270px;
-        }
 
         #fixed #selectBox{
             box-shadow: 0 -1px 0px #cccccc;
-        }
-
-        #fixed{
-            position: fixed;
-            left:50%;
-        }
-        #selectBox {
             padding-top : 30px;
             position:relative;
-            height: 180px;
         }
         #selectBox input{
-            border:1px solid #1d1d1b;
+            border:1px solid #2d2d2d;
             text-align: right;
             position:absolute;
             right:0px;
             padding: 5px;
         }
+        #sizeSelect {
+            justify-content: space-between;
+            position:relative;
+            line-height: 2em;
+            vertical-align: center;
+        }
+        #sizeSelect select{
+            position: absolute;
+            right:0;
+            font-size: 18px;
+        }
+        #selectBox .space {
+            width: 100%;
+            height: 20px;
+        }
+
         #button {
-            min-width: 300px;
-            height: 60px;
+            width: 100%;
             text-align: center;
             font-size: 24px;
-            right: 90px;
-            bottom: 30px;
-            position: absolute;
+            margin-bottom:20px;
         }
 
         .first{
             border:1px solid #EF6253;
             width: 250px;
-            height: 100%;
+            height: 60px;
             margin-right:10px;
             font-size: 20px;
         }
@@ -79,7 +89,7 @@
         .second{
             border: 1px solid black;
             width: 60px;
-            height: 100%;
+            height: 60px;
             font-size: 20px;
         }
         .second:hover{
@@ -91,6 +101,7 @@
             box-shadow: 0 -1px 0px #cccccc;
             text-align: right;
             padding: 10px;
+            height: 10%;
         }
 
         #leftSide{
@@ -116,31 +127,51 @@
         <div id="fixed">
 
             <input type="hidden" name="productId" th:value="*{id}"/>
-            <div id="info">
+            <div id="infoBox">
                 <h3>Product Info</h3>
                 <div>&nbsp;</div>
                 <p> 상품명 </p>
-                <p th:text="*{name}" class="data" id="productName"></p>
+                <p th:text="*{name}" class="data" id="productName"></p><br>
                 <span> 가격 </span>
-                <p th:text="*{price}" class="data" id="productPrice"></p>
+                <p th:text="*{#numbers.formatDecimal(price,3, 'COMMA',0,'POINT')} + ' 원'" class="data" id="productPrice"></p><br>
                 <span> 브랜드 </span>
-                <p th:text="*{brand.name}" class="data" id="productBrand"></p>
+                <p th:text="*{brand.name}" class="data" id="productBrand"></p><br>
             </div>
 
-            <div id="selectBox">
+            <div id="selectBox" style="line-height: 2em;">
+                <div id="sizeSelect">
+                    <span>사이즈 선택 :</span>
+
+                        <select class="form-select" style="width:190px;">
+                            <option value=""> </option>
+                            <option value="size" >220</option>
+                            <option value="size" >230</option>
+                            <option value="size" >240</option>
+                            <option value="size" >250</option>
+                            <option value="size" >260</option>
+                            <option value="size" >270</option>
+                            <option value="size" >280</option>
+                        </select>
+                </div><!--id sizeSelect END-->
+                <div class="space">&nbsp; </div>
                 <label > 선택 수량 : </label>
                 <input name="quantity" type="number" value="1">
+                <div class="space">&nbsp; </div>
                 <div id="button">
-                    <button type="submit" th:name="action" th:value="buy" class="btn btn-primary first" role="button" name="basket">즉시 구매</button>
+                    <button type="submit" th:name="action" th:value="buy" class="btn btn-primary first" role="button" name="basket">
+<!--                        <a th:href="@{/buy(product = ${product.id},quantity=${})}" th:text="'즉시구매'" >-->
+                            즉시구매
+<!--                        </a>-->
+                    </button>
                     <button type="submit" th:name="action" th:value="basket" class="btn btn-primary second" role="button" name="basket"><i class="fa-solid fa-cart-plus"></i></button>
                 </div>
             </div>
 
             <div id="adminBox">
-                <a th:unless="${session.accessrigths == 'NORMAL'}" th:href="@{/products/edit/{id} (id=${product.id})}" class="btn btn-primary" role="button">
+                <a th:unless="${session.accessrigths == 'NORMAL' || session.accessrigths == null}" th:href="@{/products/edit/{id} (id=${product.id})}" class="btn btn-primary" role="button">
                     수정 <!-- 관리자 권한일 때에만 표시 -->
                 </a>
-                <a th:unless="${session.accessrigths == 'NORMAL'}" th:href="@{/products/delete/{id} (id=${product.id})}" class="btn btn-primary" role="button">
+                <a th:unless="${session.accessrigths == 'NORMAL' || session.accessrigths == null}" th:href="@{/products/delete/{id} (id=${product.id})}" class="btn btn-primary" role="button">
                     삭제 <!-- 관리자 권한일 때에만 표시 -->
                 </a>
             </div>
@@ -156,6 +187,7 @@
     </div>
 
 </form>
+
 </body>
 
 </html>

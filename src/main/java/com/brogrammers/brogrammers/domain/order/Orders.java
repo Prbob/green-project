@@ -2,7 +2,9 @@ package com.brogrammers.brogrammers.domain.order;
 
 import com.brogrammers.brogrammers.domain.member.Address;
 import com.brogrammers.brogrammers.domain.member.Member;
+import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.time.LocalDate;
@@ -11,6 +13,7 @@ import java.util.List;
 
 @Entity
 @Getter // @Data == @Getter @Setter
+@NoArgsConstructor
 public class Orders {
     @Id @GeneratedValue
     @Column(name="orders_id")
@@ -30,11 +33,16 @@ public class Orders {
     private String name; // 주문한 사람
     @Column(name="order_phone")
     private String phone;
-    @Column(name="order_phone2")
-    private String phone2;
-    @Column(name="order_phone3")
-    private String phone3;
 
+
+    @Builder
+    public Orders(int totalPrice, String payment, Member member, String name, String phone) {
+        this.totalPrice = totalPrice;
+        this.payment = payment;
+        this.member = member;
+        this.name = name;
+
+    }
 
     @Column(name="order_registrationDate")
     private LocalDate registrationDate; // 주문날짜

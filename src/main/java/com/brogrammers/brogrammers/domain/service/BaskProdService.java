@@ -33,4 +33,7 @@ public class BaskProdService {
     public void delete(Long id){
         baskProdRepository.deleteBasketProductsById(id);
     }
+    public void delete(Basket basket, Products products){
+        baskProdRepository.deleteBaskProdByBasketAndProducts(basket,products);
+    }
 }

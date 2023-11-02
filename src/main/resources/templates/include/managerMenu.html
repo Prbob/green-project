@@ -2,17 +2,17 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-<th:block th:fragment="managerMenu">
-<div class="mainContent">
-    <div class="left_menu">
-        <div data-v-cdf8523a="" class="snb_area">
-            <h2 data-v-cdf8523a="" class="snb_main_title" th:text="|권한 : ${session.accessrigths}|"></h2>
-            <nav data-v-7bcac446="" data-v-cdf8523a="" class="snb">
-                <div data-v-7bcac446="" class="snb_list"><strong data-v-7bcac446="" class="snb_title">관리자 메뉴</strong>
-                    <ul data-v-7a824f04="" data-v-7bcac446="" class="snb_menu">
+                    <title>Title</title>
+                    </head>
+                    <body>
+                    <th:block th:fragment="managerMenu">
+                        <div class="mainContent">
+                            <div class="left_menu">
+                                <div data-v-cdf8523a="" class="snb_area">
+                                    <h2 data-v-cdf8523a="" class="snb_main_title" th:text="|권한 : ${session.accessrigths}|"></h2>
+                                    <nav data-v-7bcac446="" data-v-cdf8523a="" class="snb">
+                                        <div data-v-7bcac446="" class="snb_list"><strong data-v-7bcac446="" class="snb_title">관리자 메뉴</strong>
+                                            <ul data-v-7a824f04="" data-v-7bcac446="" class="snb_menu">
                         <li data-v-7a824f04="" class="menu_item">
                             <strong data-v-7a824f04="" th:if="add == ${add}" th:class="menu_link">상품등록</strong>
                             <a data-v-7a824f04="" th:unless="add == ${add}" th:class="menu_link"  th:href="@{/products/add}">상품등록</a>
