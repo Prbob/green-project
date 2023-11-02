@@ -43,21 +43,10 @@ public class AllProductController {
     @GetMapping("/products/add")
     public String addForm(@ModelAttribute("form") ProductForm form ,Model model, @PathVariable(value = "productId",required = false)Long productId,
                           HttpServletRequest request){
-        HttpSession session = request.getSession(false);
-        if(session==null){
-            return "redirect:/";
-        }
-        Member member = (Member)session.getAttribute(SessionConst.LOGIN_MEMBER);
-        if(member==null ){
-            // 없는 회원이거나
-            return "redirect:/";
-        }
-        if(member.getAccessrigths().equals("NORMAL")){
-            //회원 권한이 NOMAL일 경우 index페이지로 이동
-            return "redirect:/";
-        }
+        if(fun.getMember(request)==null || fun.getMember(request).getAccessrigths().equals("NORMAL")){return "/alert/noLogin";}
         List<Brand> brands = brandService.findAll();
         List<Category> categories = categoryService.findAll();
+        model.addAttribute("add","add");
         model.addAttribute("brands",brands);
         model.addAttribute("categories",categories);
         return "products/add";
@@ -103,7 +92,7 @@ public class AllProductController {
         if(!list.isEmpty()){model.addAttribute("imgs",list);}
         model.addAttribute("mgs","상품 등록이 완료되었습니다.");
         model.addAttribute("product",products);
-        return "products/detail"; // 상품 상세보기 페이지로 넘어갈 예정
+        return "alert/alert"; // alert창 띄우고 리스트로
     }
     /////////////////////////////////////상품 등록 ///////////////////////////////////
 
@@ -120,16 +109,22 @@ public class AllProductController {
         }else{
             products = productService.findAll(pageable);
         }
+        List<Category> all = categoryService.findAll();
+        model.addAttribute("all",all);
         String bodytitle = "전체 상품";
         int nowPage = products.getPageable().getPageNumber() + 1; // 5
         int startPage = Math.max(1,nowPage%3==0?nowPage/3*3-2:nowPage/3*3+1);
         int endPage = Math.min(products.getTotalPages(),startPage+2);
         String pname = "list";
+        List<Category> categories = categoryService.findAll();
+        List<Brand> brands = brandService.findAll();
         model.addAttribute("bodytitle",bodytitle);
         model.addAttribute("pname",pname);
         model.addAttribute("products",products);
         model.addAttribute("nowPage",nowPage);
         model.addAttribute("startPage",startPage);
+        model.addAttribute("categories", categories);
+        model.addAttribute("brands", brands);
         model.addAttribute("endPage",endPage);
         return "products/list";
     }
@@ -148,14 +143,22 @@ public class AllProductController {
     ///////////////////////////////////// 디테일 ///////////////////////////////////
     @GetMapping("/products/detail/{productId}") // 디테일 페이지 컨트롤러
     public String detail(@PathVariable("productId")Long productId,Model model,HttpServletRequest request){
-        Products product = productService.getByid(productId);
+        Products product = productService.getByid(productId); //
+
         List<Imgs> imgs = product.getImgs();
         Member member = fun.getMember(request);
         String accessrigths = "NORMAL";
         if(member!=null){ // 로그인 하지 않았을 경우
             accessrigths = String.valueOf(member.getAccessrigths());
         }
+        List<Products> products = productService.findProductsToSize(product.getGender(),
+                product.getName(),product.getBrand(),product.getColor());
+        List<Integer> sizeList = new ArrayList<>();
+        for(Products products1 : products){
+            sizeList.add(products1.getSize());
+        }
 
+        model.addAttribute("sizeList",sizeList);
         model.addAttribute("accessrigths",accessrigths);
         model.addAttribute("imgs",imgs);
         model.addAttribute("product", product);

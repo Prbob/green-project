@@ -40,6 +40,9 @@ public class Products {
     @Column(name="products_gender", columnDefinition = "varchar(255) default 'every'")
     private String gender;
 
+    public void setStockQuantity(int orderStock){
+        stockQuantity = orderStock;
+    }
     public void saveImg(String imgPath, String imgName){
         this.imgPath = imgPath;
         this.imgName = imgName;

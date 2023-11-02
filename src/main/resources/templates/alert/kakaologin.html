@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>스타일</title>
+</head>
+<body>
+<div th:text="${email}" id="email"></div>
+<div th:text="${name}" id="name"></div>
+<script>
+    alert("등록된 아이디가 없습니다. 회원가입 페이지로 넘어갑니다.");
+    var emailValue = document.getElementById('email').textContent;
+
+    window.opener.location.href = '/member/joinMember?email=' + emailValue;
+    <!--window.location.href = '/member/joinMember?email=' + emailValue;-->
+    window.close();
+</script>
+</body>
+</html>
