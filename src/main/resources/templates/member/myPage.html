@@ -147,38 +147,20 @@
 <!--<div th:text="${member.name}"></div> &lt;!&ndash; 멤버 이름 &ndash;&gt;-->
 <!--</script>-->
 <div class="MyPage_SpaceSeparation">
-    <div class="MyPage_left_side_MenuBar">
-        <div class="MyPage_left_side_MenuBar_detail">
-            <H2>마이 페이지</H2>
-            <div>
-                <ul class="MyPage_left_side_MenuBar_ul">
-                    <li class="MyPage_left_side_MenuBar_lisTitle">
-                        <strong style="font-size: 17px;">내 정보</strong>
-                    </li>
-                    <li class="MyPage_left_side_MenuBar_li">
-                        <a href="#">구매 내역</a>
-                    </li>
-                    <li class="MyPage_left_side_MenuBar_li">
-                        <a href="#">판매 내역</a>
-                    </li>
-                    <li class="MyPage_left_side_MenuBar_li">
-                        <a href="#">관심 상품</a>
-                    </li>
-                    <li class="MyPage_left_side_MenuBar_li">
-                        <a href="#">로그인 정보</a>
-                    </li>
-                    <li class="MyPage_left_side_MenuBar_li">
-                        <a href="#">프로필 관리</a>
-                    </li>
-                    <li class="MyPage_left_side_MenuBar_li">
-                        <a href="#">주소록</a>
-                    </li>
-                    <li class="MyPage_left_side_MenuBar_li">
-                        <a href="#">결제 정보</a>
-                    </li>
-                </ul>
-            </div>
-        </div>
+
+    <div class="sidebar">
+        <a href="/notice" aria-current="page">
+            <h2 data-v-cdf8523a="" class="snb_main_title">마이페이지</h2>
+        </a>
+        <nav>
+            <ul class="snb_menu">
+                <li class="menu_item"><a href="#"> 구매 내역 </a></li>
+                <li class="menu_item"><a href="#"> 판매 내역 </a></li>
+                <li class="menu_item"><a href="#"> 보관 판매 </a></li>
+                <li class="menu_item"><a href="#"> 관심 상품 </a></li>
+                <li class="menu_item" style="font-weight:bolder; color:#333;"><a href="#"> 로그인 정보 </a></li>
+            </ul>
+        </nav>
     </div>
     <div class="MyPage_MainContent">
         <div class="MyPage_MainContent_Top_userMembership">
