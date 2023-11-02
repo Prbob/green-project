@@ -136,17 +136,15 @@
         }
         /* f2f9f6 */
     </style>
-
 </head>
+
 <body>
 <h2>마이페이지</h2>
 <img th:src="@{|/upload/${member.imgName}|}"/> <!-- 사진 -->
 <div th:text="${member.name}"></div> <!-- 멤버 이름 -->
 <th:block th:replace="include/bodyHead :: bodyHeader"></th:block>
-<!--<h2>마이페이지</h2>-->
-<!--<img th:src="@{|/upload/${member.imgName}|}"/> &lt;!&ndash; 사진 &ndash;&gt;-->
-<!--<div th:text="${member.name}"></div> &lt;!&ndash; 멤버 이름 &ndash;&gt;-->
-<!--</script>-->
+<!--김한결 마이페이지 작업 시작.-->
+
 <div class="MyPage_SpaceSeparation">
     <div class="MyPage_left_side_MenuBar">
         <div class="MyPage_left_side_MenuBar_detail">
