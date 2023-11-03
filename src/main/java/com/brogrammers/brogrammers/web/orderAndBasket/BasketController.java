@@ -84,7 +84,11 @@ public class BasketController {
             list.add(BasketInProductsForm.builder().products(product).quantity(basketProducts.getQuantity()).basProductId(basketProducts.getId()).build());
             // 상품과 수량 담아주기
         }
+        if(list.isEmpty()){
+            model.addAttribute("nolist","nolist");
+        }
         model.addAttribute("list",list);
+        model.addAttribute("basket","basket");
         return "orderAndBasket/myBasket";
     }
 
