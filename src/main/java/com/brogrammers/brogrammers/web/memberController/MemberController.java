@@ -157,9 +157,9 @@ public class MemberController {
         return "member/findPassword";
     }
 
-    @GetMapping("/member/myPage") // 마이페이지
+    @GetMapping("/member/myPage") // 마이페이지 / 구매내역 페이지
     public String myPage(HttpServletRequest request, Model model,
-                         @PageableDefault(page=0,size=3,sort="id",direction = Sort.Direction.DESC)Pageable pageable){
+                         @PageableDefault(page=0,size=5,sort="id",direction = Sort.Direction.DESC)Pageable pageable){
         if(fun.getMember(request)==null){return "/alert/noLogin";}
         Member member = fun.getMemberDb(request);
         /* 로그인 정보에 맞는 오더들 다 불러옴 */
@@ -175,6 +175,13 @@ public class MemberController {
                 list.add(form);
             }
         }
+        int nowPage = orders.getPageable().getPageNumber() + 1; // 5
+        int startPage = Math.max(1,nowPage%5==0?nowPage-4:nowPage/5*5+1);
+        int endPage = Math.min(orders.getTotalPages(),startPage+4);
+        model.addAttribute("totalPage",orders.getTotalPages());
+        model.addAttribute("nowPage",nowPage);
+        model.addAttribute("startPage",startPage);
+        model.addAttribute("endPage",endPage);
         model.addAttribute("list",list);
         model.addAttribute("member",member);
         model.addAttribute("myPage","myPage");
@@ -194,7 +201,9 @@ public class MemberController {
             productsCount = ProductsCount.builder().product(product).quantity(quantity).build();
             productsCountList.add(productsCount);
         }
-
+        if (productsCountList.isEmpty()){
+            model.addAttribute("nulllist","nulllist");
+        }
         model.addAttribute("order",order);
         model.addAttribute("list",productsCountList);
         model.addAttribute("member",member);

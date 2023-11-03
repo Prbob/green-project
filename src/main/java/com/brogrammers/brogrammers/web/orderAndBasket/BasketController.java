@@ -91,6 +91,8 @@ public class BasketController {
         }
         if(list.isEmpty()){
             model.addAttribute("nolist","nolist");
+        } else{
+            model.addAttribute("nolist","yesList");
         }
         model.addAttribute("list",list);
         model.addAttribute("basket","basket");

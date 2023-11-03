@@ -21,10 +21,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Controller
 public class OrderController {
@@ -111,6 +108,7 @@ public class OrderController {
 
         Member member = functionClass.getMemberDb(request); // 어떤 회원의 오더인지 구분하기 위함. 오더 테이블에 넣어줄 예정
 
+
         // 배송 상태 저장을 해주어야함.
         Delivery delivery = new Delivery();
         Address address = Address.builder() // 오더 객체에 넣을 주소객체
@@ -129,6 +127,7 @@ public class OrderController {
                 .imp_uid(request.getParameter("imp_uid"))
                 .totalPrice(Integer.parseInt(request.getParameter("totalPrice")))
                 .delivery(delivery)
+                .please(request.getParameter("please"))
                 .build();
         orderService.save(orders); // 오더 저장 완료
 
@@ -148,19 +147,48 @@ public class OrderController {
             }
         }
 
-        response.put("redirectUrl", "/home"); // 리다이렉션할 URL을 설정, 오더 페이지로 설정해야함.
+        response.put("redirectUrl", "/orderAndBasket/orderSuccess?orderId="+orders.getId()); // 리다이렉션할 URL을 설정, 오더 페이지로 설정해야함.
 
         return ResponseEntity.ok(response);
 
     }
 
-    @GetMapping("/orderAndBasket/orderSuccess")
-    public String orderSuccess(){
-        boolean order = true;
-        if(!order){
-            return "redirect:/";
-        }
+    @GetMapping("/orderAndBasket/orderSuccess") // 결제 성공 시 이동할 페이지
+    public String orderSuccess(@RequestParam("orderId") Long orderId, HttpServletRequest request,Model model){
+        if(fun.getMember(request)==null){return "/alert/noLogin";}
+        Orders order = orderService.findById(orderId).get();
+        Delivery delivery = order.getDelivery();
+
+        List<OrderProducts> orderproductsByOrders = orderProductsService.findOrderproductsByOrders(order);
+
+
+//        if(!order){
+//            return "redirect:/";
+//        }
+        model.addAttribute("order",order);
+        model.addAttribute("delivery",delivery);
         return "/orderAndBasket/orderSuccess";
     }
 
+    @GetMapping("/test")
+    public String tete(@RequestParam("orderId") Long id){
+        Orders orders = orderService.findById(id).get();
+        Delivery delivery = orders.getDelivery();
+        System.out.println(orders.getPayment());
+        System.out.println(orders.getPayment());System.out.println(orders.getPayment());
+        System.out.println(orders.getPayment());
+        System.out.println(orders.getPayment());
+        System.out.println(orders.getPayment());
+        System.out.println(orders.getPayment());
+        System.out.println(orders.getPayment());
+        System.out.println(orders.getPayment());
+        System.out.println(orders.getPayment());
+        System.out.println(orders.getPayment());
+        System.out.println(orders.getPayment());
+        System.out.println(orders.getPayment());
+        System.out.println(orders.getPayment());
+
+
+        return "";
+    }
 }

@@ -132,7 +132,7 @@
     <div class="container my lg" data-v-e2abb636="" data-v-cdf8523a="" style="padding-top: 0px;">
 
         <th:block th:replace="include/memberMenu :: memberMenu"></th:block>
-
+        <div th:if="${nulllist == 'nulllist'}">구매 내역이 존재하지 않습니다.</div>
         <div data-v-cf6a6ef4="" data-v-cdf8523a="" class="content_area my-page-content">
             <div data-v-cf6a6ef4="" class="my_profile">
                 <div data-v-61e7a8a3="" data-v-cf6a6ef4="" class="content_title border">
@@ -155,6 +155,22 @@
                             </div>
                         </div>
                     </div>
+            </div>
+            <div class="paging">
+                <form th:action method="get" name="nameSearch">
+                    <input type="text">
+                    <button type="submit">검색</button>
+                </form>
+                <a th:if="${5 < startPage}" th:href="@{/category/brandList(page = ${startPage-6},nameSearch = ${param.nameSearch},brandId=${param.brandId})}">
+                    <i class="fas fa-chevron-left"></i>
+                </a>
+                <th:block th:each="page : ${#numbers.sequence(startPage,endPage)}">
+                    <a th:if="${page != nowPage}" th:href="@{/category/brandList(page = ${page-1},nameSearch = ${param.nameSearch})}" th:text="${page}"></a>
+                    <strong th:if="${page == nowPage}"  th:text="${page}" style="color:red"></strong>
+                </th:block>
+                <a th:if="${totalPage > endPage && endPage != 0}" th:href="@{/category/brandList(page = ${endPage}, nameSearch = ${param.nameSearch})}">
+                    <i class="fas fa-chevron-right"></i> <!-- Font Awesome 아이콘 클래스를 추가합니다 -->
+                </a>
             </div>
         </div>
     </div>

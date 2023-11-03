@@ -72,7 +72,7 @@
                                             <input type="button" onclick="sample6_execDaumPostcode()" class="btn btn_edit outlinegrey small" data-v-472c9b08="" data-v-0eedeb11="" value="변경">
                                             <div data-v-6b0ea0a8="" data-v-0eedeb11="">
                                                 <div data-v-6b0ea0a8="" class="button_shipping_memo_wrap">
-                                                    <select th:field="*{please}" data-v-6b0ea0a8="" class="button_shipping_memo sihwaselect" onchange="checkDirectInput(this)">
+                                                    <select th:field="*{please}" data-v-6b0ea0a8="" class="button_shipping_memo sihwaselect" onchange="checkDirectInput(this)" id="please">
                                                         <option th:value="'문 앞에 놓아주세요.'">문 앞에 놓아주세요.</option>
                                                         <option th:value="'벨 누르지 말아주세요.'">벨 누르지 말아주세요.</option>
                                                         <option th:value="'경비실에 맡겨주세요.'">경비실에 맡겨주세요.</option>
@@ -102,90 +102,18 @@
                                         <div data-v-14fdcaf7="">
                                             <div data-v-b9ae09c2="" data-v-14fdcaf7=""
                                                  class="payment_section payment_section_first">
-                                                <h4 data-v-27951412="" data-v-b9ae09c2="" class="method_title">
-                                                    <div data-v-27951412="" class="main_title"><p data-v-27951412=""
-                                                                                                  class="">계좌 간편결제</p><span
-                                                            data-v-27951412="" class="sub_title"
-                                                            style="display: none;"></span>
-                                                    </div>
-                                                </h4>
-                                                <div data-v-14fdcaf7="" data-v-b9ae09c2="" item="[object Object]">
-                                                    <div data-v-8ec23dbc="" data-v-14fdcaf7="" class="quick_pay_info"
-                                                         data-v-b9ae09c2="">
-                                                        <div data-v-8ec23dbc="" class="payment_detail">
-                                                            <div data-v-8ec23dbc="" class="payment_item request selected">
-                                                                <div data-v-8ec23dbc="" class="info_wrap">
-                                                                    <a data-v-8ec23dbc="" href="#" class="regist_link">계좌를 등록하세요</a>
-                                                                </div>
-                                                                <div data-v-8ec23dbc="" class="description">
-                                                                    <svg data-v-8ec23dbc="" xmlns="http://www.w3.org/2000/svg" class="ico-arr-right icon sprite-icons">
-                                                                        <use data-v-8ec23dbc="" href="/_nuxt/b685a18dbba161b5c3cf613cb39a8946.svg#i-ico-arr-right" xlink:href="/_nuxt/b685a18dbba161b5c3cf613cb39a8946.svg#i-ico-arr-right"></use>
-                                                                    </svg>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div><!----></div><!----><!----></div>
+
                                             <div data-v-b9ae09c2="" data-v-14fdcaf7="" class="payment_section">
-                                                <h4 data-v-27951412="" data-v-b9ae09c2="" class="method_title">
-                                                    <div data-v-27951412="" class="main_title">
-                                                        <p data-v-27951412="" class="">카드 간편결제</p>
-                                                        <span data-v-27951412="" class="sub_title" style="display: none;"></span>
-                                                        <span data-v-b9ae09c2="" data-v-27951412="" class="sub_title" style="color: rgba(34, 34, 34, 0.5);"> 일시불 </span>
-                                                    </div>
-                                                    <a data-v-b9ae09c2="" data-v-27951412="" href="#none"
-                                                       class="btn_card_add"> + 새 카드 추가 </a></h4>
+
                                                 <div data-v-14fdcaf7="" data-v-b9ae09c2="" item="[object Object]"><!---->
-                                                    <div data-v-1f504370="" data-v-14fdcaf7="" class="card_list"
-                                                         data-v-b9ae09c2="">
-                                                        <div data-v-1f504370="" class="main_card">
-                                                            <div data-v-1f504370="" class="clickable_card">
-                                                                <div data-v-4b2c396e="" data-v-1f504370="" class="card_info"><span data-v-4b2c396e="" class="card_name"> KB</span>
-                                                                    <div data-v-4b2c396e="" class="card_num"><span
-                                                                            data-v-4b2c396e="" class="num_bind"><span
-                                                                            data-v-4b2c396e="" class="dot"><span
-                                                                            data-v-4b2c396e=""
-                                                                            class="dot"></span></span><span
-                                                                            data-v-4b2c396e="" class="hyphen"></span><span
-                                                                            data-v-4b2c396e="" class="dot"><span
-                                                                            data-v-4b2c396e=""
-                                                                            class="dot"></span></span><span
-                                                                            data-v-4b2c396e="" class="hyphen"></span><span
-                                                                            data-v-4b2c396e="" class="dot"><span
-                                                                            data-v-4b2c396e=""
-                                                                            class="dot"></span></span><span
-                                                                            data-v-4b2c396e="" class="hyphen"></span><div
-                                                                            data-v-4b2c396e="" class="last_num_box"><span
-                                                                            class="last_num">****</span></div></span><!---->
-                                                                    </div>
-                                                                </div>
-                                                                <svg data-v-1f504370="" xmlns="http://www.w3.org/2000/svg"
-                                                                     class="ico-arr-right icon sprite-icons">
-                                                                    <use data-v-1f504370=""
-                                                                         href="/_nuxt/b685a18dbba161b5c3cf613cb39a8946.svg#i-ico-arr-right"
-                                                                         xlink:href="/_nuxt/b685a18dbba161b5c3cf613cb39a8946.svg#i-ico-arr-right"></use>
-                                                                </svg>
-                                                            </div>
-                                                        </div>
+                                                    <div data-v-1f504370="" data-v-14fdcaf7="" class="card_list" data-v-b9ae09c2="">
+
                                                         <div data-v-1f504370="" class="other_card" style="display: none;">
                                                             <ul data-v-1f504370="" class="other_card_list">
                                                                 <li data-v-1f504370="" class="other_card_item card_on">
                                                                     <div data-v-4b2c396e="" data-v-1f504370=""
-                                                                         class="card_info"><span data-v-4b2c396e=""
-                                                                                                 class="card_name"> KB</span>
-                                                                        <div data-v-4b2c396e="" class="card_num"><span
-                                                                                data-v-4b2c396e="" class="num_bind"><span
-                                                                                data-v-4b2c396e="" class="dot"><span
-                                                                                data-v-4b2c396e=""
-                                                                                class="dot"></span></span><span
-                                                                                data-v-4b2c396e=""
-                                                                                class="hyphen"></span><span
-                                                                                data-v-4b2c396e="" class="dot"><span
-                                                                                data-v-4b2c396e=""
-                                                                                class="dot"></span></span><span
-                                                                                data-v-4b2c396e=""
-                                                                                class="hyphen"></span><span
-                                                                                data-v-4b2c396e="" class="dot"><span
-                                                                                data-v-4b2c396e=""
+                                                                         class="card_info">
+                                                                        <div data-v-4b2c396e="" class="card_num"><span data-v-4b2c396e="" class="num_bind"><span data-v-4b2c396e="" class="dot"><span data-v-4b2c396e="" class="dot"></span></span><span data-v-4b2c396e="" class="hyphen"></span><span data-v-4b2c396e="" class="dot"><span data-v-4b2c396e="" class="dot"></span></span><span data-v-4b2c396e="" class="hyphen"></span><span data-v-4b2c396e="" class="dot"><span data-v-4b2c396e=""
                                                                                 class="dot"></span></span><span
                                                                                 data-v-4b2c396e="" class="hyphen"></span><div
                                                                                 data-v-4b2c396e=""
@@ -318,10 +246,6 @@
                                         <span data-v-679d7250="" class="price_warning" style="display: none;"><em
                                                 data-v-679d7250="">주의! </em></span></div>
                                     <div data-v-16e14710="" class="btn_confirm" id="btn_confirm22">
-                                        <!--                                    <a data-v-16e14710="" href="#" class="blind full solid false"> 계속하기 </a>-->
-                                        <!--                                    <button data-v-472c9b08="" data-v-16e14710="" type="button"-->
-                                        <!--                                            class="btn full solid false disabled"> 결제하기-->
-                                        <!--                                    </button>-->
                                         <button type="button" id="check_module">결제하기</button>
                                     </div>
                                 </div>
