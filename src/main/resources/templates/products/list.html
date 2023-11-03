@@ -2,29 +2,29 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-<<<<<<< HEAD
+
     <title>UNCOMMON | SHOP</title>
-=======
-    <title>SHOP</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
->>>>>>> 3988963836a62c4c2c3b49dadb95b6bb95b3c93c
+
     <th:block th:replace="include/header :: header"></th:block>
     <link rel="stylesheet" th:href="@{/css/product.css}" type="text/css">
     <script src="https://kit.fontawesome.com/3697bc8c45.js" crossorigin="anonymous"></script>
 
     <style>
         *{
-            color: #1d1d1b;
+            color: #1d1d1b; box-sizing: border-box;
         }
         aside{
             padding : 20px;
             box-sizing: border-box;
             height: 900px;
+            /*position:fixed;*/
         }
-
-        input{
-            border: 1px solid grey;
-            line-height: 2em;
+        aside h5{
+            border-bottom: 1px solid #bbbbbb;
+            padding-bottom: 10px;
+            font-size: 16px;
+            text-align: center;
+            font-weight: bold;
         }
         #searchForm{
             margin-top: 20px;
@@ -32,13 +32,22 @@
         #searchForm p{
             font-size:14px;
             line-height: 22px;
+            font-weight: bold;
         }
         #searchForm input{
-            margin-bottom:5px;
+            margin-bottom:20px;
             border: 1px solid #909090;
             width: 188px;
             padding-left: 5px;
             border-radius: 2px;
+            line-height: 2em;
+        }
+        .inputBox{
+            font-size:16px;
+            width: 188px;
+            height:30px;
+            margin-bottom: 20px;
+            margin-top: 5px;
         }
         button{
             /*디자인 몰라 가져오자...*/
@@ -46,10 +55,7 @@
         .content_area{
             padding:0;
         }
-        .content_area .content_title {
-            padding-top:20px;
-        }
-        .content_area #categories {
+        .content_area .categories {
             font-family: inherit;
             font-size: 14px;
             width: 100%;
@@ -61,23 +67,28 @@
             align-items:center;
             box-shadow: 0 1px 0px #dddddd;
         }
-        #categories ul{
+        .categories ul{
             display: flex;
+            min-width:600px;
         }
-        #categories li{
+        .categories li{
             margin:0 20px;
         }
 
-        #productWrap{
+        .productWrap{
             width: 100%;
             display: flex;
             padding: 20px;
+            /*border:1px solid yellow;*/
+            flex-direction: row;
+            flex-wrap:wrap;
+            align-content:space-around;
         }
         .itembox{
-            display: inline-block;
             width: 220px;
-            height: 300px;
+            height: 320px;
             margin: 3px;
+            /*border:1px solid blue;*/
         }
         .itembox a{
             display: inline-block;
@@ -85,18 +96,37 @@
         .itembox img{
             background-color: #cccccc;
             display: inherit;
-            width: 220px;
+            width: 100%;
             height: 220px;
             border-radius: 3px;
             margin-bottom: 5px;
         }
+
         .itembox p{
             padding-left: 5px;
             text-align: left;
             line-height: 1.8em;
         }
-        .itembox #priceTag{
-            font-size: 20px;
+        .pagingBox {
+            /*border: 1px solid red;*/
+            text-align: center;
+            padding:20px;
+            line-height: 2em;
+        }
+        form button{
+            border: 1px solid grey;
+            width: 188px;
+            height: 30px;
+            margin-top: 20px;
+            border-radius: 3px;
+            letter-spacing: 5px;
+        }
+        form button:hover {
+            color:white;
+            background-color: #ef6253;
+            border:none;
+            font-weight: bolder;
+            font-size:15px;
         }
 
 
@@ -110,8 +140,11 @@
         <h5>필터</h5>
         <div id="filter">
             <form th:action method="get" id="searchForm">
-                <button type="button" class="btn">Search</button>
-                <p>상품명<br><input type="text" id="nameSearch" name="nameSearch" style="background-color: white"></p>
+
+                <div class="input">
+                <p>상품명<br></p>
+                    <input class="inputBox" type="text" id="nameSearch" name="nameSearch" style="background-color: white">
+                </div>
 <!--                <div>-->
 <!--                    <div>카테고리</div>-->
 <!--                    <select th:field="*{category}" class="form-select">-->
@@ -120,47 +153,53 @@
 <!--                                th:text="${category.name}">와좌</option>-->
 <!--                    </select>-->
 <!--                </div>-->
-                <p>카테고리<br>
-                    <select style="width:190px; font-size: 16px;" name="categoryId">
+                <div class="input">
+                <p>카테고리<br></p>
+                    <select class="inputBox" name="categoryId">
                         <option value=""> </option>
                         <option th:each="category : ${categories}" th:value="${category.id}"
                                 th:text="${category.name}"></option>
                     </select>
-                </p>
 
-                <p>브랜드<br>
-                    <select style="width:190px; font-size: 16px;" name="brandId" >
+                </div>
+
+                <div class="input">
+                <p>브랜드<br></p>
+                    <select class="inputBox" name="brandId" >
                         <option value="" > </option>
                         <option th:each="brand : ${brands}" th:value="${brand.id}" th:text="${brand.name}"></option>
                     </select>
-                </p>
-                <br>
+                </div>
+                <button>검색하기</button>
             </form>
         </div>
     </aside> <!--END sidebar-->
 
     <div class="content_area">
-        <div id="categories">
-            <ul id="category_gnb">
-                <li style="font-weight: bolder"><a th:href="@{/products/list}" th:text="전체"></a></li>
-                <li th:each="category : ${categories}">
-                   <a th:if="${category != pname}" th:href="@{/products/list(categoryId=${category.id})}" th:text="${category.name}"></a>
+        <div class="categories">
+            <ul class="category_gnb">
+                <li class="category" style="font-weight: bolder"><a th:href="@{/products/list}" th:text="전체"></a></li>
+               <li class="category" th:each="category : ${categories}">
+                   <a th:if="${category != pname}" th:href="@{/products/category(categoryId=${category.id})}" th:text="${category.name}"></a>
                </li>
             </ul>
         </div>
 
-        <div id="productWrap">
+        <div class="productWrap">
             <div class="itembox" th:each="product : ${products}">
                 <a th:href="@{/products/detail/{productId} (productId=${product.id})}" >
-                    <img th:src="@{|/upload/${product.imgName}|}"/>
-                    <div id="itembox_info">
-                        <b><p th:text="|${product.brand.name}|"></p></b>
-                        <p th:text="${#strings.length(product.name) < 20 ? product.name : #strings.substring(product.name, 0, 20) + ' ...'}"></p>
-                        <p th:text="|${#numbers.formatDecimal(product.price,3, 'COMMA',0,'POINT')}|" id="priceTag"></p><br>
-                    </div>
+                    <img th:src="@{|/upload/${product.imgName}|}">
                 </a>
+                    <div class="itembox_info">
+                        <a th:href="@{/products/detail/{productId} (productId=${product.id})}" ><b><p th:text="|${product.brand.name}|"></p></b></a>
+                        <a th:href="@{/products/detail/{productId} (productId=${product.id})}" ><p th:text="${#strings.length(product.name) < 20 ? product.name : #strings.substring(product.name, 0, 20) + ' ...'}"></p></a>
+                        <p th:text="|${#numbers.formatDecimal(product.price,3, 'COMMA',0,'POINT')}|" class="priceTag"></p><br>
+                    </div>
+
             </div>
         </div>
+
+        <div class="pagingBox">
             <a th:if="${5 < startPage}" th:href="@{/products/__${pname}__(page = ${startPage-6},nameSearch = ${param.nameSearch},brandId=${param.brandId})}">
                 <i class="fas fa-chevron-left"></i>
             </a>
@@ -171,12 +210,12 @@
             <a th:if="${totalPage > endPage && endPage != 0}" th:href="@{/products/__${pname}__(page = ${endPage}, nameSearch = ${param.nameSearch},brandId=${param.brandId})}">
                 <i class="fas fa-chevron-right"></i> <!-- Font Awesome 아이콘 클래스를 추가합니다 -->
             </a>
+        </div><!--pagingBox END-->
     </div>
 
 </div> <!-- /container -->
 
 <th:block th:replace="include/footer :: footer"></th:block>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
 </body>
 </html>
 

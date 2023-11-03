@@ -58,7 +58,7 @@
 
         .container{
             margin:0; padding:0;
-            width: 61%
+            width: 100%;
         }
         .title h3{
             min-width: 90px;
@@ -112,14 +112,13 @@
             font-size: 18px;
             /*border:1px solid darkolivegreen;*/
         }
+
         .rightInfo{
             height:110px;
         }
         .rightInfo a{
             margin-bottom:20px;
         }
-
-
     </style>
 
 </head>
@@ -146,6 +145,7 @@
                                     <img th:src="@{|/upload/${form.fileName}|}"/>
                                     </div>
                                     <div class="rightInfo">
+
                                         <p><a href="/products/detail/"><b th:text="|주문 번호 : ${form.orders.id}|">item name</b></a></p>  <!-- 주문 번호-->
                                         <p th:text="|주문 금액 : ${#numbers.formatDecimal(form.orders.totalPrice,3, 'COMMA',0,'POINT')} 원|"></p>
                                         <a th:href="@{/member/orderDetail(orderId=${form.orders.id})}"> &nbsp; > 주문 상세보기 </a>
