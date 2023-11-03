@@ -88,6 +88,7 @@ public class BasketController {
             model.addAttribute("nolist","nolist");
         }
         model.addAttribute("list",list);
+        model.addAttribute("basket","basket");
         return "orderAndBasket/myBasket";
     }
 

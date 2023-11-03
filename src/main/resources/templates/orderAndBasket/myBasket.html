@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>UNCOMMON | 장바구니</title>
+    <title>UNCOMMON | 관심 상품</title>
     <th:block th:replace="include/header :: header"></th:block>
 
     <!--공지사항 css-->
@@ -19,10 +19,9 @@
         .wish_product {
             cursor: pointer;
             display: flex;
-            width: 100%
-            align-items: center;
-            padding-bottom: 20px;
-            padding-top: 20px;
+            width: 100%;
+            padding: 20px 0px;
+
         }
 
         .wish_buy[data-v-3bb254ce] {
@@ -39,7 +38,6 @@
         }
 
         .product_box {
-            padding-left : 10px;
             padding-right : 10px;
         }
 
@@ -121,7 +119,10 @@
             padding-top: 4px;
         }
 
-
+        .content_title.border[data-v-61e7a8a3] {
+            border-bottom: 3px solid #222;
+            padding-bottom: 16px
+        }
 
 
     </style>
@@ -135,29 +136,18 @@
 
 <div tabindex="0" class="layout_base" data-v-e2abb636="" data-v-cdf8523a="">
     <div class="container my lg" data-v-e2abb636="" data-v-cdf8523a="" style="padding-top: 0px;">
-        <div class="sidebar">
-            <a href="/notice" aria-current="page">
-                <h2 data-v-cdf8523a="" class="snb_main_title">마이페이지</h2>
-            </a>
-            <nav>
-                <ul class="snb_menu">
-                    <li class="menu_item"><a href="#"> 구매 내역 </a></li>
-                    <li class="menu_item"><a href="#"> 판매 내역 </a></li>
-                    <li class="menu_item"><a href="#"> 보관 판매 </a></li>
-                    <li class="menu_item" style="font-weight:bolder; color:#333;"><a href="#"> 관심 상품 </a></li>
-                    <li class="menu_item"><a href="#"> 로그인 정보 </a></li>
-                </ul>
-            </nav>
-        </div>
-
-
+      
+        <th:block th:replace="include/memberMenu :: memberMenu"></th:block>
+      
         <div class="content_area my-page-content" data-v-4128f410="" data-v-cdf8523a="" data-v-e2abb636="">
             <div class="v-portal" style="display:none;" data-v-4128f410=""></div>
-            <div class="content_title border" data-v-61e7a8a3="" data-v-4128f410="">
-                <div class="title" data-v-61e7a8a3="">
-                    <h3 data-v-61e7a8a3="">관심 상품</h3>
+
+            <div data-v-61e7a8a3="" data-v-cf6a6ef4="" class="content_title border">
+                <div data-v-61e7a8a3="" class="title">
+                    <h3 data-v-61e7a8a3="" style="font-size:24px; height:27px;">관심 상품</h3>
                 </div>
             </div>
+
             <div data-v-4128f410="" class="my_interest">
                 <ul data-v-3bb254ce="" data-v-4128f410="" class="wish_list">
 
@@ -242,7 +232,6 @@
                         전체구매
                     </a>
                 </div>
-
             </div>
         </div>
     </div>
