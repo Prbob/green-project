@@ -48,4 +48,12 @@ public class BrandService {
         }
         return id;
     }
+
+    public Optional<Brand> findById(Long id){
+        return brandRepository.findById(id);
+    }
+
+    public Page<Brand> findBrandsByName(String name, Pageable pageable){
+        return brandRepository.findBrandsByName(name,pageable);
+    }
 }

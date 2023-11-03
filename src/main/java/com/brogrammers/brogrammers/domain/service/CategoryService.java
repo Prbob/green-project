@@ -4,6 +4,8 @@ import com.brogrammers.brogrammers.domain.product.Category;
 import com.brogrammers.brogrammers.domain.repository.CategoryRepository;
 import com.brogrammers.brogrammers.web.products.CategoryForm;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -25,6 +27,7 @@ public class CategoryService {
     public List<Category> findAll(){
         return categoryRepository.findAll();
     }
+    public Page<Category> findAll(Pageable pageable){return categoryRepository.findAll(pageable);}
     public Long duplChk(String email){ // 카테고리가 이미 존재하는지 중복하는 메서드, 이름으로 확인
         Long id = null;
         if(categoryRepository.findByName(email).isPresent()){
@@ -39,5 +42,13 @@ public class CategoryService {
     public void updatCatoegryByForm(CategoryForm form){
         Category category = categoryRepository.findById(form.getId()).get();
         category.setName(form.getName());
+    }
+
+    public Optional<Category> findById(Long id){
+        return categoryRepository.findById(id);
+    }
+
+    public Page<Category> findCategoryByName(String keyName, Pageable pageable){
+        return categoryRepository.findCategoryByName(keyName,pageable);
     }
 }
