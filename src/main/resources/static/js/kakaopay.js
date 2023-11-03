@@ -1,13 +1,13 @@
 
 
 $("#check_module").click(function () {
-  var postal_code = document.getElementById("postal_code").value;
-  var detailed_address = document.getElementById("detailed_address").value;
+  var postal_code = document.getElementById("sample6_postcode").value;
+  var detailed_address = document.getElementById("sample6_detailAddress").value;
   var name = document.getElementById("name").value;
   var email = document.getElementById("email").value;
   var totalPrice = document.getElementById("totalPrice").value;
   var phone = document.getElementById("phone").value;
-  var middle_address = document.getElementById("middle_address").value;
+  var middle_address = document.getElementById("sample6_address").value;
   var payment = $(":input:radio[name=payment]:checked").val();
   document.getElementsByClassName
   var IMP = window.IMP; // 생략가능

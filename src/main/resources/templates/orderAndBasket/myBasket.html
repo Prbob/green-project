@@ -120,7 +120,9 @@
         .quantity div {
             padding-top: 4px;
         }
-
+        #buybutton{
+            width : 80px;
+        }
 
 
 
@@ -152,8 +154,7 @@
 
                         <div data-v-3bb254ce="" class="wish_product">
                             <div data-v-3bb254ce="" class="product_box">
-                                <div data-v-aff2362e="" data-v-3bb254ce="" class="product"
-                                     style="background-color: rgb(244, 244, 244); width: 100px; height: 100px;">
+                                <div data-v-aff2362e="" data-v-3bb254ce="" class="product" style="background-color: rgb(244, 244, 244); width: 100px; height: 100px;">
                                     <img th:src="@{|/upload/${basketInProducts.products.imgName}|}" alt="Product Image" style="width: 100%; height: 100%;">
                                 </div>
                             </div>
@@ -170,13 +171,11 @@
                                 <a data-v-3bb254ce="" class="name" th:href="@{/products/detail/{productId} (productId=${basketInProducts.products.id})}" th:text="|${basketInProducts.products.name} ${basketInProducts.products.color}|"></a>
 
                                 <div>
-                                    <form th:action="@{/order/basket/{productId} (productId=${basketInProducts.products.id})}" method="post"
-                                          style="width: 210px;">
+                                    <form th:action="@{/order/basket/{productId} (productId=${basketInProducts.products.id})}" method="post" style="width: 210px;">
                                         <div style="padding-top: 5px;">
                                             <form th:action="@{/order/basket/{productId} (productId=${basketInProducts.products.id})}" method="post">
                                                 <select id="quantity" name="quantity" style="color: #000;">
-                                                    <option th:each="i : ${#numbers.sequence(1, basketInProducts.products.stockQuantity)}"
-                                                            th:value="${i}" th:text="${i}" th:selected="${i == basketInProducts.quantity}"/>
+                                                    <option th:each="i : ${#numbers.sequence(1, basketInProducts.products.stockQuantity)}" th:value="${i}" th:text="${i}" th:selected="${i == basketInProducts.quantity}"/>
                                                 </select>
                                                 <button type="submit" th:name="action" th:value="myBasket" style="background-color: #fff; color: #000; border: 1px solid #ccc; padding: 1.5px 6px; border-radius: 5px; cursor: pointer;">
                                                     수정
@@ -196,16 +195,18 @@
                                 <div data-v-3bb254ce="">
                                     <div data-v-0b6ddb6a="" data-v-3bb254ce="" class="division_btn_box lg" style="margin-bottom: 5px;"><a
                                             data-v-0b6ddb6a="" href="#" disabled="disabled" class="blind btn_division">버튼</a>
-                                        <button data-v-0b6ddb6a="" class="btn_action" style="background-color: rgb(239, 98, 83); color:width; height: 60px;" >
-
-                                            <a data-v-0b6ddb6a="" th:href="@{/products/detail/{id} }" class="title" role="button">구매</a>
+<!--                                        <a data-v-0b6ddb6a="" th:href="@{/order/buy(product=${basketInProducts.products.id},quantity=${basketInProducts.quantity}) }"  role="button" class="title">-->
+                                        <a th:href="@{/order/buy(product=${basketInProducts.products.id},quantity=${basketInProducts.quantity}) }" >
+                                            <button data-v-0b6ddb6a="" class="btn_action" style="background-color: rgb(239, 98, 83); color:width; height: 60px;" id="buybutton">
+                                                구매
                                             <div data-v-0b6ddb6a="" class="price" style="height: 22px;">
                                                 <span data-v-0b6ddb6a="" class="amount">
                                                     <!--가격-->
-                                                    <div data-th-text="${#numbers.formatInteger(basketInProducts.products.price, 3, 'COMMA') + '원'}"></div>
+                                                    <div data-th-text="${#numbers.formatInteger(basketInProducts.price, 3, 'COMMA') + '원'}"></div>
                                                 </span>
                                             </div>
-                                        </button>
+                                            </button>
+                                        </a>
                                     </div>
                                     <a data-v-3bb254ce="" href="#" th:href="@{/basket/delete/{id} (id=${basketInProducts.basProductId})}" class="status_link" role="button" style="font-size: 15px" > 삭제 </a>
                                 </div>

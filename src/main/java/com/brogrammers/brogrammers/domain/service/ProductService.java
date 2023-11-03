@@ -1,8 +1,10 @@
 package com.brogrammers.brogrammers.domain.service;
 
 import com.brogrammers.brogrammers.domain.member.Member;
+import com.brogrammers.brogrammers.domain.order.Orders;
 import com.brogrammers.brogrammers.domain.product.Brand;
 import com.brogrammers.brogrammers.domain.product.Products;
+import com.brogrammers.brogrammers.domain.repository.OrdersRepository;
 import com.brogrammers.brogrammers.domain.repository.ProductsRepository;
 import com.brogrammers.brogrammers.form.DuplicatedProduct;
 import com.brogrammers.brogrammers.web.products.ProductForm;
@@ -117,4 +119,6 @@ public class ProductService {
     public Page<Products> findProductsByBrand(Brand brand,Pageable pageable){
         return productsRepository.findProductsByBrand(brand,pageable);
     }
+
+
 }

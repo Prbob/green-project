@@ -2,6 +2,7 @@
 <html lang="en">
 <html xmlns:th="http://www.thymeleaf.org">
 <meta charset="UTF-8">
+<head>
 <title>주문페이지</title>
 <th:block th:replace="include/header :: header"></th:block>
 
@@ -25,23 +26,17 @@
                         <div data-v-955c094e="" data-v-240c5974="" class="product_info_area">
                             <div data-v-955c094e="" class="product_info" th:each="pc : ${form.productCounts}">
 
-                                <div data-v-aff2362e="" data-v-955c094e="" class="product"
-                                     style="background-color: rgb(235, 240, 245);">
+                                <div data-v-aff2362e="" data-v-955c094e="" class="product" style="background-color: rgb(235, 240, 245);">
                                     <div data-v-416dde45="" data-v-aff2362e="" class="product_inner_tag display_tag_item"><!----><span data-v-416dde45="">  </span></div>
                                     <picture data-v-44ba780a="" data-v-aff2362e="" class="picture product_img">
                                         <img data-v-44ba780a="" alt="상품 이미지" th:src="@{|/upload/${pc.product.imgName}|}" loading="lazy" class="image full_width"></picture><!----><!----><!---->
                                 </div>
-                                <div data-v-955c094e="" class="product_detail"><strong data-v-955c094e="" th:text="${pc.product.name}"  class="model_number"></strong>
+                                <div data-v-955c094e="" class="product_detail">
+                                    <strong data-v-955c094e="" th:text="${pc.product.name}"  class="model_number"></strong>
                                     <p data-v-955c094e="" class="model_title"></p>
                                     <p data-v-955c094e="" class="model_ko" th:text="|ID : ${pc.product.id} / color : ${pc.product.color}|">상품 아이디 및 색상</p>  <!-- 상품 설명? 성별,색상-->
-                                    <div data-v-955c094e="" class="model_desc"><p data-v-955c094e="" class="size_txt" th:text="|size : ${pc.product.size}|"></p>
-
-                                    </div>
-                                    <div data-v-955c094e="" class="product_detail"><strong data-v-955c094e="" th:text="${pc.product.name}"  class="model_number"></strong>
-                                        <p data-v-955c094e="" class="model_title"></p>
-                                        <p data-v-955c094e="" class="model_ko" th:text="|ID : ${pc.product.id} / color : ${pc.product.color}|">상품 아이디 및 색상</p>  <!-- 상품 설명? 성별,색상-->
-                                        <div data-v-955c094e="" class="model_desc"><p data-v-955c094e="" class="size_txt" th:text="|size : ${pc.product.size}|"></p>
-                                        </div>
+                                    <div data-v-955c094e="" class="model_desc">
+                                        <p data-v-955c094e="" class="size_txt" th:text="|size : ${pc.product.size}|"></p>
                                     </div>
                                 </div>
                             </div>

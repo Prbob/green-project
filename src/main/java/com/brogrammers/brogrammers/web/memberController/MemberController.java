@@ -3,13 +3,19 @@ package com.brogrammers.brogrammers.web.memberController;
 import com.brogrammers.brogrammers.domain.member.Address;
 import com.brogrammers.brogrammers.domain.member.Member;
 import com.brogrammers.brogrammers.domain.order.Basket;
-import com.brogrammers.brogrammers.domain.service.BasketService;
-import com.brogrammers.brogrammers.domain.service.LoginService;
-import com.brogrammers.brogrammers.domain.service.MemberService;
+import com.brogrammers.brogrammers.domain.order.OrderProducts;
+import com.brogrammers.brogrammers.domain.order.Orders;
+import com.brogrammers.brogrammers.domain.product.Products;
+import com.brogrammers.brogrammers.domain.service.*;
 import com.brogrammers.brogrammers.web.FunctionClass;
+import com.brogrammers.brogrammers.web.orderAndBasket.ProductsCount;
 import com.brogrammers.brogrammers.web.session.SessionConst;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -21,6 +27,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 @Controller
@@ -32,12 +40,14 @@ public class MemberController {
     private final LoginService loginService;
     private final BasketService basketService;
     private final FunctionClass fun;
-
+    private final OrderService orderService;
+    private final OrderProductsService orderProductsService;
 //    시큐리티
 //    PasswordHashConversion passwordConverter = new PasswordHashConversion();
     /////////////////////// 회원가입 //////////////////////
     @GetMapping("/member/joinMember")
-    public String joinMemberForm(Model model, @RequestParam(value = "email",required = false) String email){
+    public String joinMemberForm(Model model, @RequestParam(value = "email",required = false) String email,HttpServletRequest request){
+        if(fun.getMember(request)!=null){return "redirect:/";}
         MemberForm memberForm = MemberForm.builder().email(email).build();
         model.addAttribute("form",memberForm);
         return "member/joinMemberForm";
@@ -148,14 +158,46 @@ public class MemberController {
     }
 
     @GetMapping("/member/myPage") // 마이페이지
-    public String myPage(HttpServletRequest request,Model model){
+    public String myPage(HttpServletRequest request, Model model,
+                         @PageableDefault(page=0,size=3,sort="id",direction = Sort.Direction.DESC)Pageable pageable){
+        if(fun.getMember(request)==null){return "/alert/noLogin";}
         Member member = fun.getMemberDb(request);
+        /* 로그인 정보에 맞는 오더들 다 불러옴 */
+        Page<Orders> orders = orderService.findOrdersByMember(member, pageable);
+        List<OrderedForm> list = new ArrayList<>();
+        OrderedForm form;
+        if(!orders.isEmpty()){
+            for(Orders oneOrder:orders.getContent()){
+                form = new OrderedForm();
+                form.setOrders(oneOrder);
+                String imgName = orderProductsService.findOrderproductsByOrders(oneOrder).get(0).getProducts().getImgName();
+                form.setFileName(imgName);
+                list.add(form);
+            }
+        }
+        model.addAttribute("list",list);
         model.addAttribute("member",member);
         model.addAttribute("myPage","myPage");
         return "member/myPage";
     }
     @GetMapping("/member/orderDetail")
-    public String orderDetail() {
+    public String orderDetail(HttpServletRequest request, Model model,Long orderId) {
+        if(fun.getMember(request)==null){return "/alert/noLogin";}
+        Member member = fun.getMemberDb(request);
+        Orders order = orderService.findById(orderId).get();  // 오더
+        List<OrderProducts> orderproductsByOrders = orderProductsService.findOrderproductsByOrders(order);  // 오더로 주문 아이템 내역 가져오기
+        List<ProductsCount> productsCountList = new ArrayList<>();
+        ProductsCount productsCount;
+        for(OrderProducts orderProducts : orderproductsByOrders){
+            int quantity = orderProducts.getQuantity();
+            Products product = orderProducts.getProducts();
+            productsCount = ProductsCount.builder().product(product).quantity(quantity).build();
+            productsCountList.add(productsCount);
+        }
+
+        model.addAttribute("order",order);
+        model.addAttribute("list",productsCountList);
+        model.addAttribute("member",member);
         return "member/orderDetail";
     }
 }

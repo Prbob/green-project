@@ -107,9 +107,10 @@
 
 <div class="container">
     <aside>
-        <h5>필터</h5><button type="button" class="btn">Search</button>
+        <h5>필터</h5>
         <div id="filter">
             <form th:action method="get" id="searchForm">
+                <button type="button" class="btn">Search</button>
                 <p>상품명<br><input type="text" id="nameSearch" name="nameSearch" style="background-color: white"></p>
 <!--                <div>-->
 <!--                    <div>카테고리</div>-->
@@ -142,8 +143,8 @@
         <div id="categories">
             <ul id="category_gnb">
                 <li style="font-weight: bolder"><a th:href="@{/products/list}" th:text="전체"></a></li>
-               <li th:each="category : ${categories}">
-                   <a th:if="${category != pname}" th:href="@{/products/category(categoryId=${category.id})}" th:text="${category.name}"></a>
+                <li th:each="category : ${categories}">
+                   <a th:if="${category != pname}" th:href="@{/products/list(categoryId=${category.id})}" th:text="${category.name}"></a>
                </li>
             </ul>
         </div>
@@ -164,7 +165,7 @@
                 <i class="fas fa-chevron-left"></i>
             </a>
         <th:block th:each="page : ${#numbers.sequence(startPage,endPage)}">
-            <a th:if="${page != nowPage}" th:href="@{/products/__${pname}__(page = ${page-1},nameSearch = ${param.nameSearch},brandId=${param.brandId})}" th:text="${page}"></a>
+            <a th:if="${page != nowPage && endPage!=0}" th:href="@{/products/__${pname}__(page = ${page-1},nameSearch = ${param.nameSearch},brandId=${param.brandId})}" th:text="${page}"></a>
             <strong th:if="${page == nowPage}"  th:text="${page}" style="color:red"></strong>
         </th:block>
             <a th:if="${totalPage > endPage && endPage != 0}" th:href="@{/products/__${pname}__(page = ${endPage}, nameSearch = ${param.nameSearch},brandId=${param.brandId})}">
