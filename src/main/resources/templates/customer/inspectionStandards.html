@@ -6,10 +6,34 @@
     <title>검수 기준</title>
     <th:block th:replace="include/header :: header"></th:block>
 
-    <!--공지사항 css-->
-   <!-- <link rel="stylesheet" th:href="@{/css/customer.css}" type="text/css"> -->
-    <!--  아래의 css를 적용함. 위에거는 적용X  -->
-    <link rel="stylesheet" type="text/css" href="/static/css/H_customer.css">
+    <link rel="stylesheet" type="text/css" href="/static/css/customer.css">
+    <style>
+        div.container{
+            display: flex;
+            justify-content: center;
+            margin-top: 30px;
+        }
+        div.sidebar{
+            margin-right: 20px;
+        }
+        div.content{
+            width: 45%;
+        }
+        div.content_title{
+            border-bottom: 2px solid black;
+            padding-bottom: 5px;
+            font-weight: 600;
+            color: black;
+        }
+        div.description_wrap{
+            margin-top: 20px;
+        }
+        div.description_wrap p:first-child{
+            margin-top: 20px;
+        }
+
+    </style>
+
 
 
 </head>
@@ -33,6 +57,7 @@
 
     <div class="content">
         <div class="description_wrap">
+            <div class="content_title"><h2 style="color: black">검수 기준</h2></div>
             <p><b>[업데이트] 2021/11/29 월</b></p>
             <p class="description"><b>[적용일시] 2021/12/03 금 00:00 체결 건 부터</b></p>
 
