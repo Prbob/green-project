@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <title th:text="${member.name}"></title>
     <th:block th:replace="include/header :: header"></th:block>
-
+    <script src="https://kit.fontawesome.com/45b9232fe5.js" crossorigin="anonymous"></script>
     <style>
         ul {
             list-style: none;
@@ -137,9 +137,12 @@
             padding: 10px;
         }
         p._notice_title{
+
+            text-align: center;
+        }
+        p._notice_title span{
             font-weight: 600;
             font-size: 15px;
-            text-align: center;
         }
         span.span-redpoint{
             color: red;
@@ -155,10 +158,38 @@
         }
         
         /* div delivery_process */
+        div.delivery_process{
+            margin-top: 20px;
+        }
         div.delivery_process_frame{
             display: flex;
             font-size: 12px;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px;
         }
+        div.deliver_process_Element{
+            margin: 10px;
+            width: 20%;
+            justify-content: center;
+        }
+        div.deliver_process_Element div {
+            display: flex;
+            justify-content: center;
+            align-items: center; /* 선택 사항: 세로 중앙 정렬 */
+        }
+        div.deliver_process_Element div img{
+            justify-content: center;
+        }
+        div.deliver_process_Element span{
+            width: 100px;
+        }
+        div.delivery_process_title span{
+            font-size: 15px;
+            color: #333;
+            margin-top: 20px;
+        }
+        
 
 
         /*여기는 한규형거 css 추가*/
@@ -379,29 +410,33 @@
 
         <div>
             <div class="delivery_process">
-                <div>
-                    <span>배송상품 주문상태 안내</span>
+                <div class="delivery_process_title">
+                    <span><strong>배송상품 주문상태 안내</strong></span>
                 </div>
                 <div class="delivery_process_frame">
-                    <div>
-                        <img src="/src/main/resources/static/image/icon/order-status/order-status1.png" alt="주문상태 1아이콘">
-                        <span>주문,결제,확인이 완료되었습니다.</span>
+                    <div class="delivery_process_Element">
+                        <div><img src="/src/main/resources/static/image/icon/order-status/order-status1.png" alt="주문상태 1아이콘"></div>
+                        <span>주문,결제,확인이 완료<br/>되었습니다.</span>
                     </div>
-                    <div>
-                        <img src="/src/main/resources/static/image/icon/order-status/order-status2.png" alt="주문상태 2아이콘">
-                        <span>판매자가 발송할 상품을 준비중입니다.</span>
+                    <i class="fa-regular fa-circle-right" style="color: #b2b1af;"></i>
+                    <div class="delivery_process_Element">
+                        <div><img src="/src/main/resources/static/image/icon/order-status/order-status2.png" alt="주문상태 2아이콘"></div>
+                        <span>판매자가 발송할 <br>상품을 준비중입니다.</span>
                     </div>
-                    <div>
-                        <img src="/src/main/resources/static/image/icon/order-status/order-status3.png" alt="주문상태 3아이콘">
-                        <span>상품준비가 완료되어 곧 배송될 예정입니다.</span>
+                    <i class="fa-regular fa-circle-right" style="color: #b2b1af;"></i>
+                    <div class="delivery_process_Element">
+                        <div><img src="/src/main/resources/static/image/icon/order-status/order-status3.png" alt="주문상태 3아이콘"></div>
+                        <span>상품준비가 완료되어 <br>곧 배송될 예정입니다.</span>
                     </div>
-                    <div>
-                        <img src="/src/main/resources/static/image/icon/order-status/order-status4.png" alt="주문상태 4아이콘">
-                        <span>상품이 고객님께 배송중입니다.</span>
+                    <i class="fa-regular fa-circle-right" style="color: #b2b1af;"></i>
+                    <div class="delivery_process_Element">
+                        <div><img src="/src/main/resources/static/image/icon/order-status/order-status4.png" alt="주문상태 4아이콘"></div>
+                        <span>상품이 고객님께 <br/>배송중입니다.</span>
                     </div>
-                    <div>
-                        <img src="/src/main/resources/static/image/icon/order-status/order-status5.png" alt="주문상태 5아이콘">
-                        <span> 상품이 주문자에게 전달완료되었습니다.</span>
+                    <i class="fa-regular fa-circle-right" style="color: #b2b1af;"></i>
+                    <div class="delivery_process_Element">
+                        <div><img src="/src/main/resources/static/image/icon/order-status/order-status5.png" alt="주문상태 5아이콘"></div>
+                        <span> 상품이 주문자에게 <br/>전달완료되었습니다.</span>
                     </div>
                 </div>
             </div>
