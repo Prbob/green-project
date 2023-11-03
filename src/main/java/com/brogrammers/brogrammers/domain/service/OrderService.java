@@ -9,6 +9,8 @@ import com.brogrammers.brogrammers.domain.repository.OrdersRepository;
 import com.brogrammers.brogrammers.web.orderAndBasket.OrderProductsForm;
 import com.brogrammers.brogrammers.web.orderAndBasket.ProductsCount;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -56,5 +58,10 @@ public class OrderService {
 
     public void save(Orders orders){
         ordersRepository.save(orders);
+    }
+
+    //    주문 내역 가져오기
+    public Page<Orders> findOrdersByMember(Member member, Pageable pageable){
+        return ordersRepository.findOrdersByMember(member,pageable);
     }
 }
