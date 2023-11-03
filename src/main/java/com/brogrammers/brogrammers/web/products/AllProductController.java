@@ -99,42 +99,90 @@ public class AllProductController {
 
 //@PageableDefault(page=0,size=10,sort="id",direction = Sort.Direction.DESC)
     /////////////////////////////////////상품 리스트 ///////////////////////////////////
-    @GetMapping("/products/list")  // 전체 상품 조회
-    public String productList(Model model, HttpServletRequest request,
-                              @PageableDefault(page=0,size=2,sort="name",direction = Sort.Direction.DESC)Pageable pageable,
-                              String searchKeyword){
-        Page<Products> products = null;
-        if(searchKeyword!=null){
-            products = productService.productSearchList(searchKeyword,pageable);
-        }else{
-            products = productService.findAll(pageable);
+@GetMapping("/products/list")  // 전체 상품 조회
+public String productList(Model model, HttpServletRequest request,
+                          @PageableDefault(page=0,size=1,sort="id",direction = Sort.Direction.DESC)Pageable pageable,
+                          String nameSearch,Long brandId,Long categoryId){
+
+
+    /// 페이징 처리 /////////////////////////
+    Page<Products> products = null;
+    if(nameSearch!=null){ // 키워드O
+        if(brandId!=null){ // 키워드O 브랜드O
+            Brand brand = brandService.findById(brandId).get();
+            if(categoryId!=null){// 키워드O 카테고리O 브랜드O
+                System.out.println("카테고리 키우ㅝ드 브랜드");
+                products = productCategoryService.findProductsByBrandNameCategory(brand,nameSearch,categoryService.findById(categoryId).get(),pageable);
+            } else{ // 키워드O 브랜드O 카테고리X
+                products = productService.findProductsByBrandAndKeyword(nameSearch,brand,pageable);
+            }
+        }else{ // 키워드 OOO 브랜드XXXX
+            if(categoryId!=null){ // 키워드O 브랜드X 카테고리O
+                products = productCategoryService.findProductsByNameCategory(nameSearch,categoryService.findById(categoryId).get(),pageable);
+            } else{ // 키워드O 브랜드X 카테고리X
+                products = productService.productSearchList(nameSearch,pageable);
+            }
         }
-        List<Category> all = categoryService.findAll();
-        model.addAttribute("all",all);
-        String bodytitle = "전체 상품";
-        int nowPage = products.getPageable().getPageNumber() + 1; // 5
-        int startPage = Math.max(1,nowPage%3==0?nowPage/3*3-2:nowPage/3*3+1);
-        int endPage = Math.min(products.getTotalPages(),startPage+2);
-        String pname = "list";
-        List<Category> categories = categoryService.findAll();
-        List<Brand> brands = brandService.findAll();
-        model.addAttribute("bodytitle",bodytitle);
-        model.addAttribute("pname",pname);
-        model.addAttribute("products",products);
-        model.addAttribute("nowPage",nowPage);
-        model.addAttribute("startPage",startPage);
-        model.addAttribute("categories", categories);
-        model.addAttribute("brands", brands);
-        model.addAttribute("endPage",endPage);
-        return "products/list";
+    }else{ // 키워드 XXXXXXXXXX
+        if(brandId!=null){ // 브랜드 OOOOOOO
+            Brand brand = brandService.findById(brandId).get();
+            if(categoryId!=null){  // 키워드X 브랜드O 카테고리O
+                products = productCategoryService.findProductsByBrandCategory(brand,categoryService.findById(categoryId).get(),pageable);
+            }else{  // 키워드X 브랜드O 카테고리X
+                products = productService.findProductsByBrand(brand,pageable);
+            }
+        }else{ // 검색 키워드가 없고 브랜드 조건이 없을 때
+            if(categoryId!=null){ // 키워드x 브랜드x 카테고리O
+                products = productCategoryService.findProductsByCategory1(categoryService.findById(categoryId).get(),pageable);
+            } else{
+                products = productService.findAll(pageable);
+            }
+        }
     }
+    /// 페이징 처리 /////////////////////////
+
+    List<Category> all = categoryService.findAll();
+    model.addAttribute("all",all);
+    String bodytitle = "전체 상품";
+    int nowPage = products.getPageable().getPageNumber() + 1; // 5
+    int startPage = Math.max(1,nowPage%5==0?nowPage-4:nowPage/5*5+1);
+    int endPage = Math.min(products.getTotalPages(),startPage+4);
+    String pname = "list";
+    List<Category> categories = categoryService.findAll();
+    List<Brand> brands = brandService.findAll();
+    model.addAttribute("totalPage",products.getTotalPages());
+    model.addAttribute("bodytitle",bodytitle);
+    model.addAttribute("pname",pname);
+    model.addAttribute("products",products);
+    model.addAttribute("nowPage",nowPage);
+    model.addAttribute("startPage",startPage);
+    model.addAttribute("endPage",endPage);
+    model.addAttribute("categories", categories);
+    model.addAttribute("brands", brands);
+
+    return "products/list";
+}
+
     @GetMapping("/products/myList")  // 로그인 정보에 맞는 상품 리스트 불러오기 ?
-    public String allMyProducts(Model model,HttpServletRequest request){
+    public String allMyProducts(Model model,HttpServletRequest request,String nameSearch,
+                                @PageableDefault(page=0,size=1,sort="id",direction = Sort.Direction.DESC)Pageable pageable){
         Member member = fun.getMember(request); // 세션에서 멤버정보 불러오기
         member = memberService.findById(member.getId());
-//        List<Products> products =  productService.findAllByMemberId(member.getId()); // 로그인된 id 값으로 상품 리스트 불러오기
 
-        List<Products> products = member.getProdutcs();
+        Page<Products> products = productService.findProductsByMember(member,pageable);
+        if(nameSearch!=null){
+            products=productService.findProductsByNameMember(nameSearch,member,pageable);
+        }
+        int nowPage = products.getPageable().getPageNumber() + 1; // 5
+        int startPage = Math.max(1,nowPage%5==0?nowPage-4:nowPage/5*5+1);
+        int endPage = Math.min(products.getTotalPages(),startPage+4);
+        model.addAttribute("totalPage",products.getTotalPages());
+        model.addAttribute("nowPage",nowPage);
+        model.addAttribute("startPage",startPage);
+        model.addAttribute("endPage",endPage);
+        model.addAttribute("categoryList",products);
+        model.addAttribute("myAdd","myAdd");
+
         model.addAttribute("products",products);
         return "products/myList";
     }
@@ -143,14 +191,22 @@ public class AllProductController {
     ///////////////////////////////////// 디테일 ///////////////////////////////////
     @GetMapping("/products/detail/{productId}") // 디테일 페이지 컨트롤러
     public String detail(@PathVariable("productId")Long productId,Model model,HttpServletRequest request){
-        Products product = productService.getByid(productId);
+        Products product = productService.getByid(productId); //
+
         List<Imgs> imgs = product.getImgs();
         Member member = fun.getMember(request);
         String accessrigths = "NORMAL";
         if(member!=null){ // 로그인 하지 않았을 경우
             accessrigths = String.valueOf(member.getAccessrigths());
         }
+        List<Products> products = productService.findProductsToSize(product.getGender(),
+                product.getName(),product.getBrand(),product.getColor());
+        List<Integer> sizeList = new ArrayList<>();
+        for(Products products1 : products){
+            sizeList.add(products1.getSize());
+        }
 
+        model.addAttribute("sizeList",sizeList);
         model.addAttribute("accessrigths",accessrigths);
         model.addAttribute("imgs",imgs);
         model.addAttribute("product", product);

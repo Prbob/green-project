@@ -141,16 +141,12 @@
                 <div id="sizeSelect">
                     <span>사이즈 선택 :</span>
 
-                    <select class="form-select" style="width:190px;">
-                        <option value=""> </option>
-                        <option value="size" >220</option>
-                        <option value="size" >230</option>
-                        <option value="size" >240</option>
-                        <option value="size" >250</option>
-                        <option value="size" >260</option>
-                        <option value="size" >270</option>
-                        <option value="size" >280</option>
-                    </select>
+
+                        <select class="form-select" style="width:190px;" name="sizeParam">
+                            <option th:each="size : ${sizeList}" th:value="${size}" th:text="${size}"></option>
+
+                        </select>
+
                 </div><!--id sizeSelect END-->
                 <div class="space">&nbsp; </div>
                 <label > 선택 수량 : </label>

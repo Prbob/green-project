@@ -40,13 +40,14 @@ public class BasketController {
     //////////////////// 상품 장바구니로 ///////////////////////
     @PostMapping("/order/basket/{productId}")
     public String addBasket(@PathVariable("productId") Long productId, HttpServletRequest request, Model model,
-                            @RequestParam("quantity")int quantity, @RequestParam("action")String action){
+                            @RequestParam("quantity")int quantity, @RequestParam("action")String action,@RequestParam(name = "sizeParam",required = false)Integer sizeParam){
+            Products p = productService.getByid(productId);
+            Products product = productService.findProductByNameColorSizeBrand(p.getName(), p.getColor(), sizeParam, p.getBrand()).get();
         if(action.equals("buy")){
-            return "redirect:/order/buy?product="+productId+"&quantity="+quantity+"&way=one";
+            return "redirect:/order/buy?product="+product.getId()+"&quantity="+quantity+"&way=one";
         }
         if(fun.getMember(request)==null){return "/alert/orderNologin";}
         Member member = fun.getMember(request); // 로그인 정보
-        Products product = productService.getByid(productId); // 원하는 상품 가져오기
         Long basketId = member.getBasket().getId(); // 바스켓 아이디 가져오기
         Basket basket = basketService.findById(basketId); // 바스켓 가져오기
         Optional<BasketProducts> optionalBasketProducts = baskProdService.findBasProByBasAndPro(basket,product);
@@ -83,7 +84,11 @@ public class BasketController {
             list.add(BasketInProductsForm.builder().products(product).quantity(basketProducts.getQuantity()).basProductId(basketProducts.getId()).build());
             // 상품과 수량 담아주기
         }
+        if(list.isEmpty()){
+            model.addAttribute("nolist","nolist");
+        }
         model.addAttribute("list",list);
+        model.addAttribute("basket","basket");
         return "orderAndBasket/myBasket";
     }
 

@@ -53,4 +53,8 @@ public class OrderService {
     public Optional<Orders> findById(Long id){
         return ordersRepository.findOrdersById(id);
     }
+
+    public void save(Orders orders){
+        ordersRepository.save(orders);
+    }
 }

@@ -1,5 +1,6 @@
 package com.brogrammers.brogrammers.domain.service;
 
+import com.brogrammers.brogrammers.domain.member.Member;
 import com.brogrammers.brogrammers.domain.product.Brand;
 import com.brogrammers.brogrammers.domain.product.Products;
 import com.brogrammers.brogrammers.domain.repository.ProductsRepository;
@@ -12,6 +13,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -25,8 +27,12 @@ public class ProductService {
         productsRepository.save(products);
         return products.getId();
     }
-
-
+    public Page<Products> findProductsByNameMember(String nameSearch, Member member,Pageable pageable){
+        return productsRepository.findProductsByNameAndMember(nameSearch,member,pageable);
+    }
+    public Page<Products> findProductsByMember(Member member,Pageable pageable){
+        return productsRepository.findProductsByMember(member,pageable);
+    }
     public Page<Products> findAll(Pageable pageable){
         return productsRepository.findAll(pageable);
     }
@@ -95,4 +101,20 @@ public class ProductService {
         productsRepository.deleteById(id);
     }
 
+    public List<Products> findProductsToSize(String gender,String name,Brand brand, String color ){return productsRepository.findProductsToSize(gender,name,brand,color);}
+
+    public Optional<Products> findProductByNameColorSizeBrand(String name, String color, int size,Brand brand){
+        return productsRepository.findProductsByNameAndColorAndSizeAndBrand(name,color,size,brand);
+    }
+
+
+    // 브랜드 O 검색 키워드 O
+    public Page<Products> findProductsByBrandAndKeyword(String keyword, Brand brand,Pageable pageable){
+        return productsRepository.findProductsByNameAndBrand(keyword,brand,pageable);
+    }
+
+    // 브랜드 O 검색 키워드X
+    public Page<Products> findProductsByBrand(Brand brand,Pageable pageable){
+        return productsRepository.findProductsByBrand(brand,pageable);
+    }
 }
