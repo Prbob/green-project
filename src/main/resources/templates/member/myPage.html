@@ -1,277 +1,187 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
+
 <head>
     <meta charset="UTF-8">
-    <title th:text="${member.name}"></title>
+    <title>회원정보</title>
     <th:block th:replace="include/header :: header"></th:block>
-    <<<<<<< HEAD
+
+    <link rel="stylesheet" th:href="@{/css/customer.css}" type="text/css">
+
+
     <style>
-        ul {
-            list-style: none;
-            padding-left: 0px;
+        * {
+            font-family: Pretendard Variable,Pretendard,-apple-system,BlinkMacSystemFont,system-ui,Segoe UI,Roboto,Ubuntu,Cantarell,Noto Sans,sans-serif,Helvetica Neue,Apple SD Gothic Neo,Noto Sans KR,Malgun Gothic,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol;
         }
-        a{
+
+        .wish_list li {
+            border-bottom: 1px solid #D3D3D3;
+        }
+
+
+        .division_btn_box .btn_action[data-v-0b6ddb6a] {
+            align-items: center;
+            border-radius: 10px;
+            color: #fff;
+            cursor: pointer;
+            display: inline-flex;
+            flex: 1;
+            position: relative;
+        }
+
+        .my_interest .division_btn_box[data-v-0b6ddb6a] {
+            margin-top: 0;
+            text-align: left;
+            width: 164px;
+        }
+
+        .layout_base {
+            padding-top: 20px;
+        }
+
+        .sidebar {
+            color: #333;
+        }
+
+        .quantity input {
+            font-size: 20px;
+        }
+
+        .quantity div {
+            padding-top: 4px;
+        }
+
+
+        ::placeholder {
             color: black;
-            text-decoration: none;
         }
-        div.MyPage_left_side_MenuBar{
-            width: 15%;
+
+        .container{
+            margin:0; padding:0; line-height: 2em;
+            width: 75%;
         }
-        div.MyPage_SpaceSeparation{
-            max-width: 1200px;
-            margin: 0 auto;
-            display: flex;
+        .title h3{
+            min-width: 90px;
         }
-        div.MyPage_left_side_MenuBar a{
-            text-decoration: none;
-            color: gray;
+        .orderInfo{
+            /*box-shadow: 0 1px 0 #aaaaaa;*/
         }
-        div.MyPage_MainContent{
-            width: 60%;
-        }
-        div.MyPage_MainContent_Top_userMembership_Introduction_info{
-            text-align: left;
-        }
-        div.MyPage_MainContent_Top_userMembership_frame{
+        .orderTitle{
             width: 100%;
-
+            min-width:600px;
         }
-        div.MyPage_MainContent_Top_userMembership{
+        .orderTitle a{
+            float:right;
+            line-height: 3em;
+            color:#297dcb;
+        }
+        .orderItems{
+            border-bottom: 2px solid #dddddd;
+        }
+        .orderItem{
+            box-shadow: 0 1px 0 #aaaaaa;
+            border:1px solid #eeeeee;
+            border-radius: 4px;
+            padding: 10px 0 10px 20px;
+            min-width: 600px;
             display: flex;
-            align-items: center;
-            text-align: left;
-            margin-top: 20px;
-        }
-        div.MyPage_MainContent_Top_userMembership_Introduction{
-            display: flex; /* Flex 컨테이너로 설정 */
-            justify-content: space-between; /* 가로 방향에서 여백을 골고루 주도록 설정 */
-            align-items: center; /* 세로 방향에서 중앙 정렬 */
-            text-align: center; /* 텍스트 가운데 정렬 */
-            padding: 10px; /* 내용 주변 여백 설정 */
-            border: 1px solid #ebebeb;
-            max-width: 720px;
-        }
-        div.MyPage_MainContent_Top_userMembership_img img{
-            border-radius: 50px;
-        }
-        div.MyPage_MainContent_Top_userMembershipsButton_frame{
-            display: flex;
-            margin-right: 30px;
-        }
-        div.MyPage_MainContent_Top_userMembershipsButton_frame div{
-            margin-right: 30px;
-        }
-        div.MyPage_MainContent_Top_userMembershipsButton_frame div:last-child{
-            margin-right: 0;
-        }
-
-        div.MyPage_MainContent_Top_userMembershipsButton_frame div a {
-            display: flex; /* Flex 컨테이너로 설정 */
-            flex-direction: column; /* 요소를 세로로 정렬 */
-            align-items: center; /* 요소를 가운데 정렬 */
-            text-align: center; /* 텍스트 가운데 정렬 (선택 사항) */
-            margin-right: 15px;
-        }
-        div.MyPage_MainContent_MiddleContent{
-            display: flex;
-            justify-content: space-between;
-            background-color: #f2f9f6;
-
-            border-radius: 15px;
-        }
-        div.MyPage_MainContent_MiddleContent a{
-            width: 23%;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            border-right: 1px solid #ebebeb;
-            padding: 20px;
-        }
-        div.MyPage_MainContent_MiddleContent a:last-child {
-            border-right: none;
-        }
-        div.MyPage_MainContent_MiddleContent A dd{
-            margin-left: 0;
-        }
-        div.MyPage_MainContent_MiddleContent A dt,
-        div.MyPage_MainContent_MiddleContent A dd{
-            text-align: center;
-        }
-        div.MyPage_MainContent_MiddleTitle{
-            margin-top: 30px;
-            margin-bottom: 0;
-        }
-        p.gray_mini_font{
-            color: #96959a;
-            font-size: 11px;
-        }
-        div.MyPage_MainContent_MiddleContent_EmptySpace{
-            margin-top: 10px;
-            width: 100%;
-            height: 20%;
-            text-align: center;
-            background-color: #fafafa;
+            vertical-align: center;
             margin-bottom: 20px;
         }
-        div.MyPage_MainContent_MiddleContent_EmptySpace p{
+        .orderItems h5{
+            font-size:16px;
+            line-height: 2.4em;
+            min-width: 50px;
+        }
+        .orderItem .leftImg {
+            /*border:1px solid red;*/
+        }
+        .orderItem img{
             display: inline-block;
-            vertical-align: middle;
-            padding: 5px 15px; /* 내용 주변의 간격 추가 */
+            width: 100px;
+            height: 100px;
+        }
+        .orderItem .rightInfo {
+            /*border: 1px solid blue;*/
+            min-width: 350px;
+            padding: 20px;
         }
 
-        div.MyPage_MainContent_MiddleContent_EmptySpace p.gray_mini_font {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100%;
+        .rightInfo p{
+            font-size: 18px;
+            /*border:1px solid darkolivegreen;*/
         }
-        button.MyPage_MainContent_Top_userMembership_Introduction_button{
-            background-color: white;
-            padding: 5px;
-            border: 1px solid #96959a;
-        }
-        p.gray_mini_font{
-            color: #96959a;
-            font-size: 11px;
-        }
-        /* f2f9f6 */
+
+
+
+
+
+
+
+
+
+
+
     </style>
 
 </head>
+
 <body>
-<h2>마이페이지</h2>
-<img th:src="@{|/upload/${member.imgName}|}"/> <!-- 사진 -->
-<div th:text="${member.name}"></div> <!-- 멤버 이름 -->
+<!--Header-->
 <th:block th:replace="include/bodyHead :: bodyHeader"></th:block>
-<!--<h2>마이페이지</h2>-->
-<!--<img th:src="@{|/upload/${member.imgName}|}"/> &lt;!&ndash; 사진 &ndash;&gt;-->
-<!--<div th:text="${member.name}"></div> &lt;!&ndash; 멤버 이름 &ndash;&gt;-->
-<!--</script>-->
-<div class="MyPage_SpaceSeparation">
-    <div class="MyPage_left_side_MenuBar">
-        <div class="MyPage_left_side_MenuBar_detail">
-            <H2>마이 페이지</H2>
-            <div>
-                <ul class="MyPage_left_side_MenuBar_ul">
-                    <li class="MyPage_left_side_MenuBar_lisTitle">
-                        <strong style="font-size: 17px;">내 정보</strong>
-                    </li>
-                    <li class="MyPage_left_side_MenuBar_li">
-                        <a href="#">구매 내역</a>
-                    </li>
-                    <li class="MyPage_left_side_MenuBar_li">
-                        <a href="#">판매 내역</a>
-                    </li>
-                    <li class="MyPage_left_side_MenuBar_li">
-                        <a href="#">관심 상품</a>
-                    </li>
-                    <li class="MyPage_left_side_MenuBar_li">
-                        <a href="#">로그인 정보</a>
-                    </li>
-                    <li class="MyPage_left_side_MenuBar_li">
-                        <a href="#">프로필 관리</a>
-                    </li>
-                    <li class="MyPage_left_side_MenuBar_li">
-                        <a href="#">주소록</a>
-                    </li>
-                    <li class="MyPage_left_side_MenuBar_li">
-                        <a href="#">결제 정보</a>
-                    </li>
+
+
+<div tabindex="0" class="layout_base" data-v-e2abb636="" data-v-cdf8523a="">
+    <div class="container my lg" data-v-e2abb636="" data-v-cdf8523a="" style="padding-top: 0px;">
+        <div class="sidebar">
+            <a href="/member/myPage" aria-current="page">
+                <h2 data-v-cdf8523a="" class="snb_main_title">마이페이지</h2>
+            </a>
+            <nav>
+                <ul class="snb_menu">
+                    <li class="menu_item"  style="font-weight:bolder; color:#333;"><a th:href="@{/member/myPage}"> 구매 내역 </a></li>
+                    <li class="menu_item"><a th:href="@{/products/myBasket}"> 관심 상품 </a></li>
+                    <li class="menu_item"><a href="#"> 로그인 정보 </a></li>
                 </ul>
-            </div>
+            </nav>
         </div>
-    </div>
-    <div class="MyPage_MainContent">
-        <div class="MyPage_MainContent_Top_userMembership">
-            <div class="MyPage_MainContent_Top_userMembership_frame">
-                <div class="MyPage_MainContent_Top_userMembership_Introduction">
-                    <div class="MyPage_MainContent_Top_userMembership_img">
-                        <!-- 해당 이미지 파일이 없기에 기본적으로 만든 이미지 첨부코드 바로 아랫줄. -->
-                        <!-- <img src="/static/image/Member_default_image.png" width="100px" height="100px"> -->
-                        <img th:src="@{|/upload/${member.imgName}|}" alt="개인 프로필 사진" width="100px" height="100px"/><!--개인 프로필 사진 연결-->
+
+
+        <div data-v-cf6a6ef4="" data-v-cdf8523a="" class="content_area my-page-content">
+            <div data-v-cf6a6ef4="" class="my_profile">
+                <div data-v-61e7a8a3="" data-v-cf6a6ef4="" class="content_title border">
+                    <div data-v-61e7a8a3="" class="title"><h3 data-v-61e7a8a3="">구매 내역</h3><!----></div><!----></div>
+                    <div id="ordersWrap">
+
+                        <div class="orderInfo">
+                            <div class="orderTitle">
+                                <h4 data-v-8b96a82e="" class="group_title" style="display: inline">YYYY.MM.DD 주문</h4><a href="/member/orderDetail"> &nbsp; > 주문 상세보기 </a>
+                            </div>
+                            <div class="orderItems">
+                                <h5>배송전</h5>
+                                <div class="orderItem">
+                                    <div class="leftImg">
+                                        <img src="/image/productMain/Nike_Zoom_Vomero_5_Oatmeal_(W).png">
+                                    </div>
+                                    <div class="rightInfo">
+                                        <p><a href="/products/detail/"><b>item name</b></a></p>
+                                        <p>price 원</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
                     </div>
-                    <div class="MyPage_MainContent_Top_userMembership_Introduction_info">
-                        <!--                        <div th:text="${member.name}"></div>&lt;!&ndash;개인 프로필 이름 연결&ndash;&gt;-->
-                        <p th:text="${member.name}" class="MyPage_MainContent_Top_userMembership_Introduction_Email">이름 들어올 부분.()</p>
-                        <p class="MyPage_MainContent_Top_userMembership_Introduction_Email gray_mini_font">이메일</p>
-                        <!--개인 프로필 이메일 연결-->
-                    </div>
-                    <div class="MyPage_MainContent_Top_userMembershipsButton_frame">
-                        <div>
-                            <a class="MyPage_MainContent_Top_userMembershipsButton_Atag" href="#">
-                                <img src="/src/main/resources/static/image/icon/icon_point.svg" alt="포인트 아이콘">
-                                <span>포인트 P</span><!--개인 소유 포인트를 이곳으로 연결시켜줘서 보여주기.-->
-                            </a>
-                        </div>
-                        <div>
-                            <a class="MyPage_MainContent_Top_userMembershipsButton_Atag" href="#">
-                                <img src="/src/main/resources/static/image/icon/icon_copon.svg" alt="쿠폰 아이콘">
-                                <span>쿠폰 0</span><!--개인 소유 쿠폰을 이곳으로 보여주기.-->
-                            </a>
-                        </div>
-                        <div>
-                            <a class="MyPage_MainContent_Top_userMembershipsButton_Atag" href="notice.html">
-                                <img src="/src/main/resources/static/image/icon/icon_Notice.svg" alt="공지사항 아이콘">
-                                <span>공지사항</span><!--현재 공지사항 사이트로 이동하기..-->
-                            </a>
-                        </div>
-                    </div><!--MyPage_MainContent_Top_userMembershipsButton_frame 영역 끝-->
-                </div>
-            </div><!--MyPage_MainContent_Top_userMembership_frame 영역 끝-->
-        </div><!--MyPage_MainContent_Top_userMembership 종료-->
 
-        <img src="/src/main/resources/static/image/banner/sample_banner01.png" alt="배너 광고" width="100%" height="25%">
-        <!--만들어놓기는 했는데 구현을 못할거같아서 안보이게 처리함.-->
-        <!-- <a class="MyPage_MainContent_MiddleContent_miniBanner">
-            <div>
-                <img src="images/크림 이미지/Icon/icon_Notice.svg" alt="임시 아이콘">
-                <p class="MyPage_MainContent_MiddleContent_miniBanner_p"><strong>보관 신청하기</strong></p>
-                <p class="MyPage_MainContent_MiddleContent_miniBanner_p">한번에 신청하고 한번에 발송하세요</p>
             </div>
-            <span class="MyPage_MainContent_MiddleContent_miniBanner_button">></span>
-        </a> -->
-
-
-        <div class="MyPage_MainContent_MiddleTitle"><!-- 이거는 나중에 다시 써야 하는 거.-->
-            <h3 class="MyPage_MainContent_MiddleTitle_title">
-                구매 내역
-            </h3>
-            <!-- <span class="MyPage_MainContent_MiddleTitle_GrayMini" onclick="location.href='#'">
-                더보기 >
-            </span> -->
-        </div>
-        <div class="MyPage_MainContent_MiddleContent">
-            <a class="MyPage_MainContent_MiddleContent_a" href="#">
-                <dt class="MyPage_MainContent_MiddleContent_dt">전체</dt>
-                <dd class="MyPage_MainContent_MiddleContent_dd">0</dd>
-            </a>
-            <a class="MyPage_MainContent_MiddleContent_a"  href="#">
-                <dt class="MyPage_MainContent_MiddleContent_dt">입찰 중</dt>
-                <dd class="MyPage_MainContent_MiddleContent_dd">0</dd>
-            </a>
-            <a class="MyPage_MainContent_MiddleContent_a"  href="#">
-                <dt class="MyPage_MainContent_MiddleContent_dt">진행 중</dt>
-                <dd class="MyPage_MainContent_MiddleContent_dd">0</dd>
-            </a>
-            <a class="MyPage_MainContent_MiddleContent_a" href="#">
-                <dt class="MyPage_MainContent_MiddleContent_dt">종료</dt>
-                <dd class="MyPage_MainContent_MiddleContent_dd">0</dd>
-            </a>
-        </div>
-        <div class="MyPage_MainContent_MiddleContent_EmptySpace">
-            <p class="gray_mini_font">현재 거래 내역이 없습니다.</p>
-        </div>
-
-        <div class="MyPage_MainContent_MiddleTitle"><!-- 이거는 나중에 다시 써야 하는 거.-->
-            <h3 class="MyPage_MainContent_MiddleTitle_title">
-                관심 상품
-            </h3>
-        </div>
-        <div class="MyPage_MainContent_MiddleContent_EmptySpace">
-            <p class="gray_mini_font">현재 거래 내역이 없습니다.</p>
         </div>
     </div>
 </div>
+
+<link href="/_nuxt/css/2e6b79f.css" rel="stylesheet" type="text/css">
+<link href="/_nuxt/css/c9eea23.css" rel="stylesheet" type="text/css">
+<!--footer-->
+<th:block th:replace="include/footer :: footer"></th:block>
+
+
 </body>
-</script>
-</html>
