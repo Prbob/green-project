@@ -1,5 +1,6 @@
 package com.brogrammers.brogrammers.domain.repository;
 
+import com.brogrammers.brogrammers.domain.member.Member;
 import com.brogrammers.brogrammers.domain.product.Brand;
 import com.brogrammers.brogrammers.domain.product.Products;
 import org.springframework.data.domain.Page;
@@ -38,4 +39,17 @@ public interface ProductsRepository extends JpaRepository<Products,Long> {
 
     @Query("SELECT p FROM Products p WHERE p.name= :name AND p.color=:color AND p.size=:size AND p.brand =:brand")
     Optional<Products> findProductsByNameAndColorAndSizeAndBrand(@Param("name") String name,@Param("color") String color, @Param("size") int size,@Param("brand") Brand brand);    void deleteBrandByBrandId(Brand brand);
+
+    // 브랜드 O 검색 키워드 O
+    @Query("SELECT p FROM Products p WHERE p.name LIKE %:name% AND p.brand= :brand")
+    Page<Products> findProductsByNameAndBrand(@Param("name")String name, @Param("brand")Brand brand,Pageable pageable);
+
+    // 브랜드 O 검색 키워드 X
+//    @Query("SELECT p FROM Products p WHERE p.brand= :brand")
+    Page<Products> findProductsByBrand(Brand brand,Pageable pageable);
+
+    @Query("SELECT p FROM Products p WHERE p.name LIKE %:name% AND p.member=:member")
+    Page<Products> findProductsByNameAndMember(@Param("name")String nameSearch, @Param("member") Member member,Pageable pageable);
+
+    Page<Products> findProductsByMember(Member member, Pageable pageable);
 }

@@ -18,7 +18,8 @@
                             <a data-v-7a824f04="" th:unless="add == ${add}" th:class="menu_link"  th:href="@{/products/add}">상품등록</a>
                         </li>
                         <li data-v-7a824f04="" class="menu_item">
-                            <a data-v-7a824f04="" th:class="menu_link" th:href="@{/products/myList}">내가 등록한 신발</a> <br>
+                            <strong data-v-7a824f04="" th:if="myAdd == ${myAdd}" th:class="menu_link">내가 등록한 신발</strong>
+                            <a data-v-7a824f04="" th:unless="myAdd==${myAdd}" th:class="menu_link" th:href="@{/products/myList}">내가 등록한 신발</a> <br>
                         </li>
                         <li data-v-7a824f04="" class="menu_item">
                             <a data-v-7a824f04="" th:class="menu_link" th:href="@{/products/myList}">공지사항 등록</a> <br>
