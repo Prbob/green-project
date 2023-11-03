@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>UNCOMMON | 장바구니</title>
+    <title>UNCOMMON | 관심 상품</title>
     <th:block th:replace="include/header :: header"></th:block>
 
     <!--공지사항 css-->
@@ -20,9 +20,8 @@
             cursor: pointer;
             display: flex;
             width: 100%;
-            align-items: center;
-            padding-bottom: 20px;
-            padding-top: 20px;
+            padding: 20px 0px;
+
         }
 
         .wish_buy[data-v-3bb254ce] {
@@ -39,7 +38,6 @@
         }
 
         .product_box {
-            padding-left : 10px;
             padding-right : 10px;
         }
 
@@ -121,7 +119,10 @@
             padding-top: 4px;
         }
 
-
+        .content_title.border[data-v-61e7a8a3] {
+            border-bottom: 3px solid #222;
+            padding-bottom: 16px
+        }
 
 
     </style>
@@ -140,11 +141,13 @@
       
         <div class="content_area my-page-content" data-v-4128f410="" data-v-cdf8523a="" data-v-e2abb636="">
             <div class="v-portal" style="display:none;" data-v-4128f410=""></div>
-            <div class="content_title border" data-v-61e7a8a3="" data-v-4128f410="">
-                <div class="title" data-v-61e7a8a3="">
-                    <h3 data-v-61e7a8a3="">관심 상품</h3>
+
+            <div data-v-61e7a8a3="" data-v-cf6a6ef4="" class="content_title border">
+                <div data-v-61e7a8a3="" class="title">
+                    <h3 data-v-61e7a8a3="" style="font-size:24px; height:27px;">관심 상품</h3>
                 </div>
             </div>
+
             <div data-v-4128f410="" class="my_interest">
                 <ul data-v-3bb254ce="" data-v-4128f410="" class="wish_list">
 
