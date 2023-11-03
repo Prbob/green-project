@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>회원정보</title>
+    <title>UNCOMMON | 구매 내역</title>
     <th:block th:replace="include/header :: header"></th:block>
 
     <link rel="stylesheet" th:href="@{/css/customer.css}" type="text/css">
@@ -57,8 +57,8 @@
         }
 
         .container{
-            margin:0; padding:0; line-height: 2em;
-            width: 75%;
+            margin:0; padding:0;
+            width: 61%
         }
         .title h3{
             min-width: 90px;
@@ -111,7 +111,6 @@
             font-size: 18px;
             /*border:1px solid darkolivegreen;*/
         }
-
     </style>
 
 </head>
@@ -123,19 +122,8 @@
 
 <div tabindex="0" class="layout_base" data-v-e2abb636="" data-v-cdf8523a="">
     <div class="container my lg" data-v-e2abb636="" data-v-cdf8523a="" style="padding-top: 0px;">
-        <div class="sidebar">
-            <a href="/member/myPage" aria-current="page">
-                <h2 data-v-cdf8523a="" class="snb_main_title">마이페이지</h2>
-            </a>
-            <nav>
-                <ul class="snb_menu">
-                    <li class="menu_item"  style="font-weight:bolder; color:#333;"><a th:href="@{/member/myPage}"> 구매 내역 </a></li>
-                    <li class="menu_item"><a th:href="@{/products/myBasket}"> 관심 상품 </a></li>
-                    <li class="menu_item"><a href="#"> 로그인 정보 </a></li>
-                </ul>
-            </nav>
-        </div>
 
+        <th:block th:replace="include/memberMenu :: memberMenu"></th:block>
 
         <div data-v-cf6a6ef4="" data-v-cdf8523a="" class="content_area my-page-content">
             <div data-v-cf6a6ef4="" class="my_profile">
@@ -160,9 +148,7 @@
                                 </div>
                             </div>
                         </div>
-
                     </div>
-
             </div>
         </div>
     </div>
