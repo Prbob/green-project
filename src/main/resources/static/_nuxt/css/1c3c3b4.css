@@ -31,6 +31,9 @@
 .payment_section input[type=radio]{
     display: none;
 }
+.product_info{
+        margin-bottom:15px;
+    }
 .payment_section input[type=radio]+label{
     display: inline-block;
     cursor: pointer;
@@ -214,7 +217,7 @@
     justify-content: space-between;
 }
 .orderInformation1{
-    width: 200px;
+    width: 400px;
     padding:10px;
 }
 .orderInformation2{

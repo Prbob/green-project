@@ -111,7 +111,6 @@ public String productList(Model model, HttpServletRequest request,
         if(brandId!=null){ // 키워드O 브랜드O
             Brand brand = brandService.findById(brandId).get();
             if(categoryId!=null){// 키워드O 카테고리O 브랜드O
-                System.out.println("카테고리 키우ㅝ드 브랜드");
                 products = productCategoryService.findProductsByBrandNameCategory(brand,nameSearch,categoryService.findById(categoryId).get(),pageable);
             } else{ // 키워드O 브랜드O 카테고리X
                 products = productService.findProductsByBrandAndKeyword(nameSearch,brand,pageable);

@@ -12,12 +12,13 @@ public class BasketInProductsForm { // 바구니에 담긴 상품 + 갯수
     private int quantity;
     private Products products;
     private Long basProductId;
-
+    private int price;
     @Builder
     public BasketInProductsForm(int quantity, Products products, Long basProductId) {
         this.quantity = quantity;
         this.products = products;
         this.basProductId = basProductId;
+        price = quantity * products.getPrice();
     }
 
 }
