@@ -1,5 +1,6 @@
 package com.brogrammers.brogrammers.domain.service;
 
+import com.brogrammers.brogrammers.domain.member.Member;
 import com.brogrammers.brogrammers.domain.product.Brand;
 import com.brogrammers.brogrammers.domain.product.Products;
 import com.brogrammers.brogrammers.domain.repository.ProductsRepository;
@@ -26,8 +27,12 @@ public class ProductService {
         productsRepository.save(products);
         return products.getId();
     }
-
-
+    public Page<Products> findProductsByNameMember(String nameSearch, Member member,Pageable pageable){
+        return productsRepository.findProductsByNameAndMember(nameSearch,member,pageable);
+    }
+    public Page<Products> findProductsByMember(Member member,Pageable pageable){
+        return productsRepository.findProductsByMember(member,pageable);
+    }
     public Page<Products> findAll(Pageable pageable){
         return productsRepository.findAll(pageable);
     }

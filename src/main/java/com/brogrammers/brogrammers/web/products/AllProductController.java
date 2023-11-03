@@ -159,16 +159,30 @@ public String productList(Model model, HttpServletRequest request,
     model.addAttribute("endPage",endPage);
     model.addAttribute("categories", categories);
     model.addAttribute("brands", brands);
+
     return "products/list";
 }
 
     @GetMapping("/products/myList")  // 로그인 정보에 맞는 상품 리스트 불러오기 ?
-    public String allMyProducts(Model model,HttpServletRequest request){
+    public String allMyProducts(Model model,HttpServletRequest request,String nameSearch,
+                                @PageableDefault(page=0,size=1,sort="id",direction = Sort.Direction.DESC)Pageable pageable){
         Member member = fun.getMember(request); // 세션에서 멤버정보 불러오기
         member = memberService.findById(member.getId());
-//        List<Products> products =  productService.findAllByMemberId(member.getId()); // 로그인된 id 값으로 상품 리스트 불러오기
 
-        List<Products> products = member.getProdutcs();
+        Page<Products> products = productService.findProductsByMember(member,pageable);
+        if(nameSearch!=null){
+            products=productService.findProductsByNameMember(nameSearch,member,pageable);
+        }
+        int nowPage = products.getPageable().getPageNumber() + 1; // 5
+        int startPage = Math.max(1,nowPage%5==0?nowPage-4:nowPage/5*5+1);
+        int endPage = Math.min(products.getTotalPages(),startPage+4);
+        model.addAttribute("totalPage",products.getTotalPages());
+        model.addAttribute("nowPage",nowPage);
+        model.addAttribute("startPage",startPage);
+        model.addAttribute("endPage",endPage);
+        model.addAttribute("categoryList",products);
+        model.addAttribute("myAdd","myAdd");
+
         model.addAttribute("products",products);
         return "products/myList";
     }
