@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>회원정보</title>
+    <title>UNCOMMON | 로그인 정보</title>
     <th:block th:replace="include/header :: header"></th:block>
 
     <link rel="stylesheet" th:href="@{/css/customer.css}" type="text/css">
@@ -121,6 +121,8 @@
         }
 
 
+
+
     </style>
 
 </head>
@@ -132,19 +134,7 @@
 
 <div tabindex="0" class="layout_base" data-v-e2abb636="" data-v-cdf8523a="">
     <div class="container my lg" data-v-e2abb636="" data-v-cdf8523a="" style="padding-top: 0px;">
-        <div class="sidebar">
-            <a href="/notice" aria-current="page">
-                <h2 data-v-cdf8523a="" class="snb_main_title">마이페이지</h2>
-            </a>
-            <nav>
-                <ul class="snb_menu">
-                    <li class="menu_item"><a th:href="@{/member/myPage}"> 구매 내역 </a></li>
-                    <li class="menu_item"><a th:href="@{/products/myBasket}"> 관심 상품 </a></li>
-                    <li class="menu_item" style="font-weight:bolder; color:#333;"><a href="#"> 로그인 정보 </a></li>
-                </ul>
-            </nav>
-        </div>
-
+        <th:block th:replace="include/memberMenu :: memberMenu"></th:block>
 
         <div data-v-cf6a6ef4="" data-v-cdf8523a="" class="content_area my-page-content">
             <div data-v-cf6a6ef4="" class="my_profile">
