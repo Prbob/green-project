@@ -85,6 +85,7 @@ public class BasketController {
             // 상품과 수량 담아주기
         }
         model.addAttribute("list",list);
+        model.addAttribute("basket","basket");
         return "orderAndBasket/myBasket";
     }
 
