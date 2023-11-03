@@ -7,7 +7,7 @@ body {
     display: flex;
     max-width: 1200px;
     margin: 0 auto;
-    background-color: #f5f5f5;
+    /*background-color: #f5f5f5;*/
 }
 .sidebar {
     background-color: #fff;
@@ -19,6 +19,7 @@ body {
     padding: 20px;
     flex-grow: 1;
     background-color: #fff;
+    border-left:1px solid #eeeeee;
 }
 .content_title {
     font-size: 24px;
