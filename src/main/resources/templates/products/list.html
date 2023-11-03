@@ -67,13 +67,16 @@
             width: 100%;
             display: flex;
             padding: 20px;
-            /*border:1px solid yellow;*/
+            border:1px solid yellow;
+            flex-direction: row;
+            flex-wrap:wrap;
+            align-content:space-around;
         }
         .itembox{
             width: 220px;
             height: 320px;
             margin: 3px;
-            /*border:1px solid blue;*/
+            border:1px solid blue;
         }
         .itembox a{
             display: inline-block;
@@ -93,7 +96,7 @@
             line-height: 1.8em;
         }
         .pagingBox {
-            /*border: 1px solid red;*/
+            border: 1px solid red;
             text-align: center;
             padding:20px;
         }
@@ -150,13 +153,14 @@
         <div class="productWrap">
             <div class="itembox" th:each="product : ${products}">
                 <a th:href="@{/products/detail/{productId} (productId=${product.id})}" >
-                    <img th:src="@{|/upload/${product.imgName}|}"/>
+                    <img th:src="@{|/upload/${product.imgName}|}">
+                </a>
                     <div class="itembox_info">
-                        <b><p th:text="|${product.brand.name}|"></p></b>
-                        <p th:text="${#strings.length(product.name) < 20 ? product.name : #strings.substring(product.name, 0, 20) + ' ...'}"></p>
+                        <a th:href="@{/products/detail/{productId} (productId=${product.id})}" ><b><p th:text="|${product.brand.name}|"></p></b></a>
+                        <a th:href="@{/products/detail/{productId} (productId=${product.id})}" ><p th:text="${#strings.length(product.name) < 20 ? product.name : #strings.substring(product.name, 0, 20) + ' ...'}"></p></a>
                         <p th:text="|${#numbers.formatDecimal(product.price,3, 'COMMA',0,'POINT')}|" class="priceTag"></p><br>
                     </div>
-                </a>
+
             </div>
         </div>
 
