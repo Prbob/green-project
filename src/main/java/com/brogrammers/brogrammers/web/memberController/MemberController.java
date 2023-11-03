@@ -151,6 +151,7 @@ public class MemberController {
     public String myPage(HttpServletRequest request,Model model){
         Member member = fun.getMemberDb(request);
         model.addAttribute("member",member);
+        model.addAttribute("myPage","myPage");
         return "member/myPage";
     }
 }
