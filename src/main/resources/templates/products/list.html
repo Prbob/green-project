@@ -145,14 +145,7 @@
                 <p>상품명<br></p>
                     <input class="inputBox" type="text" id="nameSearch" name="nameSearch" style="background-color: white">
                 </div>
-<!--                <div>-->
-<!--                    <div>카테고리</div>-->
-<!--                    <select th:field="*{category}" class="form-select">-->
-<!--                        <option value="">==카테고리 선택==</option>-->
-<!--                        <option th:each="category : ${categories}" th:value="${category.id}"-->
-<!--                                th:text="${category.name}">와좌</option>-->
-<!--                    </select>-->
-<!--                </div>-->
+
                 <div class="input">
                 <p>카테고리<br></p>
                     <select class="inputBox" name="categoryId">
@@ -207,7 +200,7 @@
             <a th:if="${page != nowPage && endPage!=0}" th:href="@{/products/__${pname}__(page = ${page-1},nameSearch = ${param.nameSearch},brandId=${param.brandId})}" th:text="${page}"></a>
             <strong th:if="${page == nowPage}"  th:text="${page}" style="color:red"></strong>
         </th:block>
-            <a th:if="${totalPage > endPage && endPage != 0}" th:href="@{/products/__${pname}__(page = ${endPage}, nameSearch = ${param.nameSearch},brandId=${param.brandId})}">
+            <a th:if="${totalPage > endPage && endPage != 0}" th:href="@{/products/__${pname}__(page = ${endPage}, nameSearch = ${param.nameSearch},brandId=${param.brandId},gender=${param.gender})}">
                 <i class="fas fa-chevron-right"></i> <!-- Font Awesome 아이콘 클래스를 추가합니다 -->
             </a>
         </div><!--pagingBox END-->

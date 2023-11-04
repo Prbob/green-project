@@ -82,7 +82,12 @@ public class ProductService {
 
     public Page<Products> productSearchList(String searchKeyword,Pageable pageable){
         return productsRepository.findByNameContaining(searchKeyword, pageable);
-    }
+    } // 키워드O
+
+    public Page<Products> productSearchListGender(String searchKeyword,String gender,Pageable pageable){
+        return productsRepository.findByNameContainingAndGender(searchKeyword,gender,"every",pageable);
+    } // 키워드O 성별O
+
     public Page<Products> soldOutList(int num,Pageable pageable){ // 매진 임박, no keyword
         return productsRepository.findByStockQuantityLessThan(num,pageable);
     }
@@ -113,6 +118,11 @@ public class ProductService {
     // 브랜드 O 검색 키워드 O
     public Page<Products> findProductsByBrandAndKeyword(String keyword, Brand brand,Pageable pageable){
         return productsRepository.findProductsByNameAndBrand(keyword,brand,pageable);
+    }
+
+    // 브랜드 O 검색 키워드 O 성별 O
+    public Page<Products> findProductsByBrandAndKeywordAndGender(String keyword, Brand brand,String gender,Pageable pageable){
+        return productsRepository.findProductsByNameAndBrandAndGender(keyword,brand,gender,"every",pageable);
     }
 
     // 브랜드 O 검색 키워드X

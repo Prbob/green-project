@@ -107,7 +107,7 @@ public class CategoryController {
         }
         brandService.save(form.getName());
 
-        return "rediredt:/category/brand";
+        return "redirect:/category/brandList";
     }
     @GetMapping("/category/brandList")
     public String brandList(Model model, HttpServletRequest request,String nameSearch,

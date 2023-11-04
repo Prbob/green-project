@@ -102,7 +102,7 @@ public class AllProductController {
 @GetMapping("/products/list")  // 전체 상품 조회
 public String productList(Model model, HttpServletRequest request,
                           @PageableDefault(page=0,size=12,sort="id",direction = Sort.Direction.DESC)Pageable pageable,
-                          String nameSearch,Long brandId,Long categoryId){
+                          String nameSearch,Long brandId,Long categoryId,String gender){
 
 
     /// 페이징 처리 /////////////////////////
@@ -111,30 +111,62 @@ public String productList(Model model, HttpServletRequest request,
         if(brandId!=null){ // 키워드O 브랜드O
             Brand brand = brandService.findById(brandId).get();
             if(categoryId!=null){// 키워드O 카테고리O 브랜드O
-                products = productCategoryService.findProductsByBrandNameCategory(brand,nameSearch,categoryService.findById(categoryId).get(),pageable);
+                if(gender !=null){ // 키워드O 카테고리O 브랜드O 성별O
+                    products = productCategoryService.findProductsByBrandNameCategoryGender(brand,nameSearch,categoryService.findById(categoryId).get(),pageable,gender);
+                }else{ // 키워드O 카테고리O 브랜드O 성별X
+                    products = productCategoryService.findProductsByBrandNameCategory(brand,nameSearch,categoryService.findById(categoryId).get(),pageable);
+                }
             } else{ // 키워드O 브랜드O 카테고리X
-                products = productService.findProductsByBrandAndKeyword(nameSearch,brand,pageable);
+                if(gender!=null){ // 키워드O 브랜드O 카테고리X 성별 O
+                    products = productService.findProductsByBrandAndKeywordAndGender(nameSearch,brand,gender,pageable);
+                } else{ // 키워드O 브랜드O 카테고리X 성별 X
+                    products = productService.findProductsByBrandAndKeyword(nameSearch,brand,pageable);
+                }
             }
         }else{ // 키워드 OOO 브랜드XXXX
             if(categoryId!=null){ // 키워드O 브랜드X 카테고리O
-                products = productCategoryService.findProductsByNameCategory(nameSearch,categoryService.findById(categoryId).get(),pageable);
+                if(gender!=null){ // 키워드O 브랜드X 카테고리O 성별O
+                    products = productCategoryService.findProductsByNameCategoryGender(nameSearch,categoryService.findById(categoryId).get(),gender,pageable);
+                }else{ // 키워드O 브랜드X 카테고리O 성별X
+                    products = productCategoryService.findProductsByNameCategory(nameSearch,categoryService.findById(categoryId).get(),pageable);
+                }
             } else{ // 키워드O 브랜드X 카테고리X
-                products = productService.productSearchList(nameSearch,pageable);
+                if(gender !=null){  // 키워드O 브랜드X 카테고리X 성별O
+                    products = productService.productSearchListGender(nameSearch,gender,pageable);
+                }else{ //  // 키워드O 브랜드X 카테고리X 성별X
+                    products = productService.productSearchList(nameSearch,pageable);
+                }
             }
         }
     }else{ // 키워드 XXXXXXXXXX
         if(brandId!=null){ // 브랜드 OOOOOOO
             Brand brand = brandService.findById(brandId).get();
             if(categoryId!=null){  // 키워드X 브랜드O 카테고리O
-                products = productCategoryService.findProductsByBrandCategory(brand,categoryService.findById(categoryId).get(),pageable);
+                if(gender!=null){
+
+                } else{
+                    products = productCategoryService.findProductsByBrandCategory(brand,categoryService.findById(categoryId).get(),pageable);
+                }
             }else{  // 키워드X 브랜드O 카테고리X
-                products = productService.findProductsByBrand(brand,pageable);
+                if(gender!=null){
+
+                } else{
+                    products = productService.findProductsByBrand(brand,pageable);
+                }
             }
         }else{ // 검색 키워드가 없고 브랜드 조건이 없을 때
             if(categoryId!=null){ // 키워드x 브랜드x 카테고리O
-                products = productCategoryService.findProductsByCategory1(categoryService.findById(categoryId).get(),pageable);
+                if(gender!=null){
+
+                } else{
+                    products = productCategoryService.findProductsByCategory1(categoryService.findById(categoryId).get(),pageable);
+                }
             } else{
-                products = productService.findAll(pageable);
+                if(gender!=null){
+
+                } else{
+                    products = productService.findAll(pageable);
+                }
             }
         }
     }
