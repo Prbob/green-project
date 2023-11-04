@@ -112,7 +112,7 @@ public class CategoryController {
     }
     @GetMapping("/category/brandList")
     public String brandList(Model model, HttpServletRequest request,String nameSearch,
-                            @PageableDefault(page=0,size=1,sort="id",direction = Sort.Direction.DESC) Pageable pageable){
+                            @PageableDefault(page=0,size=5,sort="id",direction = Sort.Direction.DESC) Pageable pageable){
         if(fun.getMember(request)==null || fun.getMember(request).getAccessrigths().equals("NORAML")){
             return "alert/noLogin";
         }

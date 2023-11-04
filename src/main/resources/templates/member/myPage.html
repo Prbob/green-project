@@ -136,7 +136,11 @@
         <div data-v-cf6a6ef4="" data-v-cdf8523a="" class="content_area my-page-content">
             <div data-v-cf6a6ef4="" class="my_profile">
                 <div data-v-61e7a8a3="" data-v-cf6a6ef4="" class="content_title border">
-                    <div data-v-61e7a8a3="" class="title"><h3 data-v-61e7a8a3="">구매 내역</h3><!----></div><!----></div>
+                    <div data-v-61e7a8a3="" class="title"><h3 data-v-61e7a8a3="">구매 내역</h3>
+                        <!---->
+                    </div><!---->
+                </div>
+                <div th:if="*{list != null}">
                     <div id="ordersWrap">
                         <div class="orderInfo">
                             <div class="orderItems">
@@ -155,6 +159,10 @@
                             </div>
                         </div>
                     </div>
+                </div>
+                <div th:if="*{list == null}">
+                    <p>구매한 상품이 없습니다.</p>
+                </div>
             </div>
         </div>
     </div>
