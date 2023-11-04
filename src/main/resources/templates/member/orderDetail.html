@@ -63,8 +63,6 @@
             color: white;
         }
         .orderEdit:hover {
-            background-color: #1d85e6;
-            color: white;
             letter-spacing: 5px;
             font-weight: bolder;
         }
@@ -139,6 +137,7 @@
                                         </div>
                                         <div>
                                             <b><span th:text="|상품명 : ${productsCount.product.name}|">item name</span></b>
+                                            <span><br></span>
                                             <span style="font-size:12px;" th:text="|(${productsCount.quantity} ea)|"></span> <br>
                                             <span th:text="| 가격 : ${productsCount.quantity * productsCount.product.price} |"></span>
                                         </div>
