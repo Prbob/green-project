@@ -97,7 +97,7 @@ public class ProductService {
     }
 
     public Page<Products> findProductsByGender(String gender, Pageable pageable){
-        return productsRepository.findProductsByGender(gender, pageable); // 성별 입력하면 그 성별에 맞는 모든 제품들 출력
+        return productsRepository.findProductsByMemberAndGender(gender,"every" ,pageable); // 성별 입력하면 그 성별에 맞는 모든 제품들 출력
     }
     public Page<Products> findProductsByGenderAndKeyword(String gender,String keyword,Pageable pageable){
         return productsRepository.findProductsByGender(gender,keyword, pageable); // 성별 입력하면 그 성별에 맞는 모든 제품들 출력
@@ -128,6 +128,10 @@ public class ProductService {
     // 브랜드 O 검색 키워드X
     public Page<Products> findProductsByBrand(Brand brand,Pageable pageable){
         return productsRepository.findProductsByBrand(brand,pageable);
+    }
+    // 브랜드 O 검색 키워드X
+    public Page<Products> findProductsByBrandGender(Brand brand,String gender,Pageable pageable){
+        return productsRepository.findProductsByBrandAndGender(brand,gender,"every",pageable);
     }
 
 

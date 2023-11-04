@@ -23,7 +23,11 @@ public class ProductCategoryService {
 
     public Page<Products> findProductsByCategory1(Category category, Pageable pageable){
         return productCategoryRepository.findProductsByCategory(category,pageable);
-    }
+    } // 카테고리
+
+    public Page<Products> findProductsByCategoryGender(Category category,String gender ,Pageable pageable){
+        return productCategoryRepository.findProductsByCategoryAndGender(category,gender,"every",pageable);
+    } // 카테고리 성별
 
     public void deleteByProducts(Products products){productCategoryRepository.deleteProductCategoryByProducts(products);}
 
@@ -39,7 +43,7 @@ public class ProductCategoryService {
     } // 브랜드 / 카테고리
 
     public Page<Products> findProductsByBrandCategoryGender(Brand brand,Category category,String gender, Pageable pageable){
-        return productCategoryRepository.finProductsByBrandAndCategory(brand,category,pageable);
+        return productCategoryRepository.finProductsByBrandAndCategoryAndGender(brand,category,gender,"every",pageable);
     } // 브랜드 / 카테고리 / 성별
 
     public Page<Products> findProductsByNameCategory(String name, Category category, Pageable pageable){

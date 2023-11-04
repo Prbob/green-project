@@ -126,7 +126,12 @@
         #abutton{
             width:140px;
         }
-
+        .pagingBox {
+            /*border: 1px solid red;*/
+            text-align: center;
+            padding:20px;
+            line-height: 2em;
+        }
     </style>
 
 </head>
@@ -150,7 +155,7 @@
                 </div>
             </div>
             <div th:if="|${nolist=='nolist'}|" >등록된 상품이 없습니다.</div>
-            <div data-v-4128f410="" class="my_interest">
+            <div th:if="|${nolist!='nolist'}|" data-v-4128f410="" class="my_interest">
                 <ul data-v-3bb254ce="" data-v-4128f410="" class="wish_list">
 
                     <li data-v-3bb254ce="" th:each="basketInProducts : ${list}">
@@ -223,6 +228,18 @@
                 <div style="text-align: right; margin-top: 10px;">
                     <a href="#" th:if="${nolist != 'nolist'}" th:href="@{/order/buy}" class="btn btn-primary" role="button">
                         전체구매
+                    </a>
+                </div>
+                <div class="pagingBox" th:if="${nolist != 'nolist'}" >
+                    <a th:if="${5 < startPage}" th:href="@{/member/myPage(page = ${startPage-6})}">
+                        <i class="fas fa-chevron-left"></i>
+                    </a>
+                    <th:block th:each="page : ${#numbers.sequence(startPage,endPage)}">
+                        <a th:if="${page != nowPage}" th:href="@{/member/myPage(page = ${page-1})}" th:text="${page}"></a>
+                        <strong th:if="${page == nowPage}"  th:text="${page}" style="color:red"></strong>
+                    </th:block>
+                    <a th:if="${totalPage > endPage && endPage != 0}" th:href="@{/member/myPage(page = ${endPage})}">
+                        <i class="fas fa-chevron-right"></i> <!-- Font Awesome 아이콘 클래스를 추가합니다 -->
                     </a>
                 </div>
             </div>

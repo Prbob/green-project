@@ -56,8 +56,17 @@ public interface ProductsRepository extends JpaRepository<Products,Long> {
 //    @Query("SELECT p FROM Products p WHERE p.brand= :brand")
     Page<Products> findProductsByBrand(Brand brand,Pageable pageable);
 
+
+    // 브랜드 O 검색 키워드 X 성별 O
+    @Query("SELECT p FROM Products p WHERE p.brand= :brand AND (p.gender=:gender OR p.gender=:every )")
+    Page<Products> findProductsByBrandAndGender(@Param("brand") Brand brand,@Param("gender")String gender, @Param("every")String every ,Pageable pageable);
+
     @Query("SELECT p FROM Products p WHERE p.name LIKE %:name% AND p.member=:member") // 장바구니 페이지 같음?
     Page<Products> findProductsByNameAndMember(@Param("name")String nameSearch, @Param("member") Member member,Pageable pageable);
 
     Page<Products> findProductsByMember(Member member, Pageable pageable);
+
+    @Query("SELECT p FROM Products p WHERE p.gender=:gender OR p.gender=:every") // 성별 조건만 있을 때
+    Page<Products> findProductsByMemberAndGender(@Param("gender") String gender,@Param("every") String every,Pageable pageable);
+
 }

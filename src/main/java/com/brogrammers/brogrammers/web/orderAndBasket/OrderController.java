@@ -130,6 +130,8 @@ public class OrderController {
                 .please(request.getParameter("please"))
                 .build();
         orderService.save(orders); // 오더 저장 완료
+        member.updatTotalOrderPrice(Integer.parseInt(request.getParameter("totalPrice")));
+        memberService.updateMember(member);
 
         HttpSession session = request.getSession();
         Object attribute = session.getAttribute(SessionConst.PRODUCTSCOUNT); // 어떤 상품들 불러오려고 하는 지
@@ -170,25 +172,5 @@ public class OrderController {
         return "/orderAndBasket/orderSuccess";
     }
 
-    @GetMapping("/test")
-    public String tete(@RequestParam("orderId") Long id){
-        Orders orders = orderService.findById(id).get();
-        Delivery delivery = orders.getDelivery();
-        System.out.println(orders.getPayment());
-        System.out.println(orders.getPayment());System.out.println(orders.getPayment());
-        System.out.println(orders.getPayment());
-        System.out.println(orders.getPayment());
-        System.out.println(orders.getPayment());
-        System.out.println(orders.getPayment());
-        System.out.println(orders.getPayment());
-        System.out.println(orders.getPayment());
-        System.out.println(orders.getPayment());
-        System.out.println(orders.getPayment());
-        System.out.println(orders.getPayment());
-        System.out.println(orders.getPayment());
-        System.out.println(orders.getPayment());
 
-
-        return "";
-    }
 }
