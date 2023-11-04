@@ -6,8 +6,14 @@
     <script src="/js/instafeed.min.js"></script>
     <style>
         * {margin:0; padding: 0; text-align: center; box-sizing: border-box;}
+
+        #wrap{
+            width:80%;
+            margin: 0 auto;
+        }
         #wrap  h2{
-            margin-top: 20px;
+
+            margin: 30px auto;
             text-align: center;
         }
         #gallery {
@@ -19,7 +25,7 @@
         }
 
         #gallery li{
-            width: 24%;
+            width: 25%;
             list-style: none;
             margin-bottom: 30px;
 
@@ -49,8 +55,8 @@
 <script>
     var feed = new Instafeed({
         target :'gallery',
-        template:'<li><a href="{{link}}"><img src="{{image}}" /></a><h5>{{caption}}</h5></li>',
-        accessToken: 'IGQWROcXNuWG5JZATl5ckd4OFI2d21yUGttcGhyTFJMT3ZAhLVFSakhlZAjRMclFIVjZAIVkZAQYXBBSnp0S2R4LXlocmRpNmNteDV3T2hfdzZApVkxfYm8zanZAORFp6bU53OVpPUElWZAWpKbXBiVDREejVIem5iZAUs1NlUZD'
+        template:'<li><a href="{{link}}"><img src="{{image}}" /></a></li>',
+        accessToken: 'IGQWRNbC1XOGdRZAHphdXhXVVcwOXRZAbnQyLWxhV2hIbF96dHpfNnQ3OTNNNjR6V1FRUmR5Vy1VcHNET2Nsc2JEbDlNdF8zaWZAZAT0VHVzBWZAWh2a0JPckpxT0xUckg3TGVuUnVJNWRxTDk2QkpQRUJYcXFDekdYaDAZD'
     });
     feed.run();
 </script>
