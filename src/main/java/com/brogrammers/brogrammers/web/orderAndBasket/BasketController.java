@@ -42,7 +42,12 @@ public class BasketController {
     public String addBasket(@PathVariable("productId") Long productId, HttpServletRequest request, Model model,
                             @RequestParam("quantity")int quantity, @RequestParam("action")String action,@RequestParam(name = "sizeParam",required = false)Integer sizeParam){
             Products p = productService.getByid(productId);
-            Products product = productService.findProductByNameColorSizeBrand(p.getName(), p.getColor(), sizeParam, p.getBrand()).get();
+            Products product;
+            if(action.equals("myBasket")){
+                product = productService.findProductByNameColorSizeBrand(p.getName(), p.getColor(), p.getSize(), p.getBrand()).get();
+            } else{
+                product = productService.findProductByNameColorSizeBrand(p.getName(), p.getColor(), sizeParam, p.getBrand()).get();
+            }
         if(action.equals("buy")){
             return "redirect:/order/buy?product="+product.getId()+"&quantity="+quantity+"&way=one";
         }

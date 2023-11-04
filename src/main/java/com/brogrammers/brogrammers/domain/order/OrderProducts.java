@@ -25,8 +25,6 @@ public class OrderProducts {
     @Column(name="order_products_quantity")
     private int quantity;
 
-
-
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "products_id")
     private Products products;

@@ -104,41 +104,6 @@ public class OrderController {
         return "orderAndBasket/orderForm";
     }
 
-    @PostMapping("/order/buy")
-    public String order(@ModelAttribute("form") @Valid OrderProductsForm form, BindingResult result, Model model, HttpServletRequest request) {
-        if (fun.getMember(request) == null) {
-            return "/alert/noLogin";
-        }
-        if (result.hasErrors()) {
-            return "redirect:/order/buyAll";
-        }
-        List<ProductsCount> productsCounts = new ArrayList<>();
-        Member member = functionClass.getMemberDb(request); // 1. 회원 정보를 불러옴
-        Basket basket = basketService.findByMemberid(member.getId()).get(); // 1. 장바구니를 불러옴
-        List<Products> products = baskProdService.findProductsByBasketId(basket); // 3. 장바구니에 담긴 상품 가져오기
-        BasketProducts basketProducts = null;
-        for (Products product : products) {
-            basketProducts = baskProdService.findBasProByBasAndPro(basket, product).get();
-            ProductsCount productsCount = ProductsCount.builder().product(product).quantity(basketProducts.getQuantity()).build(); // 상품과 갯수를 넣어줌
-            productsCounts.add(productsCount);
-        }
-
-        Long orderId = orderService.saveOrderFromOrderController(form, productsCounts, member); // 주문 아이디
-        List<OrderProducts> orderProducts = orderProductsService.findOrderproductsByOrders(orderService.findById(orderId).get());
-
-
-        System.out.println("오더/바이올 포스트 맵핑입니다.");
-        System.out.println("이름" + form.getName());
-        System.out.println("우편번호" + form.getPostal_code());
-        System.out.println("주소" + form.getMiddle_address());
-        System.out.println("상세주소" + form.getDetailed_address());
-        System.out.println("핸드폰번호" + form.getPhone());
-        System.out.println("요청사항" + form.getPlease());
-        System.out.println("총 주문 금액" + form.getTotalPrice());
-        System.out.println("이름" + form.getName());
-
-        return "orderAndBasket/orderFormTest";
-    }
 
     @PostMapping("/kakaopay")
     public ResponseEntity<Map<String, String>> buyOne(HttpServletRequest request, Model model){

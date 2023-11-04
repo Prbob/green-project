@@ -29,6 +29,7 @@
 <!--Header-->
 <th:block th:replace="include/bodyHead :: bodyHeader"></th:block>
 <script type="text/javascript" th:src="@{/js/kakaoLogin.js}"></script>
+<script type="text/javascript" th:src="@{/js/naverLogin.js}"></script>
 
 <div id="__nuxt" style="height: 530px;">
     <div id="__layout" style="width:400px; height:600px; margin:auto;">
@@ -116,6 +117,7 @@
                                     <li class="look_list" data-v-399f484e="" style="border-right: 1px solid #D3D3D3;">
                                         <a th:href="@{/member/joinMember}" class="look_link" data-v-399f484e="">회원가입</a>
                                     </li>
+
                                     <li class="look_list" data-v-399f484e="">
                                         <a th:href="@{/member/findPassword}" class="look_link" data-v-399f484e="">비밀번호
                                             찾기</a>
@@ -154,6 +156,9 @@
     });
 
 </script>
+
+<!-- 네이버 스크립트 -->
+<script src="https://static.nid.naver.com/js/naveridlogin_js_sdk_2.0.2.js" charset="utf-8"></script>
 
 </body>
 </html>

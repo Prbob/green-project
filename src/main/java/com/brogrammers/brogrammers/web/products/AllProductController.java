@@ -101,7 +101,7 @@ public class AllProductController {
     /////////////////////////////////////상품 리스트 ///////////////////////////////////
 @GetMapping("/products/list")  // 전체 상품 조회
 public String productList(Model model, HttpServletRequest request,
-                          @PageableDefault(page=0,size=1,sort="id",direction = Sort.Direction.DESC)Pageable pageable,
+                          @PageableDefault(page=0,size=12,sort="id",direction = Sort.Direction.DESC)Pageable pageable,
                           String nameSearch,Long brandId,Long categoryId){
 
 
@@ -111,7 +111,6 @@ public String productList(Model model, HttpServletRequest request,
         if(brandId!=null){ // 키워드O 브랜드O
             Brand brand = brandService.findById(brandId).get();
             if(categoryId!=null){// 키워드O 카테고리O 브랜드O
-                System.out.println("카테고리 키우ㅝ드 브랜드");
                 products = productCategoryService.findProductsByBrandNameCategory(brand,nameSearch,categoryService.findById(categoryId).get(),pageable);
             } else{ // 키워드O 브랜드O 카테고리X
                 products = productService.findProductsByBrandAndKeyword(nameSearch,brand,pageable);
