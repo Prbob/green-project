@@ -11,15 +11,12 @@
     <!--  위의 경로가 원래의 경로인데 css적용이 안되어서 아래줄 추가함.[Han]  -->
     <!-- <link rel="stylesheet" type="text/css" href="/static/css/H_customer.css">-->
 
-    <style>
+    <style>s
         * {
             font-family: Pretendard Variable,Pretendard,-apple-system,BlinkMacSystemFont,system-ui,Segoe UI,Roboto,Ubuntu,Cantarell,Noto Sans,sans-serif,Helvetica Neue,Apple SD Gothic Neo,Noto Sans KR,Malgun Gothic,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol;
         }
         .wish_list li {
             border-bottom: 1px solid #D3D3D3;
-        }
-        .profile_info{
-            width: 100%;
         }
         .content_area{
             width:100%;
@@ -46,13 +43,29 @@
         }
         #buttons{
             width: 100%;
-            border:1px solid red;
+            /*border:1px solid red;*/
         }
         .orderEdit {
             display: inline-block;
-            border: 1px solid blue;
-            width: 85px;
+            background-color: #eeeeee;
+            border-radius: 3px;
+            /*border: 1px solid blue;*/
+            width: 120px;
+            line-height: 40px;
+            letter-spacing: 3px;
             text-align: center;
+            margin: 6px auto;
+            font-weight: bold;
+        }
+        .delivery{
+            background-color: #1d85e6;
+            color: white;
+        }
+        .orderEdit:hover {
+            background-color: #1d85e6;
+            color: white;
+            letter-spacing: 5px;
+            font-weight: bolder;
         }
 
         .tableBox{
@@ -78,6 +91,7 @@
         ::placeholder {
             color: black;
         }
+
 
     </style>
 
@@ -107,7 +121,7 @@
             <div data-v-cf6a6ef4="" class="my_profile">
                 <div data-v-61e7a8a3="" data-v-cf6a6ef4="" class="content_title border">
                     <div data-v-61e7a8a3="" class="title"><h3 data-v-61e7a8a3="">구매 내역</h3><!----></div><!----></div>
-                <div data-v-cf6a6ef4="" class="profile_info">
+                <div class="orderInfo">
 
                     <div data-v-8b96a82e="" data-v-cf6a6ef4="" class="profile_group">
                         <h4 data-v-8b96a82e="" class="group_title"> 오더날짜 YYYY.MM.DD + 주문번호 : orderNumber </h4>
@@ -125,7 +139,7 @@
                                 </td>
                                 <td colspan="1" rowspan="0" id="buttonBox">
                                     <div id="buttons">
-                                        <a href="cancelOrder" class="orderEdit">배송조회</a>
+                                        <a href="cancelOrder" class="orderEdit delivery">배송조회</a>
                                         <a href="cancelOrder" class="orderEdit">주문취소</a>
                                     </div>
                                 </td>
