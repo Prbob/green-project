@@ -160,7 +160,6 @@
                         <option th:each="category : ${categories}" th:value="${category.id}"
                                 th:text="${category.name}"></option>
                     </select>
-
                 </div>
 
                 <div class="input">
@@ -170,6 +169,17 @@
                         <option th:each="brand : ${brands}" th:value="${brand.id}" th:text="${brand.name}"></option>
                     </select>
                 </div>
+
+
+                <div class="input">
+                    <p>성별<br></p>
+                    <div style="display: flex;">
+                        <a href="#" style="margin-right: 20px;">male</a>
+                        <a href="#" style="margin-right: 20px;">female</a>
+                        <a href="#">every</a>
+                    </div>
+                </div>
+
                 <button>검색하기</button>
             </form>
         </div>
