@@ -26,6 +26,7 @@
         }
         .orderItem{
             padding:10px;
+            display:flex;
         }
         .orderItem img {
             display: inline-block;
@@ -35,7 +36,7 @@
             border-left:2px solid #aaaaaa;
         }
         .orderItem span{
-            line-height: 4.8em;
+            line-height: 2.4em;
             margin: 10px;
         }
         #buttonBox{
@@ -124,7 +125,7 @@
                 <div class="orderInfo">
 
                     <div data-v-8b96a82e="" data-v-cf6a6ef4="" class="profile_group">
-                        <h4 data-v-8b96a82e="" class="group_title"> 오더날짜 YYYY.MM.DD + 주문번호 : orderNumber </h4>
+                        <h4 data-v-8b96a82e="" class="group_title" th:text="|주문 일자 : ${order.registrationDate} / 주문 번호 : ${order.id}|"> 오더날짜 YYYY.MM.DD + 주문번호 : orderNumber </h4>
                     </div>
 
                     <div> &nbsp;</div>
@@ -132,9 +133,15 @@
                         <table border="1">
                             <tr>
                                 <td colspan="4">
-                                    <div class="orderItem">
-                                        <img src="/image/productMain/Nike_Zoom_Vomero_5_Oatmeal_(W).png">
-                                        <b><span>item name</span></b>
+                                    <div class="orderItem" th:each="productsCount : ${list}">
+                                        <div>
+                                            <img th:src="@{|/upload/${productsCount.product.imgName}|}"/>
+                                        </div>
+                                        <div>
+                                            <b><span th:text="|상품명 : ${productsCount.product.name}|">item name</span></b>
+                                            <span style="font-size:12px;" th:text="|(${productsCount.quantity} ea)|"></span> <br>
+                                            <span th:text="| 가격 : ${productsCount.quantity * productsCount.product.price} |"></span>
+                                        </div>
                                     </div>
                                 </td>
                                 <td colspan="1" rowspan="0" id="buttonBox">
@@ -144,15 +151,7 @@
                                     </div>
                                 </td>
                             </tr>
-                            <tr>
-                                <td colspan="4">
-                                    <div class="orderItem">
-                                        <img src="/image/productMain/Nike_Zoom_Vomero_5_Oatmeal_(W).png">
-                                        <b><span>item name</span></b>
-                                    </div>
-                                </td>
 
-                            </tr>
                         </table>
                     </div>
 

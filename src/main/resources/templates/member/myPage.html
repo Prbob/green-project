@@ -104,12 +104,20 @@
         .orderItem .rightInfo {
             /*border: 1px solid blue;*/
             min-width: 350px;
-            padding: 20px;
+            padding: 10px;
+            padding-left:20px;
         }
 
         .rightInfo p{
             font-size: 18px;
             /*border:1px solid darkolivegreen;*/
+        }
+
+        .rightInfo{
+            height:110px;
+        }
+        .rightInfo a{
+            margin-bottom:20px;
         }
     </style>
 
@@ -130,22 +138,19 @@
                 <div data-v-61e7a8a3="" data-v-cf6a6ef4="" class="content_title border">
                     <div data-v-61e7a8a3="" class="title"><h3 data-v-61e7a8a3="">구매 내역</h3><!----></div><!----></div>
                     <div id="ordersWrap">
-
                         <div class="orderInfo">
-                            <div class="orderTitle">
-                                <h4 data-v-8b96a82e="" class="group_title" style="display: inline">YYYY.MM.DD 주문</h4><a href="/member/orderDetail"> &nbsp; > 주문 상세보기 </a>
-                            </div>
                             <div class="orderItems">
-                                <h5>배송전</h5>
-                                <div class="orderItem">
-                                    <div class="leftImg">
-                                        <img src="/image/productMain/Nike_Zoom_Vomero_5_Oatmeal_(W).png">
+                                <div class="orderItem"  th:each="form : ${list}">
+                                    <div class="leftImg">  <!-- 상품들 중 하나 넣고 -->
+                                    <img th:src="@{|/upload/${form.fileName}|}"/>
                                     </div>
                                     <div class="rightInfo">
-                                        <p><b>brand</b></p>
-                                        <p><a href="/products/detail/">item name</a></p>
-                                        <p>price 원</p>
+
+                                        <p><a href="/products/detail/"><b th:text="|주문 번호 : ${form.orders.id}|">item name</b></a></p>  <!-- 주문 번호-->
+                                        <p th:text="|주문 금액 : ${#numbers.formatDecimal(form.orders.totalPrice,3, 'COMMA',0,'POINT')} 원|"></p>
+                                        <a th:href="@{/member/orderDetail(orderId=${form.orders.id})}"> &nbsp; > 주문 상세보기 </a>
                                     </div>
+                                    <div th:text="|구매 일자 : ${form.orders.registrationDate}|"></div>
                                 </div>
                             </div>
                         </div>

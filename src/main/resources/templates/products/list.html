@@ -140,6 +140,7 @@
         <h5>필터</h5>
         <div id="filter">
             <form th:action method="get" id="searchForm">
+
                 <div class="input">
                 <p>상품명<br></p>
                     <input class="inputBox" type="text" id="nameSearch" name="nameSearch" style="background-color: white">
@@ -203,7 +204,7 @@
                 <i class="fas fa-chevron-left"></i>
             </a>
         <th:block th:each="page : ${#numbers.sequence(startPage,endPage)}">
-            <a th:if="${page != nowPage}" th:href="@{/products/__${pname}__(page = ${page-1},nameSearch = ${param.nameSearch},brandId=${param.brandId})}" th:text="${page}"></a>
+            <a th:if="${page != nowPage && endPage!=0}" th:href="@{/products/__${pname}__(page = ${page-1},nameSearch = ${param.nameSearch},brandId=${param.brandId})}" th:text="${page}"></a>
             <strong th:if="${page == nowPage}"  th:text="${page}" style="color:red"></strong>
         </th:block>
             <a th:if="${totalPage > endPage && endPage != 0}" th:href="@{/products/__${pname}__(page = ${endPage}, nameSearch = ${param.nameSearch},brandId=${param.brandId})}">
