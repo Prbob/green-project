@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+    <title>UNCOMMON | 가입 완료 페이지</title>
+
+    <link rel="stylesheet" href="/_nuxt/css/12266fe.css">
+    <link href="/_nuxt/css/4244584.css" rel="stylesheet" type="text/css">
+
+    <script src="https://kit.fontawesome.com/48c9cc0a12.js" crossorigin="anonymous"></script>
+
+    <th:block th:replace="include/header :: header"></th:block>
+
+
+    <style>
+        .black-button {
+            background-color: #000; /* 검은색 배경 색상 */
+            color: #fff; /* 텍스트 색상 (흰색) */
+            border: none; /* 테두리 제거 */
+            border-radius: 5px; /* 버튼 모서리 둥글게 */
+            cursor: pointer; /* 커서를 포인터로 변경하여 버튼이 클릭 가능한 것처럼 보이게 함 */
+            height: 36px;
+            padding: 10px 0px;
+            text-align: center;
+            font-size: 13.33px;
+        }
+
+        .joinCompleteBox {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .joinCompleteBoxBtn {
+            display: flex; /* Flexbox 컨테이너로 설정 */
+            gap: 10px; /* 버튼 사이의 간격을 설정 (원하는 간격으로 조정 가능) */
+            justify-content: center; /* 가로 정렬을 중앙으로 설정 */
+        }
+
+        .black-button {
+            width: 80px;
+        }
+    </style>
+</head>
+<body>
+<th:block th:replace="include/bodyHead :: bodyHeader"></th:block>
+<div id="__nuxt" >
+    <div id="__layout" style="width:400px; margin:auto;">
+        <div id="wrap" tabindex="0" class="layout_base lg wrap win_os lg" data-v-e2abb636="" data-v-6d2e0ef8="" style="padding: 80px 0px;">
+            <div data-v-286e873e="" data-v-6d2e0ef8="" class="container join">
+                <div data-v-286e873e="" class="content lg">
+                    <div data-v-286e873e="" class="join_area" style="padding-bottom: 30px;">
+                        <div class="joinCompleteBox">
+                            <i class="fa-solid fa-circle-check" style="color: #000000; font-size: 50px;"></i>
+
+                            <h3 style="margin: 20px;">회원가입이 완료되었습니다.</h3>
+
+                            <p style="margin-top: 10px;">로그인 후 안전하고 편리하게</p>
+                            <p style="margin-bottom: 30px; margin-top: 10px; padding-left: 5px;">서비스를 이용하실 수 있습니다.</p>
+
+                            <div class="joinCompleteBoxBtn">
+                                <a href="/member/login" class="black-button">로그인</a>
+                                <a href="/" class="black-button">홈으로</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<th:block th:replace="include/footer :: footer"></th:block>
+</body>
+</html>

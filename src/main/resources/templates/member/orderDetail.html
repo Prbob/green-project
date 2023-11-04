@@ -103,24 +103,15 @@
 
 <div tabindex="0" class="layout_base" data-v-e2abb636="" data-v-cdf8523a="">
     <div class="container my lg" data-v-e2abb636="" data-v-cdf8523a="" style="padding-top: 0px;">
-        <div class="sidebar">
-            <a href="/notice" aria-current="page">
-                <h2 data-v-cdf8523a="" class="snb_main_title">마이페이지</h2>
-            </a>
-            <nav>
-                <ul class="snb_menu">
-                    <li class="menu_item"  style="font-weight:bolder; color:#333;"><a href="#"> 구매 내역 </a></li>
-                    <li class="menu_item"><a href="#"> 관심 상품 </a></li>
-                    <li class="menu_item"><a href="#"> 로그인 정보 </a></li>
-                </ul>
-            </nav>
-        </div>
+
+        <th:block th:replace="include/memberMenu :: memberMenu"></th:block>
 
         <div data-v-cf6a6ef4="" data-v-cdf8523a="" class="content_area my-page-content">
             <div data-v-cf6a6ef4="" class="my_profile">
                 <div data-v-61e7a8a3="" data-v-cf6a6ef4="" class="content_title border">
-                    <div data-v-61e7a8a3="" class="title"><h3 data-v-61e7a8a3="">구매 내역</h3><!----></div><!----></div>
-                <div class="orderInfo">
+
+                    <div data-v-61e7a8a3="" class="title"><h3 data-v-61e7a8a3="">주문 상세</h3><!----></div><!----></div>
+                <div data-v-cf6a6ef4="" class="profile_info">
 
                     <div data-v-8b96a82e="" data-v-cf6a6ef4="" class="profile_group">
                         <h4 data-v-8b96a82e="" class="group_title" th:text="|주문 일자 : ${order.registrationDate} / 주문 번호 : ${order.id}|"> 오더날짜 YYYY.MM.DD + 주문번호 : orderNumber </h4>

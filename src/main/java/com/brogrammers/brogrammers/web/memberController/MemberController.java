@@ -89,9 +89,17 @@ public class MemberController {
         Basket basket = Basket.builder().member(member).build();
         basketService.save(basket); // 회원 가입하면서 회원 전용 장바구니 하나 만들기.
         log.info("가입 이메일={}, 아이디={}",member.getEmail(),member.getId());
-        return "redirect:/";
+        return "/member/joinComplete";
     }
     /////////////////////// 회원가입 //////////////////////
+
+
+    @GetMapping("/member/joinComplete") // 회원가입 성공 페이지
+    public String joinComplete() {
+        return "/member/joinComplete";
+    }
+
+
 
     @PostMapping("/customer/customerService") // 고객센터
     public String customerService(){
