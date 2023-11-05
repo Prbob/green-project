@@ -17,6 +17,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -44,14 +45,24 @@ public class BasketController {
     //////////////////// 상품 장바구니로 ///////////////////////
     @PostMapping("/order/basket/{productId}")
     public String addBasket(@PathVariable("productId") Long productId, HttpServletRequest request, Model model,
-                            @RequestParam("quantity")int quantity, @RequestParam("action")String action,@RequestParam(name = "sizeParam",required = false)Integer sizeParam){
-            Products p = productService.getByid(productId);
-            Products product;
-            if(action.equals("myBasket")){
-                product = productService.findProductByNameColorSizeBrand(p.getName(), p.getColor(), p.getSize(), p.getBrand()).get();
-            } else{
-                product = productService.findProductByNameColorSizeBrand(p.getName(), p.getColor(), sizeParam, p.getBrand()).get();
-            }
+                            @RequestParam("quantity")int quantity, @RequestParam("action")String action, @RequestParam(name = "sizeParam",required = false)Integer sizeParam){
+        if (quantity<1){
+            model.addAttribute("errormsg","최소 수량은 1개부터 입니다.");
+            model.addAttribute("productId",productId);
+            return "alert/quantityerror";
+        }
+        Products p = productService.getByid(productId);
+        if (quantity>p.getStockQuantity()){
+            model.addAttribute("errormsg","재고가 부족합니다.");
+            model.addAttribute("productId",productId);
+            return "alert/quantityerror";
+        }
+        Products product;
+        if(action.equals("myBasket")){
+            product = productService.findProductByNameColorSizeBrand(p.getName(), p.getColor(), p.getSize(), p.getBrand()).get();
+        } else{
+            product = productService.findProductByNameColorSizeBrand(p.getName(), p.getColor(), sizeParam, p.getBrand()).get();
+        }
         if(action.equals("buy")){
             return "redirect:/order/buy?product="+product.getId()+"&quantity="+quantity+"&way=one";
         }

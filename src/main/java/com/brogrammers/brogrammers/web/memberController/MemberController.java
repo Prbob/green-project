@@ -250,7 +250,7 @@ public class MemberController {
         MemberForm form = MemberForm.builder()
                 .name(member.getName())
                 .email(member.getEmail())
-                .phone(member.getPhone())
+                .phone_number(member.getPhone())
                 .postal_code(member.getAddress().getPostal_code())
                 .middle_address(member.getAddress().getMiddle_address())
                 .detailed_address(member.getAddress().getDetailed_address())
@@ -265,6 +265,7 @@ public class MemberController {
         if(result.hasErrors()){
             return "/member/updateMyInformation";
         }
+
         String pwd = form.getPwd();
         String pwdChk = form.getPwdChk();
         String phone = form.getPhone_number();
@@ -292,6 +293,7 @@ public class MemberController {
         Member member = fun.getMemberDb(request);
         member.updatLeave("bye");
         memberService.updateMember(member);
+        fun.logout(request);
         return "alert/bye";
     }
 }
