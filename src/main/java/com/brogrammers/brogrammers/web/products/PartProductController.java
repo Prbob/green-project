@@ -59,7 +59,7 @@ public class PartProductController {
 
         }
         String pname = gender;
-        String bodytitle = gender.equals("male")?"남성":"여성";
+        String bodytitle = gender.equals("man")?"남성":"여성";
         int nowPage = products.getPageable().getPageNumber() + 1; // 5
         int startPage = Math.max(1,nowPage%3==0?nowPage/3*3-2:nowPage/3*3+1);
         int endPage = Math.min(products.getTotalPages(),startPage+2);
