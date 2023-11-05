@@ -2,6 +2,7 @@ package com.brogrammers.brogrammers.web.products;
 
 import com.brogrammers.brogrammers.domain.member.Member;
 import com.brogrammers.brogrammers.domain.order.OrderProducts;
+import com.brogrammers.brogrammers.domain.order.Orders;
 import com.brogrammers.brogrammers.domain.product.*;
 import com.brogrammers.brogrammers.domain.service.*;
 import com.brogrammers.brogrammers.form.DuplicatedProduct;
@@ -41,6 +42,7 @@ public class AllProductController {
     @Autowired BrandService brandService;
     @Autowired ProductCategoryService productCategoryService;
     @Autowired OrderProductsService orderProductsService;
+    @Autowired OrderService orderService;
     /////////////////////////////////////상품 등록 ///////////////////////////////////
     @GetMapping("/products/add")
     public String addForm(@ModelAttribute("form") ProductForm form ,Model model, @PathVariable(value = "productId",required = false)Long productId,
@@ -348,6 +350,17 @@ public String productList(Model model, HttpServletRequest request,
         return "redirect:/products/list";
     }
 
+    @PostMapping("/product/review")
+    public String review(HttpServletRequest request, Model model){
+        Member member = fun.getMemberDb(request);
+        Products products; // 주문 받아와야됨
+        List<Orders> ordersByMember = orderService.findOrdersByMember(member); // 회원의 주문 목록 불러오기
+        for(Orders orders : ordersByMember){
+//            orderProductsService.findOrderProductsByOrdersAndProducts(orders,products);
+//            if(orderProductsService)
+        }
+        return "";
+    }
 
 
 }
