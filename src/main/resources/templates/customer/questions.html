@@ -31,18 +31,10 @@
 <th:block th:replace="include/bodyHead :: bodyHeader"></th:block>
 
 <div class="container">
-    <div class="sidebar">
-        <a href="/notice" aria-current="page">
-            <h2 class="snb_main_title">자주 묻는 질문</h2>
-        </a>
-        <nav>
-            <ul class="snb_menu">
-                <li class="menu_item"><a href="/customer/notice" aria-current="page" class="menu_link"> 공지사항 </a></li>
-                <li class="menu_item"><a href="/customer/questions" class="menu_link"> <span style="font-weight:bolder">자주 묻는 질문</span> </a></li>
-                <li class="menu_item"><a href="/customer/inspectionStandards" class="menu_link"> 검수 기준 </a></li>
-            </ul>
-        </nav>
-    </div>
+
+    <th:block th:replace="customer/customerMenu :: customerMenu"></th:block>
+
+
     <div class="content_area">
         <div class="content_title">자주 묻는 질문</div>
         <ul class="dropdown_list" >
