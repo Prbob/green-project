@@ -35,11 +35,11 @@ public class CategoryService {
         };
         return id;
     }
-    public CategoryForm getCategoryFromById(Long id){
+    public CategoryForm getCategoryFormById(Long id){
         Category category = categoryRepository.findById(id).get();
         return CategoryForm.builder().name(category.getName()).id(category.getId()).build();
     }
-    public void updatCatoegryByForm(CategoryForm form){
+    public void updatCatoegoryByForm(CategoryForm form){
         Category category = categoryRepository.findById(form.getId()).get();
         category.setName(form.getName());
     }
