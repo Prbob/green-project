@@ -8,13 +8,23 @@
 <th:block th:fragment="customerMenu">
     <div class="sidebar">
         <a href="/notice" aria-current="page">
-            <h2 class="snb_main_title">자주 묻는 질문</h2>
+            <h2 class="snb_main_title">고객센터</h2>
         </a>
         <nav>
             <ul class="snb_menu">
-                <li class="menu_item"><a href="/customer/notice" aria-current="page" class="menu_link"> 공지사항 </a></li>
-                <li class="menu_item"><a href="/customer/questions" class="menu_link"> <span style="font-weight:bolder">자주 묻는 질문</span> </a></li>
-                <li class="menu_item"><a href="/customer/inspectionStandards" class="menu_link"> 검수 기준 </a></li>
+
+                <li class="menu_item">
+                    <strong th:if="notice == ${notice}" th:class="menu_link"> 공지사항 </strong>
+                    <a th:unless="notice == ${notice}" th:href="@{/customer/notice}" th:class="menu_link"> 공지사항 </a>
+                </li>
+                <li class="menu_item">
+                    <strong th:if="questions == ${questions}" th:class="menu_link"> 자주 묻는 질문 </strong>
+                    <a th:unless="questions == ${questions}" th:href="@{/customer/questions}" th:class="menu_link"> 자주 묻는 질문 </a>
+                </li>
+                <li class="menu_item">
+                    <strong th:if="inspectionStandards == ${inspectionStandards}" th:class="menu_link"> 검수 기준 </strong>
+                    <a th:unless="inspectionStandards == ${inspectionStandards}" th:href="@{/customer/inspectionStandards}" th:class="menu_link"> 검수 기준 </a>
+                </li>
             </ul>
         </nav>
     </div>

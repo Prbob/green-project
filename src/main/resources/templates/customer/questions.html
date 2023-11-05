@@ -15,13 +15,28 @@
             display: flex;
         }
         div.content_title{
-            border-bottom: 2px solid black;
-            padding-bottom: 5px;
+            border-bottom: 3px solid black;
+            padding-bottom: 16px;
             font-weight: 600;
             color: black;
+            height: 46px;
         }
         h2.snb_main_title{
             color: black;
+        }
+
+        .dropdown div {
+            display: flex; /* Flexbox 레이아웃 사용 */
+            justify-content: space-between; /* 좌우로 정렬 */
+            align-items: center; /* 수직 가운데 정렬 (선택 사항) */
+        }
+
+        .fa-solid {
+            margin-right: 10px;
+        }
+
+        .dropdown_list li {
+            border-radius: 5px;
         }
     </style>
 
@@ -30,12 +45,12 @@
 <!--Header-->
 <th:block th:replace="include/bodyHead :: bodyHeader"></th:block>
 
-<div class="container">
+<div class="container" style="padding-top: 20px;">
 
     <th:block th:replace="customer/customerMenu :: customerMenu"></th:block>
 
 
-    <div class="content_area">
+    <div class="content_area" style="padding-bottom: 160px;">
         <div class="content_title">자주 묻는 질문</div>
         <ul class="dropdown_list" >
             <li id="questions_li_1">
@@ -474,7 +489,7 @@
         // display 속성을 토글하고 배경 색상을 변경합니다.
         if (currentDisplay === 'none') {
             hiddenFrame1.style.display = 'block';
-            questionLi1.style.backgroundColor = 'gray';
+            questionLi1.style.backgroundColor = '#f5f5f5';
             // 아이콘 변경
             caretIcon1.classList.remove('fa-caret-down');
             caretIcon1.classList.add('fa-caret-up');
@@ -493,7 +508,7 @@
         // display 속성을 토글하고 배경 색상을 변경합니다.
         if (currentDisplay === 'none') {
             hiddenFrame2.style.display = 'block';
-            questionLi2.style.backgroundColor = 'gray';
+            questionLi2.style.backgroundColor = '#f5f5f5';
             // 아이콘 변경
             caretIcon2.classList.remove('fa-caret-down');
             caretIcon2.classList.add('fa-caret-up');
@@ -512,7 +527,7 @@
         // display 속성을 토글하고 배경 색상을 변경합니다.
         if (currentDisplay === 'none') {
             hiddenFrame3.style.display = 'block';
-            questionLi3.style.backgroundColor = 'gray';
+            questionLi3.style.backgroundColor = '#f5f5f5';
             // 아이콘 변경
             caretIcon3.classList.remove('fa-caret-down');
             caretIcon3.classList.add('fa-caret-up');
