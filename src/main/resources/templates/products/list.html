@@ -192,8 +192,11 @@
                    <a th:text="${categoryName}"></a>
                </li>
                 <li class="category" th:if="${brandName != null}">
-                   <a  th:text="${brandName}"></a>
+                   <a th:text="${brandName}"></a>
                </li>
+                <li class="category" th:if="${gender != null}">
+                    <a th:text="${gender}"></a>
+                </li>
             </ul>
         </div>
 
