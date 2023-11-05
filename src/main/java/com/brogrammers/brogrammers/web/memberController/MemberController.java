@@ -74,7 +74,10 @@ public class MemberController {
 //        String hashedPassword = passwordConverter.hashPassword(form.getPwd());
 
         Member member = new Member();
+
+//        member = member.saveMember(form.getEmail(),hashedPassword,form.getName());
         member = member.saveMember(form.getEmail(),form.getPwd(),form.getName(),form.getPhone());
+
 
         if(form.getPostal_code()!=null &&form.getMiddle_address()!=null&&form.getDetailed_address()!=null){
             Address address = new Address(form.getPostal_code(),form.getMiddle_address(),form.getDetailed_address()); // 주소 입력 메서드
