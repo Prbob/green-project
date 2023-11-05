@@ -94,11 +94,11 @@
                             <!--전화번호-->
                             <div data-v-4e1fd2e6="" data-v-286e873e="" class="input_box input_join has_button">
                                 <div style="display: flex; align-items: center;">
-                                    <h3 data-v-286e873e="" data-v-4e1fd2e6="" class="input_title ess">전화번호</h3>
-<!--                                    <div class="field-error" th:errors="*{pwdChk}" />-->
+                                    <h3 data-v-286e873e="" data-v-4e1fd2e6="" class="input_title ess" th:for="phone_number">전화번호</h3>
+                                    <div class="field-error" th:errors="*{phone_number}" />
                                 </div>
                                 <div data-v-4e1fd2e6="" class="input_item">
-                                    <input data-v-4e1fd2e6="" type="number" placeholder="예) 01012345678" autocomplete="off" class="input_txt">
+                                    <input data-v-4e1fd2e6="" type="number" placeholder="예) 01012345678" autocomplete="off" class="input_txt" th:field="*{phone_number}">
                                 </div>
 
                             </div><!---->
