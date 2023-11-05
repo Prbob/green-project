@@ -164,7 +164,7 @@
                 <a th:unless="${session.accessrigths == 'NORMAL' || session.accessrigths == null}" th:href="@{/products/edit/{id} (id=${product.id})}" class="btn btn-primary" role="button">
                     수정 <!-- 관리자 권한일 때에만 표시 -->
                 </a>
-                <a th:unless="${session.accessrigths == 'NORMAL' || session.accessrigths == null}" th:href="@{/products/delete/{id} (id=${product.id})}" class="btn btn-primary" role="button">
+                <a th:unless="${session.accessrigths == 'NORMAL' || session.accessrigths == null}" th:href="@{/products/delete/{id} (id=${product.id})}" class="btn btn-primary" role="button" onclick="return confirm('정말로 상품을 삭제하시겠습니까?')">
                     삭제 <!-- 관리자 권한일 때에만 표시 -->
                 </a>
             </div>
@@ -181,7 +181,6 @@
     </div>
 
 </form>
-
 </body>
 
 </html>
