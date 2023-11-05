@@ -1,6 +1,7 @@
 package com.brogrammers.brogrammers.web.products;
 
 import com.brogrammers.brogrammers.domain.member.Member;
+import com.brogrammers.brogrammers.domain.order.OrderProducts;
 import com.brogrammers.brogrammers.domain.product.*;
 import com.brogrammers.brogrammers.domain.service.*;
 import com.brogrammers.brogrammers.form.DuplicatedProduct;
@@ -39,6 +40,7 @@ public class AllProductController {
     @Autowired CategoryService categoryService;
     @Autowired BrandService brandService;
     @Autowired ProductCategoryService productCategoryService;
+    @Autowired OrderProductsService orderProductsService;
     /////////////////////////////////////상품 등록 ///////////////////////////////////
     @GetMapping("/products/add")
     public String addForm(@ModelAttribute("form") ProductForm form ,Model model, @PathVariable(value = "productId",required = false)Long productId,
@@ -322,13 +324,17 @@ public String productList(Model model, HttpServletRequest request,
     ///////////////////////////////////// edit ///////////////////////////////////
 
     @GetMapping("/products/delete/{id}")
-    public String delete(@PathVariable("id") Long id, HttpServletRequest request){
+    public String delete(@PathVariable("id") Long id, HttpServletRequest request,Model model){
         Member member = fun.getMember(request);
         if(member == null || member.getAccessrigths().equals("NORMAL")){
             return "redirect:/";
         }
-        System.out.println("상품의 아이디 : " + id);
         Products products = productService.getByid(id);
+        List<OrderProducts> orderProductsByProducts = orderProductsService.findOrderProductsByProducts(products);
+        if(orderProductsByProducts != null){
+            model.addAttribute("productId",id);
+            return "alert/errorDeleteProduct";
+        }
         List<Imgs> imgs = imgService.findImgsByProducts(products);
         if(products.getImgPath()!=null){
             new File(products.getImgPath()).delete();

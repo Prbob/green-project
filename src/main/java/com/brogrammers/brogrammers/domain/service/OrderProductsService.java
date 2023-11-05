@@ -2,6 +2,7 @@ package com.brogrammers.brogrammers.domain.service;
 
 import com.brogrammers.brogrammers.domain.order.OrderProducts;
 import com.brogrammers.brogrammers.domain.order.Orders;
+import com.brogrammers.brogrammers.domain.product.Products;
 import com.brogrammers.brogrammers.domain.repository.OrderProductsRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -20,5 +21,8 @@ public class OrderProductsService {
     }
     public List<OrderProducts> findOrderproductsByOrders(Orders orders){
         return orderProductsRepository.findOrderProductsByOrders(orders);
+    }
+    public List<OrderProducts> findOrderProductsByProducts(Products products){
+        return orderProductsRepository.findOrderProductsByProducts(products);
     }
 }

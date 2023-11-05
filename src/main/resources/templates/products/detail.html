@@ -156,7 +156,8 @@
                     <button type="submit" th:name="action" th:value="buy" class="btn btn-primary first" role="button" name="basket">
                         즉시구매
                     </button>
-                    <button type="submit" th:name="action" th:value="basket" class="btn btn-primary second" role="button" name="basket"><i class="fa-solid fa-cart-plus"></i></button>
+                    <button type="submit" th:name="action" th:value="basket" class="btn btn-primary second" role="button" name="basket"><i class="fa-solid fa-cart-plus" onclick="confirmBasket(event)"></i></button>
+                    <div th:if="${error}"><p>최소 수량은 0개부터 입니다.</p></div>
                 </div>
             </div>
 
@@ -164,7 +165,7 @@
                 <a th:unless="${session.accessrigths == 'NORMAL' || session.accessrigths == null}" th:href="@{/products/edit/{id} (id=${product.id})}" class="btn btn-primary" role="button">
                     수정 <!-- 관리자 권한일 때에만 표시 -->
                 </a>
-                <a th:unless="${session.accessrigths == 'NORMAL' || session.accessrigths == null}" th:href="@{/products/delete/{id} (id=${product.id})}" class="btn btn-primary" role="button">
+                <a th:unless="${session.accessrigths == 'NORMAL' || session.accessrigths == null}" th:href="@{/products/delete/{id} (id=${product.id})}" class="btn btn-primary" role="button" onclick="confirmDelete(event)">
                     삭제 <!-- 관리자 권한일 때에만 표시 -->
                 </a>
             </div>
@@ -181,6 +182,19 @@
     </div>
 
 </form>
+
+<script>
+    function confirmDelete(event) {
+        if (!confirm("정말로 삭제하시겠습니까?")) {
+            event.preventDefault(); // 삭제 요청을 보내지 않음
+        }
+    }
+    function confirmBasket(event) {
+        if (!confirm("관심상품으로 등록하시겠습니까?")) {
+            event.preventDefault(); // 삭제 요청을 보내지 않음
+        }
+    }
+</script>
 
 </body>
 

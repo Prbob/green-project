@@ -229,14 +229,14 @@
                     </a>
                 </div>
                 <div class="pagingBox" th:if="${nolist != 'nolist'}" >
-                    <a th:if="${5 < startPage}" th:href="@{/member/myPage(page = ${startPage-6})}">
+                    <a th:if="${5 < startPage}" th:href="@{/products/myBasket(page = ${startPage-6})}">
                         <i class="fas fa-chevron-left"></i>
                     </a>
                     <th:block th:each="page : ${#numbers.sequence(startPage,endPage)}">
-                        <a th:if="${page != nowPage}" th:href="@{/member/myPage(page = ${page-1})}" th:text="${page}"></a>
+                        <a th:if="${page != nowPage}" th:href="@{/products/myBasket(page = ${page-1})}" th:text="${page}"></a>
                         <strong th:if="${page == nowPage}"  th:text="${page}" style="color:red"></strong>
                     </th:block>
-                    <a th:if="${totalPage > endPage && endPage != 0}" th:href="@{/member/myPage(page = ${endPage})}">
+                    <a th:if="${totalPage > endPage && endPage != 0}" th:href="@{/products/myBasket(page = ${endPage})}">
                         <i class="fas fa-chevron-right"></i> <!-- Font Awesome 아이콘 클래스를 추가합니다 -->
                     </a>
                 </div>
