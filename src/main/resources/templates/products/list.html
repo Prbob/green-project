@@ -168,9 +168,14 @@
                 <div class="input">
                     <p>성별<br></p>
                     <div style="display: flex;">
-                        <a href="#" style="margin-right: 20px;">male</a>
-                        <a href="#" style="margin-right: 20px;">female</a>
-                        <a href="#">every</a>
+                        <a th:if="${gender == 'male'}" th:href="@{/products/list(gender=male)}" style="margin-right: 20px;"><strong>male</strong></a>
+                        <a th:unless="${gender == 'male'}" th:href="@{/products/list(gender=male)}" style="margin-right: 20px;">male</a>
+
+                        <a th:if="${gender == 'female'}" th:href="@{/products/list(gender=female)}" style="margin-right: 20px;"><strong>female</strong></a>
+                        <a th:unless="${gender == 'female'}" th:href="@{/products/list(gender=female)}" style="margin-right: 20px;">female</a>
+
+                        <a th:if="${gender == 'every'}" th:href="@{/products/list(gender=every)}"><strong>every</strong></a>
+                        <a th:unless="${gender == 'every'}" th:href="@{/products/list(gender=every)}">every</a>
                     </div>
                 </div>
 
