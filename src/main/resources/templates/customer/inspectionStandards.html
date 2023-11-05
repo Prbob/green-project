@@ -6,8 +6,27 @@
     <title>검수 기준</title>
     <th:block th:replace="include/header :: header"></th:block>
 
-    <link rel="stylesheet" type="text/css" href="/static/css/customer.css">
+    <!--공지사항 css-->
+    <link rel="stylesheet" th:href="@{/css/customer.css}"type="text/css">
+    <!-- 폰트어썸 -->
+    <script src="https://kit.fontawesome.com/45b9232fe5.js" crossorigin="anonymous"></script>
     <style>
+        div.container{
+            display: flex;
+        }
+        div.content_title{
+            border-bottom: 2px solid black;
+            padding-bottom: 5px;
+            font-weight: 600;
+            color: black;
+        }
+        h2.snb_main_title{
+            color: black;
+        }
+
+
+
+
         th {
             font-weight: normal;
         }
@@ -20,7 +39,6 @@
             margin-right: 20px;
         }
         div.content{
-            width: 45%;
             font-size: 14px;
         }
         div.content_title{
@@ -109,9 +127,9 @@
             margin-top: 10px;
         }
 
+
+
     </style>
-
-
 
 </head>
 <body>
@@ -119,18 +137,9 @@
 <th:block th:replace="include/bodyHead :: bodyHeader"></th:block>
 
 <div class="container">
-    <div class="sidebar">
-        <a href="/notice" aria-current="page">
-            <h2 class="snb_main_title">고객센터</h2>
-        </a>
-        <nav>
-            <ul class="snb_menu">
-                <li class="menu_item"><a href="/customer/notice" aria-current="page" class="menu_link"> 공지사항 </a></li>
-                <li class="menu_item"><a href="/customer/questions" class="menu_link"> 자주 묻는 질문 </a></li>
-                <li class="menu_item"><a href="/customer/inspectionStandards" class="menu_link"> <span style="font-weight:bolder">검수 기준</span> </a></li>
-            </ul>
-        </nav>
-    </div>
+
+    <th:block th:replace="customer/customerMenu :: customerMenu"></th:block>
+
 
     <div class="content">
         <div class="description_wrap">
@@ -575,10 +584,6 @@
             <p class="etc_desc">'구매의사 확인' 이후 발생하는 반송건</p>
         </div>
     </div>
-
-
-
-
 </div>
 
 
@@ -586,4 +591,5 @@
 <!--footer-->
 <th:block th:replace="include/footer :: footer"></th:block>
 </body>
+
 </html>
