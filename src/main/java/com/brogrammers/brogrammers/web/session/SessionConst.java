@@ -5,4 +5,5 @@ public class SessionConst {
     public static final String LOGIN_MEMBER="member";
     public static final String ACCESSRIGHTS="accessrigths";
     public static final String PRODUCTSCOUNT="productscount";
+    public static final String MYINFO = "myInfo";
 }

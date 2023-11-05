@@ -29,13 +29,12 @@ public class MemberForm {
     private Long totalOrderPrice;
     @Builder
 
-    public MemberForm(Long id, String email, String name, String pwd, String pwdChk, String postal_code, String middle_address, String detailed_address,String phone,String grade,Long totalOrderPrice) {
+    public MemberForm(Long id, String email, String name, String pwd, String pwdChk, String postal_code, String middle_address, String detailed_address,String phone_number,String grade,Long totalOrderPrice) {
         this.id = id;
         this.email = email;
         this.name = name;
         this.pwd = pwd;
         this.pwdChk = pwdChk;
-        this.phone_number = phone_number;
         this.postal_code = postal_code;
         this.middle_address = middle_address;
         this.detailed_address = detailed_address;

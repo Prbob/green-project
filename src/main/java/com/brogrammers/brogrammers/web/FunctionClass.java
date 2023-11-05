@@ -73,6 +73,16 @@ public class FunctionClass {
         return products;
     }
 
+    public Boolean myInfo(HttpServletRequest request){
+        HttpSession session = request.getSession();
 
+        String str = (String) session.getAttribute(SessionConst.MYINFO);
+        return (str.equals("myInfo"));
+    }
+
+    public void logout(HttpServletRequest request){
+        HttpSession session = request.getSession();
+        session.invalidate();
+    }
 
 }
