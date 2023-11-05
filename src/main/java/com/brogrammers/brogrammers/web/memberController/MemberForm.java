@@ -21,9 +21,11 @@ public class MemberForm {
     private String postal_code;
     private String middle_address;
     private String detailed_address;
-
+    private String phone;
+    private String grade;
+    private Long totalOrderPrice;
     @Builder
-    public MemberForm(Long id, String email, String name, String pwd, String pwdChk, String postal_code, String middle_address, String detailed_address) {
+    public MemberForm(Long id, String email, String name, String pwd, String pwdChk, String postal_code, String middle_address, String detailed_address,String phone,String grade,Long totalOrderPrice) {
         this.id = id;
         this.email = email;
         this.name = name;
@@ -32,5 +34,8 @@ public class MemberForm {
         this.postal_code = postal_code;
         this.middle_address = middle_address;
         this.detailed_address = detailed_address;
+        this.phone = phone;
+        this.grade = grade;
+        this.totalOrderPrice = totalOrderPrice;
     }
 }

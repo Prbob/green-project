@@ -82,7 +82,12 @@ public class ProductService {
 
     public Page<Products> productSearchList(String searchKeyword,Pageable pageable){
         return productsRepository.findByNameContaining(searchKeyword, pageable);
-    }
+    } // 키워드O
+
+    public Page<Products> productSearchListGender(String searchKeyword,String gender,Pageable pageable){
+        return productsRepository.findByNameContainingAndGender(searchKeyword,gender,"every",pageable);
+    } // 키워드O 성별O
+
     public Page<Products> soldOutList(int num,Pageable pageable){ // 매진 임박, no keyword
         return productsRepository.findByStockQuantityLessThan(num,pageable);
     }
@@ -92,7 +97,7 @@ public class ProductService {
     }
 
     public Page<Products> findProductsByGender(String gender, Pageable pageable){
-        return productsRepository.findProductsByGender(gender, pageable); // 성별 입력하면 그 성별에 맞는 모든 제품들 출력
+        return productsRepository.findProductsByMemberAndGender(gender,"every" ,pageable); // 성별 입력하면 그 성별에 맞는 모든 제품들 출력
     }
     public Page<Products> findProductsByGenderAndKeyword(String gender,String keyword,Pageable pageable){
         return productsRepository.findProductsByGender(gender,keyword, pageable); // 성별 입력하면 그 성별에 맞는 모든 제품들 출력
@@ -115,9 +120,18 @@ public class ProductService {
         return productsRepository.findProductsByNameAndBrand(keyword,brand,pageable);
     }
 
+    // 브랜드 O 검색 키워드 O 성별 O
+    public Page<Products> findProductsByBrandAndKeywordAndGender(String keyword, Brand brand,String gender,Pageable pageable){
+        return productsRepository.findProductsByNameAndBrandAndGender(keyword,brand,gender,"every",pageable);
+    }
+
     // 브랜드 O 검색 키워드X
     public Page<Products> findProductsByBrand(Brand brand,Pageable pageable){
         return productsRepository.findProductsByBrand(brand,pageable);
+    }
+    // 브랜드 O 검색 키워드X
+    public Page<Products> findProductsByBrandGender(Brand brand,String gender,Pageable pageable){
+        return productsRepository.findProductsByBrandAndGender(brand,gender,"every",pageable);
     }
 
 

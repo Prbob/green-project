@@ -46,10 +46,11 @@ public class Member {  /////////////////// 완료 !
         this.imgName = imgName;
     }
 
-    public Member saveMember(String email, String pwd, String name){  // 회원 가입 때 쓸 메서드
+    public Member saveMember(String email, String pwd, String name,String phone){  // 회원 가입 때 쓸 메서드
         this.email = email;
         this.pwd = pwd;
         this.name = name;
+        this.phone = phone;
         return this;
     }
     @Embedded
@@ -63,13 +64,15 @@ public class Member {  /////////////////// 완료 !
     private String accessrigths; // 회원 권한, 처음 생성할 때 권한 부여X
 
     @Column(name="member_order_count",columnDefinition = "integer default 0")
-    private Long orderCount; /// 총 주문 횟수
-    @Column(name="member_grade")
+    private Long totalOrderPrice; /// 총 주문 횟수
+    @Column(name="member_grade",columnDefinition = "varchar(255) default 'NORMAL'")
     private String grade; // 회원 등급, 주문 횟수에 따른 등급조정?
 
     @Column(name="member_registrationDate")
     private LocalDate registrationDate; // 가입날짜?, 자동 주입
 
+    @Column(name="member_leave",columnDefinition = "varchar(255) default 'hi'")
+    private String leave;
 
     @OneToMany(mappedBy = "member")
     private List<Orders> orders = new ArrayList<>(); // 오더와 1대다 관계
@@ -80,12 +83,24 @@ public class Member {  /////////////////// 완료 !
     @OneToMany(mappedBy = "member")
     private List<Board> boards = new ArrayList<>();
 
+    public void updatTotalOrderPrice(int price){
+        this.totalOrderPrice += price;
+    }
+
     @PrePersist
     public void prePersist() {
         // 엔티티가 영구 저장되기 전에 실행되는 메서드
         this.registrationDate = LocalDate.now(); // 현재 날짜와 시간을 설정
     }
-
+    public void updatLeave(String leave){
+        this.leave = leave;
+    }
+    public void updatPwd(String pwd){
+        this.pwd = pwd;
+    }
+    public void updatPhone(String phone){
+        this.phone = phone;
+    }
     @OneToOne(mappedBy = "member")
     private Basket basket;
     public void saveBasket(Basket basket){
