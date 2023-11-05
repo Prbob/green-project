@@ -222,9 +222,30 @@ public class MemberController {
         return "member/orderDetail";
     }
 
+    @GetMapping("/member/myInformationSecurity")
+    public String myInformationSecurityForm(HttpServletRequest request,Model model,InfoUpdatPwdChk form){
+        if(fun.getMember(request)==null ){return "/alert/noLogin";}
+        model.addAttribute("form",form);
+        model.addAttribute("myinfo","myinfo");
+        return "/member/myInformationSecurity";
+    }
+    @PostMapping("/member/myInformationSecurity")
+    public String myInformationSecurity(HttpServletRequest request,Model model, @Valid @ModelAttribute("form") InfoUpdatPwdChk form,BindingResult result){
+        Member member = fun.getMemberDb(request);
+        if (result.hasErrors()){return "/member/myInformationSecurity";}
+        if(!member.getPwd().equals(form.getPwd())){
+            result.rejectValue("pwd","error.pwd","비밀번호가 일치하지 않습니다.");
+            return "/member/myInformationSecurity";
+        }
+        HttpSession session = request.getSession();
+        session.setAttribute(SessionConst.MYINFO,"myInfo");
+        return "redirect:/member/updateMyInformation";
+    }
+
     @GetMapping("/member/updateMyInformation")
     public String updateMyInformationForm(HttpServletRequest request,Model model){
-        if(fun.getMember(request)==null){return "/alert/noLogin";}
+        if(fun.getMember(request)==null || !fun.myInfo(request)){return "/alert/noLogin";}
+        model.addAttribute("myinfo","myinfo");
         Member member = fun.getMemberDb(request);
         MemberForm form = MemberForm.builder()
                 .name(member.getName())
@@ -261,6 +282,7 @@ public class MemberController {
             member.saveAddress(Address.builder().detailed_address(detailedAddress).middle_address(middleAddress).postal_code(postalCode).build()); // 주소 업뎃
         }
         memberService.updateMember(member);
+        fun.logout(request);
         model.addAttribute("form",form);
         return "/alert/updatMyInformation";
     }

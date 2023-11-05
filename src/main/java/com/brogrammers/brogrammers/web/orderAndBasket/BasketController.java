@@ -77,7 +77,7 @@ public class BasketController {
             return "redirect:/products/myBasket";
         }
         model.addAttribute("product",product);
-        return "products/detail";
+        return "redirect:/products/detail/"+productId;
     }
     //////////////////// 상품 장바구니로 ///////////////////////
 
