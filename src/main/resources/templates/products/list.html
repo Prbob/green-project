@@ -168,14 +168,14 @@
                 <div class="input">
                     <p>성별<br></p>
                     <div style="display: flex;">
-                        <a th:if="${gender == 'man'}" th:href="@{/products/list(gender=man)}" style="margin-right: 20px;"><strong>남성</strong></a>
-                        <a th:unless="${gender == 'man'}" th:href="@{/products/list(gender=man)}" style="margin-right: 20px;">남성</a>
+                        <a th:if="${gender == 'Man'}" th:href="@{/products/list(gender=Man)}" style="margin-right: 20px;"><strong>남성</strong></a>
+                        <a th:unless="${gender == 'Man'}" th:href="@{/products/list(gender=Man)}" style="margin-right: 20px;">남성</a>
 
-                        <a th:if="${gender == 'woman'}" th:href="@{/products/list(gender=woman)}" style="margin-right: 20px;"><strong>여성</strong></a>
-                        <a th:unless="${gender == 'woman'}" th:href="@{/products/list(gender=woman)}" style="margin-right: 20px;">여성</a>
+                        <a th:if="${gender == 'Woman'}" th:href="@{/products/list(gender=Woman)}" style="margin-right: 20px;"><strong>여성</strong></a>
+                        <a th:unless="${gender == 'Woman'}" th:href="@{/products/list(gender=Woman)}" style="margin-right: 20px;">여성</a>
 
-                        <a th:if="${gender == 'unisex'}" th:href="@{/products/list(gender=unisex)}"><strong>남녀공용</strong></a>
-                        <a th:unless="${gender == 'unisex'}" th:href="@{/products/list(gender=unisex)}">남녀공용</a>
+                        <a th:if="${gender == 'Unisex'}" th:href="@{/products/list(gender=Unisex)}"><strong>남녀공용</strong></a>
+                        <a th:unless="${gender == 'Unisex'}" th:href="@{/products/list(gender=Unisex)}">남녀공용</a>
                     </div>
                 </div>
 
