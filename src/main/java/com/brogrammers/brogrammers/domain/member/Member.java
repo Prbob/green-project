@@ -32,7 +32,7 @@ public class Member {  /////////////////// 완료 !
     @NotNull
     @Column(name="member_name")
     private String name; // 회원 이름
-    @Column(name="member_phone",columnDefinition = "varchar(255) default '010-1234-5678'")
+    @Column(name="member_phone")
     private String phone;
 
 
@@ -46,10 +46,11 @@ public class Member {  /////////////////// 완료 !
         this.imgName = imgName;
     }
 
-    public Member saveMember(String email, String pwd, String name){  // 회원 가입 때 쓸 메서드
+    public Member saveMember(String email, String pwd, String name, String phone){  // 회원 가입 때 쓸 메서드
         this.email = email;
         this.pwd = pwd;
         this.name = name;
+        this.phone = phone;
         return this;
     }
     @Embedded

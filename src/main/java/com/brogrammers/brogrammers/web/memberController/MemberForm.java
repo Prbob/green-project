@@ -18,17 +18,22 @@ public class MemberForm {
     private String pwd;
     @NotEmpty(message = "비밀번호 확인 입력란은 필수 입니다.")
     private String pwdChk;
+
+    @NotEmpty(message = "전화번호 입력은 필수 입니다.")
+    private String phone_number;
+
     private String postal_code;
     private String middle_address;
     private String detailed_address;
 
     @Builder
-    public MemberForm(Long id, String email, String name, String pwd, String pwdChk, String postal_code, String middle_address, String detailed_address) {
+    public MemberForm(Long id, String email, String name, String pwd, String pwdChk, String phone_number, String postal_code, String middle_address, String detailed_address) {
         this.id = id;
         this.email = email;
         this.name = name;
         this.pwd = pwd;
         this.pwdChk = pwdChk;
+        this.phone_number = phone_number;
         this.postal_code = postal_code;
         this.middle_address = middle_address;
         this.detailed_address = detailed_address;
