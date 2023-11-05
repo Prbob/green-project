@@ -25,7 +25,6 @@ public class MemberForm {
     private String postal_code;
     private String middle_address;
     private String detailed_address;
-    private String phone;
     private String grade;
     private Long totalOrderPrice;
     @Builder
@@ -40,7 +39,7 @@ public class MemberForm {
         this.postal_code = postal_code;
         this.middle_address = middle_address;
         this.detailed_address = detailed_address;
-        this.phone = phone;
+        this.phone_number = phone_number;
         this.grade = grade;
         this.totalOrderPrice = totalOrderPrice;
     }

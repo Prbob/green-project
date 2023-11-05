@@ -76,7 +76,7 @@ public class MemberController {
         Member member = new Member();
 
 //        member = member.saveMember(form.getEmail(),hashedPassword,form.getName());
-        member = member.saveMember(form.getEmail(),form.getPwd(),form.getName(),form.getPhone());
+        member = member.saveMember(form.getEmail(),form.getPwd(),form.getName(),form.getPwd());
 
 
         if(form.getPostal_code()!=null &&form.getMiddle_address()!=null&&form.getDetailed_address()!=null){
@@ -246,7 +246,7 @@ public class MemberController {
         }
         String pwd = form.getPwd();
         String pwdChk = form.getPwdChk();
-        String phone = form.getPhone();
+        String phone = form.getPhone_number();
         String detailedAddress = form.getDetailed_address();
         String middleAddress = form.getMiddle_address();
         String postalCode = form.getPostal_code();
@@ -256,7 +256,7 @@ public class MemberController {
         }
         Member member = fun.getMemberDb(request);
         member.updatPwd(form.getPwd()); // 비밀번호 변경
-        member.updatPhone(form.getPhone()); // 핸드폰 번호 변경
+        member.updatPhone(form.getPhone_number()); // 핸드폰 번호 변경
         if(!(form.getPostal_code().isEmpty() && form.getMiddle_address().isEmpty() && form.getDetailed_address().isEmpty())){
             member.saveAddress(Address.builder().detailed_address(detailedAddress).middle_address(middleAddress).postal_code(postalCode).build()); // 주소 업뎃
         }

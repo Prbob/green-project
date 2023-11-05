@@ -161,12 +161,10 @@ public class OrderController {
         Orders order = orderService.findById(orderId).get();
         Delivery delivery = order.getDelivery();
 
-        List<OrderProducts> orderproductsByOrders = orderProductsService.findOrderproductsByOrders(order);
+        List<OrderProducts> list = orderProductsService.findOrderproductsByOrders(order);
 
 
-//        if(!order){
-//            return "redirect:/";
-//        }
+        model.addAttribute("list",list);
         model.addAttribute("order",order);
         model.addAttribute("delivery",delivery);
         return "/orderAndBasket/orderSuccess";
