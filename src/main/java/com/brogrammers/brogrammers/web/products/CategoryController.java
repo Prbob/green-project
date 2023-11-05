@@ -60,7 +60,7 @@ public class CategoryController {
         categoryService.save(category);
         List<Category> categoryList = categoryService.findAll();
         model.addAttribute("categoryList",categoryList);
-        return "category/categoryList";
+        return "redirect:/category/list";
     }
     @GetMapping("/category/list")
     public String categoryList(Model model,HttpServletRequest request,@PageableDefault(page=0,size=15,sort="id",direction = Sort.Direction.DESC) Pageable pageable,
@@ -106,9 +106,8 @@ public class CategoryController {
             return "category/brandForm";
         }
         brandService.save(form.getName());
-        List<Brand> list = brandService.findAll();
-        model.addAttribute("brandList",list);
-        return "category/brandList";
+
+        return "redirect:/category/brandList";
     }
     @GetMapping("/category/brandList")
     public String brandList(Model model, HttpServletRequest request,String nameSearch,

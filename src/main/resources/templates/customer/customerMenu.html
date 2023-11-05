@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<th:block th:fragment="customerMenu">
+    <div class="sidebar">
+        <a href="/notice" aria-current="page">
+            <h2 class="snb_main_title">자주 묻는 질문</h2>
+        </a>
+        <nav>
+            <ul class="snb_menu">
+                <li class="menu_item"><a href="/customer/notice" aria-current="page" class="menu_link"> 공지사항 </a></li>
+                <li class="menu_item"><a href="/customer/questions" class="menu_link"> <span style="font-weight:bolder">자주 묻는 질문</span> </a></li>
+                <li class="menu_item"><a href="/customer/inspectionStandards" class="menu_link"> 검수 기준 </a></li>
+            </ul>
+        </nav>
+    </div>
+</th:block>
+</body>
+</html>

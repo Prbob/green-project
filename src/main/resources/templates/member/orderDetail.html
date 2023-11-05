@@ -152,16 +152,22 @@
                         <h3>받는 사람 정보</h3>
                         <table border="0">
                             <tr>
-                                <th>받는사람</th> <td>Name</td>
+                                <th>받는사람</th> <td th:text="${member.name}">Name</td>
                             </tr>
                             <tr>
-                                <th>전화번호</th> <td>Number</td>
+                                <th>전화번호</th> <td th:text="${member.phone}">Number</td>
                             </tr>
                             <tr>
-                                <th>받는주소</th> <td>receiver Address</td>
+                                <th>우편번호</th> <td th:text="${member.address.postal_code}">receiver Address</td>
                             </tr>
                             <tr>
-                                <th>요청사항</th> <td> comment </td>
+                                <th>받는주소</th> <td th:text="${member.address.middle_address}">receiver Address</td>
+                            </tr>
+                            <tr>
+                                <th>상세주소</th> <td th:text="${member.address.detailed_address}">receiver Address</td>
+                            </tr>
+                            <tr>
+                                <th>요청사항</th> <td th:text="${order.please}"> comment </td>
                             </tr>
                             </tr>
                         </table>
@@ -170,16 +176,10 @@
                         <h3>결제 정보</h3>
                         <table border="0">
                             <tr>
-                                <th>주문금액</th> <td><b>XXXX원</b></td>
+                                <th>결제 수단</th> <td th:text="${order.payment}">카카오페이 토스페이</td>
                             </tr>
                             <tr>
-                                <th>추가배송료</th> <td>0원</td>
-                            </tr>
-                            <tr>
-                                <th>결제 수단</th> <td>카카오페이 토스페이</td>
-                            </tr>
-                            <tr>
-                                <th>총결제금액</th> <td><b> XXXX + 0원</b></td>
+                                <th>총결제금액</th> <td th:text="${order.totalPrice}"><b> XXXX + 0원</b></td>
                             </tr>
 
                         </table>

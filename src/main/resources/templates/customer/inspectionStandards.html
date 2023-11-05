@@ -7,10 +7,129 @@
     <th:block th:replace="include/header :: header"></th:block>
 
     <!--공지사항 css-->
-    <link rel="stylesheet" th:href="@{/css/customer.css}" type="text/css">
-    <!--  아래의 css를 적용함. 위에거는 적용X  -->
-<!--    <link rel="stylesheet" type="text/css" href="/static/css/H_customer.css">-->
+    <link rel="stylesheet" th:href="@{/css/customer.css}"type="text/css">
+    <!-- 폰트어썸 -->
+    <script src="https://kit.fontawesome.com/45b9232fe5.js" crossorigin="anonymous"></script>
+    <style>
+        div.container{
+            display: flex;
+        }
+        div.content_title{
+            border-bottom: 2px solid black;
+            padding-bottom: 5px;
+            font-weight: 600;
+            color: black;
+        }
+        h2.snb_main_title{
+            color: black;
+        }
 
+
+
+
+        th {
+            font-weight: normal;
+        }
+        div.container{
+            display: flex;
+            justify-content: center;
+            margin-top: 30px;
+        }
+        div.sidebar{
+            margin-right: 20px;
+        }
+        div.content{
+            font-size: 14px;
+        }
+        div.content_title{
+            border-bottom: 2px solid black;
+            padding-bottom: 5px;
+            font-weight: 600;
+            color: black;
+        }
+        div.description_wrap{
+            margin-top: 20px;
+        }
+        /* 이거는 h3의 값을 가지고 있는 애들 서식 넣으려고 */
+        h3.title_check{
+            margin-top: 30px;
+        }
+        div.btn_check{
+            margin-top: 15px;
+        }
+        ul.description_list{
+            padding: 17px;
+            color: #b2b1af;
+        }
+        ul.description_list li{
+            list-style-type: square;
+            font-size: 14px;
+        }
+        li.more_list_item{
+            color: #b2b1af;
+            font-size: 11px;
+        }
+    /*  table  */
+        table{
+            font-size: 10px;
+            text-align: center;
+        }
+        table tr{
+            border-bottom: 1px solid #f5f5f5;
+        }
+        thead{
+            background-color: #fbfbfb;
+            color: #b2b1af;
+            font-weight: 300;
+        }
+        tbody{
+            color: #222222;
+        }
+        tbody tr{
+            text-align: left;
+            text-decoration: none;
+        }
+        tbody tr th{
+            padding: 10px 0;
+        }
+        tbody tr td{
+            text-align: center;
+        }
+        em{
+            display: block;
+            color: #f15746;
+        }
+        tbody tr p.etc{
+            color: #b2b1af;
+        }
+
+
+
+        p.etc{
+            font-size: 8px;
+
+        }
+        div.check_wrap p.etc_desc {
+            color: #b2b1af;
+        }
+
+        ul.more_info_list{
+            padding: 10px 0;
+        }
+
+        li.more_list_item{
+            margin-top: 3px;
+        }
+        p.add_check{
+            margin-top: 20px;
+        }
+        p.description{
+            margin-top: 10px;
+        }
+
+
+
+    </style>
 
 </head>
 <body>
@@ -18,22 +137,15 @@
 <th:block th:replace="include/bodyHead :: bodyHeader"></th:block>
 
 <div class="container">
-    <div class="sidebar">
-        <a href="/notice" aria-current="page">
-            <h2 class="snb_main_title">고객센터</h2>
-        </a>
-        <nav>
-            <ul class="snb_menu">
-                <li class="menu_item"><a href="/customer/notice" aria-current="page" class="menu_link"> 공지사항 </a></li>
-                <li class="menu_item"><a href="/customer/questions" class="menu_link"> 자주 묻는 질문 </a></li>
-                <li class="menu_item"><a href="/customer/inspectionStandards" class="menu_link"> <span style="font-weight:bolder">검수 기준</span> </a></li>
-            </ul>
-        </nav>
-    </div>
+
+    <th:block th:replace="customer/customerMenu :: customerMenu"></th:block>
+
 
     <div class="content">
         <div class="description_wrap">
-            <p><b>[업데이트] 2023/11.04 화</b></p>
+            <div class="content_title"><h2 style="color: black">검수 기준</h2></div>
+            <p style="margin-top: 20px"><b>[업데이트] 2021/11/29 월</b></p>
+            <p class="description"><b>[적용일시] 2021/12/03 금 00:00 체결 건 부터</b></p>
 
             <p class="description">
                 <span>UNCOMMON</span>의 검수기준은 거래 당사자간 원활한 거래와 보다 균형있는 검수기준
@@ -97,7 +209,7 @@
                                 <col style="width: 20%">
                             </colgroup>
 
-                            <thead>
+                            <thead style="">
                             <tr>
                                 <th scope="col">구분</th>
                                 <th scope="col">불합격</th>
@@ -460,7 +572,7 @@
                 또한 불가합니다.
             </p>
             <p class="description">
-                ※ KREAM을 통해 거래된 모든 상품은 입고 시 자동화 처리를 위해 고유의 정보를 포함한
+                ※ UNCOMMON을 통해 거래된 모든 상품은 입고 시 자동화 처리를 위해 고유의 정보를 포함한
                 스티커가 부착됩니다. 부착 위치는 제품에 따라 차이가 있으며 이는 발송(반송) 시에도
                 제거되지 않습니다.
             </p>
@@ -472,10 +584,6 @@
             <p class="etc_desc">'구매의사 확인' 이후 발생하는 반송건</p>
         </div>
     </div>
-
-
-
-
 </div>
 
 
@@ -483,4 +591,5 @@
 <!--footer-->
 <th:block th:replace="include/footer :: footer"></th:block>
 </body>
+
 </html>
