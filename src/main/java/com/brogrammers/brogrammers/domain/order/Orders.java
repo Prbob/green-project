@@ -35,9 +35,11 @@ public class Orders {
     private String phone;
     @Column(name="imp_uid")
     private String imp_uid;
+    @Column(name="please")
+    private String please;
 
     @Builder
-    public Orders(int totalPrice, String payment, Member member, String name, String phone, String imp_uid,Delivery delivery) {
+    public Orders(int totalPrice, String payment, Member member, String name, String phone, String imp_uid,Delivery delivery,String please) {
         this.totalPrice = totalPrice;
         this.payment = payment;
         this.member = member;
@@ -45,6 +47,7 @@ public class Orders {
         this.phone = phone;
         this.imp_uid = imp_uid;
         this.delivery = delivery;
+        this.please = please;
     }
 
     @Column(name="order_registrationDate")
