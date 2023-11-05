@@ -24,9 +24,8 @@
                 </li>
 
                 <li class="menu_item">
-<!--                    <strong th:if="# == ${#}" th:class="menu_link"> 로그인 정보 </strong>
-                    <a th:unless="# == ${#}" th:class="menu_link"  th:href="@{#}"> 로그인 정보 </a>-->
-                    <a th:class="menu_link" th:href="@{/member/updateMyInformation}"> 로그인 정보 </a>
+                    <strong th:if="loginInformation == ${loginInformation}" th:class="menu_link"> 로그인 정보 </strong>
+                    <a th:unless="loginInformation == ${loginInformation}" th:class="menu_link"  th:href="@{/member/updateMyInformation}"> 로그인 정보 </a>
                 </li>
             </ul>
         </nav>

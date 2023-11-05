@@ -185,17 +185,15 @@
                                         <div style="padding-top: 5px;">
                                             <form th:action="@{/order/basket/{productId} (productId=${basketInProducts.products.id})}" method="post">
                                                 <select id="quantity" name="quantity" style="color: #000;">
-                                                    <option th:each="i : ${#numbers.sequence(1, basketInProducts.products.stockQuantity)}"
+                                                    <option th:each="i : ${#numbers.sequence(1, (basketInProducts.products.stockQuantity > 10 ? 10 : basketInProducts.products.stockQuantity))}"
                                                             th:value="${i}" th:text="${i}" th:selected="${i == basketInProducts.quantity}"/>
                                                 </select>
                                                 <button type="submit" th:name="action" th:value="myBasket" style="background-color: #fff; color: #000; border: 1px solid #ccc; padding: 1.5px 6px; border-radius: 5px; cursor: pointer;">
                                                     수정
                                                 </button>
                                             </form>
+
                                         </div>
-
-
-
                                     </form>
                                 </div>
 
