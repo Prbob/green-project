@@ -18,9 +18,6 @@
         .wish_list li {
             border-bottom: 1px solid #D3D3D3;
         }
-        .profile_info{
-            width: 100%;
-        }
         .content_area{
             width:100%;
         }
@@ -47,13 +44,27 @@
         }
         #buttons{
             width: 100%;
-            border:1px solid red;
+            /*border:1px solid red;*/
         }
         .orderEdit {
             display: inline-block;
-            border: 1px solid blue;
-            width: 85px;
+            background-color: #eeeeee;
+            border-radius: 3px;
+            /*border: 1px solid blue;*/
+            width: 120px;
+            line-height: 40px;
+            letter-spacing: 3px;
             text-align: center;
+            margin: 6px auto;
+            font-weight: bold;
+        }
+        .delivery{
+            background-color: #1d85e6;
+            color: white;
+        }
+        .orderEdit:hover {
+            letter-spacing: 5px;
+            font-weight: bolder;
         }
 
         .tableBox{
@@ -80,6 +91,7 @@
             color: black;
         }
 
+
     </style>
 
 </head>
@@ -91,23 +103,14 @@
 
 <div tabindex="0" class="layout_base" data-v-e2abb636="" data-v-cdf8523a="">
     <div class="container my lg" data-v-e2abb636="" data-v-cdf8523a="" style="padding-top: 0px;">
-        <div class="sidebar">
-            <a href="/notice" aria-current="page">
-                <h2 data-v-cdf8523a="" class="snb_main_title">마이페이지</h2>
-            </a>
-            <nav>
-                <ul class="snb_menu">
-                    <li class="menu_item"  style="font-weight:bolder; color:#333;"><a href="#"> 구매 내역 </a></li>
-                    <li class="menu_item"><a href="#"> 관심 상품 </a></li>
-                    <li class="menu_item"><a href="#"> 로그인 정보 </a></li>
-                </ul>
-            </nav>
-        </div>
+
+        <th:block th:replace="include/memberMenu :: memberMenu"></th:block>
 
         <div data-v-cf6a6ef4="" data-v-cdf8523a="" class="content_area my-page-content">
             <div data-v-cf6a6ef4="" class="my_profile">
                 <div data-v-61e7a8a3="" data-v-cf6a6ef4="" class="content_title border">
-                    <div data-v-61e7a8a3="" class="title"><h3 data-v-61e7a8a3="">구매 내역</h3><!----></div><!----></div>
+
+                    <div data-v-61e7a8a3="" class="title"><h3 data-v-61e7a8a3="">주문 상세</h3><!----></div><!----></div>
                 <div data-v-cf6a6ef4="" class="profile_info">
 
                     <div data-v-8b96a82e="" data-v-cf6a6ef4="" class="profile_group">
@@ -125,6 +128,7 @@
                                         </div>
                                         <div>
                                             <b><span th:text="|상품명 : ${productsCount.product.name}|">item name</span></b>
+                                            <span><br></span>
                                             <span style="font-size:12px;" th:text="|(${productsCount.quantity} ea)|"></span> <br>
                                             <span th:text="| 가격 : ${productsCount.quantity * productsCount.product.price} |"></span>
                                         </div>
@@ -132,7 +136,7 @@
                                 </td>
                                 <td colspan="1" rowspan="0" id="buttonBox">
                                     <div id="buttons">
-                                        <a href="cancelOrder" class="orderEdit">배송조회</a>
+                                        <a href="cancelOrder" class="orderEdit delivery">배송조회</a>
                                         <a href="cancelOrder" class="orderEdit">주문취소</a>
                                     </div>
                                 </td>

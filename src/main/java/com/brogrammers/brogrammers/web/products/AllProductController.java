@@ -194,6 +194,9 @@ public String productList(Model model, HttpServletRequest request,
     model.addAttribute("categories", categories);
     model.addAttribute("brands", brands);
 
+    // 헤더 home, style, shop중 shop 글자 굵기를 위한
+    model.addAttribute("shop", "shop");
+
     return "products/list";
 }
 

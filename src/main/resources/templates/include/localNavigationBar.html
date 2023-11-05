@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<th:block th:fragment="localNavigationBar">
+
+    <nav data-v-3e40d81c="" class="gnb" >
+        <ul class="gnb_list">
+            <li data-v-83e3cb96="" data-v-3e40d81c="" class="gnb_item" style="float: left">
+                <a th:if="home == ${home}" data-v-83e3cb96="" href="/" aria-current="page" class="active nuxt-link-active gnb_link active">HOME</a>
+                <a th:unless="home == ${home}" data-v-83e3cb96="" href="/" aria-current="page" class="gnb_link">HOME</a>
+            </li>
+
+            <li data-v-83e3cb96="" data-v-3e40d81c="" class="gnb_item" style="float: left" >
+                <a th:if="style == ${style}" data-v-83e3cb96="" href="/menu/social" class="active nuxt-link-active gnb_link active"> STYLE </a>
+                <a th:unless="style == ${style}" data-v-83e3cb96="" href="/menu/social" class="gnb_link"> STYLE </a>
+            </li>
+
+            <li data-v-83e3cb96="" data-v-3e40d81c="" class="gnb_item" style="float: left">
+                <a th:if="shop == ${shop}" data-v-83e3cb96="" th:href="@{/products/list}" class="active nuxt-link-active gnb_link active"> SHOP </a>
+                <a th:unless="shop == ${shop}" data-v-83e3cb96="" th:href="@{/products/list}" class="gnb_link"> SHOP </a>
+            </li>
+        </ul>
+    </nav>
+
+</th:block>
+</body>
+</html>
