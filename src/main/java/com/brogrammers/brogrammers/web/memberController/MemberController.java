@@ -235,7 +235,6 @@ public class MemberController {
                 .detailed_address(member.getAddress().getDetailed_address())
                 .grade(member.getGrade())
                 .build();
-        model.addAttribute("loginInformation","loginInformation");
         model.addAttribute("form",form);
         return "/member/updateMyInformation";
     }
