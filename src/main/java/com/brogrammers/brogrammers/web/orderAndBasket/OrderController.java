@@ -174,7 +174,7 @@ public class OrderController {
         model.addAttribute("list",list);
         model.addAttribute("order",order);
         model.addAttribute("delivery",delivery);
-        return "/orderAndBasket/orderSuccess";
+        return "orderAndBasket/orderSuccess";
     }
 
 

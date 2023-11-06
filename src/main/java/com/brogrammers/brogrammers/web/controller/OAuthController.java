@@ -42,10 +42,10 @@ public class OAuthController {
         Optional<Member> memberChk = memberService.findByEmail(email);
         if(memberChk.isPresent()){
             session.setAttribute(SessionConst.LOGIN_MEMBER,memberChk.get()); // 로그인 정보 담아주기
-            return "/alert/kakaologinSuccess";
+            return "alert/kakaologinSuccess";
         }
         model.addAttribute("email",email);
-        return "/alert/kakaologin";
+        return "alert/kakaologin";
     }
 
 
