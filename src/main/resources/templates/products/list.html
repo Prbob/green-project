@@ -168,9 +168,14 @@
                 <div class="input">
                     <p>성별<br></p>
                     <div style="display: flex;">
-                        <a href="#" style="margin-right: 20px;">male</a>
-                        <a href="#" style="margin-right: 20px;">female</a>
-                        <a href="#">every</a>
+                        <a th:if="${gender == 'Man'}" th:href="@{/products/list(gender=Man)}" style="margin-right: 20px;"><strong>남성</strong></a>
+                        <a th:unless="${gender == 'Man'}" th:href="@{/products/list(gender=Man)}" style="margin-right: 20px;">남성</a>
+
+                        <a th:if="${gender == 'Woman'}" th:href="@{/products/list(gender=Woman)}" style="margin-right: 20px;"><strong>여성</strong></a>
+                        <a th:unless="${gender == 'Woman'}" th:href="@{/products/list(gender=Woman)}" style="margin-right: 20px;">여성</a>
+
+                        <a th:if="${gender == 'Unisex'}" th:href="@{/products/list(gender=Unisex)}"><strong>남녀공용</strong></a>
+                        <a th:unless="${gender == 'Unisex'}" th:href="@{/products/list(gender=Unisex)}">남녀공용</a>
                     </div>
                 </div>
 
@@ -183,9 +188,15 @@
         <div class="categories">
             <ul class="category_gnb">
                 <li class="category" style="font-weight: bolder"><a th:href="@{/products/list}" th:text="전체"></a></li>
-               <li class="category" th:each="category : ${categories}">
-                   <a th:if="${category != pname}" th:href="@{/products/category(categoryId=${category.id})}" th:text="${category.name}"></a>
+               <li class="category" th:if="${categoryName != null}">
+                   <a th:text="${categoryName}"></a>
                </li>
+                <li class="category" th:if="${brandName != null}">
+                   <a th:text="${brandName}"></a>
+               </li>
+                <li class="category" th:if="${gender != null}">
+                    <a th:text="${gender}"></a>
+                </li>
             </ul>
         </div>
 

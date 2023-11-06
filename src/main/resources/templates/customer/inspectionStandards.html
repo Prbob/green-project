@@ -3,34 +3,47 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>검수 기준</title>
+    <title>UNCOMMON | 검수 기준</title>
     <th:block th:replace="include/header :: header"></th:block>
 
-    <link rel="stylesheet" type="text/css" href="/static/css/customer.css">
+    <!--공지사항 css-->
+    <link rel="stylesheet" th:href="@{/css/customer.css}"type="text/css">
+    <!-- 폰트어썸 -->
+    <script src="https://kit.fontawesome.com/45b9232fe5.js" crossorigin="anonymous"></script>
     <style>
+        div.container{
+            display: flex;
+        }
+        div.content_title{
+            border-bottom: 3px solid black;
+            padding-bottom: 16px;
+            font-weight: 600;
+            color: black;
+        }
+        h2.snb_main_title{
+            color: black;
+        }
+
+
         th {
             font-weight: normal;
         }
         div.container{
             display: flex;
             justify-content: center;
-            margin-top: 30px;
+            margin-top: 20px;
         }
         div.sidebar{
             margin-right: 20px;
         }
         div.content{
-            width: 45%;
             font-size: 14px;
         }
-        div.content_title{
-            border-bottom: 2px solid black;
-            padding-bottom: 5px;
-            font-weight: 600;
-            color: black;
-        }
+
         div.description_wrap{
             margin-top: 20px;
+            margin-bottom: 20px;
+            padding-bottom: 16px;
         }
         /* 이거는 h3의 값을 가지고 있는 애들 서식 넣으려고 */
         h3.title_check{
@@ -109,9 +122,9 @@
             margin-top: 10px;
         }
 
+
+
     </style>
-
-
 
 </head>
 <body>
@@ -119,22 +132,19 @@
 <th:block th:replace="include/bodyHead :: bodyHeader"></th:block>
 
 <div class="container">
-    <div class="sidebar">
-        <a href="/notice" aria-current="page">
-            <h2 class="snb_main_title">고객센터</h2>
-        </a>
-        <nav>
-            <ul class="snb_menu">
-                <li class="menu_item"><a href="/customer/notice" aria-current="page" class="menu_link"> 공지사항 </a></li>
-                <li class="menu_item"><a href="/customer/questions" class="menu_link"> 자주 묻는 질문 </a></li>
-                <li class="menu_item"><a href="/customer/inspectionStandards" class="menu_link"> <span style="font-weight:bolder">검수 기준</span> </a></li>
-            </ul>
-        </nav>
-    </div>
+
+    <th:block th:replace="customer/customerMenu :: customerMenu"></th:block>
+
 
     <div class="content">
         <div class="description_wrap">
-            <div class="content_title"><h2 style="color: black">검수 기준</h2></div>
+
+            <div data-v-61e7a8a3="" data-v-cf6a6ef4="" class="content_title border">
+                <div data-v-61e7a8a3="" class="title">
+                    <h3 data-v-61e7a8a3="" style="font-size:24px; height:27px;">검수기준</h3>
+                </div>
+            </div>
+
             <p style="margin-top: 20px"><b>[업데이트] 2021/11/29 월</b></p>
             <p class="description"><b>[적용일시] 2021/12/03 금 00:00 체결 건 부터</b></p>
 
@@ -575,10 +585,6 @@
             <p class="etc_desc">'구매의사 확인' 이후 발생하는 반송건</p>
         </div>
     </div>
-
-
-
-
 </div>
 
 
@@ -586,4 +592,5 @@
 <!--footer-->
 <th:block th:replace="include/footer :: footer"></th:block>
 </body>
+
 </html>

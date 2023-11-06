@@ -168,7 +168,7 @@ public class CategoryController {
                               Model model){
         if(fun.getMember(request)==null || fun.getMember(request).getAccessrigths().equals("NORMAL")){return "/alert/noLogin";}
 
-        CategoryForm form = categoryService.getCategoryFromById(id);
+        CategoryForm form = categoryService.getCategoryFormById(id);
         model.addAttribute("cateUp","cateUp");
         model.addAttribute("msg","카테고리 수정");
         model.addAttribute("form",form);
@@ -187,7 +187,7 @@ public class CategoryController {
             return "category/categoryForm";
         }
 
-        categoryService.updatCatoegryByForm(form);
+        categoryService.updatCatoegoryByForm(form);
         model.addAttribute("msg","카테고리 업데이트");
         model.addAttribute("form",form);
         return "redirect:/category/list";

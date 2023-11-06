@@ -1,6 +1,7 @@
 package com.brogrammers.brogrammers.web.controller;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
@@ -12,17 +13,21 @@ public class SeviceController {
     }
 
     @GetMapping("/customer/notice") // 고객센터
-    public String notice(){
+    public String notice(Model model){
+
+        model.addAttribute("notice","notice");
         return "customer/notice";
     }
 
-    @GetMapping("/customer/questions") // 공지사항
-    public String questions(){
+    @GetMapping("/customer/questions") // 자주 묻는 질문
+    public String questions(Model model){
+        model.addAttribute("questions","questions");
         return "customer/questions";
     }
 
     @GetMapping("/customer/inspectionStandards") // 검수기준
-    public String inspectionStandards(){
+    public String inspectionStandards(Model model){
+        model.addAttribute("inspectionStandards","inspectionStandards");
         return "customer/inspectionStandards";
     }
 

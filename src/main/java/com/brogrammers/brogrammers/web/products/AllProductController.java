@@ -116,7 +116,13 @@ public String productList(Model model, HttpServletRequest request,
     if(nameSearch!=null){ // 키워드O
         if(brandId!=null){ // 키워드O 브랜드O
             Brand brand = brandService.findById(brandId).get();
+            model.addAttribute("brandName", brand.getName());
+
             if(categoryId!=null){// 키워드O 카테고리O 브랜드O
+                Category category = categoryService.findById(categoryId).orElse(null);
+                if(category != null) {
+                    model.addAttribute("categoryName", category.getName());
+                }
                 if(!gender.isEmpty()){ // 키워드O 카테고리O 브랜드O 성별O
                     products = productCategoryService.findProductsByBrandNameCategoryGender(brand,nameSearch,categoryService.findById(categoryId).get(),pageable,gender);
                 }else{ // 키워드O 카테고리O 브랜드O 성별X
@@ -131,6 +137,10 @@ public String productList(Model model, HttpServletRequest request,
             }
         }else{ // 키워드 OOO 브랜드XXXX
             if(categoryId!=null){ // 키워드O 브랜드X 카테고리O
+                Category category = categoryService.findById(categoryId).orElse(null);
+                if(category != null) {
+                    model.addAttribute("categoryName", category.getName());
+                }
                 if(!gender.isEmpty()){ // 키워드O 브랜드X 카테고리O 성별O
                     products = productCategoryService.findProductsByNameCategoryGender(nameSearch,categoryService.findById(categoryId).get(),gender,pageable);
                 }else{ // 키워드O 브랜드X 카테고리O 성별X
@@ -147,7 +157,12 @@ public String productList(Model model, HttpServletRequest request,
     }else{ // 키워드 XXXXXXXXXX
         if(brandId!=null){ // 브랜드 OOOOOOO
             Brand brand = brandService.findById(brandId).get();
+            model.addAttribute("brandName", brand.getName());
             if(categoryId!=null){  // 키워드X 브랜드O 카테고리O
+                Category category = categoryService.findById(categoryId).orElse(null);
+                if(category != null) {
+                    model.addAttribute("categoryName", category.getName());
+                }
                 if(gender!=null){   // 키워드X 브랜드O 카테고리O 성별O
                     products = productCategoryService.findProductsByBrandCategory(brand,categoryService.findById(categoryId).get(),pageable);
                 } else{ // 키워드X 브랜드O 카테고리O 성별X
@@ -162,6 +177,10 @@ public String productList(Model model, HttpServletRequest request,
             }
         }else{ // 검색 키워드가 없고 브랜드 조건이 없을 때
             if(categoryId!=null){ // 키워드x 브랜드x 카테고리O
+                Category category = categoryService.findById(categoryId).orElse(null);
+                if(category != null) {
+                    model.addAttribute("categoryName", category.getName());
+                }
                 if(gender!=null){ // 키워드x 브랜드x 카테고리O 성별O
                     products = productCategoryService.findProductsByCategoryGender(categoryService.findById(categoryId).get(),gender,pageable);
                 } else{
