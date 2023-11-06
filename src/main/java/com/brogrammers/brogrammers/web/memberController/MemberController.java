@@ -255,6 +255,7 @@ public class MemberController {
                 .middle_address(member.getAddress().getMiddle_address())
                 .detailed_address(member.getAddress().getDetailed_address())
                 .grade(member.getGrade())
+                .totalOrderPrice(member.getTotalOrderPrice())
                 .build();
         model.addAttribute("form",form);
         return "/member/updateMyInformation";

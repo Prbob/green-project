@@ -230,14 +230,13 @@
                 </div><!--id sizeSelect END-->
                 <div class="space">&nbsp; </div>
                 <label > 선택 수량 : </label>
-                <input name="quantity" type="number" value="1">
+                <input name="quantity" type="number" value="1" required>
                 <div class="space">&nbsp; </div>
                 <div id="button">
                     <button type="submit" th:name="action" th:value="buy" class="btn btn-primary first" role="button" name="basket">
                         즉시구매
                     </button>
                     <button type="submit" th:name="action" th:value="basket" class="btn btn-primary second" role="button" name="basket"><i class="fa-solid fa-cart-plus" onclick="confirmBasket(event)"></i></button>
-                    <div th:if="${error}"><p>최소 수량은 0개부터 입니다.</p></div>
                 </div>
             </div>
 

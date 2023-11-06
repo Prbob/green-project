@@ -46,7 +46,7 @@ public class BasketController {
     @PostMapping("/order/basket/{productId}")
     public String addBasket(@PathVariable("productId") Long productId, HttpServletRequest request, Model model,
                             @RequestParam("quantity")int quantity, @RequestParam("action")String action, @RequestParam(name = "sizeParam",required = false)Integer sizeParam){
-        if (quantity<1){
+        if (quantity<1 ){
             model.addAttribute("errormsg","최소 수량은 1개부터 입니다.");
             model.addAttribute("productId",productId);
             return "alert/quantityerror";

@@ -177,14 +177,14 @@
                 <div class="input">
                     <p>성별<br></p>
                     <div style="display: flex;">
-                        <a th:if="${gender == 'Man'}" th:href="@{/products/list(gender=Man)}" style="margin-right: 20px;"><strong>남성</strong></a>
-                        <a th:unless="${gender == 'Man'}" th:href="@{/products/list(gender=Man)}" style="margin-right: 20px;">남성</a>
+                        <a th:if="${gender == 'male'}" th:href="@{/products/list(gender=male)}" style="margin-right: 20px;"><strong>남성</strong></a>
+                        <a th:unless="${gender == 'male'}" th:href="@{/products/list(gender=male)}" style="margin-right: 20px;">남성</a>
 
-                        <a th:if="${gender == 'Woman'}" th:href="@{/products/list(gender=Woman)}" style="margin-right: 20px;"><strong>여성</strong></a>
-                        <a th:unless="${gender == 'Woman'}" th:href="@{/products/list(gender=Woman)}" style="margin-right: 20px;">여성</a>
+                        <a th:if="${gender == 'female'}" th:href="@{/products/list(gender=female)}" style="margin-right: 20px;"><strong>여성</strong></a>
+                        <a th:unless="${gender == 'female'}" th:href="@{/products/list(gender=female)}" style="margin-right: 20px;">여성</a>
 
-                        <a th:if="${gender == 'Unisex'}" th:href="@{/products/list(gender=Unisex)}"><strong>남녀공용</strong></a>
-                        <a th:unless="${gender == 'Unisex'}" th:href="@{/products/list(gender=Unisex)}">남녀공용</a>
+                        <a th:if="${gender != 'male' && gender !='female'}" th:href="@{/products/list}"><strong>남녀공용</strong></a>
+                        <a th:if="${gender == 'male' || gender == 'female'}" th:href="@{/products/list}">남녀공용</a>
                     </div>
                 </div>
 
@@ -196,7 +196,7 @@
     <div class="content_area">
         <div class="categories">
             <ul class="category_gnb">
-                <li class="category" style="font-weight: bolder"><a th:href="@{/products/list}" th:text="전체"></a></li>
+                <li class="category" style="font-weight: bolder"><a th:href="@{/products/list}" th:text="초기화"></a></li>
                <li class="category" th:if="${categoryName != null}">
                    <a th:text="${categoryName}"></a>
                </li>
