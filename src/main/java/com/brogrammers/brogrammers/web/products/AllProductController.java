@@ -1,7 +1,9 @@
 package com.brogrammers.brogrammers.web.products;
 
+import com.brogrammers.brogrammers.domain.board.Review;
 import com.brogrammers.brogrammers.domain.member.Member;
 import com.brogrammers.brogrammers.domain.order.OrderProducts;
+import com.brogrammers.brogrammers.domain.order.Orders;
 import com.brogrammers.brogrammers.domain.product.*;
 import com.brogrammers.brogrammers.domain.service.*;
 import com.brogrammers.brogrammers.form.DuplicatedProduct;
@@ -41,6 +43,8 @@ public class AllProductController {
     @Autowired BrandService brandService;
     @Autowired ProductCategoryService productCategoryService;
     @Autowired OrderProductsService orderProductsService;
+    @Autowired OrderService orderService;
+    @Autowired ReviewService rs;
     /////////////////////////////////////상품 등록 ///////////////////////////////////
     @GetMapping("/products/add")
     public String addForm(@ModelAttribute("form") ProductForm form ,Model model, @PathVariable(value = "productId",required = false)Long productId,
@@ -238,7 +242,6 @@ public String productList(Model model, HttpServletRequest request,
         model.addAttribute("nowPage",nowPage);
         model.addAttribute("startPage",startPage);
         model.addAttribute("endPage",endPage);
-        model.addAttribute("categoryList",products);
         model.addAttribute("myAdd","myAdd");
 
         model.addAttribute("products",products);
@@ -248,7 +251,8 @@ public String productList(Model model, HttpServletRequest request,
 
     ///////////////////////////////////// 디테일 ///////////////////////////////////
     @GetMapping("/products/detail/{productId}") // 디테일 페이지 컨트롤러
-    public String detail(@PathVariable("productId")Long productId,Model model,HttpServletRequest request){
+    public String detail(@PathVariable("productId")Long productId,Model model,HttpServletRequest request,
+                         @PageableDefault(page=0,size=1,sort="id",direction = Sort.Direction.DESC)Pageable pageable){
         Products product = productService.getByid(productId); //
 
         List<Imgs> imgs = product.getImgs();
@@ -263,7 +267,25 @@ public String productList(Model model, HttpServletRequest request,
         for(Products products1 : products){
             sizeList.add(products1.getSize());
         }
-
+//        if(member!=null){
+//            List<Orders> ordersByMember = orderService.findOrdersByMember(member); // 회원의 주문 목록 불러오기
+//            for(Orders orders : ordersByMember){
+//                Optional<OrderProducts> orderProductsByOrdersAndProducts =
+//                        orderProductsService.findOrderProductsByOrdersAndProducts(orders, product);
+//                if(orderProductsByOrdersAndProducts.isPresent()){
+//                    model.addAttribute("reviewAccess","reviewAccess");
+//                }
+//            }
+//        }
+//        Page<Review> reviews = rs.findReviewByProductName(product.getName(), pageable);
+//        int nowPage = reviews.getPageable().getPageNumber() + 1; // 5
+//        int startPage = Math.max(1,nowPage%5==0?nowPage-4:nowPage/5*5+1);
+//        int endPage = Math.min(reviews.getTotalPages(),startPage+4);
+//        model.addAttribute("totalPage",reviews.getTotalPages());
+//        model.addAttribute("nowPage",nowPage);
+//        model.addAttribute("startPage",startPage);
+//        model.addAttribute("endPage",endPage);
+//        model.addAttribute("reviews",reviews);
         model.addAttribute("sizeList",sizeList);
         model.addAttribute("accessrigths",accessrigths);
         model.addAttribute("imgs",imgs);
@@ -367,6 +389,17 @@ public String productList(Model model, HttpServletRequest request,
         return "redirect:/products/list";
     }
 
+//    @PostMapping("/product/review")
+//    public String review(HttpServletRequest request, Model model,String content,Long productId){
+//        Member member = fun.getMemberDb(request);
+//
+//        Products products = productService.getByid(productId); // 주문 받아와야됨
+//        String name = products.getName();
+//        Review review = new Review();
+//        review.saveContent(content); review.saveMember(member); review.saveProductName(name);
+//        rs.save(review);
+//        return "redirect:/products/detail/"+productId;
+//    }
 
 
 }

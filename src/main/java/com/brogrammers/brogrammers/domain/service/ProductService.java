@@ -134,5 +134,4 @@ public class ProductService {
         return productsRepository.findProductsByBrandAndGender(brand,gender,"every",pageable);
     }
 
-
 }

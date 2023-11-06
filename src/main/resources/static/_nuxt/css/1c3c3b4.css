@@ -620,7 +620,9 @@
     line-height: 17px;
     overflow: hidden
 }
-
+.info_box dt{
+    margin-top: 5px;
+}
 .info_box+.info_box[data-v-05a4f438] {
     margin-top: 6px
 }
@@ -1534,6 +1536,15 @@ section[data-v-240c5974] .section_title .title_txt {
 .delivery_info[data-v-240c5974] {
     padding-right: 60px;
     position: relative
+}
+.delivery_info input{
+    width: 230px;
+    padding:5px;
+    margin: 5px;
+    margin-top:0px;
+}
+.delivery_info input[type=button]{
+    width: 100px;
 }
 
 .delivery_tab .delivery_info[data-v-240c5974] {

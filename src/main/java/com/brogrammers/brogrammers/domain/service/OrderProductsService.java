@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 
 @Transactional
 @RequiredArgsConstructor
@@ -24,5 +25,9 @@ public class OrderProductsService {
     }
     public List<OrderProducts> findOrderProductsByProducts(Products products){
         return orderProductsRepository.findOrderProductsByProducts(products);
+    }
+
+    public Optional<OrderProducts> findOrderProductsByOrdersAndProducts(Orders orders , Products products){
+        return orderProductsRepository.findOrderProductsByOrdersAndProducts(orders,products);
     }
 }

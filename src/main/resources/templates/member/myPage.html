@@ -134,6 +134,9 @@
         border:1px solid gray;
         margin-left:10px;
         }
+        #detailAlink{
+            margin-bottom:10px;
+        }
     </style>
 
 </head>
@@ -164,8 +167,8 @@
                                     <div class="rightInfo">
 
                                         <p><a href="/products/detail/"><b th:text="|주문 번호 : ${form.orders.id}|">item name</b></a></p>  <!-- 주문 번호-->
-                                        <p th:text="|주문 금액 : ${#numbers.formatDecimal(form.orders.totalPrice,3, 'COMMA',0,'POINT')} 원|"></p>
-                                        <a th:href="@{/member/orderDetail(orderId=${form.orders.id})}"> &nbsp; > 주문 상세보기 </a>
+                                        <p th:text="|주문 금액 : ${#numbers.formatDecimal(form.orders.totalPrice,3, 'COMMA',0,'POINT')} 원|" id="detailAlink">></p>
+                                        <a th:href="@{/member/orderDetail(orderId=${form.orders.id})}"  &nbsp; > > 주문 상세보기 </a>
                                     </div>
                                     <div th:text="|구매 일자 : ${form.orders.registrationDate}|"></div>
                                 </div>

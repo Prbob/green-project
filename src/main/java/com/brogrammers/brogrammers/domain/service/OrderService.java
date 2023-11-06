@@ -64,4 +64,8 @@ public class OrderService {
     public Page<Orders> findOrdersByMember(Member member, Pageable pageable){
         return ordersRepository.findOrdersByMember(member,pageable);
     }
+
+    public List<Orders> findOrdersByMember(Member member){
+        return ordersRepository.findOrdersByMember(member);
+    }
 }
