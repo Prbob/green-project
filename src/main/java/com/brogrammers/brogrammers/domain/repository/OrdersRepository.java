@@ -8,6 +8,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
+import java.util.List;
 import java.util.Optional;
 
 public interface OrdersRepository extends JpaRepository<Orders,Long> {
@@ -15,4 +16,6 @@ public interface OrdersRepository extends JpaRepository<Orders,Long> {
     Optional<Orders> findOrdersById(@Param("id") Long id);
 
     Page<Orders> findOrdersByMember(Member member, Pageable pageable);
+
+    List<Orders> findOrdersByMember(Member member);
 }
