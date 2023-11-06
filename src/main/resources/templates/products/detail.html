@@ -12,34 +12,59 @@
         }
         html{scroll-behavior:smooth;}
         p{
-            line-height: 2em;
+            line-height: 1.8em;
+        }
+
+        #bodyContent{
+            display:flex;
+            margin:0 auto;
+            width: 1100px;
+
+        }
+        #bodyContent > form{
+            height: 600px;
         }
         .form-group {
-            margin:0px auto;
-            max-width:1100px;
+            margin: 0px auto;
+            width: 1100px;
             min-width: 600px;
+            position:relative;
+            height: 700px;
         }
-        #fixed {
-            padding : 0px 20px 40px 30px;
-            /*border: 1px solid blue;*/
-            width: 500px;
+
+        #leftSide{
+            display: inline-block;
+            width: 550px;
+            height: 550px;
+            background-color: #eeeeee;
+            float: left;
+        }
+        #leftSide img {
+            width: 100%;
             height: 100%;
-            font-size: 18px;
-            position: fixed;
-            left:50%;
         }
-        #fixed #infoBox {
+
+        #rightSide {
+            padding : 0px 20px 40px 30px;
+            width: 550px;
+            height: 550px;
+            font-size: 18px;
+            left:50%;
+            position: absolute;
+            right: 0;
+        }
+        #rightSide #infoBox {
             box-shadow: 0 -1px 0px #cccccc;
-            height: 40%;
+            height: 65%;
             padding-top: 30px;
             padding-bottom : 30px;
             overflow: hidden;
         }
-        #fixed .data{
+        #rightSide .data{
             text-align: right;
         }
 
-        #fixed #selectBox{
+        #rightSide #selectBox{
             box-shadow: 0 -1px 0px #cccccc;
             padding-top : 30px;
             position:relative;
@@ -104,20 +129,6 @@
             height: 10%;
         }
 
-        #leftSide{
-            display: inline-block;
-            width: 50%;
-            height: 50%;
-            /*border: 1px solid red;*/
-            background-color: #eeeeee;
-            float: left;
-            margin-right: 20px;
-        }
-        #leftSide img {
-            width: 100%;
-            height: 100%;
-        }
-
 
 
         <!--///////////////////////-->
@@ -152,15 +163,47 @@
         .next {
           right: 960px;
         }
+        #imageUl {
+            position:relative;
+            width: 550px;
+        }
+        #imageUl .prev{
+            position: absolute;
+            left: 5px;
+            top:272px;
+        }
+        #imageUl .next{
+            position: absolute;
+            right: 5px;
+            top: 270px;
+        }
+
 
     </style>
 </head>
 <body>
 <th:block th:replace="include/bodyHead :: bodyHeader"></th:block>
+<div id="bodyContent">
 <h2 th:text="${msg}">상품등록(디테일) 페이지 </h2>
 <form th:action="@{/order/basket/{productId} (productId=${product.id})}" th:object="${product}" method="post">
     <div class="form-group">
-        <div id="fixed">
+
+
+        <div id="leftSide">
+            <div id="imageUl" class="slider">
+                <div class="slide">
+                    <img th:src="@{|/upload/${product.imgName}|}">
+                </div>
+                <div class="slide" th:each="img : ${imgs}">
+                    <img th:src="@{|/upload/${img.saveName}|}">
+                </div>
+
+                <button class="prev"><i class="fa-solid fa-chevron-up fa-rotate-270"></i></button>
+                <button class="next"><i class="fa-solid fa-chevron-up fa-rotate-90"></i></button>
+            </div>
+        </div>
+
+        <div id="rightSide">
             <input type="hidden" name="productId" th:value="*{id}"/>
             <div id="infoBox">
                 <h3>Product Info</h3>
@@ -178,10 +221,10 @@
                     <span>사이즈 선택 :</span>
 
 
-                        <select class="form-select" style="width:190px;" name="sizeParam">
-                            <option th:each="size : ${sizeList}" th:value="${size}" th:text="${size}"></option>
+                    <select class="form-select" style="width:190px;" name="sizeParam">
+                        <option th:each="size : ${sizeList}" th:value="${size}" th:text="${size}"></option>
 
-                        </select>
+                    </select>
 
                 </div><!--id sizeSelect END-->
                 <div class="space">&nbsp; </div>
@@ -218,23 +261,11 @@
                 </li>
             </ul>
         </div>-->
-
-        <div id="leftSide">
-            <div id="imageUl" class="slider">
-                <div class="slide">
-                    <img th:src="@{|/upload/${product.imgName}|}">
-                </div>
-                <div class="slide" th:each="img : ${imgs}">
-                    <img th:src="@{|/upload/${img.saveName}|}">
-                </div>
-
-                <button class="prev"><i class="fa-solid fa-chevron-up fa-rotate-270"></i></button>
-                <button class="next"><i class="fa-solid fa-chevron-up fa-rotate-90"></i></button>
-            </div>
-        </div>
     </div>
 
 </form>
+</div>
+<th:block th:replace="include/footer :: footer"></th:block>
 <script>
 document.addEventListener('DOMContentLoaded', function() {
   const slides = document.querySelectorAll('.slide');
