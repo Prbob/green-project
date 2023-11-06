@@ -1,6 +1,7 @@
 package com.brogrammers.brogrammers.domain.board;
 
 import com.brogrammers.brogrammers.domain.member.Member;
+import lombok.Data;
 import lombok.Getter;
 
 import javax.persistence.*;
@@ -10,9 +11,9 @@ import java.time.LocalDate;
 @Entity
 public class Review {
     @Id @GeneratedValue
-    @Column(name="board_id")
+    @Column(name="review_id")
     private Long id;
-    @Column(name="board_content")
+    @Column(name="review_content")
     private String content; // 게시글 내용
 
     @ManyToOne(fetch = FetchType.LAZY)
@@ -22,6 +23,16 @@ public class Review {
     @Column(name="board_product_name")
     private String productName;
 
+    public void saveMember(Member member){
+        this.member = member;
+    }
+    public void saveProductName(String productName){
+        this.productName=productName;
+    }
+    public void saveContent(String content){
+        this.content = content;
+
+    }
     @Column(name="board_registrationDate")
     private LocalDate registrationDate; // 게시글 작성날짜
     @PrePersist

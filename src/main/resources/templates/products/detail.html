@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>로그인</title>
+    <title>UN/Detail</title>
     <script src="https://kit.fontawesome.com/3697bc8c45.js" crossorigin="anonymous"></script>
     <th:block th:replace="include/header :: header"></th:block>
 
@@ -180,8 +180,33 @@
         </div>
 
     </div>
-
 </form>
+<!--<div>  &lt;!&ndash;리뷰 박스&ndash;&gt;-->
+<!--    <div th:each="review:${reviews}" th:if="${reviews}">-->
+<!--        <p th:text="${review.content}"></p>-->
+<!--        <a th:if="${review.member.id == #session.member.id}" th:href="@{/products/review/delete(reviewId=${review.id})}">리뷰 삭제</a>-->
+<!--    </div>-->
+<!--    <div class="pagingBox" th:if="${review}">-->
+<!--        <a th:if="${5 < startPage}" th:href="@{/products/detail/__${product.id}__(page = ${startPage-6})">-->
+<!--            <i class="fas fa-chevron-left"></i>-->
+<!--        </a>-->
+<!--        <th:block th:each="page : ${#numbers.sequence(startPage,endPage)}">-->
+<!--            <a th:if="${page != nowPage && endPage!=0}" th:href="@{/products/detail/__${product.id}__(page = ${page-1})}" th:text="${page}"></a>-->
+<!--            <strong th:if="${page == nowPage}"  th:text="${page}" style="color:red"></strong>-->
+<!--        </th:block>-->
+<!--        <a th:if="${totalPage > endPage && endPage != 0}" th:href="@{/products/detail/__${product.id}__(page = ${endPage})}">-->
+<!--            <i class="fas fa-chevron-right"></i> &lt;!&ndash; Font Awesome 아이콘 클래스를 추가합니다 &ndash;&gt;-->
+<!--        </a>-->
+<!--    </div>&lt;!&ndash;pagingBox END&ndash;&gt;-->
+<!--</div>-->
+<!--<div th:if="${reviewAccess}">-->
+<!--    <form th:action="@{/product/review}" method="post">-->
+<!--        <input type="hidden" name="productId" th:value="${product.id}">-->
+<!--        <span>리뷰내용입력</span>-->
+<!--        <input type="text" name="content">-->
+<!--        <button type="submit">작성</button>-->
+<!--    </form>-->
+<!--</div>-->
 <script>
     function confirmDelete(event) {
         if (!confirm("정말로 삭제하시겠습니까?")) {
