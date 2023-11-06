@@ -60,7 +60,7 @@ public class MemberController {
         }
         if(!form.getPwd().equals(form.getPwdChk())){ //notEqualPwd
             bindingResult.rejectValue("pwdChk","error.pwdChk","비밀번호가 일치하지 않습니다.");
-            return "member/joinMemberForm";
+            return "/member/joinMemberForm";
         }
 
         Optional<Member> optionalMember = memberService.validataDuplicateMember(form.getEmail());
@@ -76,7 +76,7 @@ public class MemberController {
         Member member = new Member();
 
 //        member = member.saveMember(form.getEmail(),hashedPassword,form.getName());
-        member = member.saveMember(form.getEmail(),form.getPwd(),form.getName(),form.getPwd());
+        member = member.saveMember(form.getEmail(),form.getPwd(),form.getName(),form.getPhone_number());
 
 
         if(form.getPostal_code()!=null &&form.getMiddle_address()!=null&&form.getDetailed_address()!=null){
@@ -91,15 +91,9 @@ public class MemberController {
         Basket basket = Basket.builder().member(member).build();
         basketService.save(basket); // 회원 가입하면서 회원 전용 장바구니 하나 만들기.
         log.info("가입 이메일={}, 아이디={}",member.getEmail(),member.getId());
-        return "/member/joinComplete";
+        return "member/joinComplete";
     }
     /////////////////////// 회원가입 //////////////////////
-
-
-    @GetMapping("/member/joinComplete") // 회원가입 성공 페이지
-    public String joinComplete() {
-        return "/member/joinComplete";
-    }
 
 
 

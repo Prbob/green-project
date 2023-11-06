@@ -11,7 +11,7 @@ public class MenuController {
         public String socialMenu(Model model){
         // 헤더 home, style, shop중 style 글자 굵기를 위한
         model.addAttribute("style","style");
-        return "/menu/social";
+        return "menu/social";
     }
     @GetMapping("/menu/total")
     public String totalMenu(){
