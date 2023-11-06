@@ -90,7 +90,9 @@
         ::placeholder {
             color: black;
         }
-
+        #divsecond{
+        padding:10px;
+        }
 
     </style>
 
@@ -126,9 +128,8 @@
                                         <div>
                                             <img th:src="@{|/upload/${productsCount.product.imgName}|}"/>
                                         </div>
-                                        <div>
-                                            <b><span th:text="|상품명 : ${productsCount.product.name}|">item name</span></b>
-                                            <span><br></span>
+                                        <div id="divsecond">
+                                            <b><a th:href="@{/products/detail/__${productsCount.product.id}__}" th:text="|상품명 : ${productsCount.product.name}|"><span >item name</span></a></b>
                                             <span style="font-size:12px;" th:text="|(${productsCount.quantity} ea)|"></span> <br>
                                             <span th:text="| 가격 : ${productsCount.quantity * productsCount.product.price} |"></span>
                                         </div>

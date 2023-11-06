@@ -18,7 +18,7 @@ public interface ProductsRepository extends JpaRepository<Products,Long> {
 
     Page<Products> findByNameContaining(String search, Pageable pageable); // 이름으로 검색
 
-    @Query("SELECT p FROM Products p WHERE p.name=:search AND (p.gender=:gender OR p.gender=:every)")
+    @Query("SELECT p FROM Products p WHERE p.name LIKE %:search% AND (p.gender=:gender OR p.gender=:every)")
     Page<Products> findByNameContainingAndGender(@Param("search") String search,@Param("gender") String gender,@Param("every") String every, Pageable pageable);
     // 이름, 성별
 

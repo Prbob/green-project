@@ -149,6 +149,7 @@ public class OrderController {
             }
         }
 
+
         response.put("redirectUrl", "/orderAndBasket/orderSuccess?orderId="+orders.getId()); // 리다이렉션할 URL을 설정, 오더 페이지로 설정해야함.
 
         return ResponseEntity.ok(response);
@@ -158,11 +159,17 @@ public class OrderController {
     @GetMapping("/orderAndBasket/orderSuccess") // 결제 성공 시 이동할 페이지
     public String orderSuccess(@RequestParam("orderId") Long orderId, HttpServletRequest request,Model model){
         if(fun.getMember(request)==null){return "/alert/noLogin";}
+        Member memberDb = fun.getMemberDb(request);
+        Basket basket = basketService.findByMemberid(memberDb.getId()).get();
         Orders order = orderService.findById(orderId).get();
         Delivery delivery = order.getDelivery();
-
+        Products products;
         List<OrderProducts> list = orderProductsService.findOrderproductsByOrders(order);
-
+        for(OrderProducts orderProducts : list){
+            products = orderProducts.getProducts();
+            Optional<BasketProducts> basProByBasAndPro = baskProdService.findBasProByBasAndPro(basket, products);
+            basProByBasAndPro.ifPresent(basketProducts -> baskProdService.delete(basketProducts.getId()));
+        }
 
         model.addAttribute("list",list);
         model.addAttribute("order",order);

@@ -216,7 +216,7 @@
                                             </button>
                                         </a>
                                     </div>
-                                    <a data-v-3bb254ce="" href="#" th:href="@{/basket/delete/{id} (id=${basketInProducts.basProductId})}" class="status_link" role="button" style="font-size: 15px" > 삭제 </a>
+                                    <a data-v-3bb254ce="" href="#" th:href="@{/basket/delete/{id} (id=${basketInProducts.basProductId})}" class="status_link" role="button" style="font-size: 15px" onclick="return confirm('삭제하시겠습니까?')"> 삭제 </a>
                                 </div>
                             </div>
                         </div>

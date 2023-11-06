@@ -87,6 +87,7 @@
             display: flex;
             vertical-align: center;
             margin-bottom: 20px;
+            background-color: rgb(247, 247, 247);
         }
         .orderItems h5{
             font-size:16px;
@@ -137,6 +138,13 @@
         #detailAlink{
             margin-bottom:10px;
         }
+        #detailbuypage{
+        color:rgb(107, 107, 107);
+        }
+        #detailbuypage:hover{
+        color:rgb(0, 0, 0);
+        font-weight: 800;
+        }
     </style>
 
 </head>
@@ -166,9 +174,9 @@
                                     </div>
                                     <div class="rightInfo">
 
-                                        <p><a href="/products/detail/"><b th:text="|주문 번호 : ${form.orders.id}|">item name</b></a></p>  <!-- 주문 번호-->
+                                        <p><b th:text="|주문 번호 : ${form.orders.id}|">item name</b></p>  <!-- 주문 번호-->
                                         <p th:text="|주문 금액 : ${#numbers.formatDecimal(form.orders.totalPrice,3, 'COMMA',0,'POINT')} 원|" id="detailAlink">></p>
-                                        <a th:href="@{/member/orderDetail(orderId=${form.orders.id})}"  &nbsp; > > 주문 상세보기 </a>
+                                        <a th:href="@{/member/orderDetail(orderId=${form.orders.id})}" id="detailbuypage" > > 주문 상세보기 </a>
                                     </div>
                                     <div th:text="|구매 일자 : ${form.orders.registrationDate}|"></div>
                                 </div>
