@@ -23,6 +23,8 @@ public class HomeController {
     @GetMapping(value = {"/home","/",""})
     // HTTP GET 요청을 처리 메소드의 매개변수로 HttpServletRequest와 Model을 받는다
     public String home(HttpServletRequest request, Model model){
+        // 헤더 home, style, shop중 home 글자 굵기를 위한
+        model.addAttribute("home","home");
 
         // 새로운 세션을 가져오거나 기존 세션을 가져오는 역할
         // 현재 요청에 대한 세션 객체를 가져온다.

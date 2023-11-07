@@ -100,32 +100,29 @@
     <h2> 주문 완료 </h2>
     <p><b>주문이 완료</b>되었습니다. 감사합니다. </p>
     <div class="orderItems">
-        <div class="orderItem">
+        <div class="orderItem" th:each="products:${list}">
+            <img th:src="@{|/upload/${products.products.imgName}|}" style="display: inline-block;">
+            <b><span style="line-height: 3.5em;" th:text="|${products.products.name}(${products.quantity}ea)|">item name</span></b>
+        </div>
+        <!--<div class="orderItem">
             <img src="/image/productMain/Nike_Zoom_Vomero_5_Oatmeal_(W).png" style="display: inline-block;">
             <b><span style="line-height: 3.5em;">item name</span></b>
-        </div>
-        <div class="orderItem">
-            <img src="/image/productMain/Nike_Zoom_Vomero_5_Oatmeal_(W).png" style="display: inline-block;">
-            <b><span style="line-height: 3.5em;">item name</span></b>
-        </div>
+        </div>-->
     </div>
 </div> <!--END noticeBOX-->
 <div id="orderInfo">
     <div class="space"></div>
     <div id="receiverInfo" class = "infoBox">
-        <h3>받는 사람 정보</h3>
+        <h3>회원 정보</h3>
         <table border="0">
             <tr>
-                <th>받는사람</th> <td>Name</td>
+                <th>주문자</th> <td th:text="${order.name}"></td>
             </tr>
             <tr>
-                <th>전화번호</th> <td>Number</td>
+                <th>전화번호</th> <td th:text="${order.phone}">Number</td>
             </tr>
             <tr>
-                <th>받는주소</th> <td>receiver Address</td>
-            </tr>
-            <tr>
-                <th>요청사항</th> <td> comment </td>
+                <th>받는주소</th> <td th:text="${delivery.address.middle_address}">receiver Address</td>
             </tr>
         </table>
     </div>
@@ -134,26 +131,22 @@
         <h3>주문 정보</h3>
         <table border="0">
             <tr>
-                <th>주문번호</th> <td> 그냥 있길래 넣어봄 </td>
+                <th>요청사항</th> <td th:text="${order.please}"> comment </td>
             </tr>
             <tr>
-                <th>주문금액</th> <td> XXXX 원</td>
+                <th>주문번호</th> <td th:text="${order.id}"> 그냥 있길래 넣어봄 </td>
             </tr>
             <tr>
-                <th>추가배송료</th> <td> 0 원</td>
+                <th>주문금액</th> <td th:text="${order.totalPrice}"> XXXX 원</td>
             </tr>
-            <tr>
-                <th>총 금액</th> <td> XXXX 원</td>
-            </tr>
-
         </table>
     </div>
     <div class="space"></div>
 </div><!--END orderInfo-->
 
 <div class="buttons">
-    <a href="/member/orderDetail" style="margin-right:15px;">주문 상세 보기</a>
-    <a href="/">쇼핑 계속 하기</a>
+    <a href="/" style="margin-right:15px;">메인 페이지</a>
+    <a href="/products/list">쇼핑 계속 하기</a>
 </div><!--END buttons-->
 
 </div><!--END container-->

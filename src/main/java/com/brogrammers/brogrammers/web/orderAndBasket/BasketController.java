@@ -11,8 +11,13 @@ import com.brogrammers.brogrammers.domain.service.ProductService;
 import com.brogrammers.brogrammers.web.FunctionClass;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -40,14 +45,24 @@ public class BasketController {
     //////////////////// 상품 장바구니로 ///////////////////////
     @PostMapping("/order/basket/{productId}")
     public String addBasket(@PathVariable("productId") Long productId, HttpServletRequest request, Model model,
-                            @RequestParam("quantity")int quantity, @RequestParam("action")String action,@RequestParam(name = "sizeParam",required = false)Integer sizeParam){
-            Products p = productService.getByid(productId);
-            Products product;
-            if(action.equals("myBasket")){
-                product = productService.findProductByNameColorSizeBrand(p.getName(), p.getColor(), p.getSize(), p.getBrand()).get();
-            } else{
-                product = productService.findProductByNameColorSizeBrand(p.getName(), p.getColor(), sizeParam, p.getBrand()).get();
-            }
+                            @RequestParam("quantity")int quantity, @RequestParam("action")String action, @RequestParam(name = "sizeParam",required = false)Integer sizeParam){
+        if (quantity<1){
+            model.addAttribute("errormsg","최소 수량은 1개부터 입니다.");
+            model.addAttribute("productId",productId);
+            return "alert/quantityerror";
+        }
+        Products p = productService.getByid(productId);
+        if (quantity>p.getStockQuantity()){
+            model.addAttribute("errormsg","재고가 부족합니다.");
+            model.addAttribute("productId",productId);
+            return "alert/quantityerror";
+        }
+        Products product;
+        if(action.equals("myBasket")){
+            product = productService.findProductByNameColorSizeBrand(p.getName(), p.getColor(), p.getSize(), p.getBrand()).get();
+        } else{
+            product = productService.findProductByNameColorSizeBrand(p.getName(), p.getColor(), sizeParam, p.getBrand()).get();
+        }
         if(action.equals("buy")){
             return "redirect:/order/buy?product="+product.getId()+"&quantity="+quantity+"&way=one";
         }
@@ -73,25 +88,37 @@ public class BasketController {
             return "redirect:/products/myBasket";
         }
         model.addAttribute("product",product);
-        return "products/detail";
+        return "redirect:/products/detail/"+productId;
     }
     //////////////////// 상품 장바구니로 ///////////////////////
 
     @GetMapping("/products/myBasket") // 내 장바구니 이동
-    public String myBasket(Model model, HttpServletRequest request){
+    public String myBasket(Model model, HttpServletRequest request,
+                           @PageableDefault(page=0,size=5,sort="id",direction = Sort.Direction.DESC) Pageable pageable){
         if(fun.getMember(request)==null){return "/alert/noLogin";}
         Member member = memberService.findById(fun.getMember(request).getId()); // 멤버 가져오기
         Basket basket = basketService.findById(member.getBasket().getId()); // 장바구니 가져오기
-        List<Products> productList = baskProdService.findProductsByBasketId(basket); // 장바구니에 저장된 모든 상품들 가져오기
+        Page<Products> productList = baskProdService.findProductsByBasket(basket,pageable); // 장바구니에 저장된 모든 상품들 가져오기
         List<BasketInProductsForm> list = new ArrayList<>();
         for(Products product : productList){
+
             BasketProducts basketProducts = baskProdService.findBasProByBasAndPro(basket, product).get();
             list.add(BasketInProductsForm.builder().products(product).quantity(basketProducts.getQuantity()).basProductId(basketProducts.getId()).build());
             // 상품과 수량 담아주기
         }
-        if(list.isEmpty()){
+        if(productList.isEmpty()){
             model.addAttribute("nolist","nolist");
+
+        } else{
+            model.addAttribute("nolist","yesList");
         }
+        int nowPage = productList.getPageable().getPageNumber() + 1; // 5
+        int startPage = Math.max(1,nowPage%5==0?nowPage-4:nowPage/5*5+1);
+        int endPage = Math.min(productList.getTotalPages(),startPage+4);
+        model.addAttribute("totalPage",productList.getTotalPages());
+        model.addAttribute("nowPage",nowPage);
+        model.addAttribute("startPage",startPage);
+        model.addAttribute("endPage",endPage);
         model.addAttribute("list",list);
         model.addAttribute("basket","basket");
         return "orderAndBasket/myBasket";

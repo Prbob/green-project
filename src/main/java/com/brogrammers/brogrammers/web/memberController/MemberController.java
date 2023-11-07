@@ -74,8 +74,10 @@ public class MemberController {
 //        String hashedPassword = passwordConverter.hashPassword(form.getPwd());
 
         Member member = new Member();
-        member = member.saveMember(form.getEmail(),form.getPwd(),form.getName());
+
 //        member = member.saveMember(form.getEmail(),hashedPassword,form.getName());
+        member = member.saveMember(form.getEmail(),form.getPwd(),form.getName(),form.getPwd());
+
 
         if(form.getPostal_code()!=null &&form.getMiddle_address()!=null&&form.getDetailed_address()!=null){
             Address address = new Address(form.getPostal_code(),form.getMiddle_address(),form.getDetailed_address()); // 주소 입력 메서드
@@ -89,9 +91,17 @@ public class MemberController {
         Basket basket = Basket.builder().member(member).build();
         basketService.save(basket); // 회원 가입하면서 회원 전용 장바구니 하나 만들기.
         log.info("가입 이메일={}, 아이디={}",member.getEmail(),member.getId());
-        return "redirect:/";
+        return "/member/joinComplete";
     }
     /////////////////////// 회원가입 //////////////////////
+
+
+    @GetMapping("/member/joinComplete") // 회원가입 성공 페이지
+    public String joinComplete() {
+        return "/member/joinComplete";
+    }
+
+
 
     @PostMapping("/customer/customerService") // 고객센터
     public String customerService(){
@@ -157,9 +167,9 @@ public class MemberController {
         return "member/findPassword";
     }
 
-    @GetMapping("/member/myPage") // 마이페이지
+    @GetMapping("/member/myPage") // 마이페이지 / 구매내역 페이지
     public String myPage(HttpServletRequest request, Model model,
-                         @PageableDefault(page=0,size=3,sort="id",direction = Sort.Direction.DESC)Pageable pageable){
+                         @PageableDefault(page=0,size=5,sort="id",direction = Sort.Direction.DESC)Pageable pageable){
         if(fun.getMember(request)==null){return "/alert/noLogin";}
         Member member = fun.getMemberDb(request);
         /* 로그인 정보에 맞는 오더들 다 불러옴 */
@@ -174,7 +184,16 @@ public class MemberController {
                 form.setFileName(imgName);
                 list.add(form);
             }
+        } else{
+            model.addAttribute("nolist","nolist");
         }
+        int nowPage = orders.getPageable().getPageNumber() + 1; // 5
+        int startPage = Math.max(1,nowPage%5==0?nowPage-4:nowPage/5*5+1);
+        int endPage = Math.min(orders.getTotalPages(),startPage+4);
+        model.addAttribute("totalPage",orders.getTotalPages());
+        model.addAttribute("nowPage",nowPage);
+        model.addAttribute("startPage",startPage);
+        model.addAttribute("endPage",endPage);
         model.addAttribute("list",list);
         model.addAttribute("member",member);
         model.addAttribute("myPage","myPage");
@@ -194,11 +213,88 @@ public class MemberController {
             productsCount = ProductsCount.builder().product(product).quantity(quantity).build();
             productsCountList.add(productsCount);
         }
-
+        if (productsCountList.isEmpty()){
+            model.addAttribute("nulllist","nulllist");
+        }
         model.addAttribute("order",order);
         model.addAttribute("list",productsCountList);
         model.addAttribute("member",member);
         return "member/orderDetail";
+    }
+
+    @GetMapping("/member/myInformationSecurity")
+    public String myInformationSecurityForm(HttpServletRequest request,Model model,InfoUpdatPwdChk form){
+        if(fun.getMember(request)==null ){return "/alert/noLogin";}
+        model.addAttribute("form",form);
+        model.addAttribute("myinfo","myinfo");
+        return "/member/myInformationSecurity";
+    }
+    @PostMapping("/member/myInformationSecurity")
+    public String myInformationSecurity(HttpServletRequest request,Model model, @Valid @ModelAttribute("form") InfoUpdatPwdChk form,BindingResult result){
+        Member member = fun.getMemberDb(request);
+        if (result.hasErrors()){return "/member/myInformationSecurity";}
+        if(!member.getPwd().equals(form.getPwd())){
+            result.rejectValue("pwd","error.pwd","비밀번호가 일치하지 않습니다.");
+            return "/member/myInformationSecurity";
+        }
+        HttpSession session = request.getSession();
+        session.setAttribute(SessionConst.MYINFO,"myInfo");
+        return "redirect:/member/updateMyInformation";
+    }
+
+    @GetMapping("/member/updateMyInformation")
+    public String updateMyInformationForm(HttpServletRequest request,Model model){
+        if(fun.getMember(request)==null || !fun.myInfo(request)){return "/alert/noLogin";}
+        model.addAttribute("myinfo","myinfo");
+        Member member = fun.getMemberDb(request);
+        MemberForm form = MemberForm.builder()
+                .name(member.getName())
+                .email(member.getEmail())
+                .phone_number(member.getPhone())
+                .postal_code(member.getAddress().getPostal_code())
+                .middle_address(member.getAddress().getMiddle_address())
+                .detailed_address(member.getAddress().getDetailed_address())
+                .grade(member.getGrade())
+                .build();
+        model.addAttribute("form",form);
+        return "/member/updateMyInformation";
+    }
+    @PostMapping("/member/updateMyInformation")
+    public String updateMyInformation(@Valid @ModelAttribute("form") MemberForm form,BindingResult result, HttpServletRequest request,Model model){
+        if(fun.getMember(request)==null){return "/alert/noLogin";}
+        if(result.hasErrors()){
+            return "/member/updateMyInformation";
+        }
+
+        String pwd = form.getPwd();
+        String pwdChk = form.getPwdChk();
+        String phone = form.getPhone_number();
+        String detailedAddress = form.getDetailed_address();
+        String middleAddress = form.getMiddle_address();
+        String postalCode = form.getPostal_code();
+        if(!pwd.equals(pwdChk)){ //notEqualPwd
+            result.rejectValue("pwdChk","error.pwdChk","비밀번호가 일치하지 않습니다.");
+            return "/member/updateMyInformation";
+        }
+        Member member = fun.getMemberDb(request);
+        member.updatPwd(form.getPwd()); // 비밀번호 변경
+        member.updatPhone(form.getPhone_number()); // 핸드폰 번호 변경
+        if(!(form.getPostal_code().isEmpty() && form.getMiddle_address().isEmpty() && form.getDetailed_address().isEmpty())){
+            member.saveAddress(Address.builder().detailed_address(detailedAddress).middle_address(middleAddress).postal_code(postalCode).build()); // 주소 업뎃
+        }
+        memberService.updateMember(member);
+        fun.logout(request);
+        model.addAttribute("form",form);
+        return "/alert/updatMyInformation";
+    }
+
+    @GetMapping("/my/withdrawal")
+    public String withdrawal(HttpServletRequest request){
+        Member member = fun.getMemberDb(request);
+        member.updatLeave("bye");
+        memberService.updateMember(member);
+        fun.logout(request);
+        return "alert/bye";
     }
 }
 

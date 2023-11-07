@@ -123,8 +123,15 @@
             border-bottom: 3px solid #222;
             padding-bottom: 16px
         }
-
-
+        #abutton{
+            width:140px;
+        }
+        .pagingBox {
+            /*border: 1px solid red;*/
+            text-align: center;
+            padding:20px;
+            line-height: 2em;
+        }
     </style>
 
 </head>
@@ -147,8 +154,8 @@
                     <h3 data-v-61e7a8a3="" style="font-size:24px; height:27px;">관심 상품</h3>
                 </div>
             </div>
-
-            <div data-v-4128f410="" class="my_interest">
+            <div th:if="|${nolist=='nolist'}|" >등록된 상품이 없습니다.</div>
+            <div th:if="|${nolist!='nolist'}|" data-v-4128f410="" class="my_interest">
                 <ul data-v-3bb254ce="" data-v-4128f410="" class="wish_list">
 
                     <li data-v-3bb254ce="" th:each="basketInProducts : ${list}">
@@ -178,17 +185,15 @@
                                         <div style="padding-top: 5px;">
                                             <form th:action="@{/order/basket/{productId} (productId=${basketInProducts.products.id})}" method="post">
                                                 <select id="quantity" name="quantity" style="color: #000;">
-                                                    <option th:each="i : ${#numbers.sequence(1, basketInProducts.products.stockQuantity)}"
+                                                    <option th:each="i : ${#numbers.sequence(1, (basketInProducts.products.stockQuantity > 10 ? 10 : basketInProducts.products.stockQuantity))}"
                                                             th:value="${i}" th:text="${i}" th:selected="${i == basketInProducts.quantity}"/>
                                                 </select>
                                                 <button type="submit" th:name="action" th:value="myBasket" style="background-color: #fff; color: #000; border: 1px solid #ccc; padding: 1.5px 6px; border-radius: 5px; cursor: pointer;">
                                                     수정
                                                 </button>
                                             </form>
+
                                         </div>
-
-
-
                                     </form>
                                 </div>
 
@@ -199,16 +204,17 @@
                                 <div data-v-3bb254ce="">
                                     <div data-v-0b6ddb6a="" data-v-3bb254ce="" class="division_btn_box lg" style="margin-bottom: 5px;"><a
                                             data-v-0b6ddb6a="" href="#" disabled="disabled" class="blind btn_division">버튼</a>
-                                        <button data-v-0b6ddb6a="" class="btn_action" style="background-color: rgb(239, 98, 83); color:width; height: 60px;" >
-
-                                            <a data-v-0b6ddb6a="" th:href="@{/products/detail/{id} }" class="title" role="button">구매</a>
+                                        <a data-v-0b6ddb6a="" th:href="@{/order/buy(product=${basketInProducts.products.id},quantity=${basketInProducts.quantity},way=one) }" class="title"  role="button">
+                                            <button data-v-0b6ddb6a="" class="btn_action" style="background-color: rgb(239, 98, 83); color:width; height: 60px;" id="abutton">
+                                                구매
                                             <div data-v-0b6ddb6a="" class="price" style="height: 22px;">
                                                 <span data-v-0b6ddb6a="" class="amount">
                                                     <!--가격-->
                                                     <div data-th-text="${#numbers.formatInteger(basketInProducts.products.price, 3, 'COMMA') + '원'}"></div>
                                                 </span>
                                             </div>
-                                        </button>
+                                            </button>
+                                        </a>
                                     </div>
                                     <a data-v-3bb254ce="" href="#" th:href="@{/basket/delete/{id} (id=${basketInProducts.basProductId})}" class="status_link" role="button" style="font-size: 15px" > 삭제 </a>
                                 </div>
@@ -217,19 +223,21 @@
                     </li>
                 </ul>
 
-
-                <!--<div data-v-1f9de2f0="" data-v-4128f410="" class="pagination">
-                    <div data-v-1f9de2f0="" class="pagination_box first last">
-                        <div data-v-1f9de2f0="" class="page_bind" style="text-align: center; margin-top: 20px;">
-                            <a data-v-1f9de2f0="" href="/saved?page=1" class="btn_page active" aria-label="1페이지"> 1 </a>
-                        </div>
-                    </div>
-                </div>-->
-
-
                 <div style="text-align: right; margin-top: 10px;">
-                    <a href="#" th:href="@{/order/buy}" class="btn btn-primary" role="button">
+                    <a href="#" th:if="${nolist != 'nolist'}" th:href="@{/order/buy}" class="btn btn-primary" role="button">
                         전체구매
+                    </a>
+                </div>
+                <div class="pagingBox" th:if="${nolist != 'nolist'}" >
+                    <a th:if="${5 < startPage}" th:href="@{/products/myBasket(page = ${startPage-6})}">
+                        <i class="fas fa-chevron-left"></i>
+                    </a>
+                    <th:block th:each="page : ${#numbers.sequence(startPage,endPage)}">
+                        <a th:if="${page != nowPage}" th:href="@{/products/myBasket(page = ${page-1})}" th:text="${page}"></a>
+                        <strong th:if="${page == nowPage}"  th:text="${page}" style="color:red"></strong>
+                    </th:block>
+                    <a th:if="${totalPage > endPage && endPage != 0}" th:href="@{/products/myBasket(page = ${endPage})}">
+                        <i class="fas fa-chevron-right"></i> <!-- Font Awesome 아이콘 클래스를 추가합니다 -->
                     </a>
                 </div>
             </div>

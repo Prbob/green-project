@@ -51,7 +51,7 @@
                             </div>
                         </div>
                         <div data-v-533cad97="" class="header_main">
-                            <div data-v-533cad97="" class="main_inner" style="padding-bottom: 10px;">
+                            <div data-v-533cad97="" class="main_inner">
                                 <div id="mainLogoSet">
                                     <h1 data-v-7546c27e="" data-v-533cad97="">
                                         <a data-v-7546c27e="" href="/" aria-label="홈" class="logo" style="font-size:25px;width: 170px;">UNCOMMON</a>
@@ -64,20 +64,7 @@
                                 <div data-v-533cad97="" class="center"></div>
                                 <div data-v-533cad97="" class="right">
                                     <div data-v-3e40d81c="" class="gnb_area" data-v-533cad97="">
-                                        <nav data-v-3e40d81c="" class="gnb" >
-                                            <ul class="gnb_list">
-                                                <li data-v-83e3cb96="" data-v-3e40d81c="" class="gnb_item" style="float: left"><a
-                                                        data-v-83e3cb96="" href="/" aria-current="page"
-                                                        class="active nuxt-link-active gnb_link active"> HOME </a></li>
-                                                <li data-v-83e3cb96="" data-v-3e40d81c="" class="gnb_item" style="float: left" ><a
-                                                        data-v-83e3cb96="" href="/menu/social" class="gnb_link"> STYLE </a>
-                                                </li>
-                                                <li data-v-83e3cb96="" data-v-3e40d81c="" class="gnb_item" style="float: left"><a
-                                                        data-v-83e3cb96="" th:href="@{/products/list}" class="gnb_link"> SHOP </a>
-                                                </li>
-                                            </ul>
-                                        </nav>
-
+                                        <th:block th:replace="include/localNavigationBar :: localNavigationBar"></th:block>
                                     </div>
                                 </div>
                             </div>
@@ -105,11 +92,11 @@
                                             data-v-bdefeeaa=""><span data-v-a1a3ce98="" class="tab_name"> 컬렉션
                                             </span></a></li>
                                     <li data-v-bdefeeaa="" data-v-2830b567="" class="li_tab" data-v-7fae9a20=""><a
-                                            data-v-a1a3ce98="" data-v-2830b567="" href="/?tab=home_men" class="tab"
+                                            data-v-a1a3ce98="" data-v-2830b567="" th:href="@{/products/list(gender=male)}" class="tab"
                                             data-v-bdefeeaa=""><span data-v-a1a3ce98="" class="tab_name"> 남성 </span></a>
                                     </li>
                                     <li data-v-bdefeeaa="" data-v-2830b567="" class="li_tab" data-v-7fae9a20=""><a
-                                            data-v-a1a3ce98="" data-v-2830b567="" href="/?tab=home_women" class="tab"
+                                            data-v-a1a3ce98="" data-v-2830b567="" th:href="@{/products/list(gender=female)}" class="tab"
                                             data-v-bdefeeaa=""><span data-v-a1a3ce98="" class="tab_name"> 여성 </span></a>
                                     </li>
                                     <li data-v-bdefeeaa="" data-v-2830b567="" class="li_tab" data-v-7fae9a20=""><a

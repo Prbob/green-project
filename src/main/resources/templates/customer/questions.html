@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>자주 묻는 질문</title>
+    <title>UNCOMMON | 자주 묻는 질문</title>
     <th:block th:replace="include/header :: header"></th:block>
 
     <!--공지사항 css-->
@@ -15,14 +15,39 @@
             display: flex;
         }
         div.content_title{
+<<<<<<< HEAD
             border-bottom: 2px solid black;
             padding-bottom: 5px;
             font-weight: 600;
             color: black;
+=======
+            border-bottom: 3px solid black;
+            padding-bottom: 16px;
+            font-weight: 600;
+            color: black;
+            height: 46px;
+>>>>>>> develop
         }
         h2.snb_main_title{
             color: black;
         }
+<<<<<<< HEAD
+=======
+
+        .dropdown div {
+            display: flex; /* Flexbox 레이아웃 사용 */
+            justify-content: space-between; /* 좌우로 정렬 */
+            align-items: center; /* 수직 가운데 정렬 (선택 사항) */
+        }
+
+        .fa-solid {
+            margin-right: 10px;
+        }
+
+        .dropdown_list li {
+            border-radius: 5px;
+        }
+>>>>>>> develop
     </style>
 
 </head>
@@ -30,20 +55,12 @@
 <!--Header-->
 <th:block th:replace="include/bodyHead :: bodyHeader"></th:block>
 
-<div class="container">
-    <div class="sidebar">
-        <a href="/notice" aria-current="page">
-            <h2 class="snb_main_title">자주 묻는 질문</h2>
-        </a>
-        <nav>
-            <ul class="snb_menu">
-                <li class="menu_item"><a href="/customer/notice" aria-current="page" class="menu_link"> 공지사항 </a></li>
-                <li class="menu_item"><a href="/customer/questions" class="menu_link"> <span style="font-weight:bolder">자주 묻는 질문</span> </a></li>
-                <li class="menu_item"><a href="/customer/inspectionStandards" class="menu_link"> 검수 기준 </a></li>
-            </ul>
-        </nav>
-    </div>
-    <div class="content_area">
+<div class="container" style="padding-top: 20px;">
+
+    <th:block th:replace="customer/customerMenu :: customerMenu"></th:block>
+
+
+    <div class="content_area" style="padding-bottom: 160px;">
         <div class="content_title">자주 묻는 질문</div>
         <ul class="dropdown_list" >
             <li id="questions_li_1">
@@ -482,7 +499,11 @@
         // display 속성을 토글하고 배경 색상을 변경합니다.
         if (currentDisplay === 'none') {
             hiddenFrame1.style.display = 'block';
+<<<<<<< HEAD
             questionLi1.style.backgroundColor = 'gray';
+=======
+            questionLi1.style.backgroundColor = '#f5f5f5';
+>>>>>>> develop
             // 아이콘 변경
             caretIcon1.classList.remove('fa-caret-down');
             caretIcon1.classList.add('fa-caret-up');
@@ -501,7 +522,11 @@
         // display 속성을 토글하고 배경 색상을 변경합니다.
         if (currentDisplay === 'none') {
             hiddenFrame2.style.display = 'block';
+<<<<<<< HEAD
             questionLi2.style.backgroundColor = 'gray';
+=======
+            questionLi2.style.backgroundColor = '#f5f5f5';
+>>>>>>> develop
             // 아이콘 변경
             caretIcon2.classList.remove('fa-caret-down');
             caretIcon2.classList.add('fa-caret-up');
@@ -520,7 +545,11 @@
         // display 속성을 토글하고 배경 색상을 변경합니다.
         if (currentDisplay === 'none') {
             hiddenFrame3.style.display = 'block';
+<<<<<<< HEAD
             questionLi3.style.backgroundColor = 'gray';
+=======
+            questionLi3.style.backgroundColor = '#f5f5f5';
+>>>>>>> develop
             // 아이콘 변경
             caretIcon3.classList.remove('fa-caret-down');
             caretIcon3.classList.add('fa-caret-up');

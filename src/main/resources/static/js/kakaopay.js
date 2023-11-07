@@ -8,6 +8,8 @@ $("#check_module").click(function () {
   var totalPrice = document.getElementById("totalPrice").value;
   var phone = document.getElementById("phone").value;
   var middle_address = document.getElementById("sample6_address").value;
+  var please = document.getElementById("please").value;
+  
   var payment = $(":input:radio[name=payment]:checked").val();
   document.getElementsByClassName
   var IMP = window.IMP; // 생략가능
@@ -66,7 +68,6 @@ $("#check_module").click(function () {
       msg += '상점 거래ID : ' + rsp.merchant_uid;
       msg += '결제 금액 : ' + rsp.paid_amount;
       msg += '카드 승인번호 : ' + rsp.apply_num;
-      alert(msg);
       // window.location.href='/kakaopay';
       $.ajax({
         type: 'POST',
@@ -82,6 +83,7 @@ $("#check_module").click(function () {
           detailed_address : detailed_address,
           postal_code : postal_code,
           'imp_uid' : rsp.imp_uid,
+          'please' : please
         },
         success: function (data) {
           // 서버에서 응답을 받았을 때의 처리를 수행

@@ -119,6 +119,21 @@
         .rightInfo a{
             margin-bottom:20px;
         }
+        .pagingBox {
+            /*border: 1px solid red;*/
+            text-align: center;
+            padding:20px;
+            line-height: 2em;
+        }
+        #namesearchID{
+        padding:5px;
+        border:1px solid gray;
+        }
+        #buttonsearch{
+        padding:5px;
+        border:1px solid gray;
+        margin-left:10px;
+        }
     </style>
 
 </head>
@@ -132,12 +147,14 @@
     <div class="container my lg" data-v-e2abb636="" data-v-cdf8523a="" style="padding-top: 0px;">
 
         <th:block th:replace="include/memberMenu :: memberMenu"></th:block>
-
         <div data-v-cf6a6ef4="" data-v-cdf8523a="" class="content_area my-page-content">
             <div data-v-cf6a6ef4="" class="my_profile">
                 <div data-v-61e7a8a3="" data-v-cf6a6ef4="" class="content_title border">
+
                     <div data-v-61e7a8a3="" class="title"><h3 data-v-61e7a8a3="">구매 내역</h3><!----></div><!----></div>
-                    <div id="ordersWrap">
+                    <div th:if="${nolist == 'nolist'}">구매 내역이 존재하지 않습니다.</div>
+                    <div th:if="${nolist != 'nolist'}" id="ordersWrap">
+
                         <div class="orderInfo">
                             <div class="orderItems">
                                 <div class="orderItem"  th:each="form : ${list}">
@@ -155,7 +172,28 @@
                             </div>
                         </div>
                     </div>
+                </div>
+                <div th:if="*{list == null}">
+                    <p>구매한 상품이 없습니다.</p>
+                </div>
+
+
+                <div class="pagingBox" th:if="${nolist != 'nolist'}" >
+                    <a th:if="${5 < startPage}" th:href="@{/member/myPage(page = ${startPage-6})}">
+                        <i class="fas fa-chevron-left"></i>
+                    </a>
+                    <th:block th:each="page : ${#numbers.sequence(startPage,endPage)}">
+                        <a th:if="${page != nowPage}" th:href="@{/member/myPage(page = ${page-1})}" th:text="${page}"></a>
+                        <strong th:if="${page == nowPage}"  th:text="${page}" style="color:red"></strong>
+                    </th:block>
+                    <a th:if="${totalPage > endPage && endPage != 0}" th:href="@{/member/myPage(page = ${endPage})}">
+                        <i class="fas fa-chevron-right"></i> <!-- Font Awesome 아이콘 클래스를 추가합니다 -->
+                    </a>
+                </div>
             </div>
+
+
+
         </div>
     </div>
 </div>
