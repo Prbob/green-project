@@ -17,7 +17,7 @@ spring:
 
 ## 서버 db (mySQL)
 #spring:
-#  datasource:-99
+#  datasource:
 #    # jdbc:mysql://<rds에서 생성한 db 엔드포인트>:<포트>/<데이터베이스_이름>
 #    url: jdbc:mysql://database-1.coawkjlckqsh.ap-northeast-2.rds.amazonaws.com:3306/test
 #    # rds 에서 db 생성시 입력하는 마스터 사용자 이름
@@ -31,7 +31,7 @@ spring:
 #  jpa:
 #    hibernate:
 #      # 서버 껏다 켰을때 데이터 유지를 하고 싶다면 create만 지우기
-#      ddl-auto:
+#      ddl-auto: update
 #      dialect: org.hibernate.dialect.MySQL5InnoDBDialect
 
 
