@@ -166,7 +166,7 @@ public class CategoryController {
     @GetMapping("/category/updatCategory/{id}")
     public String updatCategoryForm(@PathVariable("id")Long id, HttpServletRequest request,
                               Model model){
-        if(fun.getMember(request)==null || fun.getMember(request).getAccessrigths().equals("NORMAL")){return "/alert/noLogin";}
+        if(fun.getMember(request)==null || fun.getMember(request).getAccessrigths().equals("NORMAL")){return "alert/noLogin";}
 
         CategoryForm form = categoryService.getCategoryFormById(id);
         model.addAttribute("cateUp","cateUp");

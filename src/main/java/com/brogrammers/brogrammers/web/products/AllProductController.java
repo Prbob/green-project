@@ -49,7 +49,7 @@ public class AllProductController {
     @GetMapping("/products/add")
     public String addForm(@ModelAttribute("form") ProductForm form ,Model model, @PathVariable(value = "productId",required = false)Long productId,
                           HttpServletRequest request){
-        if(fun.getMember(request)==null || fun.getMember(request).getAccessrigths().equals("NORMAL")){return "/alert/noLogin";}
+        if(fun.getMember(request)==null || fun.getMember(request).getAccessrigths().equals("NORMAL")){return "alert/noLogin";}
         List<Brand> brands = brandService.findAll();
         List<Category> categories = categoryService.findAll();
         model.addAttribute("add","add");
@@ -362,7 +362,7 @@ public String productList(Model model, HttpServletRequest request,
         model.addAttribute("accessrigths",member);
         model.addAttribute("imgs",list);
         model.addAttribute("product",product);
-        return "/products/detail";
+        return "products/detail";
     }
     ///////////////////////////////////// edit ///////////////////////////////////
 

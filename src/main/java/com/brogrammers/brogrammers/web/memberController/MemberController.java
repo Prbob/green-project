@@ -43,7 +43,7 @@ public class MemberController {
     private final OrderService orderService;
     private final OrderProductsService orderProductsService;
 //    시큐리티
-//    PasswordHashConversion passwordConverter = new PasswordHashConversion();
+    PasswordHashConversion passwordConverter = new PasswordHashConversion();
     /////////////////////// 회원가입 //////////////////////
     @GetMapping("/member/joinMember")
     public String joinMemberForm(Model model, @RequestParam(value = "email",required = false) String email,HttpServletRequest request){
@@ -60,7 +60,7 @@ public class MemberController {
         }
         if(!form.getPwd().equals(form.getPwdChk())){ //notEqualPwd
             bindingResult.rejectValue("pwdChk","error.pwdChk","비밀번호가 일치하지 않습니다.");
-            return "/member/joinMemberForm";
+            return "member/joinMemberForm";
         }
 
         Optional<Member> optionalMember = memberService.validataDuplicateMember(form.getEmail());
@@ -71,12 +71,12 @@ public class MemberController {
         }
 
         // 비밀번호 해싱
-//        String hashedPassword = passwordConverter.hashPassword(form.getPwd());
+        String hashedPassword = passwordConverter.hashPassword(form.getPwd());
 
         Member member = new Member();
 
-//        member = member.saveMember(form.getEmail(),hashedPassword,form.getName());
-        member = member.saveMember(form.getEmail(),form.getPwd(),form.getName(),form.getPhone_number());
+        member = member.saveMember(form.getEmail(),hashedPassword,form.getName(),form.getPhone_number());
+//        member = member.saveMember(form.getEmail(),form.getPwd(),form.getName(),form.getPhone_number());
 
 
         if(form.getPostal_code()!=null &&form.getMiddle_address()!=null&&form.getDetailed_address()!=null){
@@ -91,7 +91,7 @@ public class MemberController {
         Basket basket = Basket.builder().member(member).build();
         basketService.save(basket); // 회원 가입하면서 회원 전용 장바구니 하나 만들기.
         log.info("가입 이메일={}, 아이디={}",member.getEmail(),member.getId());
-        return "/member/joinComplete";
+        return "member/joinComplete";
     }
     /////////////////////// 회원가입 //////////////////////
 
@@ -122,10 +122,9 @@ public class MemberController {
         }
 
         // 비밀번호 해싱
-//        String hashedPassword = passwordConverter.hashPassword(form.getPassword());
-//        Member loginMember = loginService.login(form.getMemberEmail(),hashedPassword);
+        String hashedPassword = passwordConverter.hashPassword(form.getPassword());
+        Member loginMember = loginService.login(form.getMemberEmail(),hashedPassword);
 
-        Member loginMember = loginService.login(form.getMemberEmail(),form.getPassword());
         if(loginMember==null){
             bindingResult.reject("loginFail","아이디 또는 비밀번호 오류");
             return "member/loginForm";
@@ -164,7 +163,7 @@ public class MemberController {
     @GetMapping("/member/myPage") // 마이페이지 / 구매내역 페이지
     public String myPage(HttpServletRequest request, Model model,
                          @PageableDefault(page=0,size=5,sort="id",direction = Sort.Direction.DESC)Pageable pageable){
-        if(fun.getMember(request)==null){return "/alert/noLogin";}
+        if(fun.getMember(request)==null){return "alert/noLogin";}
         Member member = fun.getMemberDb(request);
         /* 로그인 정보에 맞는 오더들 다 불러옴 */
         Page<Orders> orders = orderService.findOrdersByMember(member, pageable);
@@ -195,7 +194,7 @@ public class MemberController {
     }
     @GetMapping("/member/orderDetail")
     public String orderDetail(HttpServletRequest request, Model model,Long orderId) {
-        if(fun.getMember(request)==null){return "/alert/noLogin";}
+        if(fun.getMember(request)==null){return "alert/noLogin";}
         Member member = fun.getMemberDb(request);
         Orders order = orderService.findById(orderId).get();  // 오더
         List<OrderProducts> orderproductsByOrders = orderProductsService.findOrderproductsByOrders(order);  // 오더로 주문 아이템 내역 가져오기
@@ -218,18 +217,19 @@ public class MemberController {
 
     @GetMapping("/member/myInformationSecurity")
     public String myInformationSecurityForm(HttpServletRequest request,Model model,InfoUpdatPwdChk form){
-        if(fun.getMember(request)==null ){return "/alert/noLogin";}
+        if(fun.getMember(request)==null ){return "alert/noLogin";}
         model.addAttribute("form",form);
         model.addAttribute("myinfo","myinfo");
-        return "/member/myInformationSecurity";
+        return "member/myInformationSecurity";
     }
     @PostMapping("/member/myInformationSecurity")
     public String myInformationSecurity(HttpServletRequest request,Model model, @Valid @ModelAttribute("form") InfoUpdatPwdChk form,BindingResult result){
         Member member = fun.getMemberDb(request);
-        if (result.hasErrors()){return "/member/myInformationSecurity";}
-        if(!member.getPwd().equals(form.getPwd())){
+        String hashedPassword = passwordConverter.hashPassword(form.getPwd());
+        if (result.hasErrors()){return "member/myInformationSecurity";}
+        if(!member.getPwd().equals(hashedPassword)){
             result.rejectValue("pwd","error.pwd","비밀번호가 일치하지 않습니다.");
-            return "/member/myInformationSecurity";
+            return "member/myInformationSecurity";
         }
         HttpSession session = request.getSession();
         session.setAttribute(SessionConst.MYINFO,"myInfo");
@@ -238,7 +238,7 @@ public class MemberController {
 
     @GetMapping("/member/updateMyInformation")
     public String updateMyInformationForm(HttpServletRequest request,Model model){
-        if(fun.getMember(request)==null || !fun.myInfo(request)){return "/alert/noLogin";}
+        if(fun.getMember(request)==null || !fun.myInfo(request)){return "alert/noLogin";}
         model.addAttribute("myinfo","myinfo");
         Member member = fun.getMemberDb(request);
         MemberForm form = MemberForm.builder()
@@ -252,13 +252,13 @@ public class MemberController {
                 .totalOrderPrice(member.getTotalOrderPrice())
                 .build();
         model.addAttribute("form",form);
-        return "/member/updateMyInformation";
+        return "member/updateMyInformation";
     }
     @PostMapping("/member/updateMyInformation")
     public String updateMyInformation(@Valid @ModelAttribute("form") MemberForm form,BindingResult result, HttpServletRequest request,Model model){
-        if(fun.getMember(request)==null){return "/alert/noLogin";}
+        if(fun.getMember(request)==null){return "alert/noLogin";}
         if(result.hasErrors()){
-            return "/member/updateMyInformation";
+            return "member/updateMyInformation";
         }
 
         String pwd = form.getPwd();
@@ -269,10 +269,12 @@ public class MemberController {
         String postalCode = form.getPostal_code();
         if(!pwd.equals(pwdChk)){ //notEqualPwd
             result.rejectValue("pwdChk","error.pwdChk","비밀번호가 일치하지 않습니다.");
-            return "/member/updateMyInformation";
+            return "member/updateMyInformation";
         }
+        String hashedPassword = passwordConverter.hashPassword(form.getPwd());
+
         Member member = fun.getMemberDb(request);
-        member.updatPwd(form.getPwd()); // 비밀번호 변경
+        member.updatPwd(hashedPassword); // 비밀번호 변경
         member.updatPhone(form.getPhone_number()); // 핸드폰 번호 변경
         if(!(form.getPostal_code().isEmpty() && form.getMiddle_address().isEmpty() && form.getDetailed_address().isEmpty())){
             member.saveAddress(Address.builder().detailed_address(detailedAddress).middle_address(middleAddress).postal_code(postalCode).build()); // 주소 업뎃
@@ -280,7 +282,7 @@ public class MemberController {
         memberService.updateMember(member);
         fun.logout(request);
         model.addAttribute("form",form);
-        return "/alert/updatMyInformation";
+        return "alert/updatMyInformation";
     }
 
     @GetMapping("/my/withdrawal")

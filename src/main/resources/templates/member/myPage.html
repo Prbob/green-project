@@ -170,7 +170,7 @@
                             <div class="orderItems">
                                 <div class="orderItem"  th:each="form : ${list}">
                                     <div class="leftImg">  <!-- 상품들 중 하나 넣고 -->
-                                    <img th:src="@{|/upload/${form.fileName}|}"/>
+                                        <img th:src="${form.fileName}"/>
                                     </div>
                                     <div class="rightInfo">
 

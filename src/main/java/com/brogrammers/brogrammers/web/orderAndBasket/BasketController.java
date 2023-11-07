@@ -66,7 +66,7 @@ public class BasketController {
         if(action.equals("buy")){
             return "redirect:/order/buy?product="+product.getId()+"&quantity="+quantity+"&way=one";
         }
-        if(fun.getMember(request)==null){return "/alert/orderNologin";}
+        if(fun.getMember(request)==null){return "alert/orderNologin";}
         Member member = fun.getMember(request); // 로그인 정보
         Long basketId = member.getBasket().getId(); // 바스켓 아이디 가져오기
         Basket basket = basketService.findById(basketId); // 바스켓 가져오기
@@ -95,7 +95,7 @@ public class BasketController {
     @GetMapping("/products/myBasket") // 내 장바구니 이동
     public String myBasket(Model model, HttpServletRequest request,
                            @PageableDefault(page=0,size=5,sort="id",direction = Sort.Direction.DESC) Pageable pageable){
-        if(fun.getMember(request)==null){return "/alert/noLogin";}
+        if(fun.getMember(request)==null){return "alert/noLogin";}
         Member member = memberService.findById(fun.getMember(request).getId()); // 멤버 가져오기
         Basket basket = basketService.findById(member.getBasket().getId()); // 장바구니 가져오기
         Page<Products> productList = baskProdService.findProductsByBasket(basket,pageable); // 장바구니에 저장된 모든 상품들 가져오기

@@ -193,10 +193,10 @@
         <div id="leftSide">
             <div id="imageUl" class="slider">
                 <div class="slide">
-                    <img th:src="@{|/upload/${product.imgName}|}">
+                    <img th:src="${product.imgName}">
                 </div>
                 <div class="slide" th:each="img : ${imgs}">
-                    <img th:src="@{|/upload/${img.saveName}|}">
+                    <img th:src="${img.saveName}">
                 </div>
 
                 <button class="prev"><i class="fa-solid fa-chevron-up fa-rotate-270"></i></button>

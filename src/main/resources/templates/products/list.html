@@ -183,8 +183,8 @@
                         <a th:if="${gender == 'female'}" th:href="@{/products/list(gender=female)}" style="margin-right: 20px;"><strong>여성</strong></a>
                         <a th:unless="${gender == 'female'}" th:href="@{/products/list(gender=female)}" style="margin-right: 20px;">여성</a>
 
-                        <a th:if="${gender != 'male' && gender !='female'}" th:href="@{/products/list}"><strong>남녀공용</strong></a>
-                        <a th:if="${gender == 'male' || gender == 'female'}" th:href="@{/products/list}">남녀공용</a>
+                        <a th:if="${gender != 'male' && gender !='female'}" th:href="@{/products/list}"><strong>전체보기</strong></a>
+                        <a th:if="${gender == 'male' || gender == 'female'}" th:href="@{/products/list}">전체보기</a>
                     </div>
                 </div>
 
@@ -209,19 +209,35 @@
             </ul>
         </div>
 
+<!--        <div class="productWrap">-->
+<!--            <div class="itembox" th:each="product : ${products}">-->
+<!--                <a th:href="@{/products/detail/{productId} (productId=${product.id})}" >-->
+<!--                    <img th:src="${product.imgName}">-->
+<!--                </a>-->
+<!--                    <div class="itembox_info">-->
+<!--                        <a th:href="@{/products/detail/{productId} (productId=${product.id})}" ><b><p th:text="|${product.brand.name}|"></p></b></a>-->
+<!--                        <a th:href="@{/products/detail/{productId} (productId=${product.id})}" ><p th:text="${#strings.length(product.name) < 20 ? product.name : #strings.substring(product.name, 0, 20) + ' ...'}"></p></a>-->
+<!--                        <p th:text="|${#numbers.formatDecimal(product.price,3, 'COMMA',0,'POINT')}원|" class="priceTag"></p><br>-->
+<!--                    </div>-->
+<!--            </div>-->
+<!--        </div>-->
+
         <div class="productWrap">
             <div class="itembox" th:each="product : ${products}">
                 <a th:href="@{/products/detail/{productId} (productId=${product.id})}" >
-                    <img th:src="@{|/upload/${product.imgName}|}">
+                    <img th:src="${product.imgName}">
                 </a>
-                    <div class="itembox_info">
-                        <a th:href="@{/products/detail/{productId} (productId=${product.id})}" ><b><p th:text="|${product.brand.name}|"></p></b></a>
-                        <a th:href="@{/products/detail/{productId} (productId=${product.id})}" ><p th:text="${#strings.length(product.name) < 20 ? product.name : #strings.substring(product.name, 0, 20) + ' ...'}"></p></a>
-                        <p th:text="|${#numbers.formatDecimal(product.price,3, 'COMMA',0,'POINT')}원|" class="priceTag"></p><br>
-                    </div>
+                <div class="itembox_info">
+                    <a th:href="@{/products/detail/{productId} (productId=${product.id})}" ><b><p th:text="|${product.brand.name}|"></p></b></a>
+                    <a th:href="@{/products/detail/{productId} (productId=${product.id})}" ><p th:text="${#strings.length(product.name) < 20 ? product.name : #strings.substring(product.name, 0, 20) + ' ...'}"></p></a>
+                    <p th:text="|${#numbers.formatDecimal(product.price,3, 'COMMA',0,'POINT')}원|" class="priceTag"></p><br>
+                </div>
 
             </div>
         </div>
+
+
+
 
         <div class="pagingBox">
             <a th:if="${5 < startPage}" th:href="@{/products/__${pname}__(page = ${startPage-6},nameSearch = ${param.nameSearch},brandId=${param.brandId},gender=${param.gender})}">

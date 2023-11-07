@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>구매 성공</title>
@@ -101,7 +101,7 @@
     <p><b>주문이 완료</b>되었습니다. 감사합니다. </p>
     <div class="orderItems">
         <div class="orderItem" th:each="products:${list}">
-            <img th:src="@{|/upload/${products.products.imgName}|}" style="display: inline-block;">
+            <img th:src="${products.products.imgName}" style="display: inline-block;">
             <b><span style="line-height: 3.5em;" th:text="|${products.products.name}(${products.quantity}ea)|">item name</span></b>
         </div>
     </div>

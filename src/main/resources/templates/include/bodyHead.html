@@ -41,7 +41,7 @@
                             <div data-v-533cad97="" class="top_inner">
                                 <ul data-v-533cad97="" class="top_list">
 
-                                    <li data-v-533cad97="" th:if="${session.member!=null} and ${session.accessrigths != 'NORMAL'}" class="top_item"><a data-v-533cad97="" href="/manager" class="top_link"> 관리자페이지 </a></li>
+                                    <li data-v-533cad97="" th:if="${session.member!=null} and ${session.member.accessrigths != 'NORMAL'}" class="top_item"><a data-v-533cad97="" href="/manager" class="top_link"> 관리자페이지 </a></li>
                                     <li data-v-533cad97="" class="top_item"><a data-v-533cad97="" href="/customer/notice" class="top_link"> 고객센터 </a></li>
                                     <li data-v-533cad97="" th:unless="${session.member==null}" class="top_item"><a data-v-533cad97="" th:href="@{/member/myPage}" class="top_link"> 내정보 </a></li>
                                     <li data-v-533cad97="" th:unless="${session.member==null}" class="top_item"><a data-v-533cad97="" th:href="@{/products/myBasket}" class="top_link"> 관심상품 </a></li>

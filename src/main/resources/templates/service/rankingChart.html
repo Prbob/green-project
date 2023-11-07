@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="kr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UNCOMMON | 한정판 거래의 FLEX</title>
+    <script src="https://kit.fontawesome.com/45b9232fe5.js" crossorigin="anonymous"></script>
+    <style>
+        ul {
+            padding: 0;
+            margin: 0;
+        }
+
+        ul li {
+            list-style: none;
+        }
+
+        div.rank_Contaner {
+            width: 50%;
+            margin: 0 auto;
+        }
+
+        div.rank_TopContaner {
+            display: flex;
+            justify-content: space-between;
+            /* 버튼을 오른쪽으로 이동 */
+            align-items: center;
+            /* 세로 중앙 정렬 유지 */
+            border-bottom: 2px solid black;
+        }
+
+        div.rank_TopContaner button {
+            float: inline-end;
+        }
+
+        div.rank_TopContaner-div {
+            text-align: center;
+            /* 텍스트 가운데 정렬 */
+            margin: 0 auto;
+            /* 수평 가운데 정렬 */
+        }
+
+        div.rank_TopContaner-div p {
+            color: gray;
+            font-size: 10px;
+            
+        }
+
+        div.rank_MainContaner {
+            margin-top: 20px;
+        }
+
+        div.rank_MainContaner div input {
+            width: 100%;
+            height: 30px;
+            margin-bottom: 40px;
+        }
+
+        div.rank-mainContent-detail {
+            display: flex;
+            /* 요소들을 가로로 정렬합니다. */
+            align-items: center;
+            /* 세로 가운데 정렬을 유지합니다. */
+            gap: 5px;
+            border-bottom: 1px solid gray;
+            padding: 5px;
+            justify-content: center;
+        }
+
+        div.rank-mainContent-detail-img {
+            justify-content: start;
+        }
+
+        div.rank-mainContent-detail-mini-Explanation {
+            width: 100%;
+        }
+
+        div.rank-mainContent-detail img {
+            width: 50px;
+            /* 이미지의 너비 설정 */
+            height: 50px;
+            /* 이미지의 높이 설정 */
+            margin-right: 10px;
+            /* 이미지와 텍스트 사이의 간격 설정 */
+        }
+
+        div.rank-mainContent-detail-mini-price {
+            display: flex;
+        }
+
+        div.rank-mainContent-detail-mini-price-main {
+            color: black;
+            margin-right: 10px;
+            text-align: left;
+            justify-content: flex-end;
+            text-align: right;
+        }
+
+        div.rank-mainContent-detail-mini-price-main div {
+            justify-content: left;
+        }
+
+        div.rank-mainContent-detail-mini-Explanation-name {
+            color: black;
+            font-weight: 500;
+            font-size: 13px;
+        }
+
+        div.rank-mainContent-detail-mini-Explanation-StyleCode {
+            color: grey;
+            font-size: 11px;
+        }
+
+        div.rank-mainContent-detail-mini-Explanation-option {
+            color: black;
+            font-size: 11px;
+        }
+
+        span.rank-mainContent-detail-mini-price-main-mainPrice {
+            display: inline-block;
+            /* inline에서 inline-block으로 변경 */
+            /* content: "\2191"; */
+            color: rgb(172, 223, 94);
+        }
+
+        span.arrow-up::after {
+            content: "↑";
+            /* 화살표 문자 */
+            display: inline-block;
+            /* display 속성 추가 */
+            color: rgb(172, 223, 94);
+            margin-right: 5px;
+            /* 화살표와 숫자 사이의 간격 조절 */
+        }
+
+        span.arrow-down::after {
+            content: "↓";
+            /* 화살표 문자 */
+            display: inline-block;
+            /* display 속성 추가 */
+            color: red;
+            margin-right: 5px;
+            /* 화살표와 숫자 사이의 간격 조절 */
+        }
+
+        button.BTN_Green {
+            background-color: rgb(172, 223, 94);
+            color: white;
+        }
+
+        button.BTN_Red {
+            background-color: #ef6253;
+            color: white;
+        }
+
+
+        /* 화살표 아이콘을 세로 가운데 정렬 */
+        i {
+            
+            vertical-align: middle; /* 아이콘을 세로 중앙에 정렬합니다 */
+        }
+        .fas fa-arrow-up fa-2xl{
+            align-items: center;
+        }
+        i::before{
+            vertical-align: middle;
+        }
+        .fas.fa-arrow-up.fa-2xl,
+        .fas.fa-arrow-down.fa-2xl {
+            font-size: 2rem; /* 아이콘의 크기를 조절합니다 */
+            vertical-align: middle; /* 세로로 가운데 정렬합니다 */
+        }
+        .rank-mainContent-detail-mini-price::before {
+            display: block;
+            margin-right: 5px;
+            color: rgb(172, 223, 94); /* 화살표 컬러 */
+            
+        }
+        
+
+        .arrow i {
+            font-size: 24px; /* 아이콘의 크기 */
+            line-height: 50px; /* 아이콘의 높이를 컨테이너의 높이와 같게 설정 */
+            vertical-align: middle; /* 세로 정렬 */
+        }
+        button.BTN_Green + .rank-mainContent-detail-mini-price .rank-mainContent-detail-mini-price-main-mainPrice,
+        button.BTN_Red + .rank-mainContent-detail-mini-price .rank-mainContent-detail-mini-price-main-mainPrice {
+            color: inherit !important;
+        }
+        
+        .negative-price {
+            background-color: red !important; /* 버튼의 배경색을 빨간색으로 변경 */
+            color: white !important; /* 버튼 텍스트 색상을 흰색으로 변경 */
+        }
+        
+
+        /* div.rank-mainContent-detail */
+        /* rank-mainContent-detail-mini-price-priceBTN */
+    </style>
+</head>
+
+<body>
+    <div class="rank_Contaner">
+        <div class="rank_TopContaner">
+            <div class="rank_TopContaner-div">
+                <H1>실시간 차트</H1>
+                <p>오늘 거래량 기준</p>
+            </div>
+            <img src="images/크림 이미지/Icon/icon_point.svg" alt="아이콘 팝업창.?">
+        </div>
+        <div class="rank_MainContaner">
+            <div class="rank-mainContent">
+                <ul>
+                    <li>
+                        <div class="rank-mainContent-detail">
+                            <div class="rank-mainContent-detail-img">
+                                <img src="images/크림 이미지/Icon/icon_Notice.svg" alt="순위 이미지"><!--이곳에 이미지 나오게 해야합니다.-->
+                            </div>
+                            <div class="rank-mainContent-detail-mini-Explanation"><!-- 깡통으로 놔둘거면 여기는 안건드려도 됨..-->
+                                <div class="rank-mainContent-detail-mini-Explanation-name">Jordan 1 x Trabis Scott Retro
+                                    Low OG SP Sail and Ridgerock </div>
+                                <div class="rank-mainContent-detail-mini-Explanation-StyleCode">DM7866-162</div>
+                                <div class="rank-mainContent-detail-mini-Explanation-option">270</div>
+                            </div>
+                             <div class="rank-mainContent-detail-mini-price">
+                                <div class="rank-mainContent-detail-mini-price-main">
+                                    <div class="rank-mainContent-detail-mini-price-main-mainPrice"> 1,332,000</div>
+                                    <span class="rank-mainContent-detail-mini-price-main-mainPrice">16,000</span>
+                                    <div class="arrow"></div> <!-- 화살표 표시를 위한 빈 요소 -->
+                                </div>
+                                <button type="button" class="rank-mainContent-detail-mini-price-priceBTN BTN_Green">+1.2%</button>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="rank-mainContent-detail">
+                            <div class="rank-mainContent-detail-img">
+                                <img src="images/크림 이미지/Icon/icon_Notice.svg" alt="순위 이미지"><!--이곳에 이미지 나오게 해야합니다.-->
+                            </div>
+                            <div class="rank-mainContent-detail-mini-Explanation">
+                                <div class="rank-mainContent-detail-mini-Explanation-name">Jordan 1x Travis Scott x
+                                    Fragment Retro Low OG SP Military Bule</div>
+                                <div class="rank-mainContent-detail-mini-Explanation-StyleCode">DM-7866-567</div>
+                                <div class="rank-mainContent-detail-mini-Explanation-option">280</div>
+                            </div>
+                            <div class="rank-mainContent-detail-mini-price">
+                                <div class="rank-mainContent-detail-mini-price-main">
+                                    <div class="rank-mainContent-detail-mini-price-main-mainPrice">1,912,000</div>
+                                    <span class="rank-mainContent-detail-mini-price-main-mainPrice">4,000</span>
+                                    <div class="arrow"></div> <!-- 화살표 표시를 위한 빈 요소 -->
+                                </div>
+                                <button type="button" class="rank-mainContent-detail-mini-price-priceBTN BTN_Red">-0.2%</button>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="rank-mainContent-detail">
+                            <div class="rank-mainContent-detail-img">
+                                <img src="images/크림 이미지/Icon/icon_Notice.svg" alt="순위 이미지"><!--이곳에 이미지 나오게 해야합니다.-->
+                            </div>
+                            <div class="rank-mainContent-detail-mini-Explanation">
+                                <div class="rank-mainContent-detail-mini-Explanation-name">Puma unaited Low OG SP Military Bule</div>
+                                <div class="rank-mainContent-detail-mini-Explanation-StyleCode">DM-2203-7981</div>
+                                <div class="rank-mainContent-detail-mini-Explanation-option">275</div>
+                            </div>
+                            <div class="rank-mainContent-detail-mini-price">
+                                <div class="rank-mainContent-detail-mini-price-main">
+                                    <div class="rank-mainContent-detail-mini-price-main-mainPrice">704,000</div>
+                                    <span class="rank-mainContent-detail-mini-price-main-mainPrice">5,000</span>
+                                    <div class="arrow"></div> <!-- 화살표 표시를 위한 빈 요소 -->
+                                </div>
+                                <button type="button" class="rank-mainContent-detail-mini-price-priceBTN BTN_Green">+0.7%</button>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="rank-mainContent-detail">
+                            <div class="rank-mainContent-detail-img">
+                                <img src="images/크림 이미지/Icon/icon_Notice.svg" alt="순위 이미지"><!--이곳에 이미지 나오게 해야합니다.-->
+                            </div>
+                            <div class="rank-mainContent-detail-mini-Explanation"><!-- 깡통으로 놔둘거면 여기는 안건드려도 됨..-->
+                                <div class="rank-mainContent-detail-mini-Explanation-name">Jornadan 2x santa Retro
+                                    Low power shoose </div>
+                                <div class="rank-mainContent-detail-mini-Explanation-StyleCode">DM7866-162</div>
+                                <div class="rank-mainContent-detail-mini-Explanation-option">270</div>
+                            </div>
+                             <div class="rank-mainContent-detail-mini-price">
+                                <div class="rank-mainContent-detail-mini-price-main">
+                                    <div class="rank-mainContent-detail-mini-price-main-mainPrice"> 796,000</div>
+                                    <span class="rank-mainContent-detail-mini-price-main-mainPrice">10,000</span>
+                                    <div class="arrow"></div> <!-- 화살표 표시를 위한 빈 요소 -->
+                                </div>
+                                <button type="button" class="rank-mainContent-detail-mini-price-priceBTN BTN_Red">-1.2%</button>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="rank-mainContent-detail">
+                            <div class="rank-mainContent-detail-img">
+                                <img src="images/크림 이미지/Icon/icon_Notice.svg" alt="순위 이미지"><!--이곳에 이미지 나오게 해야합니다.-->
+                            </div>
+                            <div class="rank-mainContent-detail-mini-Explanation"><!-- 깡통으로 놔둘거면 여기는 안건드려도 됨..-->
+                                <div class="rank-mainContent-detail-mini-Explanation-name">Nike switch
+                                    power sail shoose </div>
+                                <div class="rank-mainContent-detail-mini-Explanation-StyleCode">DM-6785-090</div>
+                                <div class="rank-mainContent-detail-mini-Explanation-option">270</div>
+                            </div>
+                             <div class="rank-mainContent-detail-mini-price">
+                                <div class="rank-mainContent-detail-mini-price-main">
+                                    <div class="rank-mainContent-detail-mini-price-main-mainPrice"> 373,000</div>
+                                    <span class="rank-mainContent-detail-mini-price-main-mainPrice">10,000</span>
+                                    <div class="arrow"></div> <!-- 화살표 표시를 위한 빈 요소 -->
+                                </div>
+                                <button type="button" class="rank-mainContent-detail-mini-price-priceBTN BTN_Green">+2.8%</button>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="rank-mainContent-detail">
+                            <div class="rank-mainContent-detail-img">
+                                <img src="images/크림 이미지/Icon/icon_Notice.svg" alt="순위 이미지"><!--이곳에 이미지 나오게 해야합니다.-->
+                            </div>
+                            <div class="rank-mainContent-detail-mini-Explanation"><!-- 깡통으로 놔둘거면 여기는 안건드려도 됨..-->
+                                <div class="rank-mainContent-detail-mini-Explanation-name">(W) UGG Classic Ultra Mini Boots Chestnut </div>
+                                <div class="rank-mainContent-detail-mini-Explanation-StyleCode">DM-3454879</div>
+                                <div class="rank-mainContent-detail-mini-Explanation-option">250</div>
+                            </div>
+                             <div class="rank-mainContent-detail-mini-price">
+                                <div class="rank-mainContent-detail-mini-price-main">
+                                    <div class="rank-mainContent-detail-mini-price-main-mainPrice"> 319,000</div>
+                                    <span class="rank-mainContent-detail-mini-price-main-mainPrice">3,000</span>
+                                    <div class="arrow"></div> <!-- 화살표 표시를 위한 빈 요소 -->
+                                </div>
+                                <button type="button" class="rank-mainContent-detail-mini-price-priceBTN BTN_Red">-0.9%</button>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="rank-mainContent-detail">
+                            <div class="rank-mainContent-detail-img">
+                                <img src="images/크림 이미지/Icon/icon_Notice.svg" alt="순위 이미지"><!--이곳에 이미지 나오게 해야합니다.-->
+                            </div>
+                            <div class="rank-mainContent-detail-mini-Explanation"><!-- 깡통으로 놔둘거면 여기는 안건드려도 됨..-->
+                                <div class="rank-mainContent-detail-mini-Explanation-name">New Balance 993 Made in USA Grey - D Standard </div>
+                                <div class="rank-mainContent-detail-mini-Explanation-StyleCode">DM-3424-879</div>
+                                <div class="rank-mainContent-detail-mini-Explanation-option">275</div>
+                            </div>
+                             <div class="rank-mainContent-detail-mini-price">
+                                <div class="rank-mainContent-detail-mini-price-main">
+                                    <div class="rank-mainContent-detail-mini-price-main-mainPrice"> 578,000</div>
+                                    <span class="rank-mainContent-detail-mini-price-main-mainPrice">10,000</span>
+                                    <div class="arrow"></div> <!-- 화살표 표시를 위한 빈 요소 -->
+                                </div>
+                                <button type="button" class="rank-mainContent-detail-mini-price-priceBTN BTN_Green">+0.2%</button>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="rank-mainContent-detail">
+                            <div class="rank-mainContent-detail-img">
+                                <img src="images/크림 이미지/Icon/icon_Notice.svg" alt="순위 이미지"><!--이곳에 이미지 나오게 해야합니다.-->
+                            </div>
+                            <div class="rank-mainContent-detail-mini-Explanation"><!-- 깡통으로 놔둘거면 여기는 안건드려도 됨..-->
+                                <div class="rank-mainContent-detail-mini-Explanation-name">Jordan 1 Retro High OG Chicago 2022 </div>
+                                <div class="rank-mainContent-detail-mini-Explanation-StyleCode">DM-7895-0987</div>
+                                <div class="rank-mainContent-detail-mini-Explanation-option">270</div>
+                            </div>
+                             <div class="rank-mainContent-detail-mini-price">
+                                <div class="rank-mainContent-detail-mini-price-main">
+                                    <div class="rank-mainContent-detail-mini-price-main-mainPrice"> 1,332,000</div>
+                                    <span class="rank-mainContent-detail-mini-price-main-mainPrice">20,000</span>
+                                    <div class="arrow"></div> <!-- 화살표 표시를 위한 빈 요소 -->
+                                </div>
+                                <button type="button" class="rank-mainContent-detail-mini-price-priceBTN BTN_Green">+1.5%</button>
+                            </div>
+                        </div>
+                    </li>
+                    
+                </ul>
+            </div>
+        </div>
+    </div>
+</body>
+<script>
+     
+    
+    document.addEventListener("DOMContentLoaded", function () {
+        // 모든 priceBTN 요소 가져오기
+        var priceButtons = document.querySelectorAll(".rank-mainContent-detail-mini-price-priceBTN");
+
+        priceButtons.forEach(function (button) {
+            var value = parseFloat(button.innerText); // 버튼의 텍스트 내용을 부동 소수점으로 파싱
+
+            if (value < 0) {
+                // 음수인 경우 텍스트 색상 변경
+                var priceElement = button.closest(".rank-mainContent-detail-mini-price").querySelector("span.rank-mainContent-detail-mini-price-main-mainPrice");
+                priceElement.style.color = "red";
+            }
+        });
+    });
+
+    document.addEventListener("DOMContentLoaded", function () {
+        // 모든 priceBTN 요소 가져오기
+        var priceButtons = document.querySelectorAll(".rank-mainContent-detail-mini-price-priceBTN");
+
+        priceButtons.forEach(function (button) {
+            var value = parseFloat(button.innerText); // 버튼의 텍스트 내용을 부동 소수점으로 파싱
+
+            // 화살표 아이콘을 나타내는 HTML 코드 생성
+            var arrowIcon = document.createElement("i");
+            arrowIcon.className = "fas fa-arrow-up fa-2xl"; // 위쪽 화살표 아이콘 클래스
+            arrowIcon.style.verticalAlign = "middle"; // 세로 정가운데 정렬
+            arrowIcon.style.color="rgb(172, 223, 94)";
+            arrowIcon.style.marginLeft="5px";
+            arrowIcon.style.marginTop="17px";
+            arrowIcon.style.marginRight="7px";
+
+            if (value < 0) {
+                // 음수인 경우 아래쪽 화살표 아이콘 클래스로 변경
+                arrowIcon.className = "fas fa-arrow-down fa-2xl"; // 아래쪽 화살표 아이콘
+                arrowIcon.style.verticalAlign = "middle"; // 세로 정가운데 정렬
+                
+                arrowIcon.style.color="red";
+                arrowIcon.style.marginLeft="5px";
+                arrowIcon.style.marginTop="17px";
+                arrowIcon.style.marginRight="7px";
+            }
+
+            // 화살표 아이콘을 버튼 앞에 추가
+            button.insertAdjacentElement("beforebegin", arrowIcon);
+        });
+    });
+
+</script>
+
+</html>

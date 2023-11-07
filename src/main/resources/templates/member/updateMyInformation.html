@@ -175,7 +175,7 @@
                                     <h3 data-v-286e873e="" data-v-4e1fd2e6="" class="input_title">총 주문 금액</h3>
                                 </div>
                                 <div data-v-4e1fd2e6="" class="input_item">
-                                    <div data-v-4e1fd2e6="" type="text" placeholder="값 받아오기" autocomplete="off" class="input_txt" readonly th:text="${form.totalOrderPrice}"/>
+                                    <div data-v-4e1fd2e6="" type="text" placeholder="값 받아오기" autocomplete="off" class="input_txt" readonly th:text="|${#numbers.formatDecimal(form.totalOrderPrice,3, 'COMMA',0,'POINT')}원|"/>
                                 </div>
                             </div><!---->
 

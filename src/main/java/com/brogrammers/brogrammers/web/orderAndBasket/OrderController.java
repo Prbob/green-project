@@ -46,7 +46,7 @@ public class OrderController {
 
     public String orderForm(@RequestParam(name = "product",required = false)Long id,@RequestParam(name = "quantity",required = false)Integer quantity,
                             Model model, HttpServletRequest request,@RequestParam(name = "way",required = false)String way){
-        if(fun.getMember(request)==null){return "/alert/orderNologin";}
+        if(fun.getMember(request)==null){return "alert/orderNologin";}
         HttpSession session1 = request.getSession();
 
         Member member = functionClass.getMemberDb(request); // 1. 회원 정보를 불러옴
@@ -158,7 +158,7 @@ public class OrderController {
 
     @GetMapping("/orderAndBasket/orderSuccess") // 결제 성공 시 이동할 페이지
     public String orderSuccess(@RequestParam("orderId") Long orderId, HttpServletRequest request,Model model){
-        if(fun.getMember(request)==null){return "/alert/noLogin";}
+        if(fun.getMember(request)==null){return "alert/noLogin";}
         Member memberDb = fun.getMemberDb(request);
         Basket basket = basketService.findByMemberid(memberDb.getId()).get();
         Orders order = orderService.findById(orderId).get();

@@ -124,7 +124,7 @@
                                 <td colspan="4">
                                     <div class="orderItem" th:each="productsCount : ${list}">
                                         <div>
-                                            <img th:src="@{|/upload/${productsCount.product.imgName}|}"/>
+                                            <img th:src="${productsCount.product.imgName}"/>
                                         </div>
                                         <div id="divsecond">
                                             <b><a th:href="@{/products/detail/__${productsCount.product.id}__}" th:text="|상품명 : ${productsCount.product.name}|"><span >item name</span></a></b>
