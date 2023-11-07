@@ -38,8 +38,8 @@ spring:
   mail:
     host: smtp.gmail.com
     port: 465
-    username: qkrgksrl0033@gmail.com #보내는 사람 이메일
-    password: tmdvpjdnnpxcneiv # 구글 앱 비밀번호(구글 비밀번호x)
+    username:  #보내는 사람 이메일
+    password:  # 구글 앱 비밀번호(구글 비밀번호x)
     properties:
       mail:
         smtp:

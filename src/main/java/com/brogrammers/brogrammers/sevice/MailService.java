@@ -9,7 +9,7 @@ import java.util.Random;
 @Service
 public class MailService {
     private JavaMailSender mailSender;
-    private static final String FROM_ADDRESS = "qkrgksrl0033@gmail.com"; // 발송자 정보
+    private static final String FROM_ADDRESS = ""; // 발송자 이메일
 
     public MailService(JavaMailSender mailSender) {
         this.mailSender = mailSender;
