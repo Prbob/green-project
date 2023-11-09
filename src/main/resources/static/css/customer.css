@@ -1,5 +1,4 @@
 body {
-    font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
 }
@@ -7,12 +6,12 @@ body {
     display: flex;
     max-width: 1200px;
     margin: 0 auto;
-    background-color: #f5f5f5;
+    /*장바구니 배경에 깔려서 뺏음*/
+    /*background-color: #f5f5f5;*/
 }
 .sidebar {
     background-color: #fff;
-    color: #fff;
-    width: 250px;
+    min-width: 250px;
     padding: 20px;
 }
 .snb_main_title {
@@ -23,7 +22,7 @@ body {
     padding: 0;
 }
 .menu_item {
-    margin-bottom: 10px;
+    margin-bottom: 14px;
 }
 .menu_link {
     text-decoration: none;

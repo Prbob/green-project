@@ -5,6 +5,8 @@ import com.brogrammers.brogrammers.domain.product.BasketProducts;
 import com.brogrammers.brogrammers.domain.product.Products;
 import com.brogrammers.brogrammers.domain.repository.BaskProdRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -23,6 +25,9 @@ public class BaskProdService {
     }
     public Optional<BasketProducts> findById(Long id){return baskProdRepository.findById(id);}
     public List<Products> findProductsByBasketId(Basket basket){return baskProdRepository.findProductsByBasket(basket);}
+
+    public Page<Products> findProductsByBasket(Basket basket, Pageable pageable){return baskProdRepository.findProductsByBasket(basket, pageable);}
+
     // 이건 안쓸듯
     public Optional<BasketProducts> findBasProByBasAndPro(Basket basket, Products products){return baskProdRepository.findOneByBaskeyAndProducts(basket,products);}
 
@@ -32,5 +37,8 @@ public class BaskProdService {
     }
     public void delete(Long id){
         baskProdRepository.deleteBasketProductsById(id);
+    }
+    public void delete(Basket basket, Products products){
+        baskProdRepository.deleteBaskProdByBasketAndProducts(basket,products);
     }
 }

@@ -29,5 +29,12 @@ public class MemberService {
         return memberRepository.findByEmail(email);
     }
 
+    public Optional<Member> findByEmail(String email){return memberRepository.findByEmail(email);}
+
+    @Transactional
+    public void updateMember(Member member){
+        Member origin = findById(member.getId());
+        origin = member;
+    }
 
 }

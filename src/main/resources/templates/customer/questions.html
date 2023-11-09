@@ -3,60 +3,457 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>자주 묻는 질문</title>
+    <title>UNCOMMON | 자주 묻는 질문</title>
     <th:block th:replace="include/header :: header"></th:block>
 
     <!--공지사항 css-->
-    <link rel="stylesheet" th:href="@{/css/customer.css}" type="text/css">
+    <link rel="stylesheet" th:href="@{/css/customer.css}"type="text/css">
+    <!-- 폰트어썸 -->
+    <script src="https://kit.fontawesome.com/45b9232fe5.js" crossorigin="anonymous"></script>
+    <style>
+        div.container{
+            display: flex;
+        }
+        div.content_title{
+            border-bottom: 3px solid black;
+            padding-bottom: 16px;
+            font-weight: 600;
+            color: black;
+            height: 46px;
+        }
+        h2.snb_main_title{
+            color: black;
+        }
 
+        .dropdown div {
+            display: flex; /* Flexbox 레이아웃 사용 */
+            justify-content: space-between; /* 좌우로 정렬 */
+            align-items: center; /* 수직 가운데 정렬 (선택 사항) */
+        }
+
+        .fa-solid {
+            margin-right: 10px;
+        }
+
+        .dropdown_list li {
+            border-radius: 5px;
+        }
+    </style>
 
 </head>
 <body>
 <!--Header-->
 <th:block th:replace="include/bodyHead :: bodyHeader"></th:block>
 
-<div class="container">
-    <div class="sidebar">
-        <a href="/notice" aria-current="page">
-            <h2 class="snb_main_title">자주 묻는 질문</h2>
-        </a>
-        <nav>
-            <ul class="snb_menu">
-                <li class="menu_item"><a href="/customer/notice" aria-current="page" class="menu_link"> 공지사항 </a></li>
-                <li class="menu_item"><a href="/customer/questions" class="menu_link"> <span style="font-weight:bolder">자주 묻는 질문</span> </a></li>
-                <li class="menu_item"><a href="/customer/inspectionStandards" class="menu_link"> 검수 기준 </a></li>
-            </ul>
-        </nav>
-    </div>
-    <div class="content_area">
+<div class="container" style="padding-top: 20px;">
+
+    <th:block th:replace="customer/customerMenu :: customerMenu"></th:block>
+
+
+    <div class="content_area" style="padding-bottom: 160px;">
         <div class="content_title">자주 묻는 질문</div>
-        <ul class="dropdown_list">
-            <li>
-                <a href="#"> <!-- 첫 번째 링크 주소를 추가하세요 -->
-                    <div class="dropdown">
-                        <div class="title_box">
-                            <p class="title">페널티 정책</p>
-                        </div>
+        <ul class="dropdown_list" >
+            <li id="questions_li_1">
+                <div class="dropdown">
+                    <div class="title_box div_start_end">
+                        <p class="title">페널티 정책</p>
+                        <i class="fa-solid fa-caret-down" id="dropdown_I1"></i>
                     </div>
-                </a>
+                </div>
+                <div class="dropdown_hidden" id="questions_hiddenFrame_1">
+                    <div class="dropdown_hidden_frame">
+                        <p>최종 수정일 2023-11-01</p>
+                        &nbsp;
+                        <p>판매자와 구매자의 건전한 거래를 위하여 아래의 사유에 따라 패널티가 부과됩니다.</p>
+                        <p>결제 정보 오류로 패널티 결제 실패 시, 이용약관 제 42조에 의거하여 별도의 고지없이 재결재를 시도합니다.</p>
+                        <p>
+                            &nbsp;
+                            <br>
+                        </p>
+                        <h2>판매거부</h2>
+                        <table>
+                            <tbody>
+                            <tr>
+                                <td>판매 거래 대기 이후, 1시간 이내 판매 거부</td>
+                                <td class="tbody_red">5.0%</td>
+                            </tr>
+                            <tr>
+                                <td>판매 거래 대기 이후, 1시간 이후 판매 거부</td>
+                                <td class="tbody_red">10.0%</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                        <p>
+                            <br>
+                            <br>
+                        </p>
+                        <h2>발송지연</h2>
+                        <table>
+                            <tbody>
+                            <tr>
+                                <td>
+                                    <p>판매 거래 체결후,</p>
+                                    <p>48시간(일요일, 공휴일 제외) 이내</p>
+                                    <p>발송 정보 미입력</p>
+                                </td>
+                                <td class="tbody_red">10.0%</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                        <p>
+                            <br>
+                            <br>
+                        </p>
+                        <h2>미입고</h2>
+                        <table>
+                            <tbody>
+                            <tr>
+                                <td>
+                                    <p>발송 정보 입력 후</p>
+                                    <p>48시간(일요일, 공휴일 제외) 이내</p>
+                                    <p>발송 정보 미입력</p>
+                                </td>
+                                <td class="tbody_red">10.0%</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                        <p>
+                            <br>
+                            <br>
+                        </p>
+                        <p>*발송 정보 입력시 지원하지 않는 배송 수단의 경우, 운송장 추적 불가, 도착 상품의 식별 곤란등의 사유로 인해 입고가 불가하며 이에 해당되는 상품은 반송처리가 됩니다.</p>
+                        <p>* 반송 처리 등 정상적이지 않은 배송 방법을 통해 상품을 검수센터로 전달할 경우 상품 입고가 불가능합니다.</p>
+                        <p>* 단, 부득이한 경우 발송 정보 입력 기한 이내에 고객센터를 통한 협의 및 KREAM의 사전 승인 하에 상품 동일성 식별이 가능하도록 조치한 경우에 한하여 상품 입고가 가능한 점 참고 부탁드립니다. </p>
+                        <p>
+                            <br>
+                            <br>
+                        </p>
+                        <h2>검수 기준 악용</h2>
+                        <p>아래 검수 기준 위반시에는 패널티를 부과합니다.(패키지와 상품 공통 적용)</p>
+                        <p>
+                            <br>
+                            <br>
+                        </p>
+                        <h2>신발</h2>
+                        <table>
+                            <tbody>
+                            <tr>
+                                <td>상품 불일치</td>
+                                <td class="tbody_red">10.0%</td>
+                            </tr>
+                            <tr>
+                                <td>사이즈 불일치</td>
+                                <td class="tbody_red">10.0%</td>
+                            </tr>
+                            <tr>
+                                <td>기본 구성품 누락</td>
+                                <td class="tbody_red">10.0%</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                        <p>
+                            <br>
+                            <br>
+                        </p>
+                        <h2>가품,손상/오염/사용감</h2>
+                        <p>일반 거래는 판매가 기준이며, 보관 판매는 판매 상품 모든 사이즈의 전월 평균가 거래기준.</p>
+                        <table>
+                            <tbody>
+                            <tr>
+                                <td>가품</td>
+                                <td class="tbody_red">15.0%</td>
+                            </tr>
+                            <tr>
+                                <td></td>손상/오염/사용감</td>
+                                <td class="tbody_red">15.0%</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                        <p>
+                            <br>
+                            <br>
+                        </p>
+                        <h2>페널티 감면 기준</h2>
+                        <p>KREAM은 이용약관 제 24조 ("서비스 수수료") 다. 항에 따라 회원이 아래와 같은 특별한 사유에 해당하는 것으로 객관적으로 소명할 경우 기 부과된 페널티를 감경 또는 면제할 수 있습니다.</p>
+                        <br>
+                        <p>KREAM은 해당 사안의 사실관계, 이전 사용이력, 거래행태 등을 종합적으로 분석하여 아래 사유에 해당하는지 여부를 최종 판단합니다.</p>
+                        <p>페널티 감경 또는 면제는 해당 회원의 부주의에도 불구하고 KREAM이 회원의 특별한 사정을 고려하여 예외적으로 실시하는 조치이므로 하기 특별 사유의 존재 여부는 해당 "회원"이 객관적으로 증명해야 할 책임이 있습니다.</p>
+                        <br>
+                        <ul>
+                            <li>서비스 사용 미숙에 따른 조작실수임이 명백한 경우</li>
+                            <li>명백히 택배사의 책임 있는 사유로 인하여 페널티 발생한 경우</li>
+                            <li>고의성이 없이 가품 및 손상/오염/사용감 있는 제품을 판매한 것이 명백한 경우 (단, 페널티 감경이 이루어지더라도 가품 및 손상/오염/사용감 있는 제품 판매로 인한 이용정지 등의 절차는 진행될 수 있음)</li>
+                        </ul>
+                    </div>
+                </div>
             </li>
-            <li>
-                <a href="#"> <!-- 두 번째 링크 주소를 추가하세요 -->
-                    <div class="dropdown">
-                        <div class="title_box">
-                            <p class="title">가품 ・ 손상/오염/사용감 있는 상품 판매에 대한 제재</p>
-                        </div>
+            <li id="questions_li_2">
+                <div class="dropdown">
+                    <div class="title_box div_start_end">
+                        <p class="title">가품 ・ 손상/오염/사용감 있는 상품 판매에 대한 제재</p>
+                        <i class="fa-solid fa-caret-down" id="dropdown_I2"></i>
                     </div>
-                </a>
+                </div>
+                <div class="dropdown_hidden" id="questions_hiddenFrame_2">
+                    <div class="dropdown_hidden_frame">
+                        <p>최종 수정일 2023-11-01</p>
+                        &nbsp;
+                        <p>판매자와 구매자의 건전한 거래를 위하여 아래의 사유에 따라 패널티가 부과됩니다.</p>
+                        <p>결제 정보 오류로 패널티 결제 실패 시, 이용약관 제 42조에 의거하여 별도의 고지없이 재결재를 시도합니다.</p>
+                        <p>
+                            &nbsp;
+                            <br>
+                        </p>
+                        <h2>판매거부</h2>
+                        <table>
+                            <tbody>
+                            <tr>
+                                <td>판매 거래 대기 이후, 1시간 이내 판매 거부</td>
+                                <td class="tbody_red">5.0%</td>
+                            </tr>
+                            <tr>
+                                <td>판매 거래 대기 이후, 1시간 이후 판매 거부</td>
+                                <td class="tbody_red">10.0%</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                        <p>
+                            <br>
+                            <br>
+                        </p>
+                        <h2>발송지연</h2>
+                        <table>
+                            <tbody>
+                            <tr>
+                                <td>
+                                    <p>판매 거래 체결후,</p>
+                                    <p>48시간(일요일, 공휴일 제외) 이내</p>
+                                    <p>발송 정보 미입력</p>
+                                </td>
+                                <td class="tbody_red">10.0%</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                        <p>
+                            <br>
+                            <br>
+                        </p>
+                        <h2>미입고</h2>
+                        <table>
+                            <tbody>
+                            <tr>
+                                <td>
+                                    <p>발송 정보 입력 후</p>
+                                    <p>48시간(일요일, 공휴일 제외) 이내</p>
+                                    <p>발송 정보 미입력</p>
+                                </td>
+                                <td class="tbody_red">10.0%</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                        <p>
+                            <br>
+                            <br>
+                        </p>
+                        <p>*발송 정보 입력시 지원하지 않는 배송 수단의 경우, 운송장 추적 불가, 도착 상품의 식별 곤란등의 사유로 인해 입고가 불가하며 이에 해당되는 상품은 반송처리가 됩니다.</p>
+                        <p>* 반송 처리 등 정상적이지 않은 배송 방법을 통해 상품을 검수센터로 전달할 경우 상품 입고가 불가능합니다.</p>
+                        <p>* 단, 부득이한 경우 발송 정보 입력 기한 이내에 고객센터를 통한 협의 및 KREAM의 사전 승인 하에 상품 동일성 식별이 가능하도록 조치한 경우에 한하여 상품 입고가 가능한 점 참고 부탁드립니다. </p>
+                        <p>
+                            <br>
+                            <br>
+                        </p>
+                        <h2>검수 기준 악용</h2>
+                        <p>아래 검수 기준 위반시에는 패널티를 부과합니다.(패키지와 상품 공통 적용)</p>
+                        <p>
+                            <br>
+                            <br>
+                        </p>
+                        <h2>신발</h2>
+                        <table>
+                            <tbody>
+                            <tr>
+                                <td>상품 불일치</td>
+                                <td class="tbody_red">10.0%</td>
+                            </tr>
+                            <tr>
+                                <td>사이즈 불일치</td>
+                                <td class="tbody_red">10.0%</td>
+                            </tr>
+                            <tr>
+                                <td>기본 구성품 누락</td>
+                                <td class="tbody_red">10.0%</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                        <p>
+                            <br>
+                            <br>
+                        </p>
+                        <h2>가품,손상/오염/사용감</h2>
+                        <p>일반 거래는 판매가 기준이며, 보관 판매는 판매 상품 모든 사이즈의 전월 평균가 거래기준.</p>
+                        <table>
+                            <tbody>
+                            <tr>
+                                <td>가품</td>
+                                <td class="tbody_red">15.0%</td>
+                            </tr>
+                            <tr>
+                                <td></td>손상/오염/사용감</td>
+                                <td class="tbody_red">15.0%</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                        <p>
+                            <br>
+                            <br>
+                        </p>
+                        <h2>페널티 감면 기준</h2>
+                        <p>KREAM은 이용약관 제 24조 ("서비스 수수료") 다. 항에 따라 회원이 아래와 같은 특별한 사유에 해당하는 것으로 객관적으로 소명할 경우 기 부과된 페널티를 감경 또는 면제할 수 있습니다.</p>
+                        <br>
+                        <p>KREAM은 해당 사안의 사실관계, 이전 사용이력, 거래행태 등을 종합적으로 분석하여 아래 사유에 해당하는지 여부를 최종 판단합니다.</p>
+                        <p>페널티 감경 또는 면제는 해당 회원의 부주의에도 불구하고 KREAM이 회원의 특별한 사정을 고려하여 예외적으로 실시하는 조치이므로 하기 특별 사유의 존재 여부는 해당 "회원"이 객관적으로 증명해야 할 책임이 있습니다.</p>
+                        <br>
+                        <ul>
+                            <li>서비스 사용 미숙에 따른 조작실수임이 명백한 경우</li>
+                            <li>명백히 택배사의 책임 있는 사유로 인하여 페널티 발생한 경우</li>
+                            <li>고의성이 없이 가품 및 손상/오염/사용감 있는 제품을 판매한 것이 명백한 경우 (단, 페널티 감경이 이루어지더라도 가품 및 손상/오염/사용감 있는 제품 판매로 인한 이용정지 등의 절차는 진행될 수 있음)</li>
+                        </ul>
+                    </div>
+                </div>
             </li>
-            <li>
-                <a href="#"> <!-- 세 번째 링크 주소를 추가하세요 -->
-                    <div class="dropdown">
-                        <div class="title_box">
-                            <p class="title">검수 기준 악용에 대한 제재</p>
-                        </div>
+            <li id="questions_li_3">
+                <div class="dropdown">
+                    <div class="title_box div_start_end">
+                        <p class="title">검수 기준 악용에 대한 제재</p>
+                        <i class="fa-solid fa-caret-down" id="dropdown_I3"></i>
                     </div>
-                </a>
+                </div>
+                <div class="dropdown_hidden" id="questions_hiddenFrame_3">
+                    <div class="dropdown_hidden_frame">
+                        <p>최종 수정일 2023-11-01</p>
+                        &nbsp;
+                        <p>판매자와 구매자의 건전한 거래를 위하여 아래의 사유에 따라 패널티가 부과됩니다.</p>
+                        <p>결제 정보 오류로 패널티 결제 실패 시, 이용약관 제 42조에 의거하여 별도의 고지없이 재결재를 시도합니다.</p>
+                        <p>
+                            &nbsp;
+                            <br>
+                        </p>
+                        <h2>판매거부</h2>
+                        <table>
+                            <tbody>
+                            <tr>
+                                <td>판매 거래 대기 이후, 1시간 이내 판매 거부</td>
+                                <td class="tbody_red">5.0%</td>
+                            </tr>
+                            <tr>
+                                <td>판매 거래 대기 이후, 1시간 이후 판매 거부</td>
+                                <td class="tbody_red">10.0%</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                        <p>
+                            <br>
+                            <br>
+                        </p>
+                        <h2>발송지연</h2>
+                        <table>
+                            <tbody>
+                            <tr>
+                                <td>
+                                    <p>판매 거래 체결후,</p>
+                                    <p>48시간(일요일, 공휴일 제외) 이내</p>
+                                    <p>발송 정보 미입력</p>
+                                </td>
+                                <td class="tbody_red">10.0%</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                        <p>
+                            <br>
+                            <br>
+                        </p>
+                        <h2>미입고</h2>
+                        <table>
+                            <tbody>
+                            <tr>
+                                <td>
+                                    <p>발송 정보 입력 후</p>
+                                    <p>48시간(일요일, 공휴일 제외) 이내</p>
+                                    <p>발송 정보 미입력</p>
+                                </td>
+                                <td class="tbody_red">10.0%</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                        <p>
+                            <br>
+                            <br>
+                        </p>
+                        <p>*발송 정보 입력시 지원하지 않는 배송 수단의 경우, 운송장 추적 불가, 도착 상품의 식별 곤란등의 사유로 인해 입고가 불가하며 이에 해당되는 상품은 반송처리가 됩니다.</p>
+                        <p>* 반송 처리 등 정상적이지 않은 배송 방법을 통해 상품을 검수센터로 전달할 경우 상품 입고가 불가능합니다.</p>
+                        <p>* 단, 부득이한 경우 발송 정보 입력 기한 이내에 고객센터를 통한 협의 및 KREAM의 사전 승인 하에 상품 동일성 식별이 가능하도록 조치한 경우에 한하여 상품 입고가 가능한 점 참고 부탁드립니다. </p>
+                        <p>
+                            <br>
+                            <br>
+                        </p>
+                        <h2>검수 기준 악용</h2>
+                        <p>아래 검수 기준 위반시에는 패널티를 부과합니다.(패키지와 상품 공통 적용)</p>
+                        <p>
+                            <br>
+                            <br>
+                        </p>
+                        <h2>신발</h2>
+                        <table>
+                            <tbody>
+                            <tr>
+                                <td>상품 불일치</td>
+                                <td class="tbody_red">10.0%</td>
+                            </tr>
+                            <tr>
+                                <td>사이즈 불일치</td>
+                                <td class="tbody_red">10.0%</td>
+                            </tr>
+                            <tr>
+                                <td>기본 구성품 누락</td>
+                                <td class="tbody_red">10.0%</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                        <p>
+                            <br>
+                            <br>
+                        </p>
+                        <h2>가품,손상/오염/사용감</h2>
+                        <p>일반 거래는 판매가 기준이며, 보관 판매는 판매 상품 모든 사이즈의 전월 평균가 거래기준.</p>
+                        <table>
+                            <tbody>
+                            <tr>
+                                <td>가품</td>
+                                <td class="tbody_red">15.0%</td>
+                            </tr>
+                            <tr>
+                                <td></td>손상/오염/사용감</td>
+                                <td class="tbody_red">15.0%</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                        <p>
+                            <br>
+                            <br>
+                        </p>
+                        <h2>페널티 감면 기준</h2>
+                        <p>KREAM은 이용약관 제 24조 ("서비스 수수료") 다. 항에 따라 회원이 아래와 같은 특별한 사유에 해당하는 것으로 객관적으로 소명할 경우 기 부과된 페널티를 감경 또는 면제할 수 있습니다.</p>
+                        <br>
+                        <p>KREAM은 해당 사안의 사실관계, 이전 사용이력, 거래행태 등을 종합적으로 분석하여 아래 사유에 해당하는지 여부를 최종 판단합니다.</p>
+                        <p>페널티 감경 또는 면제는 해당 회원의 부주의에도 불구하고 KREAM이 회원의 특별한 사정을 고려하여 예외적으로 실시하는 조치이므로 하기 특별 사유의 존재 여부는 해당 "회원"이 객관적으로 증명해야 할 책임이 있습니다.</p>
+                        <br>
+                        <ul>
+                            <li>서비스 사용 미숙에 따른 조작실수임이 명백한 경우</li>
+                            <li>명백히 택배사의 책임 있는 사유로 인하여 페널티 발생한 경우</li>
+                            <li>고의성이 없이 가품 및 손상/오염/사용감 있는 제품을 판매한 것이 명백한 경우 (단, 페널티 감경이 이루어지더라도 가품 및 손상/오염/사용감 있는 제품 판매로 인한 이용정지 등의 절차는 진행될 수 있음)</li>
+                        </ul>
+                    </div>
+                </div>
             </li>
             <!-- 다른 공지사항 항목을 추가하려면 위와 같은 방식으로 추가하세요 -->
         </ul>
@@ -68,4 +465,82 @@
 <!--footer-->
 <th:block th:replace="include/footer :: footer"></th:block>
 </body>
+<script>
+    // li1 번
+    const questionLi1 = document.getElementById('questions_li_1');
+    const hiddenFrame1 = document.getElementById('questions_hiddenFrame_1');
+    const caretIcon1 = document.querySelector('#dropdown_I1');
+
+    // li2 번
+    const questionLi2 = document.getElementById('questions_li_2');
+    const hiddenFrame2 = document.getElementById('questions_hiddenFrame_2');
+    const caretIcon2 = document.querySelector('#dropdown_I2');
+
+    // li3 번
+    const questionLi3 = document.getElementById('questions_li_3');
+    const hiddenFrame3 = document.getElementById('questions_hiddenFrame_3');
+    const caretIcon3 = document.querySelector('#dropdown_I3');
+
+    // 질문 리스트 아이템을 클릭했을 때의 동작을 정의합니다.
+    questionLi1.addEventListener('click', function () {
+        // 현재 답변의 display 속성 값을 가져옵니다.
+        const currentDisplay = window.getComputedStyle(hiddenFrame1).getPropertyValue('display');
+
+        // display 속성을 토글하고 배경 색상을 변경합니다.
+        if (currentDisplay === 'none') {
+            hiddenFrame1.style.display = 'block';
+            questionLi1.style.backgroundColor = '#f5f5f5';
+            // 아이콘 변경
+            caretIcon1.classList.remove('fa-caret-down');
+            caretIcon1.classList.add('fa-caret-up');
+        } else {
+            hiddenFrame1.style.display = 'none';
+            questionLi1.style.backgroundColor = 'white';
+            // 아이콘 변경
+            caretIcon1.classList.remove('fa-caret-up');
+            caretIcon1.classList.add('fa-caret-down');
+        }
+    });
+    questionLi2.addEventListener('click', function () {
+        // 현재 답변의 display 속성 값을 가져옵니다.
+        const currentDisplay = window.getComputedStyle(hiddenFrame2).getPropertyValue('display');
+
+        // display 속성을 토글하고 배경 색상을 변경합니다.
+        if (currentDisplay === 'none') {
+            hiddenFrame2.style.display = 'block';
+            questionLi2.style.backgroundColor = '#f5f5f5';
+            // 아이콘 변경
+            caretIcon2.classList.remove('fa-caret-down');
+            caretIcon2.classList.add('fa-caret-up');
+        } else {
+            hiddenFrame2.style.display = 'none';
+            questionLi2.style.backgroundColor = 'white';
+            // 아이콘 변경
+            caretIcon2.classList.remove('fa-caret-up');
+            caretIcon2.classList.add('fa-caret-down');
+        }
+    });
+    questionLi3.addEventListener('click', function () {
+        // 현재 답변의 display 속성 값을 가져옵니다.
+        const currentDisplay = window.getComputedStyle(hiddenFrame3).getPropertyValue('display');
+
+        // display 속성을 토글하고 배경 색상을 변경합니다.
+        if (currentDisplay === 'none') {
+            hiddenFrame3.style.display = 'block';
+            questionLi3.style.backgroundColor = '#f5f5f5';
+            // 아이콘 변경
+            caretIcon3.classList.remove('fa-caret-down');
+            caretIcon3.classList.add('fa-caret-up');
+        } else {
+            hiddenFrame3.style.display = 'none';
+            questionLi3.style.backgroundColor = 'white';
+            // 아이콘 변경
+            caretIcon3.classList.remove('fa-caret-up');
+            caretIcon3.classList.add('fa-caret-down');
+        }
+    });
+    hiddenFrame1.style.display = 'none';
+    hiddenFrame2.style.display = 'none';
+    hiddenFrame3.style.display = 'none';
+</script>
 </html>

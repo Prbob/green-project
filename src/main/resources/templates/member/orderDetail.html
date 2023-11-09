@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>회원정보</title>
+    <th:block th:replace="include/header :: header"></th:block>
+
+    <!--공지사항 css-->
+    <link rel="stylesheet" th:href="@{/css/customer.css}" type="text/css">
+    <!--  위의 경로가 원래의 경로인데 css적용이 안되어서 아래줄 추가함.[Han]  -->
+    <!-- <link rel="stylesheet" type="text/css" href="/static/css/H_customer.css">-->
+
+    <style>
+        * {
+            font-family: Pretendard Variable,Pretendard,-apple-system,BlinkMacSystemFont,system-ui,Segoe UI,Roboto,Ubuntu,Cantarell,Noto Sans,sans-serif,Helvetica Neue,Apple SD Gothic Neo,Noto Sans KR,Malgun Gothic,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol;
+        }
+        .wish_list li {
+            border-bottom: 1px solid #D3D3D3;
+        }
+        .content_area{
+            width:100%;
+        }
+        #buttonNOrderItems{
+            width:100%;
+            /*border:1px solid yellow;*/
+        }
+        .orderItem{
+            padding:10px;
+            display:flex;
+        }
+        .orderItem img {
+            display: inline-block;
+            width: 80px;
+            height: 80px;
+            border: 1px solid #eeeeee;
+            border-left:2px solid #aaaaaa;
+        }
+        .orderItem span{
+            line-height: 2.4em;
+            margin: 10px;
+        }
+        #buttonBox{
+            text-align: center;
+        }
+        #buttons{
+            width: 100%;
+            /*border:1px solid red;*/
+        }
+        .orderEdit {
+            display: inline-block;
+            background-color: #eeeeee;
+            border-radius: 3px;
+            /*border: 1px solid blue;*/
+            width: 120px;
+            line-height: 40px;
+            letter-spacing: 3px;
+            text-align: center;
+            margin: 6px auto;
+            font-weight: bold;
+        }
+        .delivery{
+            background-color: #1d85e6;
+            color: white;
+        }
+        .orderEdit:hover {
+            letter-spacing: 5px;
+            font-weight: bolder;
+        }
+
+        .tableBox{
+            text-align: left;
+            width:100%;
+            margin-top:20px;
+            line-height: 2em;
+            border-bottom: 1px solid #bbbbbb;
+            border-top: 1px solid #999999;
+        }
+        .tableBox h3{
+            margin-bottom: 10px;
+        }
+        .tableBox th{
+            width: 100px;
+        }
+        .layout_base {
+            padding-top: 20px;
+        }
+        ::placeholder {
+            color: black;
+        }
+        #divsecond{
+        padding:10px;
+        }
+
+    </style>
+
+</head>
+
+<body>
+<!--Header-->
+<th:block th:replace="include/bodyHead :: bodyHeader"></th:block>
+
+
+<div tabindex="0" class="layout_base" data-v-e2abb636="" data-v-cdf8523a="">
+    <div class="container my lg" data-v-e2abb636="" data-v-cdf8523a="" style="padding-top: 0px;">
+
+        <th:block th:replace="include/memberMenu :: memberMenu"></th:block>
+
+        <div data-v-cf6a6ef4="" data-v-cdf8523a="" class="content_area my-page-content">
+            <div data-v-cf6a6ef4="" class="my_profile">
+                <div data-v-61e7a8a3="" data-v-cf6a6ef4="" class="content_title border">
+
+                    <div data-v-61e7a8a3="" class="title"><h3 data-v-61e7a8a3="">주문 상세</h3><!----></div><!----></div>
+                <div data-v-cf6a6ef4="" class="profile_info">
+
+                    <div data-v-8b96a82e="" data-v-cf6a6ef4="" class="profile_group">
+                        <h4 data-v-8b96a82e="" class="group_title" th:text="|주문 일자 : ${order.registrationDate} / 주문 번호 : ${order.id}|"> 오더날짜 YYYY.MM.DD + 주문번호 : orderNumber </h4>
+                    </div>
+
+                    <div> &nbsp;</div>
+                    <div id="buttonNOrderItems">
+                        <table border="1">
+                            <tr>
+                                <td colspan="4">
+                                    <div class="orderItem" th:each="productsCount : ${list}">
+                                        <div>
+                                            <img th:src="@{|/upload/${productsCount.product.imgName}|}"/>
+                                        </div>
+                                        <div id="divsecond">
+                                            <b><a th:href="@{/products/detail/__${productsCount.product.id}__}" th:text="|상품명 : ${productsCount.product.name}|"><span >item name</span></a></b>
+                                            <span style="font-size:12px;" th:text="|(${productsCount.quantity} ea)|"></span> <br>
+                                            <span th:text="| 가격 : ${productsCount.quantity * productsCount.product.price} |"></span>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td colspan="1" rowspan="0" id="buttonBox">
+                                    <div id="buttons">
+                                        <a href="cancelOrder" class="orderEdit delivery">배송조회</a>
+                                        <a href="cancelOrder" class="orderEdit">주문취소</a>
+                                    </div>
+                                </td>
+                            </tr>
+
+                        </table>
+                    </div>
+
+
+
+
+                    <div id="receiverInfo" class="tableBox">
+                        <h3>받는 사람 정보</h3>
+                        <table border="0">
+                            <tr>
+                                <th>받는사람</th> <td th:text="${member.name}">Name</td>
+                            </tr>
+                            <tr>
+                                <th>전화번호</th> <td th:text="${member.phone}">Number</td>
+                            </tr>
+                            <tr>
+                                <th>우편번호</th> <td th:text="${member.address.postal_code}">receiver Address</td>
+                            </tr>
+                            <tr>
+                                <th>받는주소</th> <td th:text="${member.address.middle_address}">receiver Address</td>
+                            </tr>
+                            <tr>
+                                <th>상세주소</th> <td th:text="${member.address.detailed_address}">receiver Address</td>
+                            </tr>
+                            <tr>
+                                <th>요청사항</th> <td th:text="${order.please}"> comment </td>
+                            </tr>
+                            </tr>
+                        </table>
+                    </div>
+                    <div id="payInfo" class="tableBox">
+                        <h3>결제 정보</h3>
+                        <table border="0">
+                            <tr>
+                                <th>결제 수단</th> <td th:text="${order.payment}">카카오페이 토스페이</td>
+                            </tr>
+                            <tr>
+                                <th>총결제금액</th> <td th:text="${order.totalPrice}"><b> XXXX + 0원</b></td>
+                            </tr>
+
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<link href="/_nuxt/css/2e6b79f.css" rel="stylesheet" type="text/css">
+<link href="/_nuxt/css/c9eea23.css" rel="stylesheet" type="text/css">
+<!--footer-->
+<th:block th:replace="include/footer :: footer"></th:block>
+
+
+</body>

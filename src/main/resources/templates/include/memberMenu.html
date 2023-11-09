@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<th:block th:fragment="memberMenu">
+
+    <div class="sidebar">
+        <a href="/member/myPage" aria-current="page">
+            <h2 data-v-cdf8523a="" class="snb_main_title">마이페이지</h2>
+        </a>
+        <nav>
+            <ul class="snb_menu">
+                <li class="menu_item">
+                    <strong th:if="myPage == ${myPage}" th:class="menu_link"> 구매 내역 </strong>
+                    <a th:unless="myPage == ${myPage}" th:class="menu_link"  th:href="@{/member/myPage}"> 구매 내역 </a>
+                </li>
+
+                <li class="menu_item">
+                    <strong th:if="basket == ${basket}" th:class="menu_link"> 관심 상품 </strong>
+                    <a th:unless="basket == ${basket}" th:class="menu_link"  th:href="@{/products/myBasket}"> 관심 상품 </a>
+                </li>
+
+                <li class="menu_item">
+                    <strong th:if="myinfo == ${myinfo}" th:class="menu_link"> 로그인 정보 </strong>
+                    <a th:class="menu_link" th:if="myinfo != ${myinfo}" th:href="@{/member/myInformationSecurity}"> 로그인 정보 </a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+
+</th:block>
+</body>
+</html>

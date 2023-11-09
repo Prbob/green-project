@@ -2,10 +2,14 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <th:block th:replace="include/header :: header"></th:block>
 <script src="https://kit.fontawesome.com/3697bc8c45.js" crossorigin="anonymous"></script>
+
 <style>
 
     #iconLink{
         display: flex;
+    }
+    .top_link{
+        min-width: 50px;
     }
 
     #iconLink i{
@@ -51,7 +55,7 @@
                             <div data-v-533cad97="" class="main_inner">
                                 <div id="mainLogoSet">
                                     <h1 data-v-7546c27e="" data-v-533cad97="">
-                                        <a data-v-7546c27e="" href="/" aria-label="홈" class="logo">UNCOMMON</a>
+                                        <a data-v-7546c27e="" href="/" aria-label="홈" class="logo" style="font-size:25px;width: 170px;">UNCOMMON</a>
                                         <!--                                        <a href="#" id="iconLink" data-v-7546c27e=""><i class="fa-sharp fa-solid fa-magnifying-glass" style="font-size:20px;"></i></a>-->
                                     </h1>
 
@@ -61,20 +65,7 @@
                                 <div data-v-533cad97="" class="center"></div>
                                 <div data-v-533cad97="" class="right">
                                     <div data-v-3e40d81c="" class="gnb_area" data-v-533cad97="">
-                                        <nav data-v-3e40d81c="" class="gnb" >
-                                            <ul class="gnb_list">
-                                                <li data-v-83e3cb96="" data-v-3e40d81c="" class="gnb_item" style="float: left"><a
-                                                        data-v-83e3cb96="" href="/" aria-current="page"
-                                                        class="active nuxt-link-active gnb_link active"> HOME </a></li>
-                                                <li data-v-83e3cb96="" data-v-3e40d81c="" class="gnb_item" style="float: left" ><a
-                                                        data-v-83e3cb96="" href="/menu/social" class="gnb_link"> STYLE </a>
-                                                </li>
-                                                <li data-v-83e3cb96="" data-v-3e40d81c="" class="gnb_item" style="float: left"><a
-                                                        data-v-83e3cb96="" th:href="@{/products/list}" class="gnb_link"> SHOP </a>
-                                                </li>
-                                            </ul>
-                                        </nav>
-
+                                        <th:block th:replace="include/localNavigationBar :: localNavigationBar"></th:block>
                                     </div>
                                 </div>
                             </div>
@@ -102,11 +93,11 @@
                                             data-v-bdefeeaa=""><span data-v-a1a3ce98="" class="tab_name"> 컬렉션
                                             </span></a></li>
                                     <li data-v-bdefeeaa="" data-v-2830b567="" class="li_tab" data-v-7fae9a20=""><a
-                                            data-v-a1a3ce98="" data-v-2830b567="" href="/?tab=home_men" class="tab"
+                                            data-v-a1a3ce98="" data-v-2830b567="" th:href="@{/products/list(gender=Man)}" class="tab"
                                             data-v-bdefeeaa=""><span data-v-a1a3ce98="" class="tab_name"> 남성 </span></a>
                                     </li>
                                     <li data-v-bdefeeaa="" data-v-2830b567="" class="li_tab" data-v-7fae9a20=""><a
-                                            data-v-a1a3ce98="" data-v-2830b567="" href="/?tab=home_women" class="tab"
+                                            data-v-a1a3ce98="" data-v-2830b567="" th:href="@{/products/list(gender=Woman)}" class="tab"
                                             data-v-bdefeeaa=""><span data-v-a1a3ce98="" class="tab_name"> 여성 </span></a>
                                     </li>
                                     <li data-v-bdefeeaa="" data-v-2830b567="" class="li_tab" data-v-7fae9a20=""><a
@@ -123,6 +114,7 @@
     </div>
 
 </th:block>
+
 </body>
 
 </html>

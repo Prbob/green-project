@@ -8,6 +8,10 @@ import com.brogrammers.brogrammers.domain.service.BrandService;
 import com.brogrammers.brogrammers.domain.service.CategoryService;
 import com.brogrammers.brogrammers.web.FunctionClass;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -56,14 +60,26 @@ public class CategoryController {
         categoryService.save(category);
         List<Category> categoryList = categoryService.findAll();
         model.addAttribute("categoryList",categoryList);
-        return "category/categoryList";
+        return "redirect:/category/list";
     }
     @GetMapping("/category/list")
-    public String categoryList(Model model,HttpServletRequest request){
+    public String categoryList(Model model,HttpServletRequest request,@PageableDefault(page=0,size=15,sort="id",direction = Sort.Direction.DESC) Pageable pageable,
+                               String nameSearch){
         if(fun.getMember(request)==null || fun.getMember(request).getAccessrigths().equals("NORAML")){
             return "alert/noLogin";
         }
-        List<Category> categoryList = categoryService.findAll();
+        Page<Category> categoryList = categoryService.findAll(pageable);
+        if(nameSearch != null){
+            categoryList = categoryService.findCategoryByName(nameSearch,pageable);
+        }
+
+        int nowPage = categoryList.getPageable().getPageNumber() + 1; // 5
+        int startPage = Math.max(1,nowPage%5==0?nowPage-4:nowPage/5*5+1);
+        int endPage = Math.min(categoryList.getTotalPages(),startPage+4);
+        model.addAttribute("totalPage",categoryList.getTotalPages());
+        model.addAttribute("nowPage",nowPage);
+        model.addAttribute("startPage",startPage);
+        model.addAttribute("endPage",endPage);
         model.addAttribute("categoryList",categoryList);
         model.addAttribute("cateUp","cateUp");
         return "category/categoryList";
@@ -90,16 +106,26 @@ public class CategoryController {
             return "category/brandForm";
         }
         brandService.save(form.getName());
-        List<Brand> list = brandService.findAll();
-        model.addAttribute("brandList",list);
-        return "category/brandList";
+
+        return "redirect:/category/brandList";
     }
     @GetMapping("/category/brandList")
-    public String brandList(Model model, HttpServletRequest request){
+    public String brandList(Model model, HttpServletRequest request,String nameSearch,
+                            @PageableDefault(page=0,size=5,sort="id",direction = Sort.Direction.DESC) Pageable pageable){
         if(fun.getMember(request)==null || fun.getMember(request).getAccessrigths().equals("NORAML")){
             return "alert/noLogin";
         }
-        List<Brand> brandList = brandService.findAll();
+        Page<Brand> brandList = brandService.findAll(pageable);
+        if(nameSearch!=null){
+            brandList = brandService.findBrandsByName(nameSearch,pageable);
+        }
+        int nowPage = brandList.getPageable().getPageNumber() + 1; // 5
+        int startPage = Math.max(1,nowPage%5==0?nowPage-4:nowPage/5*5+1);
+        int endPage = Math.min(brandList.getTotalPages(),startPage+4);
+        model.addAttribute("totalPage",brandList.getTotalPages());
+        model.addAttribute("nowPage",nowPage);
+        model.addAttribute("startPage",startPage);
+        model.addAttribute("endPage",endPage);
         model.addAttribute("brandList",brandList);
         model.addAttribute("brandL","brandL");
         return "category/brandList";
@@ -142,7 +168,7 @@ public class CategoryController {
                               Model model){
         if(fun.getMember(request)==null || fun.getMember(request).getAccessrigths().equals("NORMAL")){return "/alert/noLogin";}
 
-        CategoryForm form = categoryService.getCategoryFromById(id);
+        CategoryForm form = categoryService.getCategoryFormById(id);
         model.addAttribute("cateUp","cateUp");
         model.addAttribute("msg","카테고리 수정");
         model.addAttribute("form",form);
@@ -161,7 +187,7 @@ public class CategoryController {
             return "category/categoryForm";
         }
 
-        categoryService.updatCatoegryByForm(form);
+        categoryService.updatCatoegoryByForm(form);
         model.addAttribute("msg","카테고리 업데이트");
         model.addAttribute("form",form);
         return "redirect:/category/list";

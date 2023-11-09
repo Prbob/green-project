@@ -1,0 +1,78 @@
+.profile_info[data-v-cf6a6ef4] {
+    padding-top: 38px
+}
+
+.modify[data-v-cf6a6ef4] {
+    padding-top: 23px
+}
+
+.modify .title[data-v-cf6a6ef4] {
+    color: #222;
+    padding-bottom: 22px
+}
+
+.modify.name[data-v-cf6a6ef4] {
+    padding-top: 25px
+}
+
+.modify_btn_box[data-v-cf6a6ef4] {
+    font-size: 0;
+    padding-top: 28px;
+    text-align: center
+}
+
+.modify_btn_box .btn[data-v-cf6a6ef4] {
+    padding: 0 38px
+}
+
+.modify_btn_box .btn+.btn[data-v-cf6a6ef4] {
+    margin-left: 8px
+}
+
+.btn_withdrawal[data-v-cf6a6ef4] {
+    color: rgba(34,34,34,.5);
+    display: inline-block;
+    font-size: 13px;
+    letter-spacing: -.07px;
+    margin-top: 55px;
+    padding: 5px 0
+}
+
+.btn_withdrawal[data-v-cf6a6ef4],.btn_withdrawal[data-v-cf6a6ef4]:hover {
+    -webkit-text-decoration: underline;
+    text-decoration: underline
+}
+
+.mo .my_profile[data-v-cf6a6ef4],.sm .my_profile[data-v-cf6a6ef4] {
+    padding: 0 24px 80px
+}
+
+.mo .my_profile .profile_info[data-v-cf6a6ef4],.sm .my_profile .profile_info[data-v-cf6a6ef4] {
+    padding-top: 0
+}
+
+.mo .my_profile .btn_withdrawal[data-v-cf6a6ef4],.sm .my_profile .btn_withdrawal[data-v-cf6a6ef4] {
+    display: none
+}
+
+.sm .my_profile[data-v-cf6a6ef4] {
+    padding-left: 16px;
+    padding-right: 16px
+}
+
+.btn_modify[data-v-cf6a6ef4] {
+    position: absolute;
+    right: 0
+}
+
+.header-btn.btn_home[data-v-cf6a6ef4] {
+    display: flex;
+    position: absolute;
+    right: 16px;
+    top: 11px
+}
+
+.header-btn.btn_home svg[data-v-cf6a6ef4] {
+    height: 22px;
+    width: 22px
+}

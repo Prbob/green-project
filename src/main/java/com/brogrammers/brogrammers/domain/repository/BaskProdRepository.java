@@ -3,6 +3,8 @@ package com.brogrammers.brogrammers.domain.repository;
 import com.brogrammers.brogrammers.domain.order.Basket;
 import com.brogrammers.brogrammers.domain.product.BasketProducts;
 import com.brogrammers.brogrammers.domain.product.Products;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -14,8 +16,15 @@ public interface BaskProdRepository extends JpaRepository<BasketProducts,Long> {
 
     @Query("select b.products FROM BasketProducts b WHERE b.basket =:basket ")
     List<Products> findProductsByBasket(@Param("basket") Basket basket);
+
+    @Query("select b.products FROM BasketProducts b WHERE b.basket =:basket ")
+    Page<Products> findProductsByBasket(@Param("basket") Basket basket, Pageable pageable);
+
     @Query("SELECT bp FROM BasketProducts bp WHERE bp.basket = :basket AND bp.products = :products")
     Optional<BasketProducts> findOneByBaskeyAndProducts(@Param("basket") Basket basket , @Param("products") Products products);
 
     void deleteBasketProductsById(Long id);
+
+    @Query("DELETE FROM BasketProducts bp WHERE bp.basket= :basket AND bp.products = :products")
+    void deleteBaskProdByBasketAndProducts(@Param("basket") Basket basket, @Param("products") Products products);
 }

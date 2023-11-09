@@ -50,9 +50,9 @@
                         </div>
                         <div class="select">
                             <select th:field="*{gender}">
-                                <option value="male">male</option>
-                                <option value="female">female</option>
-                                <option value="every">every</option>
+                                <option value="Man">Man</option>
+                                <option value="Woman">Woman</option>
+                                <option value="Unisex">Unisex</option>
                             </select>
                         </div>
                     </div>
@@ -62,7 +62,7 @@
                         </div>
                         <div>
                             <input type="text" th:field="*{productName}" placeholder="상품 이름을 입력해주세요"
-                                   th:class="${#fields.hasErrors('productName')}? 'form-control fieldError' : 'form-control'">>
+                                   th:class="${#fields.hasErrors('productName')}? 'form-control fieldError' : 'form-control'">
                             <div class="field-error" th:errors="*{productName}" />
                         </div>
                     </div>

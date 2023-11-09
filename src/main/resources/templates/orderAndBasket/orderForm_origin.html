@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>오더페이지</title>
+    <th:block th:replace="include/header :: header"></th:block>
+</head>
+<body>
+<th:block th:replace="include/bodyHead :: bodyHeader"></th:block>
+<h2>오더페이지</h2> <!-- 전체 상품 목록 -->
+<table th:object="${form}">
+    <tr>
+        <th class="horizontalType_table_th">배송지 선택</th>
+        <td class="horizontalType_table_td" colspan="4">
+            &nbsp;&nbsp;&nbsp;
+            <label><input type="radio" value="basic"> 기본주소</label> &nbsp;&nbsp;&nbsp;
+            <label><input type="radio" value="newtype"> 새로입력</label>&nbsp;&nbsp;&nbsp;
+            <button type="button">주소록</button>
+        </td>
+    </tr>
+    <tr>
+        <th th:text="name"class="horizontalType_table_th">받으시는 분</th>
+        <td class="horizontalType_table_td" colspan="4">
+            &nbsp;&nbsp;&nbsp;<input type="text" th:field="*{name}" th:text="*{name}">
+            <div class="field-error" th:errors="*{name}" />
+        </td>
+    </tr>
+    <tr>
+        <th class="horizontalType_table_th">휴대폰 번호</th>
+        <td class="horizontalType_table_td" colspan="4"><!-- 입력칸은 전부 width:123px, height:40px -->
+            &nbsp;&nbsp;&nbsp;
+            <select class="PN_inputBox">
+                <option value="none" selected><span>선택</span></option>
+                <option value=010> 010 </option>
+                <option value=011> 011 </option>
+                <option value=016> 016 </option>
+                <option value=017> 018 </option>
+                <option value=018> 018 </option>
+                <option value=019> 019 </option>
+                <option value=070> 070 </option>
+                <option value=0503> 0503 </option>
+            </select> &nbsp;
+            <input class="PN_inputBox" type="text" minlength="4" maxlength="4" gubun="num">&nbsp;
+            <input class="PN_inputBox" type="text" minlength="4" maxlength="4" gubun="num">
+        </td>
+    </tr> <!-- 휴대폰 번호-->
+    <tr>
+        <th class="horizontalType_table_th">배송지 주소</th>
+        <td class="horizontalType_table_td" colspan="4">
+            &nbsp;&nbsp;&nbsp;
+            <input type="text" th:field="*{postal_code}" th:text="*{postal_code}"> &nbsp;&nbsp;&nbsp;
+            <input type="text" th:field="*{middle_address}" th:text="*{middle_address}"> &nbsp;&nbsp;&nbsp;
+            <input type="text" th:field="*{detailed_address}" th:text="*{detailed_address}"> &nbsp;&nbsp;&nbsp;
+            <button type="button">입력완료</button>
+        </td>
+    </tr>
+    <tr>
+        <th class="horizontalType_table_th">배송 메세지</th>
+        <td class="horizontalType_table_td" colspan="4">
+            &nbsp;&nbsp;&nbsp;
+            <input type="text" placeholder="메세지를 입력해주세요." maxlength="20"> &nbsp;&nbsp;&nbsp;
+        </td>
+    </tr>
+</table>
+</body>
+</html>

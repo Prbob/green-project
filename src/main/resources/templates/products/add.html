@@ -29,7 +29,7 @@
                             <div class="select">
                                 <select th:field="*{productBrand}">
                                     <option th:each="brand : ${brands}" th:value="${brand.name}"
-                                        th:text="${brand.name}"></option>
+                                            th:text="${brand.name}"></option>
                                 </select>
                             </div>
                         </div>
@@ -50,9 +50,9 @@
                             </div>
                             <div class="select">
                                 <select th:field="*{gender}">
-                                    <option value="male">male</option>
-                                    <option value="female">female</option>
-                                    <option value="every">every</option>
+                                    <option value="male">Man</option>
+                                    <option value="female">Woman</option>
+                                    <option value="every">Unisex</option>
                                 </select>
                             </div>
                         </div>

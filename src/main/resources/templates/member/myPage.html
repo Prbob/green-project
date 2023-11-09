@@ -1,15 +1,218 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
+
 <head>
     <meta charset="UTF-8">
-    <title th:text="${member.name}"></title>
+    <title>UNCOMMON | 구매 내역</title>
     <th:block th:replace="include/header :: header"></th:block>
+
+    <link rel="stylesheet" th:href="@{/css/customer.css}" type="text/css">
+
+
+    <style>
+        * {
+            font-family: Pretendard Variable,Pretendard,-apple-system,BlinkMacSystemFont,system-ui,Segoe UI,Roboto,Ubuntu,Cantarell,Noto Sans,sans-serif,Helvetica Neue,Apple SD Gothic Neo,Noto Sans KR,Malgun Gothic,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol;
+        }
+
+        .wish_list li {
+            border-bottom: 1px solid #D3D3D3;
+        }
+
+
+        .division_btn_box .btn_action[data-v-0b6ddb6a] {
+            align-items: center;
+            border-radius: 10px;
+            color: #fff;
+            cursor: pointer;
+            display: inline-flex;
+            flex: 1;
+            position: relative;
+        }
+
+        .my_interest .division_btn_box[data-v-0b6ddb6a] {
+            margin-top: 0;
+            text-align: left;
+            width: 164px;
+        }
+
+        .layout_base {
+            padding-top: 20px;
+        }
+
+        .sidebar {
+            color: #333;
+        }
+
+        .quantity input {
+            font-size: 20px;
+        }
+
+        .quantity div {
+            padding-top: 4px;
+        }
+
+
+        ::placeholder {
+            color: black;
+        }
+
+        .container{
+            margin:0; padding:0;
+            width: 100%;
+        }
+        .title h3{
+            min-width: 90px;
+        }
+        .orderInfo{
+            /*box-shadow: 0 1px 0 #aaaaaa;*/
+        }
+        .orderTitle{
+            width: 100%;
+            min-width:600px;
+        }
+        .orderTitle a{
+            float:right;
+            line-height: 3em;
+            color:#297dcb;
+        }
+        .orderItems{
+            border-bottom: 2px solid #dddddd;
+        }
+        .orderItem{
+            box-shadow: 0 1px 0 #aaaaaa;
+            border:1px solid #eeeeee;
+            border-radius: 4px;
+            padding: 10px 0 10px 20px;
+            min-width: 600px;
+            display: flex;
+            vertical-align: center;
+            margin-bottom: 20px;
+            background-color: rgb(247, 247, 247);
+        }
+        .orderItems h5{
+            font-size:16px;
+            line-height: 2.4em;
+            min-width: 50px;
+        }
+        .orderItem .leftImg {
+            /*border:1px solid red;*/
+        }
+        .orderItem img{
+            display: inline-block;
+            width: 100px;
+            height: 100px;
+        }
+        .orderItem .rightInfo {
+            /*border: 1px solid blue;*/
+            min-width: 350px;
+            padding: 10px;
+            padding-left:20px;
+        }
+
+        .rightInfo p{
+            font-size: 18px;
+            /*border:1px solid darkolivegreen;*/
+        }
+
+        .rightInfo{
+            height:110px;
+        }
+        .rightInfo a{
+            margin-bottom:20px;
+        }
+        .pagingBox {
+            /*border: 1px solid red;*/
+            text-align: center;
+            padding:20px;
+            line-height: 2em;
+        }
+        #namesearchID{
+        padding:5px;
+        border:1px solid gray;
+        }
+        #buttonsearch{
+        padding:5px;
+        border:1px solid gray;
+        margin-left:10px;
+        }
+        #detailAlink{
+            margin-bottom:10px;
+        }
+        #detailbuypage{
+        color:rgb(107, 107, 107);
+        }
+        #detailbuypage:hover{
+        color:rgb(0, 0, 0);
+        font-weight: 800;
+        }
+    </style>
+
 </head>
+
 <body>
+<!--Header-->
 <th:block th:replace="include/bodyHead :: bodyHeader"></th:block>
-<h2>마이페이지</h2>
-<img th:src="@{|/upload/${member.imgName}|}"/> <!-- 사진 -->
-<div th:text="${member.name}"></div> <!-- 멤버 이름 -->
-</script>
+
+
+<div tabindex="0" class="layout_base" data-v-e2abb636="" data-v-cdf8523a="">
+    <div class="container my lg" data-v-e2abb636="" data-v-cdf8523a="" style="padding-top: 0px;">
+
+        <th:block th:replace="include/memberMenu :: memberMenu"></th:block>
+        <div data-v-cf6a6ef4="" data-v-cdf8523a="" class="content_area my-page-content">
+            <div data-v-cf6a6ef4="" class="my_profile">
+                <div data-v-61e7a8a3="" data-v-cf6a6ef4="" class="content_title border">
+
+                    <div data-v-61e7a8a3="" class="title"><h3 data-v-61e7a8a3="">구매 내역</h3><!----></div><!----></div>
+                    <div th:if="${nolist == 'nolist'}">구매 내역이 존재하지 않습니다.</div>
+                    <div th:if="${nolist != 'nolist'}" id="ordersWrap">
+
+                        <div class="orderInfo">
+                            <div class="orderItems">
+                                <div class="orderItem"  th:each="form : ${list}">
+                                    <div class="leftImg">  <!-- 상품들 중 하나 넣고 -->
+                                    <img th:src="@{|/upload/${form.fileName}|}"/>
+                                    </div>
+                                    <div class="rightInfo">
+
+                                        <p><b th:text="|주문 번호 : ${form.orders.id}|">item name</b></p>  <!-- 주문 번호-->
+                                        <p th:text="|주문 금액 : ${#numbers.formatDecimal(form.orders.totalPrice,3, 'COMMA',0,'POINT')} 원|" id="detailAlink">></p>
+                                        <a th:href="@{/member/orderDetail(orderId=${form.orders.id})}" id="detailbuypage" > > 주문 상세보기 </a>
+                                    </div>
+                                    <div th:text="|구매 일자 : ${form.orders.registrationDate}|"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div th:if="*{list == null}">
+                    <p>구매한 상품이 없습니다.</p>
+                </div>
+
+
+                <div class="pagingBox" th:if="${nolist != 'nolist'}" >
+                    <a th:if="${5 < startPage}" th:href="@{/member/myPage(page = ${startPage-6})}">
+                        <i class="fas fa-chevron-left"></i>
+                    </a>
+                    <th:block th:each="page : ${#numbers.sequence(startPage,endPage)}">
+                        <a th:if="${page != nowPage}" th:href="@{/member/myPage(page = ${page-1})}" th:text="${page}"></a>
+                        <strong th:if="${page == nowPage}"  th:text="${page}" style="color:red"></strong>
+                    </th:block>
+                    <a th:if="${totalPage > endPage && endPage != 0}" th:href="@{/member/myPage(page = ${endPage})}">
+                        <i class="fas fa-chevron-right"></i> <!-- Font Awesome 아이콘 클래스를 추가합니다 -->
+                    </a>
+                </div>
+            </div>
+
+
+
+        </div>
+    </div>
+</div>
+
+<link href="/_nuxt/css/2e6b79f.css" rel="stylesheet" type="text/css">
+<link href="/_nuxt/css/c9eea23.css" rel="stylesheet" type="text/css">
+<!--footer-->
+<th:block th:replace="include/footer :: footer"></th:block>
+
+
 </body>
-</html>

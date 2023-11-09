@@ -1,6 +1,9 @@
 package com.brogrammers.brogrammers.web.products;
 
+import com.brogrammers.brogrammers.domain.board.Review;
 import com.brogrammers.brogrammers.domain.member.Member;
+import com.brogrammers.brogrammers.domain.order.OrderProducts;
+import com.brogrammers.brogrammers.domain.order.Orders;
 import com.brogrammers.brogrammers.domain.product.*;
 import com.brogrammers.brogrammers.domain.service.*;
 import com.brogrammers.brogrammers.form.DuplicatedProduct;
@@ -39,6 +42,9 @@ public class AllProductController {
     @Autowired CategoryService categoryService;
     @Autowired BrandService brandService;
     @Autowired ProductCategoryService productCategoryService;
+    @Autowired OrderProductsService orderProductsService;
+    @Autowired OrderService orderService;
+    @Autowired ReviewService rs;
     /////////////////////////////////////상품 등록 ///////////////////////////////////
     @GetMapping("/products/add")
     public String addForm(@ModelAttribute("form") ProductForm form ,Model model, @PathVariable(value = "productId",required = false)Long productId,
@@ -99,36 +105,148 @@ public class AllProductController {
 
 //@PageableDefault(page=0,size=10,sort="id",direction = Sort.Direction.DESC)
     /////////////////////////////////////상품 리스트 ///////////////////////////////////
-    @GetMapping("/products/list")  // 전체 상품 조회
-    public String productList(Model model, HttpServletRequest request,
-                              @PageableDefault(page=0,size=2,sort="name",direction = Sort.Direction.DESC)Pageable pageable,
-                              String searchKeyword){
-        Page<Products> products = null;
-        if(searchKeyword!=null){
-            products = productService.productSearchList(searchKeyword,pageable);
-        }else{
-            products = productService.findAll(pageable);
+@GetMapping("/products/list")  // 전체 상품 조회
+public String productList(Model model, HttpServletRequest request,
+                          @PageableDefault(page=0,size=12,sort="id",direction = Sort.Direction.DESC)Pageable pageable,
+                          String nameSearch,Long brandId,Long categoryId,String gender){
+
+
+    /// 페이징 처리 /////////////////////////
+    Page<Products> products = null;
+
+
+    if(nameSearch!=null&&!nameSearch.isEmpty()){ // 키워드O
+        if(brandId!=null){ // 키워드O 브랜드O
+            Brand brand = brandService.findById(brandId).get();
+            model.addAttribute("brandName", brand.getName());
+
+            if(categoryId!=null){// 키워드O 카테고리O 브랜드O
+                Category category = categoryService.findById(categoryId).orElse(null);
+                if(category != null) {
+                    model.addAttribute("categoryName", category.getName());
+                }
+                if(gender != null && !gender.isEmpty()){ // 키워드O 카테고리O 브랜드O 성별O
+                    products = productCategoryService.findProductsByBrandNameCategoryGender(brand,nameSearch,categoryService.findById(categoryId).get(),pageable,gender);
+                }else{ // 키워드O 카테고리O 브랜드O 성별X
+                    products = productCategoryService.findProductsByBrandNameCategory(brand,nameSearch,categoryService.findById(categoryId).get(),pageable);
+                }
+            } else{ // 키워드O 브랜드O 카테고리X
+                if(gender != null && !gender.isEmpty()){ // 키워드O 브랜드O 카테고리X 성별 O
+                    products = productService.findProductsByBrandAndKeywordAndGender(nameSearch,brand,gender,pageable);
+                } else{ // 키워드O 브랜드O 카테고리X 성별 X
+                    products = productService.findProductsByBrandAndKeyword(nameSearch,brand,pageable);
+                }
+            }
+        }else{ // 키워드 OOO 브랜드XXXX
+            if(categoryId!=null){ // 키워드O 브랜드X 카테고리O
+                Category category = categoryService.findById(categoryId).orElse(null);
+                if(category != null) {
+                    model.addAttribute("categoryName", category.getName());
+                }
+                if(gender != null && !gender.isEmpty()){ // 키워드O 브랜드X 카테고리O 성별O
+                    products = productCategoryService.findProductsByNameCategoryGender(nameSearch,categoryService.findById(categoryId).get(),gender,pageable);
+                }else{ // 키워드O 브랜드X 카테고리O 성별X
+                    products = productCategoryService.findProductsByNameCategory(nameSearch,categoryService.findById(categoryId).get(),pageable);
+                }
+            } else{ // 키워드O 브랜드X 카테고리X
+                if(gender != null && !gender.isEmpty()){  // 키워드O 브랜드X 카테고리X 성별O
+                    products = productService.productSearchListGender(nameSearch,gender,pageable);
+                    System.out.println(gender);
+
+                }else{ //  // 키워드O 브랜드X 카테고리X 성별X
+                    products = productService.productSearchList(nameSearch,pageable);
+                }
+            }
         }
-        String bodytitle = "전체 상품";
+    }else{ // 키워드 XXXXXXXXXX
+        System.out.println("gender"+gender);
+        if(brandId!=null){ // 브랜드 OOOOOOO
+            Brand brand = brandService.findById(brandId).get();
+            model.addAttribute("brandName", brand.getName());
+            if(categoryId!=null){  // 키워드X 브랜드O 카테고리O
+                Category category = categoryService.findById(categoryId).orElse(null);
+                if(category != null) {
+                    model.addAttribute("categoryName", category.getName());
+                }
+                if(gender != null && !gender.isEmpty()){   // 키워드X 브랜드O 카테고리O 성별O
+                    products = productCategoryService.findProductsByBrandCategory(brand,categoryService.findById(categoryId).get(),pageable);
+                } else{ // 키워드X 브랜드O 카테고리O 성별X
+                    products = productCategoryService.findProductsByBrandCategoryGender(brand,categoryService.findById(categoryId).get(),gender,pageable);
+                }
+            }else{  // 키워드X 브랜드O 카테고리X 성별O
+                if(gender != null && !gender.isEmpty()){
+                    products = productService.findProductsByBrandGender(brand,gender,pageable);
+                } else{ // 키워드X 브랜드O 카테고리X 성별X
+                    products = productService.findProductsByBrand(brand,pageable);
+                }
+            }
+        }else{ // 검색 키워드가 없고 브랜드 조건이 없을 때
+            if(categoryId!=null){ // 키워드x 브랜드x 카테고리O
+                Category category = categoryService.findById(categoryId).orElse(null);
+                if(category != null) {
+                    model.addAttribute("categoryName", category.getName());
+                }
+                if(gender != null && !gender.isEmpty()){ // 키워드x 브랜드x 카테고리O 성별O
+                    products = productCategoryService.findProductsByCategoryGender(categoryService.findById(categoryId).get(),gender,pageable);
+                } else{
+                    products = productCategoryService.findProductsByCategory1(categoryService.findById(categoryId).get(),pageable);
+                }
+            } else{
+                if(gender != null && !gender.isEmpty()){ // 키워드X 브랜드X 카테고리X 성별 O
+                    products = productService.findProductsByGender(gender,pageable);
+                } else{ // 키워드X 브랜드X 카테고리X 성별X
+                    products = productService.findAll(pageable);
+                }
+            }
+        }
+    }
+    /// 페이징 처리 /////////////////////////
+
+    List<Category> all = categoryService.findAll();
+    model.addAttribute("all",all);
+    String bodytitle = "전체 상품";
+    int nowPage = products.getPageable().getPageNumber() + 1; // 5
+    int startPage = Math.max(1,nowPage%5==0?nowPage-4:nowPage/5*5+1);
+    int endPage = Math.min(products.getTotalPages(),startPage+4);
+    String pname = "list";
+    List<Category> categories = categoryService.findAll();
+    List<Brand> brands = brandService.findAll();
+    model.addAttribute("gender",gender);
+    model.addAttribute("totalPage",products.getTotalPages());
+    model.addAttribute("bodytitle",bodytitle);
+    model.addAttribute("pname",pname);
+    model.addAttribute("products",products);
+    model.addAttribute("nowPage",nowPage);
+    model.addAttribute("startPage",startPage);
+    model.addAttribute("endPage",endPage);
+    model.addAttribute("categories", categories);
+    model.addAttribute("brands", brands);
+
+    // 헤더 home, style, shop중 shop 글자 굵기를 위한
+    model.addAttribute("shop", "shop");
+
+    return "products/list";
+}
+
+    @GetMapping("/products/myList")  // 로그인 정보에 맞는 상품 리스트 불러오기 ?
+    public String allMyProducts(Model model,HttpServletRequest request,String nameSearch,
+                                @PageableDefault(page=0,size=15,sort="id",direction = Sort.Direction.DESC)Pageable pageable){
+        Member member = fun.getMember(request); // 세션에서 멤버정보 불러오기
+        member = memberService.findById(member.getId());
+
+        Page<Products> products = productService.findProductsByMember(member,pageable);
+        if(nameSearch!=null){
+            products=productService.findProductsByNameMember(nameSearch,member,pageable);
+        }
         int nowPage = products.getPageable().getPageNumber() + 1; // 5
-        int startPage = Math.max(1,nowPage%3==0?nowPage/3*3-2:nowPage/3*3+1);
-        int endPage = Math.min(products.getTotalPages(),startPage+2);
-        String pname = "list";
-        model.addAttribute("bodytitle",bodytitle);
-        model.addAttribute("pname",pname);
-        model.addAttribute("products",products);
+        int startPage = Math.max(1,nowPage%5==0?nowPage-4:nowPage/5*5+1);
+        int endPage = Math.min(products.getTotalPages(),startPage+4);
+        model.addAttribute("totalPage",products.getTotalPages());
         model.addAttribute("nowPage",nowPage);
         model.addAttribute("startPage",startPage);
         model.addAttribute("endPage",endPage);
-        return "products/list";
-    }
-    @GetMapping("/products/myList")  // 로그인 정보에 맞는 상품 리스트 불러오기 ?
-    public String allMyProducts(Model model,HttpServletRequest request){
-        Member member = fun.getMember(request); // 세션에서 멤버정보 불러오기
-        member = memberService.findById(member.getId());
-//        List<Products> products =  productService.findAllByMemberId(member.getId()); // 로그인된 id 값으로 상품 리스트 불러오기
+        model.addAttribute("myAdd","myAdd");
 
-        List<Products> products = member.getProdutcs();
         model.addAttribute("products",products);
         return "products/myList";
     }
@@ -137,14 +255,40 @@ public class AllProductController {
     ///////////////////////////////////// 디테일 ///////////////////////////////////
     @GetMapping("/products/detail/{productId}") // 디테일 페이지 컨트롤러
     public String detail(@PathVariable("productId")Long productId,Model model,HttpServletRequest request){
-        Products product = productService.getByid(productId);
+        Products product = productService.getByid(productId); //
+
         List<Imgs> imgs = product.getImgs();
         Member member = fun.getMember(request);
         String accessrigths = "NORMAL";
         if(member!=null){ // 로그인 하지 않았을 경우
             accessrigths = String.valueOf(member.getAccessrigths());
         }
-
+        List<Products> products = productService.findProductsToSize(product.getGender(),
+                product.getName(),product.getBrand(),product.getColor());
+        List<Integer> sizeList = new ArrayList<>();
+        for(Products products1 : products){
+            sizeList.add(products1.getSize());
+        }
+//        if(member!=null){
+//            List<Orders> ordersByMember = orderService.findOrdersByMember(member); // 회원의 주문 목록 불러오기
+//            for(Orders orders : ordersByMember){
+//                Optional<OrderProducts> orderProductsByOrdersAndProducts =
+//                        orderProductsService.findOrderProductsByOrdersAndProducts(orders, product);
+//                if(orderProductsByOrdersAndProducts.isPresent()){
+//                    model.addAttribute("reviewAccess","reviewAccess");
+//                }
+//            }
+//        }
+//        Page<Review> reviews = rs.findReviewByProductName(product.getName(), pageable);
+//        int nowPage = reviews.getPageable().getPageNumber() + 1; // 5
+//        int startPage = Math.max(1,nowPage%5==0?nowPage-4:nowPage/5*5+1);
+//        int endPage = Math.min(reviews.getTotalPages(),startPage+4);
+//        model.addAttribute("totalPage",reviews.getTotalPages());
+//        model.addAttribute("nowPage",nowPage);
+//        model.addAttribute("startPage",startPage);
+//        model.addAttribute("endPage",endPage);
+//        model.addAttribute("reviews",reviews);
+        model.addAttribute("sizeList",sizeList);
         model.addAttribute("accessrigths",accessrigths);
         model.addAttribute("imgs",imgs);
         model.addAttribute("product", product);
@@ -223,13 +367,17 @@ public class AllProductController {
     ///////////////////////////////////// edit ///////////////////////////////////
 
     @GetMapping("/products/delete/{id}")
-    public String delete(@PathVariable("id") Long id, HttpServletRequest request){
+    public String delete(@PathVariable("id") Long id, HttpServletRequest request,Model model){
         Member member = fun.getMember(request);
         if(member == null || member.getAccessrigths().equals("NORMAL")){
             return "redirect:/";
         }
-        System.out.println("상품의 아이디 : " + id);
         Products products = productService.getByid(id);
+        List<OrderProducts> orderProductsByProducts = orderProductsService.findOrderProductsByProducts(products);
+        if(!orderProductsByProducts.isEmpty()){
+            model.addAttribute("productId",id);
+            return "alert/errorDeleteProduct";
+        }
         List<Imgs> imgs = imgService.findImgsByProducts(products);
         if(products.getImgPath()!=null){
             new File(products.getImgPath()).delete();
@@ -243,6 +391,17 @@ public class AllProductController {
         return "redirect:/products/list";
     }
 
+//    @PostMapping("/product/review")
+//    public String review(HttpServletRequest request, Model model,String content,Long productId){
+//        Member member = fun.getMemberDb(request);
+//
+//        Products products = productService.getByid(productId); // 주문 받아와야됨
+//        String name = products.getName();
+//        Review review = new Review();
+//        review.saveContent(content); review.saveMember(member); review.saveProductName(name);
+//        rs.save(review);
+//        return "redirect:/products/detail/"+productId;
+//    }
 
 
 }

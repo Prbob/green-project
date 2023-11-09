@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>공지사항</title>
+    <title>UNCOMMON | 관심 상품</title>
     <th:block th:replace="include/header :: header"></th:block>
 
     <!--공지사항 css-->
@@ -19,10 +19,9 @@
         .wish_product {
             cursor: pointer;
             display: flex;
-            width: 100%
-            align-items: center;
-            padding-bottom: 20px;
-            padding-top: 20px;
+            width: 100%;
+            padding: 20px 0px;
+
         }
 
         .wish_buy[data-v-3bb254ce] {
@@ -31,6 +30,7 @@
             flex-shrink: 0;
             margin-left: auto;
             text-align: right;
+            margin-top: 10px;
         }
 
         .wish_list li {
@@ -38,7 +38,6 @@
         }
 
         .product_box {
-            padding-left : 10px;
             padding-right : 10px;
         }
 
@@ -120,9 +119,19 @@
             padding-top: 4px;
         }
 
-
-
-
+        .content_title.border[data-v-61e7a8a3] {
+            border-bottom: 3px solid #222;
+            padding-bottom: 16px
+        }
+        #abutton{
+            width:140px;
+        }
+        .pagingBox {
+            /*border: 1px solid red;*/
+            text-align: center;
+            padding:20px;
+            line-height: 2em;
+        }
     </style>
 
 </head>
@@ -133,40 +142,20 @@
 
 
 <div tabindex="0" class="layout_base" data-v-e2abb636="" data-v-cdf8523a="">
-    <div class="container my lg" data-v-e2abb636="" data-v-cdf8523a="">
-        <div class="sidebar">
-            <a href="/notice" aria-current="page">
-                <h2 data-v-cdf8523a="" class="snb_main_title" style="margin-bottom: 20px;">마이페이지</h2>
-            </a>
-            <nav>
-                <ul class="snb_menu">
-                    <li class="menu_item"><span class="menu_link" style="font-weight:bolder">쇼핑 정보</span></li>
-                    <li class="menu_item"><a href="#"> 구매 내역 </a></li>
-                    <li class="menu_item"><a href="#"> 판매 내역 </a></li>
-                    <li class="menu_item"><a href="#"> 보관 판매 </a></li>
-                    <li class="menu_item" style="font-weight:bolder; color:#333"><a href="#"> 관심 상품 </a></li>
-                </ul>
-
-                <ul class="snb_menu" style="margin-top: 50px;">
-                    <li class="menu_item"><span class="menu_link" style="font-weight:bolder">내정보</span></li>
-                    <li class="menu_item"><a href="#"> 로그인 정보 </a></li>
-                    <li class="menu_item"><a href="#"> 프로필 관리 </a></li>
-                    <li class="menu_item"><a href="#"> 주소록 </a></li>
-                    <li class="menu_item"><a href="#"> 결제 정보 </a></li>
-                    <li class="menu_item"><a href="#"> 판매 정산 계좌 </a></li>
-                    <li class="menu_item"><a href="#"> 현금영수증 정보 </a></li>
-                    <li class="menu_item"><a href="#"> 포인트 </a></li>
-                    <li class="menu_item"><a href="#"> 쿠폰 </a></li>
-                </ul>
-            </nav>
-        </div>
-
-
+    <div class="container my lg" data-v-e2abb636="" data-v-cdf8523a="" style="padding-top: 0px;">
+      
+        <th:block th:replace="include/memberMenu :: memberMenu"></th:block>
+      
         <div class="content_area my-page-content" data-v-4128f410="" data-v-cdf8523a="" data-v-e2abb636="">
             <div class="v-portal" style="display:none;" data-v-4128f410=""></div>
-            <div class="content_title border" data-v-61e7a8a3="" data-v-4128f410="">
-                <div class="title" data-v-61e7a8a3=""><h3 data-v-61e7a8a3="">관심 상품</h3><!----></div><!----></div>
-            <div data-v-4128f410="" class="my_interest">
+
+            <div data-v-61e7a8a3="" data-v-cf6a6ef4="" class="content_title border">
+                <div data-v-61e7a8a3="" class="title">
+                    <h3 data-v-61e7a8a3="" style="font-size:24px; height:27px;">관심 상품</h3>
+                </div>
+            </div>
+            <div th:if="|${nolist=='nolist'}|" >등록된 상품이 없습니다.</div>
+            <div th:if="|${nolist!='nolist'}|" data-v-4128f410="" class="my_interest">
                 <ul data-v-3bb254ce="" data-v-4128f410="" class="wish_list">
 
                     <li data-v-3bb254ce="" th:each="basketInProducts : ${list}">
@@ -176,33 +165,38 @@
                                 <div data-v-aff2362e="" data-v-3bb254ce="" class="product"
                                      style="background-color: rgb(244, 244, 244); width: 100px; height: 100px;">
                                     <img th:src="@{|/upload/${basketInProducts.products.imgName}|}" alt="Product Image" style="width: 100%; height: 100%;">
-                                    <!--                                    <div th:src="${basketInProducts.products.imgName}"></div>-->
                                 </div>
                             </div>
                             <div data-v-3bb254ce="" class="product_detail">
                                 <div data-v-3bb254ce="" class="brand_link" style="height: 20px;">
-                                    <a data-v-3bb254ce="" href="#" class="brand-text"> Typing Mistake </a>
+                                    <a data-v-3bb254ce="" href="#" class="brand-text" th:text="${basketInProducts.products.brand.name}"> </a>
                                     <svg data-v-3bb254ce="" xmlns="http://www.w3.org/2000/svg"
                                          class="ico-brand-official icon sprite-icons">
                                     </svg>
                                 </div>
+
+
                                 <!--상품명 + 색상-->
                                 <a data-v-3bb254ce="" class="name" th:href="@{/products/detail/{productId} (productId=${basketInProducts.products.id})}" th:text="|${basketInProducts.products.name} ${basketInProducts.products.color}|"></a>
 
                                 <div>
                                     <form th:action="@{/order/basket/{productId} (productId=${basketInProducts.products.id})}" method="post"
                                           style="width: 210px;">
-                                        <div class="quantity">
-                                            <input type='button' onclick='count("plus")' value='+'/>
-                                            <div id='result' name="quantity" th:text="${basketInProducts.quantity}">0</div>
-                                            <input type='button' onclick='count("minus")' value='-'/>
+                                        <div style="padding-top: 5px;">
+                                            <form th:action="@{/order/basket/{productId} (productId=${basketInProducts.products.id})}" method="post">
+                                                <select id="quantity" name="quantity" style="color: #000;">
+                                                    <option th:each="i : ${#numbers.sequence(1, (basketInProducts.products.stockQuantity > 10 ? 10 : basketInProducts.products.stockQuantity))}"
+                                                            th:value="${i}" th:text="${i}" th:selected="${i == basketInProducts.quantity}"/>
+                                                </select>
+                                                <button type="submit" th:name="action" th:value="myBasket" style="background-color: #fff; color: #000; border: 1px solid #ccc; padding: 1.5px 6px; border-radius: 5px; cursor: pointer;">
+                                                    수정
+                                                </button>
+                                            </form>
+
                                         </div>
-
-
                                     </form>
                                 </div>
 
-                                <!--<span data-v-3bb254ce="" class="size">F</span>-->
                                 <div class="size" th:text="${basketInProducts.products.size}"></div>
                             </div>
 
@@ -210,33 +204,42 @@
                                 <div data-v-3bb254ce="">
                                     <div data-v-0b6ddb6a="" data-v-3bb254ce="" class="division_btn_box lg" style="margin-bottom: 5px;"><a
                                             data-v-0b6ddb6a="" href="#" disabled="disabled" class="blind btn_division">버튼</a>
-                                        <button data-v-0b6ddb6a="" class="btn_action" style="background-color: rgb(239, 98, 83); color:width; height: 60px;" >
-                                            <a data-v-0b6ddb6a="" th:href="@{/products/detail/{id} }" class="title" role="button">구매</a>
+                                        <a data-v-0b6ddb6a="" th:href="@{/order/buy(product=${basketInProducts.products.id},quantity=${basketInProducts.quantity},way=one) }" class="title"  role="button">
+                                            <button data-v-0b6ddb6a="" class="btn_action" style="background-color: rgb(239, 98, 83); color:width; height: 60px;" id="abutton">
+                                                구매
                                             <div data-v-0b6ddb6a="" class="price" style="height: 22px;">
                                                 <span data-v-0b6ddb6a="" class="amount">
                                                     <!--가격-->
-                                                    <em data-v-0b6ddb6a="" class="num" th:text="|${basketInProducts.products.price}|"> </em>
-                                                    <span data-v-0b6ddb6a="" class="won">원</span>
+                                                    <div data-th-text="${#numbers.formatInteger(basketInProducts.products.price, 3, 'COMMA') + '원'}"></div>
                                                 </span>
                                             </div>
-                                        </button>
+                                            </button>
+                                        </a>
                                     </div>
-                                    <a data-v-3bb254ce="" href="#" th:href="@{/basket/delete/{id} (id=${basketInProducts.basProductId})}" class="status_link" role="button" style="font-size: 15px" > 삭제 </a>
+                                    <a data-v-3bb254ce="" href="#" th:href="@{/basket/delete/{id} (id=${basketInProducts.basProductId})}" class="status_link" role="button" style="font-size: 15px" onclick="return confirm('삭제하시겠습니까?')"> 삭제 </a>
                                 </div>
                             </div>
                         </div>
                     </li>
                 </ul>
 
-
-                <!--<div data-v-1f9de2f0="" data-v-4128f410="" class="pagination">
-                    <div data-v-1f9de2f0="" class="pagination_box first last">
-                        <div data-v-1f9de2f0="" class="page_bind" style="text-align: center; margin-top: 20px;">
-                            <a data-v-1f9de2f0="" href="/saved?page=1" class="btn_page active" aria-label="1페이지"> 1 </a>
-                        </div>
-                    </div>
-                </div>-->
-
+                <div style="text-align: right; margin-top: 10px;">
+                    <a href="#" th:if="${nolist != 'nolist'}" th:href="@{/order/buy}" class="btn btn-primary" role="button">
+                        전체구매
+                    </a>
+                </div>
+                <div class="pagingBox" th:if="${nolist != 'nolist'}" >
+                    <a th:if="${5 < startPage}" th:href="@{/products/myBasket(page = ${startPage-6})}">
+                        <i class="fas fa-chevron-left"></i>
+                    </a>
+                    <th:block th:each="page : ${#numbers.sequence(startPage,endPage)}">
+                        <a th:if="${page != nowPage}" th:href="@{/products/myBasket(page = ${page-1})}" th:text="${page}"></a>
+                        <strong th:if="${page == nowPage}"  th:text="${page}" style="color:red"></strong>
+                    </th:block>
+                    <a th:if="${totalPage > endPage && endPage != 0}" th:href="@{/products/myBasket(page = ${endPage})}">
+                        <i class="fas fa-chevron-right"></i> <!-- Font Awesome 아이콘 클래스를 추가합니다 -->
+                    </a>
+                </div>
             </div>
         </div>
     </div>
@@ -245,29 +248,6 @@
 <!--footer-->
 <th:block th:replace="include/footer :: footer"></th:block>
 
-<script>
-    // JavaScript로 Thymeleaf에서 가져온 데이터
-    var initialQuantity = parseInt(document.getElementById('result').textContent);
 
-    function count(type)  {
-        // 결과를 표시할 element
-        const resultElement = document.getElementById('result');
-
-        // 현재 화면에 표시된 값
-        let number = parseInt(resultElement.textContent);
-
-        // 더하기/빼기
-        if(type === 'plus') {
-            number = number + 1;
-        } else if(type === 'minus')  {
-            number = number - 1;
-        }
-
-        // 결과 출력
-        resultElement.textContent = number;
-
-
-    }
-</script>
 
 </body>

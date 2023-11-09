@@ -42,14 +42,14 @@
 #   (2) This script targets any POSIX shell, so it avoids extensions provided
 #       by Bash, Ksh, etc; in particular arrays are avoided.
 #
-#       The "traditional" practice of packing multiple parameters into a
+#       The "traditional" practice of packing multiple eters into a
 #       space-separated string is a well documented source of bugs and security
 #       problems, so this is (mostly) avoided, by progressively accumulating
 #       options in "$@", and eventually passing that to Java.
 #
 #       Where the inherited environment variables (DEFAULT_JVM_OPTS, JAVA_OPTS,
 #       and GRADLE_OPTS) rely on word-splitting, this is performed explicitly;
-#       see the in-line comments for details.
+#       see the in-line comments for s.
 #
 #       There are tweaks for specific operating systems such as AIX, CygWin,
 #       Darwin, MinGW, and NonStop.
@@ -190,7 +190,7 @@ if "$cygwin" || "$msys" ; then
         # possibly modified.
         #
         # NB: a `for` loop captures its iteration list before it begins, so
-        # changing the positional parameters here affects neither the number of
+        # changing the positional eters here affects neither the number of
         # iterations, nor the values presented in `arg`.
         shift                   # remove old arg
         set -- "$@" "$arg"      # push replacement arg

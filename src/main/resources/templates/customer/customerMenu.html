@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<th:block th:fragment="customerMenu">
+    <div class="sidebar">
+        <a href="/notice" aria-current="page">
+            <h2 class="snb_main_title">고객센터</h2>
+        </a>
+        <nav>
+            <ul class="snb_menu">
+
+                <li class="menu_item">
+                    <strong th:if="notice == ${notice}" th:class="menu_link"> 공지사항 </strong>
+                    <a th:unless="notice == ${notice}" th:href="@{/customer/notice}" th:class="menu_link"> 공지사항 </a>
+                </li>
+                <li class="menu_item">
+                    <strong th:if="questions == ${questions}" th:class="menu_link"> 자주 묻는 질문 </strong>
+                    <a th:unless="questions == ${questions}" th:href="@{/customer/questions}" th:class="menu_link"> 자주 묻는 질문 </a>
+                </li>
+                <li class="menu_item">
+                    <strong th:if="inspectionStandards == ${inspectionStandards}" th:class="menu_link"> 검수 기준 </strong>
+                    <a th:unless="inspectionStandards == ${inspectionStandards}" th:href="@{/customer/inspectionStandards}" th:class="menu_link"> 검수 기준 </a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+</th:block>
+</body>
+</html>

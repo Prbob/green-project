@@ -2,24 +2,29 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>로그인</title>
+
+    <title>UNCOMMON | SHOP</title>
+
     <th:block th:replace="include/header :: header"></th:block>
     <link rel="stylesheet" th:href="@{/css/product.css}" type="text/css">
     <script src="https://kit.fontawesome.com/3697bc8c45.js" crossorigin="anonymous"></script>
 
     <style>
         *{
-            color: #1d1d1b;
+            color: #1d1d1b; box-sizing: border-box;
         }
         aside{
             padding : 20px;
             box-sizing: border-box;
             height: 900px;
+            /*position:fixed;*/
         }
-
-        input{
-            border: 1px solid grey;
-            line-height: 2em;
+        aside h5{
+            border-bottom: 1px solid #bbbbbb;
+            padding-bottom: 10px;
+            font-size: 16px;
+            text-align: center;
+            font-weight: bold;
         }
         #searchForm{
             margin-top: 20px;
@@ -27,28 +32,63 @@
         #searchForm p{
             font-size:14px;
             line-height: 22px;
+            font-weight: bold;
         }
         #searchForm input{
-            margin-bottom:5px;
+            margin-bottom:20px;
             border: 1px solid #909090;
             width: 188px;
             padding-left: 5px;
             border-radius: 2px;
+            line-height: 2em;
+        }
+        .inputBox{
+            font-size:16px;
+            width: 188px;
+            height:30px;
+            margin-bottom: 20px;
+            margin-top: 5px;
         }
         button{
             /*디자인 몰라 가져오자...*/
         }
-
-        <!--contentsArea -->
-        #productWrap{
-            border: 1px solid red;
+        .content_area{
+            padding:0;
+        }
+        .content_area .categories {
+            font-family: inherit;
+            font-size: 14px;
             width: 100%;
+            padding: 15px 0;
+            font-weight: bold;
+            margin : auto;
+            display:flex;
+            justify-content: space-between;
+            align-items:center;
+            box-shadow: 0 1px 0px #dddddd;
+        }
+        .categories ul{
+            display: flex;
+            min-width:600px;
+        }
+        .categories li{
+            margin:0 20px;
+        }
+
+        .productWrap{
+            width: 100%;
+            display: flex;
+            padding: 20px;
+            /*border:1px solid yellow;*/
+            flex-direction: row;
+            flex-wrap:wrap;
+            align-content:space-around;
         }
         .itembox{
-            display: inline-block;
             width: 220px;
-            height: 300px;
+            height: 320px;
             margin: 3px;
+            /*border:1px solid blue;*/
         }
         .itembox a{
             display: inline-block;
@@ -56,13 +96,47 @@
         .itembox img{
             background-color: #cccccc;
             display: inherit;
-            width: 220px;
+            width: 100%;
             height: 220px;
             border-radius: 3px;
+            margin-bottom: 5px;
         }
+
         .itembox p{
-            float: right;
+            padding-left: 5px;
+            text-align: left;
+            line-height: 1.8em;
         }
+        .pagingBox {
+            /*border: 1px solid red;*/
+            text-align: center;
+            padding:20px;
+            line-height: 2em;
+        }
+        form button{
+            border: 1px solid grey;
+            width: 188px;
+            height: 30px;
+            margin-top: 20px;
+            border-radius: 3px;
+            letter-spacing: 5px;
+        }
+        form button:hover {
+            color:white;
+            background-color: #ef6253;
+            border:none;
+            font-weight: bolder;
+            font-size:15px;
+        }
+
+
+        .itembox_info {
+            display: flex;
+            flex-direction: column; /* 위에서 아래로 정렬 */
+        }
+
+
+
 
 
     </style>
@@ -74,45 +148,94 @@
     <aside>
         <h5>필터</h5>
         <div id="filter">
-            <form action="" method="get" id="searchForm">
-                <p>상품<br><input type="text" id="nameSearch" name="nameSearch"></p>
-                <p>브랜드<br><input type="text" id="brandSearch" name="brandSearch"></p>
-                <p>사이즈(KR)<br><input type="text" id="sizeSearch" name="sizeSearch"></p>
-                <br>
-                <button type="submit">
-                    검 색
-                </button>
+            <form th:action method="get" id="searchForm">
+
+                <div class="input">
+                <p>상품명<br></p>
+                    <input class="inputBox" type="text" id="nameSearch" name="nameSearch" th:value="${param.nameSearch}" style="background-color: white">
+                </div>
+
+                <div class="input">
+                <p>카테고리<br></p>
+                    <select class="inputBox" name="categoryId">
+                        <option value=""> </option>
+                        <option th:each="category : ${categories}" th:value="${category.id}"
+                                th:text="${category.name}"></option>
+                    </select>
+                </div>
+
+                <div class="input">
+                <p>브랜드<br></p>
+                    <select class="inputBox" name="brandId" >
+                        <option value="" > </option>
+                        <option th:each="brand : ${brands}" th:value="${brand.id}" th:text="${brand.name}"></option>
+                    </select>
+                </div>
+                <input type="hidden" name="gender" th:value="${gender}">
+
+
+                <div class="input">
+                    <p>성별<br></p>
+                    <div style="display: flex;">
+                        <a th:if="${gender == 'male'}" th:href="@{/products/list(gender=male)}" style="margin-right: 20px;"><strong>남성</strong></a>
+                        <a th:unless="${gender == 'male'}" th:href="@{/products/list(gender=male)}" style="margin-right: 20px;">남성</a>
+
+                        <a th:if="${gender == 'female'}" th:href="@{/products/list(gender=female)}" style="margin-right: 20px;"><strong>여성</strong></a>
+                        <a th:unless="${gender == 'female'}" th:href="@{/products/list(gender=female)}" style="margin-right: 20px;">여성</a>
+
+                        <a th:if="${gender != 'male' && gender !='female'}" th:href="@{/products/list}"><strong>남녀공용</strong></a>
+                        <a th:if="${gender == 'male' || gender == 'female'}" th:href="@{/products/list}">남녀공용</a>
+                    </div>
+                </div>
+
+                <button>검색하기</button>
             </form>
         </div>
-
     </aside> <!--END sidebar-->
 
-
-
-
     <div class="content_area">
-        <div class="content_title" th:text="${bodytitle}"></div>
+        <div class="categories">
+            <ul class="category_gnb">
+                <li class="category" style="font-weight: bolder"><a th:href="@{/products/list}" th:text="초기화"></a></li>
+               <li class="category" th:if="${categoryName != null}">
+                   <a th:text="${categoryName}"></a>
+               </li>
+                <li class="category" th:if="${brandName != null}">
+                   <a th:text="${brandName}"></a>
+               </li>
+                <li class="category" th:if="${gender != null}">
+                    <a th:text="${gender}"></a>
+                </li>
+            </ul>
+        </div>
 
-        <div id="productWrap" th:each="product : ${products}">
-<!--            <th:block th:each="" class="itembox">-->
-            <div class="itembox">
+        <div class="productWrap">
+            <div class="itembox" th:each="product : ${products}">
                 <a th:href="@{/products/detail/{productId} (productId=${product.id})}" >
-                    <img th:src="@{|/upload/${product.imgName}|}"/>
-                    <p th:text="|상품명 : ${product.name}|"></p><br>
-                    <p th:text="|가격 :  ${product.price}|"></p><br>
+                    <img th:src="@{|/upload/${product.imgName}|}">
                 </a>
+                    <div class="itembox_info">
+                        <a th:href="@{/products/detail/{productId} (productId=${product.id})}" ><b><p th:text="|${product.brand.name}|"></p></b></a>
+                        <a th:href="@{/products/detail/{productId} (productId=${product.id})}" ><p th:text="${#strings.length(product.name) < 20 ? product.name : #strings.substring(product.name, 0, 20) + ' ...'}"></p></a>
+                        <p th:text="|${#numbers.formatDecimal(product.price,3, 'COMMA',0,'POINT')}원|" class="priceTag"></p><br>
+                    </div>
+
             </div>
         </div>
+
+        <div class="pagingBox">
+            <a th:if="${5 < startPage}" th:href="@{/products/__${pname}__(page = ${startPage-6},nameSearch = ${param.nameSearch},brandId=${param.brandId},gender=${param.gender})}">
+                <i class="fas fa-chevron-left"></i>
+            </a>
         <th:block th:each="page : ${#numbers.sequence(startPage,endPage)}">
-            <a th:if="${page != nowPage}" th:href="@{/products/__${pname}__(page = ${page-1},searchKeyword = ${param.searchKeyword})}" th:text="${page}"></a>
+            <a th:if="${page != nowPage && endPage!=0}" th:href="@{/products/__${pname}__(page = ${page-1},nameSearch = ${param.nameSearch},brandId=${param.brandId},gender=${param.gender})}" th:text="${page}"></a>
             <strong th:if="${page == nowPage}"  th:text="${page}" style="color:red"></strong>
         </th:block>
+            <a th:if="${totalPage > endPage && endPage != 0}" th:href="@{/products/__${pname}__(page = ${endPage}, nameSearch = ${param.nameSearch},brandId=${param.brandId},gender=${param.gender})}">
+                <i class="fas fa-chevron-right"></i> <!-- Font Awesome 아이콘 클래스를 추가합니다 -->
+            </a>
+        </div><!--pagingBox END-->
     </div>
-    <form th:action method="get">
-        <input type="text" name="searchKeyword">
-        <button type="submit">검색</button>
-    </form>
-
 
 </div> <!-- /container -->
 

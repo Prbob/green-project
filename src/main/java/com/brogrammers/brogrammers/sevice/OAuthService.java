@@ -9,6 +9,8 @@ import org.springframework.stereotype.Service;
 import java.io.*;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.HashMap;
+import java.util.Map;
 
 @Service
 public class OAuthService {
@@ -73,6 +75,7 @@ public class OAuthService {
 
         String reqURL = "https://kapi.kakao.com/v2/user/me";
         String rree = "";
+        Map<String ,String> emailAndName = new HashMap<>();
         //access_token을 이용하여 사용자 정보 조회
         try {
             URL url = new URL(reqURL);
@@ -105,6 +108,7 @@ public class OAuthService {
             String email = "";
             if(hasEmail){
                 email = element.getAsJsonObject().get("kakao_account").getAsJsonObject().get("email").getAsString();
+                emailAndName.put("email",email);
             }
 
             System.out.println("id : " + id);

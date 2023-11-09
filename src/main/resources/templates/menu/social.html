@@ -2,15 +2,24 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>스타일</title>
+    <title>UNCOMMON | STYLE</title>
     <script src="/js/instafeed.min.js"></script>
     <style>
-        * {margin:0; padding: 0; text-align: center;}
+        * {margin:0; padding: 0; text-align: center; box-sizing: border-box;}
 
+        #wrap{
+            width:80%;
+            margin: 0 auto;
+        }
+        #wrap  h2{
+
+            margin: 30px auto;
+            text-align: center;
+        }
         #gallery {
             width: 90%;
             min-width: 900px;
-            margin : 3em auto;
+            margin : 0 auto;
             display : flex;
             flex-wrap: wrap;
         }
@@ -19,9 +28,12 @@
             width: 25%;
             list-style: none;
             margin-bottom: 30px;
+
         }
         #gallery li img{
+            display: inline-block;
             width :  95%;
+            border-radius: 10px;
         }
         #gallery li h5 {
             padding: 0 5px;
@@ -43,8 +55,8 @@
 <script>
     var feed = new Instafeed({
         target :'gallery',
-        template:'<li><a href="{{link}}"><img src="{{image}}" /></a><h5>{{caption}}</h5></li>',
-        accessToken: 'IGQWROdlQtRk5yMEdxNFl3TGFYcW13a1UzSFJya0tBeUoxdU9pSE9LU3dMWnhsdVhPOHhKR0J2NThzLWVrUFNmZAGI2dWFvdXQzWWpFRGsyQVE4RjhSX1lsQ09sTktjbEd1dzc4VkhzQVZA6d3l3RGlhMC1yNGhQR00ZD'
+        template:'<li><a href="{{link}}"><img src="{{image}}" /></a></li>',
+        accessToken: 'IGQWRQN3NuZAW5kemR1R050RnVwanlJbVRKeWVzb2I3RjRXTFA4VXpEMHNMOXQxbDVWQ3hNcDlPaXUyU2xGLVZAkMVhqcGJsNEY4RU1pbHRhRW1DRjFVeTJVTWgwZAjEwdkc3aTdPNzBSUFRkQU5vcTJPaUZAuRFVsYVkZD'
     });
     feed.run();
 </script>
